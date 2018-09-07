@@ -1,0 +1,6 @@
+RewriteEngine on 
+#RewriteBase /restobar
+RewriteCond $1 !^(index\.php|robots\.txt|sitemap\.xml|public|richtext|assets)
+RewriteRule ^(.*)$ index.php/$1 [L] 
+
+
