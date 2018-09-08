@@ -1,3 +1,6 @@
+ </div>
+ <!-- /.container-fluid -->
+
             <footer class="footer text-center"> 2017 &copy; SOFTCOM SAS </footer>
         </div>
         <!-- ============================================================== -->
@@ -27,12 +30,67 @@
     <script src="<?php echo base_url();?>assets/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
     <!-- Sparkline chart JavaScript -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+      <!-- Sweet-Alert  -->
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/sweetalert/sweetalert.min.js"></script>
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/sweetalert/jquery.sweet-alert.custom.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/custom.min.js"></script>
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/dashboard1.js"></script>
     <script src="<?php echo base_url();?>assets/plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+
+     <!-- Magnific popup JavaScript -->
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"></script>
+
     <!--Style Switcher -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
-</body>
 
+    <script>
+
+    $(document).ready(function(){
+       // console.log("cargo");
+        $('#add_asoc').submit(function(e) {
+        e.preventDefault();
+         enviardatos();
+        
+      });   
+    });
+
+     function enviardatos(){
+          var url = '<?php echo base_url() ?>capacitacion/insert_add_asoc';
+          var data = $('#add_asoc').serialize();
+          $.ajax({
+                    type: 'ajax',
+                    method: 'post',
+                    url: url,
+                    data: data,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        //sweetalert_proceso();
+                        console.log("enviando....");
+                      }
+                 })
+                  .done(function(){
+                    console.log(data);
+                    
+                     swal("Buen Trabajo!!", "Nuevo Asociado Agregado.", "success");
+                     
+                  })
+                  .fail(function(){
+                     //sweetalertclickerror();
+                  }) 
+                  .always(function(){
+                    /* setTimeout(function(){
+                      redireccionar();
+                     },2000);*/
+
+                  });
+        } 
+    
+    
+
+    </script>
+
+
+</body>
 </html>

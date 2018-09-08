@@ -8,7 +8,6 @@ class Capacitacion extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
         $this->load->database();
         $this->load->helper('url');
         $this->load->model('modelogeneral');
@@ -26,12 +25,73 @@ class Capacitacion extends CI_Controller
 
     }
 
+    public function mi_red()
+    {
+     $id_emp = 1;     // obtener id_empresa por la seccion
+     $result = $this->modelogeneral->mostrar_asoc($id_emp);
+     $data = array('asociados' => $result);
+    
+    $this->load->view("layout/header");
+    $this->load->view("layout/side_menu");
+    $this->load->view("emprendedor/red",$data);
+    $this->load->view("layout/footer");  
+
+    }
+
+    public function modulos()
+    {
+     $id_emp = 1;     // obtener id_empresa por la seccion
+     $result = $this->modelogeneral->mostrar_asoc($id_emp);
+     $data = array('asociados' => $result);
+    
+    $this->load->view("layout/header");
+    $this->load->view("layout/side_menu");
+    $this->load->view("emprendedor/capacitacion_videos",$data);
+    $this->load->view("layout/footer");  
+
+    }
      public function index1()
     {
         
     $this->load->view("layout/inicio");
     
     }
+
+     public function insert_add_asoc()
+    {
+        $param['id_emp']          = 1;     // obtener id_empresa por la seccion
+        $param['nombre_asoc']     = $this->input->post('nombre_asoc');
+        $param['dni__asoc']       = $this->input->post('dni__asoc');
+        $param['email']           = $this->input->post('email');
+        $param['telefono_asoc']   = $this->input->post('telefono_asoc');
+       //$param['estado_asoc']     = 1;
+        $param['fecha_insc_asoc'] = date('Y-m-d');
+       
+       
+        $result = $this->modelogeneral->insert_add_asoc($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*---------------------------------*/
 
 
 	public function carga_de_grafica_general()

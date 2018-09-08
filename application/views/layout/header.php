@@ -8,10 +8,16 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url();?>assets/plugins/images/favicon.png">
     <title>Emprendedores DVGI</title>
+
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url();?>assets/ampleadmin-minimal/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+     
     <!-- Menu CSS -->
     <link href="<?php echo base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- Popup CSS -->
+    <link href="<?php echo base_url();?>assets/plugins/bower_components/Magnific-Popup-master/dist/magnific-popup.css" rel="stylesheet">
+
+    <link href="<?php echo base_url();?>assets/plugins/bower_components/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
     <!-- toast CSS -->
     <link href="<?php echo base_url();?>assets/plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
     <!-- morris CSS -->
@@ -33,6 +39,51 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+<link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/css/hierarchy-view.css">
+
+<style type="text/css">
+    .hv-item-parent p {
+  font-weight: bold;
+  color: #DE5454; }
+    .management-hierarchy {
+     background-color: #303840; }
+    .management-hierarchy > h1 {
+    color: #FFF; }
+    .management-hierarchy .person {
+    text-align: center; }
+    .management-hierarchy .person > img {
+      height: 110px;
+      border: 5px solid #FFF;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #fff; }
+    .management-hierarchy .person > p.name {
+      background-color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: normal;
+      color: #3BAA9D;
+      margin: 0;
+      position: relative; }
+      .management-hierarchy .person > p.name b {
+        color: rgba(59, 170, 157, 0.5); }
+      .management-hierarchy .person > p.name:before {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 8px;
+        background-color: #fff;
+        left: 50%;
+        top: 0;
+        transform: translateY(-100%); }  
+
+</style>
+
+    
+
+
+  
 </head>
 
 <body class="fix-header">

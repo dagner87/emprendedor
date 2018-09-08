@@ -9,6 +9,38 @@ class Modelogeneral extends CI_Model {
    }
 
 
+
+
+       public function insert_add_asoc($data)
+  {
+      $this->db->insert('asociado',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        
+        }else{
+
+          return false;
+        }
+     
+  }
+
+    public function mostrar_asoc($id_emp){
+       
+       $this->db->where('id_emp',$id_emp);
+       $query = $this->db->get('asociado');
+       if($query->num_rows() > 0){
+         return $query->result();
+        }else{
+          return false;
+        }
+       
+       
+    } 
+
+
+  
+
+
   /*-----Devuelve los datos de una tienda especifica-----------*/
    public function datos_tienda($id_tienda) {
     
@@ -160,6 +192,8 @@ class Modelogeneral extends CI_Model {
         }
      
   }
+
+
 
 
       public function insertar_wizard($data)
