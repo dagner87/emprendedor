@@ -19,14 +19,18 @@ class Capacitacion extends CI_Controller
     }
      public function index()
     {
-        
-     //$this->load->view("layout/inicio");
     $this->load->view("layout/header");
     $this->load->view("layout/side_menu");
-    $this->load->view("layout/top_navigation");
     $this->load->view("layout/page_content");
     $this->load->view("layout/footer");  
 
+    }
+
+     public function index1()
+    {
+        
+    $this->load->view("layout/inicio");
+    
     }
 
 

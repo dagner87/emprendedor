@@ -4,10 +4,10 @@
                         <h4 class="page-title">INICIO</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
-                        <a href="#" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Buy Admin Now</a>
+                        <a href="#" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"><i class="ti-shopping-cart"></i> Carrito de Compra</a>
                         <ol class="breadcrumb">
-                            <li><a href="#">Dashboard</a></li>
-                            <li class="active">Dashboard 1</li>
+                            <li class="active">Inicio</li>
+                            
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -53,12 +53,12 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 col-xs-12">
                         <div class="white-box analytics-info">
-                            <h3 class="box-title">Bounce Rate</h3>
+                            <h3 class="box-title">COMICION ACTUAL</h3>
                             <ul class="list-inline two-part">
                                 <li>
                                     <div id="sparklinedash4"></div>
                                 </li>
-                                <li class="text-right"><i class="ti-arrow-down text-danger"></i> <span class="text-danger">18%</span></li>
+                                <li class="text-right"><i class="ti-arrow-down text-danger"></i> <span class="text-danger">1%</span></li>
                             </ul>
                         </div>
                     </div>
