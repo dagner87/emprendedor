@@ -8,15 +8,8 @@
                 <div class="user-profile">
                     <div class="dropdown user-pro-body">
                         <div><img src="<?php echo base_url();?>assets/plugins/images/users/varun.jpg" alt="user-img" class="img-circle"></div>
-                        <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dagner Alena <span class="caret"></span></a>
-                        <ul class="dropdown-menu animated flipInY">
-                            <li><a href="#"><i class="ti-user"></i> Mi Perfil</a></li>
-                            <li><a href="#"><i class="ti-wallet"></i> Mi Balance</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-settings"></i> Configuracion Cuenta</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="login.html"><i class="fa fa-power-off"></i> Salir</a></li>
-                        </ul>
+                        <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dagner Alena Guerra </a>
+                       
                     </div>
                 </div>
 
@@ -26,12 +19,14 @@
 
                     <li> <a href="#" class="waves-effect"><i class="mdi mdi-rename-box fa-fw"></i> <span class="hide-menu">Capacitación<span class="fa arrow"></span> <span class="label label-rouded label-info pull-right">20</span> </span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="lightbox.html"><i class="fa-fw">L</i> <span class="hide-menu">Lightbox Popup</span></a></li>
+                          <li><a href="lightbox.html"><i class="fa fa-calendar fa-fw"></i> <span class="hide-menu">Calendario</span></a></li>
+                            <li><a href="lightbox.html"><i class="fa fa-file-video-o fa-fw"></i> <span class="hide-menu">Videos</span></a></li>
                         </ul>
                     </li>
                     <li> <a href="#" class="waves-effect"><i class="fa fa-users fa-fw"></i> <span class="hide-menu">Asociados<span class="fa arrow"></span><span class="label label-rouded label-warning pull-right">10</span></span></a>
                         <ul class="nav nav-second-level">
-                          <li><a href="lightbox.html"><i class="ti-user fa-fw"></i> <span class="hide-menu">Lightbox Popup</span></a></li>
+                          <li><a href="lightbox.html"><i class="ti-user fa-fw"></i> <span class="hide-menu">Mi Red</span></a></li>
+
                         </ul>
                     </li>
                     <li><a href="inbox.html" class="waves-effect"><i class="mdi mdi-store fa-fw"></i> <span class="hide-menu">Tienda<span class="fa arrow"></span></span></a>
