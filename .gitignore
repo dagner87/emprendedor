@@ -24,7 +24,7 @@ dist/
 node_modules/
 tmp/
 temp/
-application/config/
+config/
 platforms/
 plugins/
 plugins/android.json
