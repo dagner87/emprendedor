@@ -33,7 +33,7 @@
                     </li>
                     <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-store fa-fw"></i> <span class="hide-menu">Tienda<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="carousel.html"><i class="fa fa-shopping-cart fa-fw"></i><span class="hide-menu">Ver Tienda</span></a></li>
+                            <li><a href="<?php echo base_url();?>capacitacion/tienda"><i class="fa fa-shopping-cart fa-fw"></i><span class="hide-menu">Ver Tienda</span></a></li>
                          
                         </ul>
                     </li>

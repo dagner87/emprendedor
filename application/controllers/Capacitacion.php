@@ -48,6 +48,33 @@ class Capacitacion extends CI_Controller
     $this->load->view("layout/side_menu");
     $this->load->view("emprendedor/capacitacion_videos",$data);
     $this->load->view("layout/footer");  
+    }
+
+      public function calendario()
+    {
+
+     $id_emp = 1;     // obtener id_empresa por la seccion
+     $result = $this->modelogeneral->mostrar_asoc($id_emp);
+     $data = array('asociados' => $result);
+    
+    $this->load->view("layout/header");
+    $this->load->view("layout/side_menu");
+    $this->load->view("emprendedor/calendar",$data);
+    $this->load->view("layout/footer");  
+
+    }
+
+       public function tienda()
+    {
+
+     $id_emp = 1;     // obtener id_empresa por la seccion
+     $result = $this->modelogeneral->mostrar_asoc($id_emp);
+     $data = array('asociados' => $result);
+    
+    $this->load->view("layout/header");
+    $this->load->view("layout/side_menu");
+    $this->load->view("emprendedor/tienda",$data);
+    $this->load->view("layout/footer");  
 
     }
      public function index1()
