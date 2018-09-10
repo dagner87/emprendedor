@@ -14,7 +14,8 @@
      
     <!-- Menu CSS -->
     <link href="<?php echo base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/plugins/bower_components/gallery/css/animated-masonry-gallery.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/plugins/bower_components/fancybox/ekko-lightbox.min.css" />
     <link href="<?php echo base_url();?>assets/plugins/bower_components/calendar/dist/fullcalendar.css" rel="stylesheet" />
     <!-- Popup CSS -->
     <link href="<?php echo base_url();?>assets/plugins/bower_components/Magnific-Popup-master/dist/magnific-popup.css" rel="stylesheet">
@@ -33,6 +34,8 @@
     <link href="<?php echo base_url();?>assets/ampleadmin-minimal/css/animate.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="<?php echo base_url();?>assets/ampleadmin-minimal/css/style.css" rel="stylesheet">
+      <!-- animation CSS -->
+    <link href="<?php echo base_url();?>assets/ampleadmin-minimal/css/animate.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="<?php echo base_url();?>assets/ampleadmin-minimal/css/colors/default.css" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -43,7 +46,7 @@
 <![endif]-->
 <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/css/hierarchy-view.css">
 
-<style type="text/css">
+<style type="text/css"> 
     .hv-item-parent p {
   font-weight: bold;
   color: #DE5454; }
