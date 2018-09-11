@@ -39,6 +39,11 @@
     <!-- Custom Theme JavaScript -->
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/custom.min.js"></script>
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/dashboard1.js"></script>
+     <!-- Footable -->
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/footable/js/footable.all.min.js"></script>
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <!--FooTable init-->
+    <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/footable-init.js"></script>
 
     <script src="<?php echo base_url();?>assets/plugins/bower_components/toast-master/js/jquery.toast.js"></script>
     
@@ -63,6 +68,30 @@
     <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bower_components/fancybox/ekko-lightbox.min.js"></script>
     <script type="text/javascript">
 
+      $(document).on("click",".btn-car",function(){
+        car = $(this).val();
+        cantidad = $('#cantidad'+car).val();
+        console.log(car+"*"+cantidad);
+       $.ajax({
+              type: 'ajax',
+              method: 'post',
+              url: '<?php echo base_url() ?>capacitacion/add_toCar',
+              data: {id_producto:car,cantidad:cantidad},
+              async: false,
+              dataType: 'json',
+            success: function(data){
+              console.log(data);
+                alert("Producto agregado al carrito");
+            },
+            error: function(){
+                 alert('No hay datos q mostrar');
+              }
+        });
+     
+
+    });
+
+
 
 
     $(document).ready(function($) {
@@ -82,6 +111,8 @@
       $("input[name='tch3_22']").TouchSpin({
                 initval: 500
             });
+
+
         // delegate calls to data-toggle="lightbox"
         $(document).delegate('*[data-toggle="lightbox"]:not([data-gallery="navigateTo"])', 'click', function(event) {
             event.preventDefault();
@@ -179,51 +210,7 @@
             method:"POST",
             success:function(data)
             {
-               $('#contenido').html(data);
-               
-                var table_import = $('#tabla-emp').DataTable({
-                                     responsive: true,
-                                     language: {
-                                                  "lengthMenu": "Mostrar _MENU_ registros por pagina",
-                                                  "zeroRecords": "No se encontraron resultados en su busqueda",
-                                                  "searchPlaceholder": "Buscar registros",
-                                                  "info": "Mostrando  _START_ al _END_ de un total de  _TOTAL_ registros",
-                                                  "infoEmpty": "No existen registros",
-                                                  "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                                                  "search": "Buscar:",
-                                                  "paginate": {
-                                                                "first": "Primero",
-                                                                "last": "Último",
-                                                                "next": "Siguiente",
-                                                                "previous": "Anterior"
-                                                              },
-                                        }
-
-                                    });
-
-               table_import.$('.tooltip-prod').tooltip({
-                selector: "[data-toggle=tooltip]",
-                container: "body"
-               });
-               
-               table_import.$('input[type="text"]').on('change', this, function(){
-                 var val = $(this).val();
-                 var name = $(this).attr("name");
-                 var valor =  $(this).attr("id").split('_');
-                 console.log(valor[0]+"-"+val+"-"+valor[1]);
-            
-             $.get( "<?php echo base_url();?>csv_import/updateTable",{ 
-                   id_producto:valor[1],
-                   campo:valor[0],
-                   valor:val
-                  })
-                .done(function(data) {
-                  console.log(data);
-                 $('#capa_'+valor[0]+valor[1]).html('<i class="fa fa-spinner fa-spin"></i>').fadeIn().delay(2000).fadeOut('slow');
-                              
-                }); 
-
-                }); 
+             $('#contenido').html(data);
             }
         })
     }

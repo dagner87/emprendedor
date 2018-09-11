@@ -27,6 +27,19 @@ class Modelogeneral extends CI_Model {
      
   }
 
+   public function insert_toCar($data)
+  {
+      $this->db->insert('carrito',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        
+        }else{
+
+          return false;
+        }
+     
+  }
+
   public function rowCountAsoc($id_emp){
       $this->db->where('e_a.id_padre', $id_emp);
       $this->db->join('emprendedor as emp ', 'e_a.id_hijo = emp.id_emp');
@@ -68,7 +81,36 @@ class Modelogeneral extends CI_Model {
       }else{
         return false;
       }
-  }  
+  } 
+
+   /*-----Devuelve el consecutivo de la orden -----------*/
+   public function N_orden_compra($year) {
+    
+   $this->db->where('year',$year);
+   $query = $this->db->get('orden_compra');
+   
+   return $query-> row();
+  
+   } 
+      /*-----actualiza consecutivo de la orden -----------*/
+   public function update_orden_compra($year) {
+     $data = array('no_orden' => $no_orden+1);
+   $this->db->where('year',$year);
+   $this->db->update('orden_compra',$data);
+  
+   } 
+
+    
+    /*-----Devuelve dato del producto -----------*/
+   public function datos_prod($id_producto) {
+    
+   $this->db->where('id_producto',$id_producto);
+   $query = $this->db->get('producto');
+   
+   return $query-> row();
+  
+   }
+
 
 
   

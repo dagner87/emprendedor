@@ -35,7 +35,7 @@ body {
   color: #ffffff;
 }
 .navbar-header {
-  background: #2f323e;
+  background: #2ea3f2;
 }
 .navbar-top-links > li > a {
   color: #ffffff;
@@ -77,8 +77,8 @@ body {
   background: rgba(0, 0, 0, 0.07);
 }
 #side-menu > li > a.active {
-  background: transperant;
-  color: #54667a;
+  background: #2ea3f2;
+  color: #ffffff;
   border-left: 3px solid #41b3f9;
   font-weight: 500;
 }
