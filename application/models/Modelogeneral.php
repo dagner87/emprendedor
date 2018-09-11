@@ -48,7 +48,17 @@ class Modelogeneral extends CI_Model {
       }else{
         return false;
       }
-  } 
+  }
+
+   public function mostrar_producto()
+  {
+     $query = $this->db->get('producto');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }  
 
 
   

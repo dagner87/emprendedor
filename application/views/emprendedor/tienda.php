@@ -16,51 +16,30 @@
                     <!-- .col -->
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title m-b-0">Css Animation</h3>
-                            <div id="image-popups" class="row">
-                                <div class="col-sm-2">
-                                    <a href="<?php echo base_url();?>assets/plugins/images/big/img1.jpg" data-effect="mfp-zoom-in"><img src="<?php echo base_url();?>assets/plugins/images/big/img1.jpg" class="img-responsive" />
-                                        
-                                         <br/>Purificador De Agua Sobre Mesada Dvigi – Plata</a>
-                                        <br/>
-                                                &nbsp; $5355
-                                        <br/>
-
-                                 <div class="pull-left">
-                                        <a href="<?php echo base_url();?>capacitacion/carrito" class="btn btn-outline btn-info btn-sm"><i class="ti-shopping-cart"></i> Añadir al Carrito</a>
-                                </div>
-                                 <br/>
-                                </div>
-                                <div class="col-sm-2">
-                                    <a href="<?php echo base_url();?>assets/plugins/images/big/img2.jpg" data-effect="mfp-newspaper"><img src="<?php echo base_url();?>assets/plugins/images/big/img2.jpg" class="img-responsive" />
-                                        <br/>Purificador De Agua Sobre Mesada Plata + 2 Repuesto Dvigi</a>
-                                       &nbsp; $9090
-                                        <br/>
-
-                                 <div class="pull-left">
-                                        <a href="<?php echo base_url();?>capacitacion/carrito" class="btn btn-outline btn-info btn-sm"><i class="ti-shopping-cart"></i> Añadir al Carrito</a>
-                                </div>
-                                 <br/>    
-                                         
-                                </div>
-                                <div class="col-sm-2">
+                            <h3 class="box-title m-b-0">Productos</h3>
+                            <?php  if (!empty($productos)):?> 
+                           
+                             <div id="image-popups" class="row">                                
+                               <!--producto-->  
+                                <?php foreach ($productos as $key): ?> 
+                                <div class="col-sm-4">
+                                    <br>
+                                    <a href="<?php echo base_url();?>assets/plugins/images/big/<?= $key->url_imagen;?>" data-effect="mfp-zoom-in"><img src="<?php echo base_url();?>assets/plugins/images/big/<?= $key->url_imagen;?>" class="img-responsive" />
+                                    <br/><?=  $key->nombre_prod;?></a><br/>
+                                    &nbsp; <?= " $".$key->precio_unitario;?>
+                                    <br/>
+                                   <div class="pull-left">
+                                    <button data ="<?=  $key->id_producto;?>" class="btn btn-outline btn-info btn-sm"><i class="ti-shopping-cart"></i> Añadir al Carrito</button>
+                                    &nbsp;
+                                   </div>
                                      <br/>
-                                    <a href="<?php echo base_url();?>assets/plugins/images/big/img3.jpg" data-effect="mfp-move-horizontal"><img src="<?php echo base_url();?>assets/plugins/images/big/img3.jpg" class="img-responsive" />
-                                        <br/>Horizontal move</a>
                                 </div>
-                                <div class="col-sm-2">
-                                    <a href="<?php echo base_url();?>assets/plugins/images/big/img4.jpg" data-effect="mfp-move-from-top"><img src="<?php echo base_url();?>assets/plugins/images/big/img4.jpg" class="img-responsive" />
-                                        <br/>Move from top</a>
-                                </div>
-                                <div class="col-sm-2">
-                                    <a href="<?php echo base_url();?>assets/plugins/images/big/img5.jpg" data-effect="mfp-3d-unfold"><img src="<?php echo base_url();?>assets/plugins/images/big/img5.jpg" class="img-responsive" />
-                                        <br/>3d unfold</a>
-                                </div>
-                                <div class="col-sm-2">
-                                    <a href="<?php echo base_url();?>assets/plugins/images/big/img6.jpg" data-effect="mfp-zoom-out"><img src="<?php echo base_url();?>assets/plugins/images/big/img5.jpg" class="img-responsive" />
-                                        <br/>Zoom-out</a>
-                                </div>
-                            </div>
+                               <!--/producto--> 
+                              <?php endforeach; ?> 
+                               </div> 
+
+                            <?php endif ?>  
+                           
                         </div>
                     </div>
                     <!-- .col -->

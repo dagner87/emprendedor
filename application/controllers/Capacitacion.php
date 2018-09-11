@@ -87,8 +87,8 @@ class Capacitacion extends CI_Controller
     {
 
      $id_emp = 1;     // obtener id_empresa por la seccion
-     $result = $this->modelogeneral->mostrar_asoc($id_emp);
-     $data = array('asociados' => $result);
+     $result = $this->modelogeneral->mostrar_producto();
+     $data = array('productos' => $result);
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
     
     $this->load->view("layout/header");
