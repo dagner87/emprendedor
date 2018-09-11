@@ -12,30 +12,22 @@
                 <!-- .row -->
 
 <div class="row">
-    <!-- .col -->
-    <div class="col-sm-12">
-        <div class="white-box">
-            <div class="row">
-                
-                <div class="col-sm-3">
-                    <h3 class="box-title m-b-0">Video # 1</h3> 
-                    <small>Luego de ver el video por favor rellenar el formulario de evaluación</code></small>
-                    <br/>
-                    <br/> <a class="popup-youtube btn btn-danger" href="www.youtube.com/watch?v=sK7riqg2mr4">Open YouTube video</a>
-                    <br> </div>
-                    <div class="col-sm-2"></div>
-           </div>
-        </div>
-    </div>
-    <!-- /.col -->
-</div>
-
-  <!-- Formulario de Evalucacion -->               
- <div class="row">
-    <!-- .col -->
-    <div class="col-sm-12">
-        <div class="white-box">
-            <h3 class="box-title m-b-0">Formulario de Evaluacion</h3> <a class="popup-with-form btn btn-success" href="#test-form">Open form</a>
+    <div class="col-md-12">
+        <div class="panel-group" id="exampleAccordionDefault" aria-multiselectable="true" role="tablist">
+            <div class="panel">
+                <div class="panel-heading" id="exampleHeadingDefaultOne" role="tab"> <a class="panel-title" data-toggle="collapse" href="#exampleCollapseDefaultOne" data-parent="#exampleAccordionDefault" aria-expanded="true" aria-controls="exampleCollapseDefaultOne"> Video #1 </a> 
+                </div>
+                <div class="panel-collapse collapse in" id="exampleCollapseDefaultOne" aria-labelledby="exampleHeadingDefaultOne" role="tabpanel">
+                    <div class="panel-body">
+                          <div class="col-sm-3">
+                            <h3 class="box-title m-b-0">Introduccion # 1</h3> 
+                            <small>Luego de ver el video por favor rellenar el formulario de evaluación</code></small>
+                            <br/>
+                            <br/> <a class="popup-youtube btn btn-danger" href="www.youtube.com/watch?v=sK7riqg2mr4">Ver video</a>
+                            <br> 
+                          </div>
+                            <div class="white-box">
+            <h3 class="box-title m-b-0">Formulario de Evaluación</h3> <a class="popup-with-form btn btn-success" href="#test-form">Evaluacion #1</a>
             <!-- form itself -->
             <form id="test-form" class="mfp-hide white-popup-block">
                 <h1>Form</h1>
@@ -58,6 +50,24 @@
                 </fieldset>
             </form>
         </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading" id="exampleHeadingDefaultTwo" role="tab"> <a class="panel-title collapsed" data-toggle="collapse" href="#exampleCollapseDefaultTwo" data-parent="#exampleAccordionDefault" aria-expanded="false" aria-controls="exampleCollapseDefaultTwo"> Video #2 </a> </div>
+                <div class="panel-collapse collapse" id="exampleCollapseDefaultTwo" aria-labelledby="exampleHeadingDefaultTwo" role="tabpanel">
+                    <div class="panel-body"> Praestabiliorem. Pellat excruciant legantur ullum leniter vacare foris voluptate loco ignavi, credo videretur multoque choro fatemur mortis animus adoptionem, bello statuat expediunt naturales frequenter terminari nomine, stabilitas privatio initia paranda contineri abhorreant, percipi dixerit incurreret deorsum imitarentur tenetur antiopam latinam haec. </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading" id="exampleHeadingDefaultThree" role="tab"> <a class="panel-title collapsed" data-toggle="collapse" href="#exampleCollapseDefaultThree" data-parent="#exampleAccordionDefault" aria-expanded="false" aria-controls="exampleCollapseDefaultThree" > Video #3 </a> </div>
+                <div class="panel-collapse collapse" id="exampleCollapseDefaultThree" aria-labelledby="exampleHeadingDefaultThree" role="tabpanel">
+                    <div class="panel-body"> Horum, antiquitate perciperet d conspectum locus obruamus animumque perspici probabis suscipere. Desiderat magnum, contenta poena desiderant concederetur menandri damna disputandum corporum equidem cyrenaicisque. Defuturum ultimum ista ignaviamque iudicant feci incursione, reprimique fruenda utamur tu faciam complexiones eo, habeo ortum iucundo artes. </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- .col -->
-</div>
+</div>                
+
+

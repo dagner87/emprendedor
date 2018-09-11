@@ -28,7 +28,7 @@ class Login extends CI_Controller
 		switch ($this->session->userdata('perfil')) {
 			case '':
 				$data['token'] = $this->token();
-				$this->load->view('v_login',$data);
+				$this->load->view('layout/login',$data);
 				break;
 			case 'administrador':
 			    redirect(base_url().'panel_admin_tienda');
@@ -39,7 +39,7 @@ class Login extends CI_Controller
 					
 		    default:		
 				$data['token'] = $this->token();
-				$this->load->view('v_login',$data);
+				$this->load->view('layout/login',$data);
 				break;		
 		}
 	}

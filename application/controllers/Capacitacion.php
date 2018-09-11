@@ -18,8 +18,11 @@ class Capacitacion extends CI_Controller
     }
      public function index()
     {
+      $id_emp = 1;     // obtener id_empresa por la seccion  
+      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
+
     $this->load->view("layout/header");
-    $this->load->view("layout/side_menu");
+    $this->load->view("layout/side_menu",$data);
     $this->load->view("layout/page_content");
     $this->load->view("layout/footer");  
 
@@ -29,23 +32,38 @@ class Capacitacion extends CI_Controller
     {
      $id_emp = 1;     // obtener id_empresa por la seccion
      $result = $this->modelogeneral->mostrar_asoc($id_emp);
-     $data = array('asociados' => $result);
+    
+     $data = array('asociados' => $result, 
+                   'cant_asoc' => $this->modelogeneral->rowCountAsoc($id_emp));
     
     $this->load->view("layout/header");
-    $this->load->view("layout/side_menu");
+    $this->load->view("layout/side_menu",$data);
     $this->load->view("emprendedor/red",$data);
     $this->load->view("layout/footer");  
 
     }
+
+    public function carrito()
+    {
+     $id_emp = 1;     // obtener id_empresa por la seccion  
+     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
+    $this->load->view("layout/header");
+    $this->load->view("layout/side_menu",$data);
+    $this->load->view("emprendedor/carrito");
+    $this->load->view("layout/footer");  
+
+    }
+
 
     public function modulos()
     {
      $id_emp = 1;     // obtener id_empresa por la seccion
      $result = $this->modelogeneral->mostrar_asoc($id_emp);
      $data = array('asociados' => $result);
+     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
     
     $this->load->view("layout/header");
-    $this->load->view("layout/side_menu");
+    $this->load->view("layout/side_menu",$data);
     $this->load->view("emprendedor/capacitacion_videos",$data);
     $this->load->view("layout/footer");  
     }
@@ -56,9 +74,10 @@ class Capacitacion extends CI_Controller
      $id_emp = 1;     // obtener id_empresa por la seccion
      $result = $this->modelogeneral->mostrar_asoc($id_emp);
      $data = array('asociados' => $result);
+     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
     
     $this->load->view("layout/header");
-    $this->load->view("layout/side_menu");
+    $this->load->view("layout/side_menu",$data);
     $this->load->view("emprendedor/calendar",$data);
     $this->load->view("layout/footer");  
 
@@ -70,9 +89,10 @@ class Capacitacion extends CI_Controller
      $id_emp = 1;     // obtener id_empresa por la seccion
      $result = $this->modelogeneral->mostrar_asoc($id_emp);
      $data = array('asociados' => $result);
+     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
     
     $this->load->view("layout/header");
-    $this->load->view("layout/side_menu");
+    $this->load->view("layout/side_menu",$data);
     $this->load->view("emprendedor/tienda",$data);
     $this->load->view("layout/footer");  
 

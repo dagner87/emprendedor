@@ -8,12 +8,15 @@ class Modelogeneral extends CI_Model {
       $this->load->database();
    }
 
-
-
-
-       public function insert_add_asoc($data)
+   public function insert_emp($data)
   {
-      $this->db->insert('asociado',$data);
+      $this->db->insert('emprendedor',$data);
+      return $this->db->insert_id();
+  }
+
+  public function insert_emp_asoc($data)
+  {
+      $this->db->insert('emp_asoc',$data);
      if($this->db->affected_rows() > 0){
           return true;
         
@@ -24,18 +27,28 @@ class Modelogeneral extends CI_Model {
      
   }
 
-    public function mostrar_asoc($id_emp){
-       
-       $this->db->where('id_emp',$id_emp);
-       $query = $this->db->get('asociado');
-       if($query->num_rows() > 0){
-         return $query->result();
-        }else{
-          return false;
-        }
-       
-       
-    } 
+  public function rowCountAsoc($id_emp){
+      $this->db->where('e_a.id_padre', $id_emp);
+      $this->db->join('emprendedor as emp ', 'e_a.id_hijo = emp.id_emp');
+      $query = $this->db->get('emp_asoc as e_a');
+      if($query->num_rows() > 0){
+        return $query->num_rows();
+      }else{
+        return false;
+      }
+  }
+
+  public function mostrar_asoc($id_emp)
+  {
+      $this->db->where('e_a.id_padre', $id_emp);
+      $this->db->join('emprendedor as emp ', 'e_a.id_hijo = emp.id_emp');
+      $query = $this->db->get('emp_asoc as e_a');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  } 
 
 
   

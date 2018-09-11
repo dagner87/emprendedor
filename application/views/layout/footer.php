@@ -45,9 +45,15 @@
     <!-- Custom Theme JavaScript -->
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/custom.min.js"></script>
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/dashboard1.js"></script>
+
     <script src="<?php echo base_url();?>assets/plugins/bower_components/toast-master/js/jquery.toast.js"></script>
-     <!--Style Switcher -->
-    <script src="<?php echo base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+    
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/switchery/dist/switchery.min.js"></script>
+        <script src="<?php echo base_url();?>assets/plugins/bower_components/custom-select/custom-select.min.js" type="text/javascript"></script>
+        <script src="<?php echo base_url();?>assets/plugins/bower_components/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+        <script src="<?php echo base_url();?>assets/plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+        <script src="<?php echo base_url();?>assets/plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bower_components/multiselect/js/jquery.multi-select.js"></script>
 
      <!-- Magnific popup JavaScript -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
@@ -55,7 +61,7 @@
 
     <!--Style Switcher -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
-        <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/jquery.slimscroll.js"></script>
+        
     <!--Wave Effects -->
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/waves.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bower_components/gallery/js/animated-masonry-gallery.js"></script>
@@ -63,7 +69,13 @@
     <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bower_components/fancybox/ekko-lightbox.min.js"></script>
     <script type="text/javascript">
 
+
+
     $(document).ready(function($) {
+
+      $("input[name='tch3_22']").TouchSpin({
+                initval: 500
+            });
         // delegate calls to data-toggle="lightbox"
         $(document).delegate('*[data-toggle="lightbox"]:not([data-gallery="navigateTo"])', 'click', function(event) {
             event.preventDefault();
@@ -113,6 +125,42 @@
         $('#add_asoc').submit(function(e) {
         e.preventDefault();
          enviardatos();
+        
+      });
+
+      //enviar solicitud a asociado
+        
+       $('#add_emp').submit(function(e) {
+        e.preventDefault();
+        var url = '<?php echo base_url() ?>panel_admin/insert_emp';
+        var data = $('#add_emp').serialize();
+          $.ajax({
+                    type: 'ajax',
+                    method: 'post',
+                    url: url,
+                    data: data,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        //sweetalert_proceso();
+                        console.log("enviando....");
+
+                      }
+                 })
+                  .done(function(){
+                    console.log(data);
+                    
+                     swal("Buen Trabajo!!", "Nuevo Emprendedor Agregado.", "success");
+                     
+                  })
+                  .fail(function(){
+                     //sweetalertclickerror();
+                  }) 
+                  .always(function(){
+                    /* setTimeout(function(){
+                      redireccionar();
+                     },2000);*/
+
+                  });
         
       });   
     });

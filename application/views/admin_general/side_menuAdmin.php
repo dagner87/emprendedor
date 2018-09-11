@@ -16,6 +16,7 @@
                  <!--MENU -->
                 <ul class="nav" id="side-menu">
                   <li> <a href="<?php echo base_url();?>capacitacion" class="waves-effect"><i class="mdi mdi-home-variant fa-fw"></i> <span class="hide-menu">MENU</span></a></li>
+                  <li><a href="javascript:void(0)"  data-toggle="modal" data-target="#enviarInvitacion"><i class="ti-plus fa-fw"></i> <span class="hide-menu">Enviar invitacion</span></a></li>
 
                     <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-rename-box fa-fw"></i> <span class="hide-menu">Capacitación<span class="fa arrow"></span> <span class="label label-rouded label-info pull-right">7</span> </span></a>
                         <ul class="nav nav-second-level">
@@ -25,7 +26,7 @@
                           <li><a href="<?php echo base_url();?>capacitacion/calendario"><i class="fa fa-calendar fa-fw"></i> <span class="hide-menu">Calendario</span></a></li>
                         </ul>
                     </li>
-                    <li> <a href="javascript:void(0)" class="waves-effect"><i class="fa fa-users fa-fw"></i> <span class="hide-menu">Asociados<span class="fa arrow"></span><span class="label label-rouded label-warning pull-right"><?= $cant_asoc;?></span></span></a>
+                    <li> <a href="javascript:void(0)" class="waves-effect"><i class="fa fa-users fa-fw"></i> <span class="hide-menu">Asociados<span class="fa arrow"></span><span class="label label-rouded label-warning pull-right">10</span></span></a>
                         <ul class="nav nav-second-level">
                          <li><a href="javascript:void(0)"  data-toggle="modal" data-target="#myModal"><i class="ti-plus fa-fw"></i> <span class="hide-menu">Agregar Asociado</span></a></li>
                           <li><a href="<?php echo base_url();?>capacitacion/mi_red"><i class="ti-layers-alt fa-fw"></i> <span class="hide-menu">Mi Red</span></a></li>

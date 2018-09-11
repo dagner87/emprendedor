@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="white-box">
-                            <h3 class="box-title">Gallery Page</h3>
+                            <h3 class="box-title">Galería de Productos</h3>
                             <div id="gallery">
                                 <div id="gallery-header">
                                     <div id="gallery-header-center">

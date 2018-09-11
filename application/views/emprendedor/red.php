@@ -27,26 +27,29 @@
                         </div>
                     </div>
                  
-                    <!-- asociados 1 nivel-->
+                  
+                        <?php 
+                       if (!empty($asociados)):?>
+                          <!-- asociados 1 nivel-->
                     <div class="hv-item-children">
-                        <?php  foreach ($asociados as $key) { ?>
 
+                        <?php foreach ($asociados as $key) { ?>
                             <div class="hv-item-child">
                              <!--1 er asociado -->
                             <div class="hv-item">
                                 <div class="person">
                                     <img src="<?php echo base_url();?>assets/plugins/images/users/2.jpg" alt="">
                                     <p class="name">
-                                        <?= $key->nombre_asoc ;?> <b>/ <?= $key->telefono_asoc; ?></b>
+                                        <?= $key->nombre_emp ;?> <b>/ <?= $key->telefono_emp; ?></b>
                                     </p>
                                 </div>
                            </div>
                             <!--/Key component -->
                         </div>
-                        <?php } ?>
-                       
-                    </div>
-                    <!--Fin 2do nivel-->
+                        <?php }  ?>   
+                     </div>
+                 <?php endif ?>   
+                 
                 </div>
                <!--Fin Primer nivel-->
 
