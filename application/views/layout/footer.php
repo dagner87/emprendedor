@@ -66,6 +66,18 @@
 
 
     $(document).ready(function($) {
+       //Bootstrap-TouchSpin
+            $(".vertical-spin").TouchSpin({
+                verticalbuttons: true,
+                verticalupclass: 'ti-plus',
+                verticaldownclass: 'ti-minus'
+            });
+            var vspinTrue = $(".vertical-spin").TouchSpin({
+                verticalbuttons: true
+            });
+            if (vspinTrue) {
+                $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+            }
 
       $("input[name='tch3_22']").TouchSpin({
                 initval: 500
@@ -151,11 +163,8 @@
                      //sweetalertclickerror();
                   }) 
                   .always(function(){
-                    /* setTimeout(function(){
-                      redireccionar();
-                     },2000);*/
                      load_data();
-
+ 
                   });
         
       }); 

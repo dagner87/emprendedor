@@ -28,10 +28,15 @@
                                     <br/><?=  $key->nombre_prod;?></a><br/>
                                     &nbsp; <?= " $".$key->precio_unitario;?>
                                     <br/>
+
+                                     <form class="p-r-20 col-sm-4">
+                                     <div class="form-group">
+                                            <input class="vertical-spin" type="text" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline" value="" name="vertical-spin"> </div>
                                    <div class="pull-left">
                                     <button data ="<?=  $key->id_producto;?>" class="btn btn-outline btn-info btn-sm"><i class="ti-shopping-cart"></i> Añadir al Carrito</button>
                                     &nbsp;
                                    </div>
+                               </form>
                                      <br/>
                                 </div>
                                <!--/producto--> 

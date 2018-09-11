@@ -68,7 +68,7 @@ class Panel_admin extends CI_Controller
     
    
 
-         public function insert_emp()
+    public function insert_emp()
     {
         $id_emprendedor = 1 ;//viene por la seccion
         $param['nombre_emp']   = $this->input->post('nombre_emp');
