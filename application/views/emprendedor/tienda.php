@@ -3,6 +3,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Tienda</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <a href="<?php echo base_url();?>capacitacion/carrito" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"><i class="ti-shopping-cart"></i> Carrito de Compra</a>
                         <ol class="breadcrumb">
                             <li><a href="#">Inicio</a></li>
                             <li><a href="#">Tienda</a></li>
@@ -11,77 +12,58 @@
                     </div>
                 </div>
                 <!-- /.row -->
-                <div class="row">
-                    <div class="col-md-12">
+                 <div class="row">
+                    <!-- .col -->
+                    <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Galería de Productos</h3>
-                            <div id="gallery">
-                                <div id="gallery-header">
-                                    <div id="gallery-header-center">
-                                        <div id="gallery-header-center-left">
-                                            <div class="gallery-header-center-right-links" id="filter-all">All</div>
-                                            <div class="gallery-header-center-right-links" id="filter-studio">Studio</div>
-                                            <div class="gallery-header-center-right-links" id="filter-landscape">Galería de Productos</div>
-                                        </div>
-                                    </div>
+                            <h3 class="box-title m-b-0">Css Animation</h3>
+                            <div id="image-popups" class="row">
+                                <div class="col-sm-2">
+                                    <a href="<?php echo base_url();?>assets/plugins/images/big/img1.jpg" data-effect="mfp-zoom-in"><img src="<?php echo base_url();?>assets/plugins/images/big/img1.jpg" class="img-responsive" />
+                                        
+                                         <br/>Purificador De Agua Sobre Mesada Dvigi – Plata</a>
+                                        <br/>
+                                                &nbsp; $5355
+                                        <br/>
+
+                                 <div class="pull-left">
+                                        <a href="<?php echo base_url();?>capacitacion/carrito" class="btn btn-outline btn-info btn-sm"><i class="ti-shopping-cart"></i> Añadir al Carrito</a>
                                 </div>
-                                <div id="gallery-content">
-                                    <div id="gallery-content-center">
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/studio1.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Producto"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio1.jpg" alt="gallery" class="all studio" /> </a>
-                                        
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape1.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape1.jpg" class="all landscape" alt="gallery" /> </a>
-                                        
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/studio2.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio2.jpg" class="all studio" alt="gallery" /> </a>
-                                        
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/studio25.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio25.jpg" class="all studio" alt="gallery" /> </a>
-                                        
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape2.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape2.jpg" class="all landscape" alt="gallery" /></a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/studio27.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio27.jpg" class="all studio" alt="gallery" /> </a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/studio3.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio3.jpg" class="all studio" alt="gallery" /> </a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape3.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape3.jpg" class="all landscape" alt="gallery" /> </a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/studio26.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio26.jpg" class="all studio" alt="gallery" /> </a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/studio4.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio4.jpg" class="all studio" alt="gallery" /> </a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape4.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape4.jpg" class="all landscape" alt="gallery" /></a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/studio5.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio5.jpg" class="all studio" alt="gallery" /> </a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape5.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape5.jpg" class="all landscape" alt="gallery" /></a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/studio6.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio6.jpg" class="all studio" alt="gallery" /></a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape6.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape6.jpg" class="all landscape" alt="gallery" /> </a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/studio7.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio7.jpg" class="all studio" alt="gallery" /></a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape7.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape7.jpg" class="all landscape" alt="gallery" /> </a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/studio8.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio8.jpg" class="all studio" alt="gallery" /></a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape8.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape8.jpg" class="all landscape" alt="gallery" /> </a>
-                                        <a href="<?php echo base_url();?>assets/plugins/images/assets/studio9.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio9.jpg" class="all studio" alt="gallery" />
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape9.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape9.jpg" class="all landscape" alt="gallery" /> </a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio10.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio10.jpg" class="all studio" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape10.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape10.jpg" class="all landscape" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio11.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio11.jpg" class="all studio" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape11.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape11.jpg" class="all landscape" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio12.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio12.jpg" class="all studio" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape12.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape12.jpg" class="all landscape" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio13.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio13.jpg" class="all studio" alt="gallery" /> </a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape13.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape13.jpg" class="all landscape" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio14.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio14.jpg" class="all studio" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape14.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape14.jpg" class="all landscape" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio15.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio15.jpg" class="all studio" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape15.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape15.jpg" class="all landscape" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio16.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio16.jpg" class="all studio" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape16.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape16.jpg" class="all landscape" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio17.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio17.jpg" class="all studio" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape17.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape17.jpg" class="all landscape" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio18.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio18.jpg" class="all studio" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/landscape18.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/landscape18.jpg" class="all landscape" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio19.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio19.jpg" class="all studio" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio20.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio20.jpg" class="all studio" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio21.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio21.jpg" class="all studio" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio22.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio22.jpg" class="all studio" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio23.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio23.jpg" class="all studio" alt="gallery" /></a>
-                                            <a href="<?php echo base_url();?>assets/plugins/images/assets/studio24.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="Image title will be apear here"><img src="<?php echo base_url();?>assets/plugins/images/assets/studio24.jpg" class="all studio" alt="gallery" /></a>
-                                    </div>
+                                 <br/>
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="<?php echo base_url();?>assets/plugins/images/big/img2.jpg" data-effect="mfp-newspaper"><img src="<?php echo base_url();?>assets/plugins/images/big/img2.jpg" class="img-responsive" />
+                                        <br/>Purificador De Agua Sobre Mesada Plata + 2 Repuesto Dvigi</a>
+                                       &nbsp; $9090
+                                        <br/>
+
+                                 <div class="pull-left">
+                                        <a href="<?php echo base_url();?>capacitacion/carrito" class="btn btn-outline btn-info btn-sm"><i class="ti-shopping-cart"></i> Añadir al Carrito</a>
+                                </div>
+                                 <br/>    
+                                         
+                                </div>
+                                <div class="col-sm-2">
+                                     <br/>
+                                    <a href="<?php echo base_url();?>assets/plugins/images/big/img3.jpg" data-effect="mfp-move-horizontal"><img src="<?php echo base_url();?>assets/plugins/images/big/img3.jpg" class="img-responsive" />
+                                        <br/>Horizontal move</a>
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="<?php echo base_url();?>assets/plugins/images/big/img4.jpg" data-effect="mfp-move-from-top"><img src="<?php echo base_url();?>assets/plugins/images/big/img4.jpg" class="img-responsive" />
+                                        <br/>Move from top</a>
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="<?php echo base_url();?>assets/plugins/images/big/img5.jpg" data-effect="mfp-3d-unfold"><img src="<?php echo base_url();?>assets/plugins/images/big/img5.jpg" class="img-responsive" />
+                                        <br/>3d unfold</a>
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="<?php echo base_url();?>assets/plugins/images/big/img6.jpg" data-effect="mfp-zoom-out"><img src="<?php echo base_url();?>assets/plugins/images/big/img5.jpg" class="img-responsive" />
+                                        <br/>Zoom-out</a>
                                 </div>
                             </div>
-                            <div class="clearfix"></div>
                         </div>
                     </div>
+                    <!-- .col -->
                 </div>
                 <!-- .row -->
                 <!-- /.row -->
