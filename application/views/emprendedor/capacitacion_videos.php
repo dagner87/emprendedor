@@ -23,11 +23,15 @@
                             <h3 class="box-title m-b-0">Introduccion # 1</h3> 
                             <small>Luego de ver el video por favor rellenar el formulario de evaluación</code></small>
                             <br/>
-                            <br/> <a class="popup-youtube btn btn-danger" href="www.youtube.com/watch?v=sK7riqg2mr4">Ver video</a>
+                            <br/> <a class="popup-youtube btn btn-danger" href="https://www.youtube.com/watch?v=zMVw3QamjA0">Ver video</a>
                             <br> 
                           </div>
                             <div class="white-box">
-            <h3 class="box-title m-b-0">Formulario de Evaluación</h3> <a class="popup-with-form btn btn-success" href="#test-form">Evaluacion #1</a>
+            <h3 class="box-title m-b-0">Formulario de Evaluación</h3> 
+             <small>Complete correctamente el fomulario de evaluación</code></small>
+             <br/>
+             
+            <a class="popup-with-form btn btn-success" href="#test-form">Evaluacion #1</a>
             <!-- form itself -->
             <form id="test-form" class="mfp-hide white-popup-block">
                 <h1>Form</h1>

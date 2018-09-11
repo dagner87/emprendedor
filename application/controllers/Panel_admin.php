@@ -26,33 +26,39 @@ class Panel_admin extends CI_Controller
 
     }
 
-    function load_data_emprendedores()
+    function load_dataemp()
     {
-        $result = $this->csv_import_model->select();
+        $result = $this->modelogeneral->mostrar_emp();
         $count = 0;
         $output = '';
-        if($result->num_rows() > 0)
+        if(!empty($result))
         {
-            foreach($result->result() as $row)
+            foreach($result as $row)
             {
-                $count = $count + 1;
-                $output .= '
-                  <tr>
-                    <td>'.$row->id_producto.'</td>
-                    <td>'.$row->nombre_producto.'</td>
-                    <td><input type="text" name="stock[]" id="stock_'.$row->id_producto.'" value="'.$row->stock.'" required>
-                     <i id="capa_stock'.$row->id_producto.'"></i></td>
-                    <td><input type="text" name="precio[]" id="precio_'.$row->id_producto.'" value="'.$row->precio.'" required> 
-                    <i  id="capa_precio'.$row->id_producto.'"></i></td>
-                    <td><input type="text" name="preciopromo[]" id="preciopromo_'.$row->id_producto.'" value="'.$row->preciopromo.'" required>
-                     <i  id="capa_preciopromo'.$row->id_producto.'"></i></td>
-                    <td class="tooltip-prod">';
-                 if ($row->estado == 0) { 
-                 $output .= ' <button type="button" class="btn btn-success btn-circle" data-toggle="tooltip" data-placement="right" title="Cargado"></button>';
-                 }else{
-                 $output .= '<button type="button" class="btn btn-warning btn-circle" data-toggle="tooltip" data-placement="right" title="Modificado"></button>';
-                 } 
-                 $output .= '</td></tr>';
+                $count++;
+                $output .= ' <tr>
+                    <td class="text-center">'.$count.'</td>
+                                            <td><span class="font-medium">'.$row->nombre_emp.'</span>
+                                                <br/><span class="text-muted">'.$row->email.'</span></td>
+                                            <td>Visual Designer
+                                                <br/><span class="text-muted">'.$row->telefono_emp.'</span></td>
+                                            <td>daniel@website.com
+                                                <br/><span class="text-muted">'.$row->estado_pago.'</span></td>
+                                            <td><span class="text-muted">'.$row->fecha_insc.'</span></td>
+                                            <td>
+                                                <select class="form-control">
+                                                    <option>Modulator</option>
+                                                    <option>Admin</option>
+                                                    <option>User</option>
+                                                    <option>Subscriber</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-key"></i></button>
+                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="icon-trash"></i></button>
+                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
+                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-20"><i class="ti-upload"></i></button>
+                                            </td>';
                 
             }
         }
@@ -82,6 +88,8 @@ class Panel_admin extends CI_Controller
              }
         echo json_encode($msg);
     }
+
+
 
 
     public function datos_usuarioT()

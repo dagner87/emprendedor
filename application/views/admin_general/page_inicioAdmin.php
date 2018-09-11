@@ -2,7 +2,6 @@
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">INICIO</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <a href="<?php echo base_url();?>capacitacion/carrito" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"><i class="ti-shopping-cart"></i> Carrito de Compra</a>
                         <ol class="breadcrumb">
                             <li class="active">Inicio</li>
                             
@@ -19,8 +18,8 @@
                     <div class="row">
                     <div class="col-lg-3 col-sm-6 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title">Daily Sales</h3>
-                            <div class="text-right"> <span class="text-muted">Todays Income</span>
+                            <h3 class="box-title">Nuevos Emprendedores</h3>
+                            <div class="text-right"> <span class="text-muted">Ventas</span>
                                 <h1><sup><i class="ti-arrow-up text-success"></i></sup> $12,000</h1> </div> <span class="text-success">20%</span>
                             <div class="progress m-b-0">
                                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:20%;"> <span class="sr-only">20% Complete</span> </div>
@@ -65,70 +64,20 @@
                         <div class="panel">
                             <div class="panel-heading">ADMINISTAR EMPRENDEDORES</div>
                             <div class="table-responsive">
-                                <table class="table table-hover manage-u-table">
+                                <table class="table table-hover manage-u-table" id="tabla-emp">
                                     <thead>
                                         <tr>
                                             <th class="text-center" style="width: 70px">#</th>
                                             <th>NAME</th>
-                                            <th>OCCUPATION</th>
+                                            <th>TELEFONO</th>
                                             <th>EMAIL</th>
-                                            <th>ADDED</th>
-                                            <th style="width: 250px">CATEGORY</th>
-                                            <th style="width: 300px">MANAGE</th>
+                                            <th>FECHA INGRESO</th>
+                                            <th style="width: 250px">CATEGORIA</th>
+                                            <th style="width: 300px">ACCION</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                            <td><span class="font-medium">Daniel Kristeen</span>
-                                                <br/><span class="text-muted">Texas, Unitedd states</span></td>
-                                            <td>Visual Designer
-                                                <br/><span class="text-muted">Past : teacher</span></td>
-                                            <td>daniel@website.com
-                                                <br/><span class="text-muted">999 - 444 - 555</span></td>
-                                            <td>15 Mar 1988
-                                                <br/><span class="text-muted">10: 55 AM</span></td>
-                                            <td>
-                                                <select class="form-control">
-                                                    <option>Modulator</option>
-                                                    <option>Admin</option>
-                                                    <option>User</option>
-                                                    <option>Subscriber</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-key"></i></button>
-                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="icon-trash"></i></button>
-                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
-                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-20"><i class="ti-upload"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">2</td>
-                                            <td><span class="font-medium">Daniel Kristeen</span>
-                                                <br/><span class="text-muted">Texas, Unitedd states</span></td>
-                                            <td>Visual Designer
-                                                <br/><span class="text-muted">Past : teacher</span></td>
-                                            <td>daniel@website.com
-                                                <br/><span class="text-muted">999 - 444 - 555</span></td>
-                                            <td>15 Mar 1988
-                                                <br/><span class="text-muted">10: 55 AM</span></td>
-                                            <td>
-                                                <select class="form-control">
-                                                    <option>Modulator</option>
-                                                    <option>Admin</option>
-                                                    <option>User</option>
-                                                    <option>Subscriber</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-key"></i></button>
-                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="icon-trash"></i></button>
-                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
-                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-20"><i class="ti-upload"></i></button>
-                                            </td>
-                                        </tr>
-                                       
+                                    <tbody id="contenido">
+
                                     </tbody>
                                 </table>
                             </div>

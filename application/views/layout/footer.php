@@ -115,6 +115,7 @@
     <script>
 
     $(document).ready(function(){
+      load_data();
        // console.log("cargo");
         $('#add_asoc').submit(function(e) {
         e.preventDefault();
@@ -153,11 +154,70 @@
                     /* setTimeout(function(){
                       redireccionar();
                      },2000);*/
+                     load_data();
 
                   });
         
-      });   
+      }); 
+
+
     });
+
+    function load_data()
+    {
+        $.ajax({
+            url:"<?php echo base_url(); ?>panel_admin/load_dataemp",
+            method:"POST",
+            success:function(data)
+            {
+               $('#contenido').html(data);
+               
+                var table_import = $('#tabla-emp').DataTable({
+                                     responsive: true,
+                                     language: {
+                                                  "lengthMenu": "Mostrar _MENU_ registros por pagina",
+                                                  "zeroRecords": "No se encontraron resultados en su busqueda",
+                                                  "searchPlaceholder": "Buscar registros",
+                                                  "info": "Mostrando  _START_ al _END_ de un total de  _TOTAL_ registros",
+                                                  "infoEmpty": "No existen registros",
+                                                  "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                                  "search": "Buscar:",
+                                                  "paginate": {
+                                                                "first": "Primero",
+                                                                "last": "Último",
+                                                                "next": "Siguiente",
+                                                                "previous": "Anterior"
+                                                              },
+                                        }
+
+                                    });
+
+               table_import.$('.tooltip-prod').tooltip({
+                selector: "[data-toggle=tooltip]",
+                container: "body"
+               });
+               
+               table_import.$('input[type="text"]').on('change', this, function(){
+                 var val = $(this).val();
+                 var name = $(this).attr("name");
+                 var valor =  $(this).attr("id").split('_');
+                 console.log(valor[0]+"-"+val+"-"+valor[1]);
+            
+             $.get( "<?php echo base_url();?>csv_import/updateTable",{ 
+                   id_producto:valor[1],
+                   campo:valor[0],
+                   valor:val
+                  })
+                .done(function(data) {
+                  console.log(data);
+                 $('#capa_'+valor[0]+valor[1]).html('<i class="fa fa-spinner fa-spin"></i>').fadeIn().delay(2000).fadeOut('slow');
+                              
+                }); 
+
+                }); 
+            }
+        })
+    }
 
      function enviardatos(){
           var url = '<?php echo base_url() ?>capacitacion/insert_add_asoc';
