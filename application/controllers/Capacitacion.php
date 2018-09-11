@@ -133,6 +133,7 @@ class Capacitacion extends CI_Controller
         $year                     = date('Y');
         $no_orden                 =  $this->modelogeneral->datos_prod($year);
         $param['no_orden']        = $no_orden + 1;
+        //$this->modelogeneral->update_orden_compra($year);
         $row['datos']             = $this->modelogeneral->datos_prod($param['id_producto']);
         $param['precio_car']      = $row['datos']->precio_unitario;
         $param['importe']         = $param['precio_car'] * $param['cantidad'];

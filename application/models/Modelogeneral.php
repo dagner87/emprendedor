@@ -106,7 +106,6 @@ class Modelogeneral extends CI_Model {
     
    $this->db->where('id_producto',$id_producto);
    $query = $this->db->get('producto');
-   
    return $query-> row();
   
    }

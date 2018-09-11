@@ -84,11 +84,10 @@
                 alert("Producto agregado al carrito");
             },
             error: function(){
-                 alert('No hay datos q mostrar');
+                 alert('No hay pudo agregar al carrito');
               }
         });
-     
-
+ 
     });
 
 

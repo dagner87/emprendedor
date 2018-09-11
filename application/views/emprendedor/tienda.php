@@ -24,7 +24,7 @@
                                 <?php foreach ($productos as $key): ?> 
                                 <div class="col-sm-4">
                                     <br>
-                                    <a href="<?php echo base_url();?>assets/plugins/images/big/<?= $key->url_imagen;?>" data-effect="mfp-zoom-in"><img src="<?php echo base_url();?>assets/plugins/images/big/<?= $key->url_imagen;?>" class="img-responsive" />
+                                    <a href="<?php echo base_url();?>assets/plugins/images/big/<?= $key->url_imagen;?>" data-effect="mfp-zoom-in"><img src="<?php echo base_url();?>assets/uploads/img_productos/<?= $key->url_imagen;?>" class="img-responsive" />
                                     <br/><?=  $key->nombre_prod;?></a><br/>
                                     &nbsp; <?= " $".$key->precio_unitario;?>
                                     <br/>
