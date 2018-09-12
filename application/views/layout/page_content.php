@@ -177,6 +177,7 @@
 
     $(document).ready(function(){
       reporte_asoc();
+   
       
       });
    

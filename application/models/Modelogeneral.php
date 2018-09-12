@@ -102,7 +102,9 @@ class Modelogeneral extends CI_Model {
       }else{
         return false;
       }
-  } 
+  }
+
+   
 
    /*-----Devuelve el consecutivo de la orden -----------*/
    public function N_orden_compra($year) {

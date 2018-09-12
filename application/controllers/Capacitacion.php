@@ -31,7 +31,11 @@ class Capacitacion extends CI_Controller
 
     function reporte_asoc()
     {
-        $result = $this->modelogeneral->mostrar_emp();
+         if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        }   
+        $id_emp = $this->session->userdata('id_emp');
+        $result = $this->modelogeneral->mostrar_asoc($id_emp);
         $count = 0;
         $output = '';
         if(!empty($result))
@@ -67,7 +71,10 @@ class Capacitacion extends CI_Controller
 
     public function mi_red()
     {
-     $id_emp = 1;     // obtener id_empresa por la seccion
+     if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        }   
+     $id_emp = $this->session->userdata('id_emp');
      $result = $this->modelogeneral->mostrar_asoc($id_emp);
     
      $data = array('asociados' => $result, 
@@ -82,7 +89,10 @@ class Capacitacion extends CI_Controller
 
     public function carrito()
     {
-     $id_emp = 1;     // obtener id_empresa por la seccion  
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        }   
+     $id_emp = $this->session->userdata('id_emp');
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
      $data['result']  = $this->modelogeneral->mostrar_carrito($id_emp);
 
@@ -96,7 +106,10 @@ class Capacitacion extends CI_Controller
 
     public function modulos()
     {
-     $id_emp = 1;     // obtener id_empresa por la seccion
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        }   
+     $id_emp = $this->session->userdata('id_emp');
      $result = $this->modelogeneral->mostrar_asoc($id_emp);
      $data = array('asociados' => $result);
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
@@ -110,7 +123,10 @@ class Capacitacion extends CI_Controller
       public function calendario()
     {
 
-     $id_emp = 1;     // obtener id_empresa por la seccion
+     if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        }   
+     $id_emp = $this->session->userdata('id_emp');
      $result = $this->modelogeneral->mostrar_asoc($id_emp);
      $data = array('asociados' => $result);
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
@@ -124,10 +140,13 @@ class Capacitacion extends CI_Controller
 
        public function tienda()
     {
+     if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        }   
 
-     $id_emp = 1;     // obtener id_empresa por la seccion
+     $id_emp = $this->session->userdata('id_emp');
      $result = $this->modelogeneral->mostrar_producto();
-     $data = array('productos' => $result);
+     $data   = array('productos' => $result);
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
     
     $this->load->view("layout/header");
@@ -138,29 +157,12 @@ class Capacitacion extends CI_Controller
     }
    
 
-     public function insert_add_asoc()
-    {
-        $param['id_emp']          = 1;     // obtener id_empresa por la seccion
-        $param['nombre_asoc']     = $this->input->post('nombre_asoc');
-        $param['dni__asoc']       = $this->input->post('dni__asoc');
-        $param['email']           = $this->input->post('email');
-        $param['telefono_asoc']   = $this->input->post('telefono_asoc');
-       //$param['estado_asoc']     = 1;
-        $param['fecha_insc_asoc'] = date('Y-m-d');
-       
-       
-        $result = $this->modelogeneral->insert_add_asoc($param);
-        $msg['comprobador'] = false;
-        if($result)
-             {
-               $msg['comprobador'] = TRUE;
-             }
-        echo json_encode($msg);
-    }
-
     public function add_toCar()
     {
-        $param['id_emp']          = 1;     // obtener id_empresa por la seccion
+     if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        }   
+        $param['id_emp']          = $this->session->userdata('id_emp');
         $param['id_producto']     = $this->input->post('id_producto');
         $param['cantidad']        = $this->input->post('cantidad');
         $year                     = date('Y');
@@ -199,7 +201,11 @@ class Capacitacion extends CI_Controller
 
      function carrito_compra()
     {
-        $id_emp          = 1;     // obtener id_empresa por la seccion
+        if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        }   
+
+        $id_emp = $this->session->userdata('id_emp');
         $result = $this->modelogeneral->mostrar_carrito($id_emp);
         $count = 0;
         $output = '';

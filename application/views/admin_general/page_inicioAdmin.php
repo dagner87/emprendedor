@@ -72,8 +72,8 @@
                                             <th>TELEFONO</th>
                                             <th>EMAIL</th>
                                             <th>FECHA INGRESO</th>
-                                            <th style="width: 250px">CATEGORIA</th>
-                                            <th style="width: 300px">ACCION</th>
+                                            <th style="width: 250px">PERFIL</th>
+                                            <!--th style="width: 300px">ACCION</th-->
                                         </tr>
                                     </thead>
                                     <tbody id="contenido">
@@ -85,50 +85,15 @@
                     </div>
                 </div>
 
-                <!-- .modal for add task -->
-                            <div class="modal fade" id="enviarInvitacion" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            <h4 class="modal-title">Nuevo Emprendedor</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="add_emp" action="<?php echo base_url() ?>panel_admin/insert_emp" method="post">
-                                        <div class="form-group">
-                                            <label for="exampleInputuname">Nombre Completo</label>
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="ti-user"></i></div>
-                                                <input type="text" class="form-control" name="nombre_emp" id="nombre_emp" placeholder=" Escriba Nombre Completo"> </div>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Correo</label>
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="ti-email"></i></div>
-                                                <input type="email" class="form-control"  name="email" id="email" placeholder=" Escriba Email"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputphone">Telefono</label>
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="ti-mobile"></i></div>
-                                                <input type="tel" class="form-control" name="telefono_emp" id="telefono_emp" placeholder="Escriba telefono"> </div>
-                                        </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                            <button type="submit" class="btn btn-primary">Agregar</button>
-                                        </div>
-                                         </form>
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
-                            <!-- /.modal -->
-                <!--/.row -->
+                
             </div>
             <!-- /.container-fluid -->
+<script type="text/javascript">
+     $(document).on("change","select", function(){
+         //var perfil = $(this).find(':selected')[0];
+         var perfil = $(this).val();
+        console.log(perfil);
+
+      });
+</script>            
 

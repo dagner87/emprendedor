@@ -147,14 +147,16 @@
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li class="dropdown">
 
-                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="<?php echo base_url();?>assets/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">dalena</b><span class="caret"></span> </a>
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="<?php echo base_url();?>assets/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><?= $this->session->userdata('email');?></b><span class="caret"></span> </a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
                             <li>
                                 <div class="dw-user-box">
                                     <div class="u-img"><img src="<?php echo base_url();?>assets/plugins/images/users/varun.jpg" alt="user" /></div>
                                     <div class="u-text">
-                                        <h4>Dagner Alena Guerra</h4>
-                                        <p class="text-muted">dalenag87@gmail.com</p><!--a href="profile.html" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a--></div>
+                                        <br>
+                                        <h4><?= $this->session->userdata('nombre');?></h4>
+                                        <p class="text-muted"><?= $this->session->userdata('perfil');?></p>
+                                        <!--a href="profile.html" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a--></div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
@@ -174,4 +176,48 @@
             <!-- /.navbar-static-side -->
         </nav> 
         <!-- End Top Navigation -->
+        <!-- .modal for add task -->
+                            <div class="modal fade" id="enviarInvitacion" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="titulo_invit">Nuevo Miembro </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="add_emp" action="<?php echo base_url() ?>panel_admin/insert_emp" method="post">
+                                        <div class="form-group">
+                                            <label for="exampleInputuname">Nombre Completo</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="ti-user"></i></div>
+                                                <input type="text" class="form-control" name="nombre_emp" id="nombre_emp" placeholder=" Escriba Nombre Completo"> </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Correo</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="ti-email"></i></div>
+                                                <input type="email" class="form-control"  name="email" id="email" placeholder=" Escriba Email"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputphone">Telefono</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="ti-mobile"></i></div>
+                                                <input type="tel" class="form-control" name="telefono_emp" id="telefono_emp" placeholder="Escriba telefono"> </div>
+                                        </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Agregar</button>
+                                        </div>
+                                         </form>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                <!--/.row -->
        

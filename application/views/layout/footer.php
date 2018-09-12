@@ -188,6 +188,7 @@
         
        $('#add_emp').submit(function(e) {
         e.preventDefault();
+        
         var url = '<?php echo base_url() ?>panel_admin/insert_emp';
         var data = $('#add_emp').serialize();
           $.ajax({
