@@ -20,12 +20,49 @@ class Capacitacion extends CI_Controller
     {
       $id_emp = 1;     // obtener id_empresa por la seccion  
       $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
+      $data['result']     = $this->modelogeneral->mostrar_emp();
 
     $this->load->view("layout/header");
     $this->load->view("layout/side_menu",$data);
     $this->load->view("layout/page_content");
     $this->load->view("layout/footer");  
 
+    }
+
+    function reporte_asoc()
+    {
+        $result = $this->modelogeneral->mostrar_emp();
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+            foreach($result as $row)
+            {
+                $count++;
+                $output .= '<tr>
+                            <td>
+                            <a href="contact-detail.html"><img src="'.base_url().'assets/plugins/images/users/genu.jpg" alt="user" class="img-circle" /> '.$row->nombre_emp.'</a>
+                            </td>
+                            <td>'.$row->nombre_emp.'</td>
+                            <td>'.$row->nombre_emp.'</td>
+                            <td><span class="label label-danger">'.$row->nombre_emp.'</span></td>
+                            <td>'.$row->nombre_emp.'</td>
+                            <td>'.$row->nombre_emp.'</td>
+                            <td>'.$row->nombre_emp.'</td>
+                            <td>'.$row->nombre_emp.'</td>
+                            <td>'.$row->nombre_emp.'</td>
+                            <td>'.$row->nombre_emp.'</td>
+                            <td>'.$row->nombre_emp.'</td>
+                            <td>'.$row->nombre_emp.'</td>
+                            <td>'.$row->nombre_emp.'</td>
+                            <td>'.$row->nombre_emp.'</td>
+                            
+                        </tr>';
+                
+            }
+        }
+    
+        echo $output;
     }
 
     public function mi_red()
@@ -99,12 +136,7 @@ class Capacitacion extends CI_Controller
     $this->load->view("layout/footer");  
 
     }
-     public function index1()
-    {
-        
-    $this->load->view("layout/inicio");
-    
-    }
+   
 
      public function insert_add_asoc()
     {
