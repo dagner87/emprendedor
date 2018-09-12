@@ -10,3 +10,5 @@ $route['logusuario'] = "login/new_user";
 
 //-------usuarios--------------------------
 $route['salir'] = "login/salir";
+//-------usuarios--------------------------
+$route['registro'] = "login/registro";

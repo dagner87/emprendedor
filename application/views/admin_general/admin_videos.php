@@ -9,6 +9,7 @@
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
+                  
                 </div>
 <div id="add-contact" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">

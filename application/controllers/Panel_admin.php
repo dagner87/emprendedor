@@ -45,7 +45,7 @@ class Panel_admin extends CI_Controller
                 }
 
                 $count++;
-                $output .= ' <tr>
+                $output .= '<tr>
                     <td class="text-center">'.$count.'</td>
                     <td><span class="font-medium">'.$row->nombre_emp.'</span>
                         <br/><span class="text-muted">'.$row->email.'</span></td>
@@ -57,6 +57,9 @@ class Panel_admin extends CI_Controller
                             <option value ="emprendedor" '.$selected.'>Emprendedor</option>
                             <option value ="administrador" '.$selected.' >Administrador</option>
                         </select>
+                    </td>
+                    <td>
+                          <span class="label label-danger">Registro no completado</span>
                     </td>
                      </tr>';
                 
@@ -80,7 +83,7 @@ class Panel_admin extends CI_Controller
         
         $asunto = $nombre." te invita";
         $cuerpo_mensaje = "Hola ".$param['nombre_emp']." te invito a que formes parte de nuestro negocio como emprendedor";
-        $url = "http://18.228.90.211/emprendedores/sistema/registro";
+        $url = base_url()."registro";
         $cuerpo_mensaje .= "<a href='".$url."' target='_blank'> Completar Registro</a>";
 
         $this->sendMailMandril($param['email'],$asunto, $cuerpo_mensaje);
