@@ -13,6 +13,8 @@
     <link href="<?php echo base_url();?>assets/ampleadmin-minimal/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
      <!-- Footable CSS -->
     <link href="<?php echo base_url();?>assets/plugins/bower_components/footable/css/footable.core.css" rel="stylesheet">
+    <!-- Editable CSS -->
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/bower_components/jquery-datatables-editable/datatables.css" />
     
      <link href="<?php echo base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />

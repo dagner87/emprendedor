@@ -15,7 +15,7 @@
 
                  <!--MENU -->
                 <ul class="nav" id="side-menu">
-                  <li> <a href="<?php echo base_url();?>capacitacion" class="waves-effect"><i class="mdi mdi-home-variant fa-fw"></i> <span class="hide-menu">MENU</span></a></li>
+                  <li> <a href="<?php echo base_url();?>" class="waves-effect"><i class="mdi mdi-home-variant fa-fw"></i> <span class="hide-menu">MENU</span></a></li>
 
                     <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-rename-box fa-fw"></i> <span class="hide-menu">Capacitación<span class="fa arrow"></span> <span class="label label-rouded label-info pull-right">7</span> </span></a>
                         <ul class="nav nav-second-level">

@@ -15,24 +15,18 @@
 
                  <!--MENU -->
                 <ul class="nav" id="side-menu">
-                  <li> <a href="<?php echo base_url();?>capacitacion" class="waves-effect"><i class="mdi mdi-home-variant fa-fw"></i> <span class="hide-menu">MENU</span></a></li>
+                  <li> <a href="<?php echo base_url();?>" class="waves-effect"><i class="mdi mdi-home-variant fa-fw"></i> <span class="hide-menu">MENU</span></a></li>
                   <li><a href="javascript:void(0)"  data-toggle="modal" data-target="#enviarInvitacion"><i class="ti-plus fa-fw"></i> <span class="hide-menu">Enviar invitación</span></a></li>
 
                     <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-rename-box fa-fw"></i> <span class="hide-menu">Capacitación<span class="fa arrow"></span> <span class="label label-rouded label-info pull-right">7</span> </span></a>
                         <ul class="nav nav-second-level">
 
-                            <li><a href="<?php echo base_url();?>capacitacion/modulos"><i class="fa fa-file-video-o fa-fw"></i> <span class="hide-menu">Videos</span></a></li>
-                        </ul>
-                    </li>
-                    <li> <a href="javascript:void(0)" class="waves-effect"><i class="fa fa-users fa-fw"></i> <span class="hide-menu">Asociados<span class="fa arrow"></span><span class="label label-rouded label-warning pull-right">10</span></span></a>
-                        <ul class="nav nav-second-level">
-                         <li><a href="javascript:void(0)"  data-toggle="modal" data-target="#myModal"><i class="ti-plus fa-fw"></i> <span class="hide-menu">Agregar Asociado</span></a></li>
-                          <li><a href="<?php echo base_url();?>capacitacion/mi_red"><i class="ti-layers-alt fa-fw"></i> <span class="hide-menu">Mi Red</span></a></li>
+                            <li><a href="<?php echo base_url();?>panel_admin/admin_capacitacion"><i class="fa fa-file-video-o fa-fw"></i> <span class="hide-menu">Adm. Videos</span></a></li>
                         </ul>
                     </li>
                     <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-store fa-fw"></i> <span class="hide-menu">Tienda<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="<?php echo base_url();?>capacitacion/tienda"><i class="fa fa-shopping-cart fa-fw"></i><span class="hide-menu">Administración</span></a></li>
+                            <li><a href="<?php echo base_url();?>panel_admin/admin_prod"><i class="fa fa-shopping-cart fa-fw"></i><span class="hide-menu">Adm. Productos</span></a></li>
                          
                         </ul>
                     </li>

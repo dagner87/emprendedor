@@ -85,7 +85,30 @@ class Panel_admin extends CI_Controller
         echo json_encode($msg);
     }
 
-    
+    public function admin_prod()
+    {
+    if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
+            redirect(base_url() . 'login');
+        }    
+    $this->load->view("layout/header");
+    $this->load->view("admin_general/side_menuAdmin");
+    $this->load->view("admin_general/admin_productos");
+    $this->load->view("layout/footer");  
+
+    }
+     public function admin_capacitacion()
+    {
+    if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
+            redirect(base_url() . 'login');
+        }    
+    $this->load->view("layout/header");
+    $this->load->view("admin_general/side_menuAdmin");
+    $this->load->view("admin_general/admin_videos");
+    $this->load->view("layout/footer");  
+
+    }
+
+
 
 
 
