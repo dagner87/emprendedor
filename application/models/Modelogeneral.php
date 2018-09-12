@@ -63,6 +63,20 @@ class Modelogeneral extends CI_Model {
       }
   }
 
+
+  public function mostrar_carrito($id_emp)
+  {
+      $this->db->select('id_car,no_orden,url_imagen,nombre_prod,precio_car,cantidad,importe');
+      $this->db->where('car.id_emp',$id_emp);
+      $this->db->join('producto as prod','prod.id_producto = car.id_producto');
+      $query = $this->db->get('carrito as car');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
    public function mostrar_producto()
   {
      $query = $this->db->get('producto');
@@ -109,6 +123,29 @@ class Modelogeneral extends CI_Model {
    return $query-> row();
   
    }
+
+
+    public function eliminar_prodCar($id_car)
+    {
+     $this->db->where('id_car',$id_car);
+     $this->db->delete('carrito');
+     if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+
+  }
+
+
+
+
+
+
+
+
+
+
 
 
 

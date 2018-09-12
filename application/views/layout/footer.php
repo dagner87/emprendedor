@@ -8,7 +8,7 @@
         <!-- ============================================================== -->
     </div>
    
-    <script src="<?php echo base_url();?>assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+   
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Menu Plugin JavaScript -->
@@ -90,9 +90,6 @@
  
     });
 
-
-
-
     $(document).ready(function($) {
        //Bootstrap-TouchSpin
             $(".vertical-spin").TouchSpin({
@@ -107,9 +104,10 @@
                 $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
             }
 
-      $("input[name='tch3_22']").TouchSpin({
-                initval: 500
-            });
+     /* $("input[name='cantidades[]']").TouchSpin({
+                
+
+            });*/ 
 
 
         // delegate calls to data-toggle="lightbox"

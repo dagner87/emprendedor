@@ -47,9 +47,11 @@ class Capacitacion extends CI_Controller
     {
      $id_emp = 1;     // obtener id_empresa por la seccion  
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['result']  = $this->modelogeneral->mostrar_carrito($id_emp);
+
     $this->load->view("layout/header");
     $this->load->view("layout/side_menu",$data);
-    $this->load->view("emprendedor/carrito");
+    $this->load->view("emprendedor/carrito",$data);
     $this->load->view("layout/footer");  
 
     }
@@ -145,6 +147,56 @@ class Capacitacion extends CI_Controller
              }
         echo json_encode($msg);
     }
+
+     function carrito_compra()
+    {
+        $id_emp          = 1;     // obtener id_empresa por la seccion
+        $result = $this->modelogeneral->mostrar_carrito($id_emp);
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+            foreach($result as $row)
+            {
+                $count++;
+                $output .= '<tr>
+                                 <td class="text-center">&nbsp;</td>
+                                <td class="text-center">
+                                 <a class= "btn-remove-producto" data-toggle="tooltip" data="'.$row->id_car.'" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a></td>
+                                <td>
+                                <img src="'.base_url().'assets/uploads/img_productos/'.$row->url_imagen.'" alt="user" class="img-circle" /> '.$row->nombre_prod.'</td>
+                                <td class="text-right"> '.$row->precio_car.' </td>
+                                <td class="text-center">
+                                   <div class="row">
+                                    <div class="form-group">
+                                     <input id="tch3_22" size="5" type="text" value="'.$row->cantidad.'" name="tch3_22" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline"> </div> 
+                                   </div>
+                                </td>
+                                <td class="text-right">'.$row->importe.'</td>
+
+                            </tr>';
+                
+            }
+        }
+    
+        echo $output;
+    }
+
+
+    public function eliminar_prodCar()
+    {
+
+        $id_car = $this->input->get('id_car');
+        $result  = $this->modelogeneral->eliminar_prodCar($id_car);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
+    
 
 
 

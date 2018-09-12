@@ -57,6 +57,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/css/hierarchy-view.css">
+ <script src="<?php echo base_url();?>assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 
 <style type="text/css"> 
     .hv-item-parent p {
