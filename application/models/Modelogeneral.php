@@ -58,6 +58,18 @@ class Modelogeneral extends CI_Model {
       }
   }
 
+  public function comprobar_email($email){
+      $this->db->where('email', $email);
+      $query = $this->db->get('emprendedor');
+      if($query->num_rows() > 0){
+        return $query->num_rows();
+      }else{
+        return false;
+      }
+  }
+
+  
+
   public function mostrar_asoc($id_emp)
   {
       $this->db->where('e_a.id_padre', $id_emp);

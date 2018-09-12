@@ -81,12 +81,12 @@
                     </div>
                     <div class="form-group m-b-0">
                       <div class="col-sm-12 text-center">
-                        <p>No tengo cuenta<a href="registro" class="text-primary m-l-5"><b>Regístrate
+                        <p> No tengo cuenta <a href="registro" class="text-primary m-l-5"><b>Regístrate
 </b></a></p>
                       </div>
                     </div>
                   </form>
-                  <form class="form-horizontal" id="recoverform" action="index.html">
+                  <form class="form-horizontal" id="recoverform" action="">
                     <div class="form-group ">
                       <div class="col-xs-12">
                         <h3>Recuperar contraseña</h3>
@@ -95,12 +95,12 @@
                     </div>
                     <div class="form-group ">
                       <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="Correo">
+                        <input class="form-control" type="text" id="email_rest" required="" placeholder="Correo">
                       </div>
                     </div>
                     <div class="form-group text-center m-t-20">
                       <div class="col-xs-12">
-                        <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reiniciar</button>
+                        <button id="forgot_pass" class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reiniciar</button>
                       </div>
                     </div>
                   </form>
@@ -124,5 +124,41 @@
 <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/custom.min.js"></script>
 <!--Style Switcher -->
 <script src="<?php echo base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+<script type="text/javascript">
+  $(document).on("click","#forgot_pass", function(e){
+    e.preventDefault();
+    var email_rest = $("#email_rest").val();
+    console.log(email_rest);
+     var url = '<?php echo base_url() ?>panel_admin/forgot_pass';
+          $.ajax({
+                    type: 'ajax',
+                    method: 'get',
+                    url: url,
+                    data: {email:email_rest},
+                    dataType: 'json',
+                    beforeSend: function() {
+                        //sweetalert_proceso();
+                        console.log("enviando....");
+                      }
+                 })
+                  .done(function(){
+                    console.log(data);
+                     swal("Correo enviado", "Cheque su buzón de correo", "success");
+                     
+                  })
+                  .fail(function(){
+                     //sweetalertclickerror();
+                  }) 
+                  .always(function(){
+                    /* setTimeout(function(){
+                      redireccionar();
+                     },2000);*/
+
+                  });
+
+      });
+</script>
+
+
 </body>
 </html>

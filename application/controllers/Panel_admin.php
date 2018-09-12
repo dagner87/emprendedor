@@ -139,6 +139,27 @@ class Panel_admin extends CI_Controller
         return  $message;
     } 
 
+     public function forgot_pass()
+    {
+        $email  = $this->input->post('email');
+        $result = $this->modelogeneral->comprobar_email($email);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+                $msg['comprobador'] = TRUE;
+                $asunto = "Olvidó su contraseña";
+                $cuerpo_mensaje = "Hola ".$param['nombre_emp']." te invito a que formes parte de nuestro negocio como emprendedor";
+               $url = base_url()."registro";
+               $cuerpo_mensaje .= "<a href='".$url."' target='_blank'> Completar Registro</a>";
+               $this->sendMailMandril($param['email'],$asunto, $cuerpo_mensaje);
+             }
+        
+       
+
+       
+        echo json_encode($msg);
+    }
+
 
     public function sendMailMandril($email_destino,$asunto, $cuerpo_mensaje)
     {       

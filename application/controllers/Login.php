@@ -99,5 +99,6 @@ class Login extends CI_Controller
 		$data['token'] = $this->token();
 		$this->load->view('layout/registro',$data);
 	}
+	
 
 }
