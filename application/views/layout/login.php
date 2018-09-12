@@ -81,7 +81,7 @@
                     </div>
                     <div class="form-group m-b-0">
                       <div class="col-sm-12 text-center">
-                        <p>No tengo cuenta<a href="register.html" class="text-primary m-l-5"><b>Regístrate
+                        <p>No tengo cuenta<a href="registro" class="text-primary m-l-5"><b>Regístrate
 </b></a></p>
                       </div>
                     </div>

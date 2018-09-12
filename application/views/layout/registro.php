@@ -67,10 +67,8 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-xs-12">
-                        <label>CONTRASEÑA</label>
-                        <input class="form-control" type="password" required="true" name="password"  placeholder="Contraseña">
-                      </div>
+                        <div class="col-xs-12">
+                            <input class="form-control" type="password" required="" placeholder="Confirm Password"> </div>
                     </div>
                     <div class="form-group">
                       <div class="col-md-12">
