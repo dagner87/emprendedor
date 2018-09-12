@@ -103,6 +103,15 @@ class Modelogeneral extends CI_Model {
         return false;
       }
   }
+      public function listar_data_cap()
+  {
+     $query = $this->db->get('capacitacion');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
 
    
 

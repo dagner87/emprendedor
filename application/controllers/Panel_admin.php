@@ -47,19 +47,18 @@ class Panel_admin extends CI_Controller
                 $count++;
                 $output .= ' <tr>
                     <td class="text-center">'.$count.'</td>
-                                            <td><span class="font-medium">'.$row->nombre_emp.'</span>
-                                                <br/><span class="text-muted">'.$row->email.'</span></td>
-                                            <td><span class="text-muted">'.$row->telefono_emp.'</span></td>
-                                            <td><span class="text-muted">'.$row->email.'</span></td>
-                                            <td><span class="text-muted">'.$row->fecha_insc.'</span></td>
-                                            <td>
-
-                                                <select class="form-control" id="sel_perfil">
-                                                    <option value ="emprendedor" '.$selected.'>Emprendedor</option>
-                                                    <option value ="administrador" '.$selected.' >Administrador</option>
-                                                </select>
-                                            </td>
-                                            ';
+                    <td><span class="font-medium">'.$row->nombre_emp.'</span>
+                        <br/><span class="text-muted">'.$row->email.'</span></td>
+                    <td><span class="text-muted">'.$row->telefono_emp.'</span></td>
+                    <td><span class="text-muted">'.$row->email.'</span></td>
+                    <td><span class="text-muted">'.$row->fecha_insc.'</span></td>
+                    <td>
+                        <select class="form-control" id="sel_perfil">
+                            <option value ="emprendedor" '.$selected.'>Emprendedor</option>
+                            <option value ="administrador" '.$selected.' >Administrador</option>
+                        </select>
+                    </td>
+                     </tr>';
                 
             }
         }
@@ -83,6 +82,27 @@ class Panel_admin extends CI_Controller
                $msg['comprobador'] = TRUE;
              }
         echo json_encode($msg);
+    }
+
+     function load_datAdmCap()
+    {
+        $result = $this->modelogeneral->listar_data_cap();
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+            foreach($result as $row)
+            {
+             $output .= '<tr>
+                         <td><span class="font-medium">'.$row->nombre_video.'</span>
+                         </td>
+                        <td><span class="text-muted">'.$row->evaluacion.'</span></td>
+                        <td><span class="text-muted">'.$row->nivel.'</span></td>
+                        </tr>';
+            }
+        }
+    
+        echo $output;
     }
 
     public function admin_prod()
