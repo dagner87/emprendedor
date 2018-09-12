@@ -143,12 +143,13 @@ class Panel_admin extends CI_Controller
     {
         $email  = $this->input->post('email');
         $result = $this->modelogeneral->comprobar_email($email);
+        $pass = $result->
         $msg['comprobador'] = false;
         if($result)
              {
                 $msg['comprobador'] = TRUE;
                 $asunto = "Olvidó su contraseña";
-                $cuerpo_mensaje = "Hola ".$param['nombre_emp']." te invito a que formes parte de nuestro negocio como emprendedor";
+                $cuerpo_mensaje = "Contraseña:".$result->nombre_emp']." te invito a que formes parte de nuestro negocio como emprendedor";
                $url = base_url()."registro";
                $cuerpo_mensaje .= "<a href='".$url."' target='_blank'> Completar Registro</a>";
                $this->sendMailMandril($param['email'],$asunto, $cuerpo_mensaje);
