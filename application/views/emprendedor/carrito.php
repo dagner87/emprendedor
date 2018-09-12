@@ -58,6 +58,7 @@
                 <div class="clearfix"></div>
                 <hr>
                 <div class="text-right">
+                    <a href="<?php echo base_url();?>capacitacion/tienda" class="btn btn-default btn-outline" type="button"> <span><i class="ti-shopping-cart-full"></i> Seguir Comprando</span> </a>
                     <button class="btn btn-outline btn-info" type="submit"> Finalizar Compra </button>
                 </div>
             </div>
@@ -76,10 +77,25 @@
 
         cantidad = $(this).val();
         precio = $(this).closest("tr").find("td:eq(3)").text();
-        console.log(precio);
+        id = $(this).closest("tr").find("td:eq(1)").children("a").attr('data');
+        console.log(id);
         importe = cantidad * precio;
         $(this).closest("tr").find("td:eq(5)").children("p").text(importe.toFixed(2));
         $(this).closest("tr").find("td:eq(5)").children("input").val(importe.toFixed(2));
+        $.ajax({
+                type: 'ajax',
+                method: 'get',
+                url: '<?php echo base_url() ?>capacitacion/update_prodCar',
+                data: {id_car: id,cantidad: cantidad,importe: importe},
+                async: false,
+                dataType: 'json',
+                success: function(data){
+                  
+                },
+                error: function(){
+                  alert('No se pudo actualizar');
+                }
+        });
         sumar_pro();
     });  
 
@@ -94,7 +110,15 @@
                 async: false,
                 dataType: 'json',
                 success: function(data){
-                  alert(data);
+                  $.toast({
+                        heading: 'Producto eliminado ',
+                        text: 'El producto a sido eliminado del carrito.',
+                        position: 'top-right',
+                        loaderBg: '#ff6849',
+                        icon: 'error',
+                        hideAfter: 3500
+
+                    });
                 },
                 error: function(){
                   alert('No se pudo eliminar');

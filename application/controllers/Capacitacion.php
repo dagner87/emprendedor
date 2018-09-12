@@ -131,10 +131,10 @@ class Capacitacion extends CI_Controller
         $param['id_emp']          = 1;     // obtener id_empresa por la seccion
         $param['id_producto']     = $this->input->post('id_producto');
         $param['cantidad']        = $this->input->post('cantidad');
-        $param['fecha_car']       = date('Y-m-d');
         $year                     = date('Y');
         $no_orden                 =  $this->modelogeneral->datos_prod($year);
         $param['no_orden']        = $no_orden + 1;
+        $param['fecha_car']       = date('Y-m-d');
         //$this->modelogeneral->update_orden_compra($year);
         $row['datos']             = $this->modelogeneral->datos_prod($param['id_producto']);
         $param['precio_car']      = $row['datos']->precio_unitario;
@@ -147,6 +147,23 @@ class Capacitacion extends CI_Controller
              }
         echo json_encode($msg);
     }
+
+     public function update_prodCar()
+    {
+       
+        $param['id_car']    = $this->input->get('id_car');
+        $param['cantidad']  = $this->input->get('cantidad');
+        $param['importe']   = $this->input->get('importe');
+        $result = $this->modelogeneral->update_prodCar($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
+
 
      function carrito_compra()
     {

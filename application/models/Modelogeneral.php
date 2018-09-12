@@ -32,13 +32,20 @@ class Modelogeneral extends CI_Model {
       $this->db->insert('carrito',$data);
      if($this->db->affected_rows() > 0){
           return true;
-        
         }else{
-
-          return false;
-        }
-     
+              return false;
+             }
   }
+
+  public function update_prodCar($param) {
+   $this->db->where('id_car',$param['id_car']);
+   $this->db->update('carrito',$param);
+   if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+   } 
 
   public function rowCountAsoc($id_emp){
       $this->db->where('e_a.id_padre', $id_emp);

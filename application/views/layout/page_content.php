@@ -91,19 +91,25 @@
                                                 <th>No</th>
                                                 <th>Asociado</th>
                                                 <th>Compras</th>
-                                                <th>Phone</th>
-                                                <th>Role</th>
-                                                <th>Age</th>
-                                                <th>Joining date</th>
-                                                <th>Salery</th>
-                                                <th>Action</th>
+                                                <th>Enero</th>
+                                                <th>Febrero</th>
+                                                <th>Marzo</th>
+                                                <th>Abril</th>
+                                                <th>Mayo</th>
+                                                <th>Junio</th>
+                                                <th>Julio</th>
+                                                <th>Agosto</th>
+                                                <th>Septiembre</th>
+                                                <th>Octubre</th>
+                                                <th>Noviembre</th>
+                                                <th>Diciembre</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/genu.jpg" alt="user" class="img-circle" /> Genelia Deshmukh</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/genu.jpg" alt="user" class="img-circle" /> Genelia Deshmukh</a>
                                                 </td>
                                                 <td>genelia@gmail.com</td>
                                                 <td>+123 456 789</td>
@@ -118,7 +124,7 @@
                                             <tr>
                                                 <td>2</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/arijit.jpg" alt="user" class="img-circle" /> Arijit Singh</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/arijit.jpg" alt="user" class="img-circle" /> Arijit Singh</a>
                                                 </td>
                                                 <td>arijit@gmail.com</td>
                                                 <td>+234 456 789</td>
@@ -133,7 +139,7 @@
                                             <tr>
                                                 <td>3</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/govinda.jpg" alt="user" class="img-circle" /> Govinda jalan</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/govinda.jpg" alt="user" class="img-circle" /> Govinda jalan</a>
                                                 </td>
                                                 <td>govinda@gmail.com</td>
                                                 <td>+345 456 789</td>
@@ -148,7 +154,7 @@
                                             <tr>
                                                 <td>4</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/hritik.jpg" alt="user" class="img-circle" /> Hritik Roshan</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/hritik.jpg" alt="user" class="img-circle" /> Hritik Roshan</a>
                                                 </td>
                                                 <td>hritik@gmail.com</td>
                                                 <td>+456 456 789</td>
@@ -163,7 +169,7 @@
                                             <tr>
                                                 <td>5</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/john.jpg" alt="user" class="img-circle" /> John Abraham</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/john.jpg" alt="user" class="img-circle" /> John Abraham</a>
                                                 </td>
                                                 <td>john@gmail.com</td>
                                                 <td>+567 456 789</td>
@@ -178,7 +184,7 @@
                                             <tr>
                                                 <td>6</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/pawandeep.jpg" alt="user" class="img-circle" /> Pawandeep kumar</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/pawandeep.jpg" alt="user" class="img-circle" /> Pawandeep kumar</a>
                                                 </td>
                                                 <td>pawandeep@gmail.com</td>
                                                 <td>+678 456 789</td>
@@ -193,7 +199,7 @@
                                             <tr>
                                                 <td>7</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/ritesh.jpg" alt="user" class="img-circle" /> Ritesh Deshmukh</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/ritesh.jpg" alt="user" class="img-circle" /> Ritesh Deshmukh</a>
                                                 </td>
                                                 <td>ritesh@gmail.com</td>
                                                 <td>+123 456 789</td>
@@ -208,7 +214,7 @@
                                             <tr>
                                                 <td>8</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/salman.jpg" alt="user" class="img-circle" /> Salman Khan</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/salman.jpg" alt="user" class="img-circle" /> Salman Khan</a>
                                                 </td>
                                                 <td>salman@gmail.com</td>
                                                 <td>+234 456 789</td>
@@ -223,7 +229,7 @@
                                             <tr>
                                                 <td>9</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/govinda.jpg" alt="user" class="img-circle" /> Govinda jalan</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/govinda.jpg" alt="user" class="img-circle" /> Govinda jalan</a>
                                                 </td>
                                                 <td>govinda@gmail.com</td>
                                                 <td>+345 456 789</td>
@@ -238,7 +244,7 @@
                                             <tr>
                                                 <td>10</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/sonu.jpg" alt="user" class="img-circle" /> Sonu Nigam</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/sonu.jpg" alt="user" class="img-circle" /> Sonu Nigam</a>
                                                 </td>
                                                 <td>sonu@gmail.com</td>
                                                 <td>+456 456 789</td>
@@ -253,7 +259,7 @@
                                             <tr>
                                                 <td>11</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/varun.jpg" alt="user" class="img-circle" /> Varun Dhawan</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/varun.jpg" alt="user" class="img-circle" /> Varun Dhawan</a>
                                                 </td>
                                                 <td>varun@gmail.com</td>
                                                 <td>+567 456 789</td>
@@ -268,7 +274,7 @@
                                             <tr>
                                                 <td>12</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/genu.jpg" alt="user" class="img-circle" /> Genelia Deshmukh</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/genu.jpg" alt="user" class="img-circle" /> Genelia Deshmukh</a>
                                                 </td>
                                                 <td>genelia@gmail.com</td>
                                                 <td>+123 456 789</td>
@@ -283,7 +289,7 @@
                                             <tr>
                                                 <td>13</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/arijit.jpg" alt="user" class="img-circle" /> Arijit Singh</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/arijit.jpg" alt="user" class="img-circle" /> Arijit Singh</a>
                                                 </td>
                                                 <td>arijit@gmail.com</td>
                                                 <td>+234 456 789</td>
@@ -298,7 +304,7 @@
                                             <tr>
                                                 <td>14</td>
                                                 <td>
-                                                    <a href="contact-detail.html"><img src="../plugins/images/users/govinda.jpg" alt="user" class="img-circle" /> Govinda jalan</a>
+                                                    <a href="contact-detail.html"><img src="<?php echo base_url();?>assets/plugins/images/users/govinda.jpg" alt="user" class="img-circle" /> Govinda jalan</a>
                                                 </td>
                                                 <td>govinda@gmail.com</td>
                                                 <td>+345 456 789</td>

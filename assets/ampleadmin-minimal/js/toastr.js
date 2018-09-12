@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $(".tst1").on("click", function () {
         $.toast({
-            heading: 'Welcome to my Elite admin',
+            heading: 'Welcome to my Elite admin11',
             text: 'Use the predefined ones, or specify a custom position object.',
             position: 'top-right',
             loaderBg: '#ff6849',

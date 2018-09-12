@@ -46,7 +46,8 @@
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/footable-init.js"></script>
 
     <script src="<?php echo base_url();?>assets/plugins/bower_components/toast-master/js/jquery.toast.js"></script>
-    
+    <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/toastr.js"></script>  
+
     <script src="<?php echo base_url();?>assets/plugins/bower_components/switchery/dist/switchery.min.js"></script>
         <script src="<?php echo base_url();?>assets/plugins/bower_components/custom-select/custom-select.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url();?>assets/plugins/bower_components/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
@@ -81,7 +82,15 @@
               dataType: 'json',
             success: function(data){
               console.log(data);
-                alert("Producto agregado al carrito");
+                $.toast({
+                          heading: 'Producto Agregado',
+                          text: 'Se agregó corectamente el producto al  carrito.',
+                          position: 'top-right',
+                          loaderBg: '#ff6849',
+                          icon: 'success',
+                          hideAfter: 3500,
+                          stack: 6
+                      });
             },
             error: function(){
                  alert('No hay pudo agregar al carrito');
