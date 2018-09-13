@@ -70,7 +70,7 @@
                                 <table id="example" class="table display manage-u-table">
                                     <thead>
                                         <tr>
-                                             <th class="text-center" style="width: 70px">&nbsp;</th>
+                                          
                                             <th>NOMBRE</th>
                                             <th>REPRESENTANTE</th>
                                             <th>TELEFONO</th>

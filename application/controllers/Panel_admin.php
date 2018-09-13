@@ -51,9 +51,10 @@ class Panel_admin extends CI_Controller
 
                 $count++;
                 $output .= '<tr>
-                               <td></td>
+                               
                                 <td><span class="font-medium">'.$row->nombre_emp.'</span>
                                     <br/><span class="text-muted">'.$row->email.'</span></td>
+                                <td>--</td>
                                 <td><span class="text-muted">'.$row->telefono_emp.'</span></td>
                                 <td><span class="text-muted">'.$row->fecha_insc.'</span></td>
                                 <td>
