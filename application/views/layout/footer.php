@@ -110,8 +110,18 @@
         });
  
     });
+      
+      /* $(document).on("mouseover","#view_car span",function(){
+        var i = "+";
+         $("#view_car span p").append(i);
+         });*/
 
     $(document).ready(function($) {
+     
+      $('#view_car').click(function(e) {
+            window.location.href = "<?php echo base_url();?>capacitacion/carrito";
+        });
+
        //Bootstrap-TouchSpin
             $(".vertical-spin").TouchSpin({
                 verticalbuttons: true,

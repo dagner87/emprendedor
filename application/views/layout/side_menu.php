@@ -1,3 +1,4 @@
+
     <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -12,6 +13,14 @@
                        
                     </div>
                 </div>
+
+
+ <button id="view_car" class="botonF1 tooltip-demo" title=" Ver Carrito">
+  <span><i class="ti-shopping-cart"></i></span>
+</button>
+
+<!--button type="button" class="botonF1 popover-primary" title="" data-toggle="popover" data-placement="top" data-content="Cantidad de Productos:10000" data-original-title="Carrito"><span><i class="ti-shopping-cart"></i></span></button-->
+
 
                  <!--MENU -->
                 <ul class="nav" id="side-menu">
@@ -56,6 +65,7 @@
         <!-- ============================================================== -->
         <!-- End Left Sidebar -->
         <!-- ============================================================== -->
-
         <div id="page-wrapper">
-             <div class="container-fluid">
+          <div class="container-fluid">
+      
+

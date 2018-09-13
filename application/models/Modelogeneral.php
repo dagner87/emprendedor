@@ -27,6 +27,22 @@ class Modelogeneral extends CI_Model {
      
   }
 
+  /* insertar videos */
+
+   public function insert_cap($data)
+  {
+      $this->db->insert('capacitacion',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        
+        }else{
+
+          return false;
+        }
+     
+  }
+
+
    public function insert_toCar($data)
   {
       $this->db->insert('carrito',$data);
@@ -144,6 +160,50 @@ class Modelogeneral extends CI_Model {
     return $resultados->num_rows();
   }
 
+
+  /*CRUD PRODUCTOS*/
+
+    public function listar_data_prod()
+  {
+     $query = $this->db->get('producto');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+  /*Insertar*/
+  
+     public function insert_prod($data)
+  {
+      $this->db->insert('producto',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        
+        }else{
+
+          return false;
+        }
+     
+  }
+  /*Editar*/
+  
+
+  /*Eliminar*/
+     public function eliminar_prod($id_producto)
+    {
+     $this->db->where('id_producto',$id_producto);
+     $this->db->delete('producto');
+     if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+
+  }
+
+  /*----------------*/
+
    
 
    /*-----Devuelve el consecutivo de la orden -----------*/
@@ -194,7 +254,19 @@ class Modelogeneral extends CI_Model {
 
   }
 
-    public function eliminar_emp($id_emp)
+    public function eliminar_cap($id_cap)
+    {
+     $this->db->where('id_cap',$id_cap);
+     $this->db->delete('capacitacion');
+     if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+
+  }
+
+  public function eliminar_emp($id_emp)
     {
      $this->db->where('id_emp',$id_emp);
      $this->db->delete('emprendedor');
@@ -204,6 +276,19 @@ class Modelogeneral extends CI_Model {
         return false;
       }
 
+  }
+
+   /*-----------------------editar Perfil-----------------------*/ 
+   
+  public function update_perfil($param) 
+  {
+    $this->db->where('id_emp',$param['id_emp']);
+    $this->db->update('emprendedor',$param);
+     if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
   }
 
 
@@ -389,20 +474,7 @@ class Modelogeneral extends CI_Model {
      
   }
 
- /*-----------------------editar Perfil-----------------------*/ 
-   
-  public function update_perfil($data,$id_usuario) 
-  {
-      
-      $this->db->where('id_usuario',$id_usuario);
-      $this->db->update('usuario',$data);
-      
-     if($this->db->affected_rows() > 0){
-      return true;
-       }else{
-         return false;
-        }
-  }
+
 
   /*------------get datos de producto-------------------*/
   public function editar_producto($id_producto)

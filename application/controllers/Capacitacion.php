@@ -135,8 +135,7 @@ class Capacitacion extends CI_Controller
 
      public function Myperfil()
     {
-      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor'&&
-        $this->session->userdata('perfil') != 'administrador') {
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
             redirect(base_url() . 'login');
         }   
      $id_emp = $this->session->userdata('id_emp');
