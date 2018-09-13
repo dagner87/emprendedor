@@ -25,16 +25,39 @@ class Capacitacion extends CI_Controller
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
      $data['result']     = $this->modelogeneral->mostrar_asoc($id_emp);
      $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
-     $this->load->view("layout/page_content");
+
+     if ($data['datos_emp']->id_cap != 8)
+      {
+        $this->load->view("emprendedor/capacitacion_videos",$data);
+      }else {
+             $this->load->view("layout/page_content");
+            }
+       $this->load->view("layout/footer");  
+    }
+
+    public function checkout()
+    {
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        }   
+     $id_emp = $this->session->userdata('id_emp'); 
+     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['result']     = $this->modelogeneral->mostrar_asoc($id_emp);
+     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+     $this->load->view("layout/header",$data);
+     $this->load->view("layout/side_menu",$data);
+     $this->load->view("emprendedor/checkout");
      $this->load->view("layout/footer");  
 
     }
 
+
     function reporte_asoc()
     {
-         if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+        if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
             redirect(base_url() . 'login');
         }   
         $id_emp = $this->session->userdata('id_emp');

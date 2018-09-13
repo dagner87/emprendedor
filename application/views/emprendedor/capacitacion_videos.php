@@ -3,7 +3,8 @@
                         <h4 class="page-title">CAPACITACION</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <ol class="breadcrumb">
-                            <li><a href="#">Inicio</a></li>
+                            <li><a href="<?php echo base_url();?>">Inicio</a></li>
+                            <li><a href="<?php echo base_url();?>">Capacitación</a></li>
                             <li class="active">Videos</li>
                         </ol>
                     </div>
@@ -13,26 +14,45 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="panel-group" id="exampleAccordionDefault" aria-multiselectable="true" role="tablist">
-            <div class="panel">
-                <div class="panel-heading" id="exampleHeadingDefaultOne" role="tab"> <a class="panel-title" data-toggle="collapse" href="#exampleCollapseDefaultOne" data-parent="#exampleAccordionDefault" aria-expanded="true" aria-controls="exampleCollapseDefaultOne"> Video #1 </a> 
-                </div>
-                <div class="panel-collapse collapse in" id="exampleCollapseDefaultOne" aria-labelledby="exampleHeadingDefaultOne" role="tabpanel">
-                    <div class="panel-body">
-                          <div class="col-sm-3">
-                            <h3 class="box-title m-b-0">Introduccion # 1</h3> 
-                            <small>Luego de ver el video por favor rellenar el formulario de evaluación</code></small>
-                            <br/>
-                            <br/> <a class="popup-youtube btn btn-danger" href="https://www.youtube.com/watch?v=zMVw3QamjA0">Ver video</a>
-                            <br> 
-                          </div>
+        <div class="alert alert-warning"> DEBE COMPLETAR LOS VIDEOS DE CAPACITACION PARA TENER ACCESO A LAS DEMAS PESTAÑAS DEL MENU. </div>
+        <div class="panel-group" role="tablist" aria-multiselectable="true">
+            <!--pestañas de videos-->    
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="font-bold">  Video #1 </a> </h4> </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body"> 
+                        <div class="col-md-12">
                             <div class="white-box">
-            <h3 class="box-title m-b-0">Formulario de Evaluación</h3> 
-             <small>Complete correctamente el fomulario de evaluación</code></small>
-             <br/>
-             
-            <a class="popup-with-form btn btn-success" href="#test-form">Evaluacion #1</a>
-            <!-- form itself -->
+                                <h3 class="box-title">INTRODUCCION</h3>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <a class="popup-youtube btn btn-default" title="Ver Video" href="https://www.youtube.com/watch?v=zMVw3QamjA0"><img src="<?php echo base_url();?>assets/videos/purificador-gris.jpg" class="img-responsive" /></a></div>
+                                    <div class="col-sm-9" id="slimtest1">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus, felis interdum condimentum consectetur, nisl libero elementum eros, vehicula congue lacus eros non diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                        <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
+                                        <p><a class="popup-with-form btn btn-success" href="#test-form">Evaluación #1</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <!--pestañas de videos-->      
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title"> <a class="collapsed font-bold" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" > How to modify Navigation ? </a> </h4> </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+ <!-- .row -->
+
+<!-- form itself -->
             <form id="test-form" class="mfp-hide white-popup-block">
                 <h1>Form</h1>
                 <fieldset style="border:0;">
@@ -52,26 +72,6 @@
                         <textarea class="form-control" id="textarea">Try to resize me to see how popup CSS-based resizing works.</textarea>
                     </div>
                 </fieldset>
-            </form>
-        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="panel-heading" id="exampleHeadingDefaultTwo" role="tab"> <a class="panel-title collapsed" data-toggle="collapse" href="#exampleCollapseDefaultTwo" data-parent="#exampleAccordionDefault" aria-expanded="false" aria-controls="exampleCollapseDefaultTwo"> Video #2 </a> </div>
-                <div class="panel-collapse collapse" id="exampleCollapseDefaultTwo" aria-labelledby="exampleHeadingDefaultTwo" role="tabpanel">
-                    <div class="panel-body"> Praestabiliorem. Pellat excruciant legantur ullum leniter vacare foris voluptate loco ignavi, credo videretur multoque choro fatemur mortis animus adoptionem, bello statuat expediunt naturales frequenter terminari nomine, stabilitas privatio initia paranda contineri abhorreant, percipi dixerit incurreret deorsum imitarentur tenetur antiopam latinam haec. </div>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="panel-heading" id="exampleHeadingDefaultThree" role="tab"> <a class="panel-title collapsed" data-toggle="collapse" href="#exampleCollapseDefaultThree" data-parent="#exampleAccordionDefault" aria-expanded="false" aria-controls="exampleCollapseDefaultThree" > Video #3 </a> </div>
-                <div class="panel-collapse collapse" id="exampleCollapseDefaultThree" aria-labelledby="exampleHeadingDefaultThree" role="tabpanel">
-                    <div class="panel-body"> Horum, antiquitate perciperet d conspectum locus obruamus animumque perspici probabis suscipere. Desiderat magnum, contenta poena desiderant concederetur menandri damna disputandum corporum equidem cyrenaicisque. Defuturum ultimum ista ignaviamque iudicant feci incursione, reprimique fruenda utamur tu faciam complexiones eo, habeo ortum iucundo artes. </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>                
+            </form>              
 
 

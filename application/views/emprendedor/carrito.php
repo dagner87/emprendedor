@@ -73,6 +73,8 @@
             sumar_pro();
         });
 
+        
+
     $(document).on("keyup","#carrito input", function(){
 
         cantidad = $(this).val();
