@@ -41,7 +41,7 @@
       </div>
       <div class="new-login-box">
                 <div class="white-box">
-                    <h3 class="box-title m-b-0">Registro</h3>
+                    <h3 class="box-title m-b-0">Completa el registro</h3>
                             <?php 
                 if($this->session->flashdata('usuario_incorrecto'))
                 {
@@ -69,6 +69,10 @@
                     <div class="form-group">
                         <div class="col-xs-12">
                             <input class="form-control" type="password" name="confir_password"  required="" placeholder="Confirmar Contraseña"> </div>
+                    </div>
+                    <div class="col-md-12 m-b-20">
+                        <div class="fileupload btn btn-danger btn-rounded waves-effect waves-light"><span><i class="ion-upload m-r-5"></i>Subir Imagen</span>
+                            <input type="file" name="foto_emp" class="upload"> </div>
                     </div>
                     <div class="form-group text-center m-t-20">
                       <div class="col-xs-12">

@@ -204,7 +204,7 @@
                                                 <input type="email" class="form-control"  name="email" id="email" placeholder=" Escriba Email"> </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputphone">Telefono</label>
+                                            <label for="exampleInputphone">Teléfono</label>
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="ti-mobile"></i></div>
                                                 <input type="tel" class="form-control" name="telefono_emp" id="telefono_emp" placeholder="Escriba telefono"> </div>
