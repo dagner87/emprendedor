@@ -40,7 +40,7 @@
               </div>
       </div>
       <div class="new-login-box">
-         <a href="javascript:void(0)" class="p-20 di"><img src="<?php echo base_url();?>assets/plugins/images/admin-text-dark.png" alt="home" class="light-logo" /></a>
+         <a href="<?php echo base_url();?>" class="p-20 di"><img src="<?php echo base_url();?>assets/plugins/images/admin-text-dark.png" alt="home" class="light-logo" /></a>
                 <div class="white-box">
                     <h3 class="box-title m-b-0">Entrada al sistema</h3>
                             <?php 

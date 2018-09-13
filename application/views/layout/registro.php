@@ -7,7 +7,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url();?>assets/plugins/images/favicon.ico">
-<title>login</title>
+<title>Registro</title>
 <!-- Bootstrap Core CSS -->
 <link href="<?php echo base_url();?>assets/ampleadmin-minimal/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- animation CSS -->
@@ -39,7 +39,7 @@
               </div>
       </div>
       <div class="new-login-box">
-         <a href="javascript:void(0)" class="p-20 di"><img src="<?php echo base_url();?>assets/plugins/images/admin-text-dark.png" alt="home" class="light-logo" /></a>
+         <a href="<?php echo base_url();?>" class="p-20 di"><img src="<?php echo base_url();?>assets/plugins/images/admin-text-dark.png" alt="home" class="light-logo" /></a>
                 <div class="white-box">
                     <h3 class="box-title m-b-0">Completa el registro</h3>
                             <?php 
@@ -72,7 +72,7 @@
                     </div>
                     <div class="form-group text-center m-t-20">
                       <div class="col-xs-12">
-                        <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit">Entrar</button>
+                        <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit">Registrar</button>
                       </div>
                     </div>
                     
