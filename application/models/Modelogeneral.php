@@ -110,8 +110,9 @@ class Modelogeneral extends CI_Model {
   } 
   /*mostrar lista de  emprendedores */
 
-    public function mostrar_emp()
+    public function mostrar_emp($id_emp)
   {
+     $this->db->where('id_emp !=',$id_emp);
      $query = $this->db->get('emprendedor');
       if($query->num_rows() > 0){
         return $query->result();
@@ -180,6 +181,18 @@ class Modelogeneral extends CI_Model {
     {
      $this->db->where('id_car',$id_car);
      $this->db->delete('carrito');
+     if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+
+  }
+
+    public function eliminar_emp($id_emp)
+    {
+     $this->db->where('id_emp',$id_emp);
+     $this->db->delete('emprendedor');
      if($this->db->affected_rows() > 0){
         return true;
       }else{

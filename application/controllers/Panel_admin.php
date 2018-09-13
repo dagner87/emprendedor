@@ -33,7 +33,8 @@ class Panel_admin extends CI_Controller
 
     function load_dataemp()
     {
-        $result = $this->modelogeneral->mostrar_emp();
+        $id_emp = $this->session->userdata('id_emp');
+        $result = $this->modelogeneral->mostrar_emp($id_emp);
         $count = 0;
         $output = '';
         if(!empty($result))
@@ -60,10 +61,10 @@ class Panel_admin extends CI_Controller
                         </select>
                     </td>
                     <td>
-                          <span class="label label-danger">Registro no completado</span>
+                       <span class="label label-danger">Registro no completado</span>
                     </td>
                     <td>
-                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
+                    <button type="button" data="'.$row->id_emp.'" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
                     </td>
                      </tr>';
                 
@@ -72,6 +73,19 @@ class Panel_admin extends CI_Controller
     
         echo $output;
     }
+
+      public function eliminar_emp()
+    {
+        $id_emp = $this->input->get('id_emp');
+        $result  = $this->modelogeneral->eliminar_emp($id_emp);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
     public function insert_emp()
     {
         $id_emprendedor        = $this->session->userdata('id_emp');

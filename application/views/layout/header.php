@@ -169,7 +169,7 @@
                             
                             <li><a href="my_perfil"><i class="ti-settings"></i> Mi Perfil</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="salir"><i class="fa fa-power-off"></i> Salir</a></li>
+                            <li><a href="<?php echo base_url();?>salir"><i class="fa fa-power-off"></i> Salir</a></li>
                         </ul>
                         <!-- /.dropdown-user -->
                     </li>

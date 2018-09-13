@@ -95,5 +95,33 @@
         console.log(perfil);
 
       });
+
+      $(document).on("click",".delete-row-btn", function(){
+        $(this).closest("tr").remove();
+        var id = $(this).attr('data');
+        $.ajax({
+                type: 'ajax',
+                method: 'get',
+                url: '<?php echo base_url() ?>panel_admin/eliminar_emp',
+                data: {id_emp: id},
+                async: false,
+                dataType: 'json',
+                success: function(data){
+                  $.toast({
+                        heading: 'Emprendedor eliminado ',
+                        text: 'El Emprendedor a sido eliminado.',
+                        position: 'top-right',
+                        loaderBg: '#ff6849',
+                        icon: 'error',
+                        hideAfter: 3500
+
+                    });
+                },
+                error: function(){
+                  alert('No se pudo eliminar');
+                }
+        });
+        
+    });
 </script>            
 
