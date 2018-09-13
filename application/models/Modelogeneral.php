@@ -108,6 +108,7 @@ class Modelogeneral extends CI_Model {
         return false;
       }
   } 
+  /*mostrar lista de  emprendedores */
 
     public function mostrar_emp()
   {
@@ -118,7 +119,16 @@ class Modelogeneral extends CI_Model {
         return false;
       }
   }
-      public function listar_data_cap()
+  /*mostrar datos de emprender especifico*/
+  /*-----Devuelve el consecutivo de la orden -----------*/
+   public function datos_emp($id_emp) {
+   $this->db->where('id_emp',$id_emp);
+   $query = $this->db->get('emprendedor');
+   return $query-> row();
+  
+   } 
+
+   public function listar_data_cap()
   {
      $query = $this->db->get('capacitacion');
       if($query->num_rows() > 0){
@@ -149,7 +159,7 @@ class Modelogeneral extends CI_Model {
 
    /*-----actualiza consecutivo de la orden -----------*/
    public function update_datosEmp($data_ins) {
-   $data = array('password' => $data_ins['password']);
+   $data = array('password' => $data_ins['password'],'estado'=> 1);
    $this->db->where('email',$data_ins['email']);
    $this->db->update('emprendedor',$data);
   

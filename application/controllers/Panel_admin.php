@@ -70,14 +70,15 @@ class Panel_admin extends CI_Controller
     }
     public function insert_emp()
     {
-        $id_emprendedor       = $this->session->userdata('id_emp');
+        $id_emprendedor        = $this->session->userdata('id_emp');
         $param['nombre_emp']   = $this->input->post('nombre_emp');
-       // $param['dni_emp']      = $this->input->post('dni_emp');
+        $param['foto_emp']     = 'no_img.jpg';
         $param['email']        = $this->input->post('email');
         $param['telefono_emp'] = $this->input->post('telefono_emp');
         $param['fecha_insc']   = date('Y-m-d');
-        $data['id_hijo']      = $this->modelogeneral->insert_emp($param);
-        $data['id_padre']     = $this->session->userdata('id_emp');
+        
+        $data['id_hijo']       = $this->modelogeneral->insert_emp($param);
+        $data['id_padre']      = $this->session->userdata('id_emp');
 
         $nombre       = $this->session->userdata('nombre');
         

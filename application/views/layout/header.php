@@ -75,7 +75,7 @@
     .management-hierarchy .person {
     text-align: center; }
     .management-hierarchy .person > img {
-      height: 110px;
+      height: 90px;
       border: 5px solid #FFF;
       border-radius: 50%;
       overflow: hidden;

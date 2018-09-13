@@ -70,10 +70,6 @@
                         <div class="col-xs-12">
                             <input class="form-control" type="password" name="confir_password"  required="" placeholder="Confirmar Contraseña"> </div>
                     </div>
-                    <div class="col-md-12 m-b-20">
-                        <div class="fileupload btn btn-danger btn-rounded waves-effect waves-light"><span><i class="ion-upload m-r-5"></i>Subir Imagen</span>
-                            <input type="file" name="foto_emp" class="upload"> </div>
-                    </div>
                     <div class="form-group text-center m-t-20">
                       <div class="col-xs-12">
                         <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit">Entrar</button>

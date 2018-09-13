@@ -18,9 +18,12 @@ class Capacitacion extends CI_Controller
     }
      public function index()
     {
-      $id_emp = 1;     // obtener id_empresa por la seccion  
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        }   
+      $id_emp = $this->session->userdata('id_emp'); 
       $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
-      $data['result']     = $this->modelogeneral->mostrar_emp();
+      $data['result']     = $this->modelogeneral->mostrar_asoc($id_emp);
 
     $this->load->view("layout/header");
     $this->load->view("layout/side_menu",$data);
@@ -78,7 +81,9 @@ class Capacitacion extends CI_Controller
      $result = $this->modelogeneral->mostrar_asoc($id_emp);
     
      $data = array('asociados' => $result, 
-                   'cant_asoc' => $this->modelogeneral->rowCountAsoc($id_emp));
+                   'cant_asoc' => $this->modelogeneral->rowCountAsoc($id_emp),
+                   'datos_emp' => $this->modelogeneral->datos_emp($id_emp),
+                   );
     
     $this->load->view("layout/header");
     $this->load->view("layout/side_menu",$data);
@@ -240,7 +245,6 @@ class Capacitacion extends CI_Controller
 
     public function eliminar_prodCar()
     {
-
         $id_car = $this->input->get('id_car');
         $result  = $this->modelogeneral->eliminar_prodCar($id_car);
         $msg['comprobador'] = false;

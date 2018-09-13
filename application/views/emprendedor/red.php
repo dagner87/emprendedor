@@ -9,7 +9,8 @@
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
- <section class="management-hierarchy">
+
+ <section class="management-hierarchy contact-list">
         
         <br>
        
@@ -17,17 +18,17 @@
             <div class="hv-wrapper">
                <!-- Emprendedor -->
                 <div class="hv-item">
+
                       <!-- Promotor padre Primer nivel-->    
                     <div class="hv-item-parent">
                         <div class="person">
-                            <img src="<?php echo base_url();?>assets/plugins/images/users/genu.jpg" alt="" class="">
+                            <img src="<?php echo base_url();?>assets/plugins/images/users/<?= $datos_emp->foto_emp ?>" alt="" class="">
                             <p class="name">
-                                Dagner Alena <b>/ CEO</b>
+
+                                <?= $this->session->userdata('nombre') ; ?>
                             </p>
                         </div>
                     </div>
-                 
-                  
                         <?php 
                        if (!empty($asociados)):?>
                           <!-- asociados 1 nivel-->
@@ -38,7 +39,7 @@
                              <!--1 er asociado -->
                             <div class="hv-item">
                                 <div class="person">
-                                    <img src="<?php echo base_url();?>assets/plugins/images/users/2.jpg" alt="">
+                                    <img src="<?php echo base_url();?>assets/plugins/images/users/<?= $key->foto_emp ?>" alt="">
                                     <p class="name">
                                         <?= $key->nombre_emp ;?> <b>/ <?= $key->telefono_emp; ?></b>
                                     </p>
