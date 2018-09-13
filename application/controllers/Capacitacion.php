@@ -27,15 +27,7 @@ class Capacitacion extends CI_Controller
      $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
-     
-     /*if ($data['datos_emp']->) {
-         # code...
-     } else {
-         # code...
-     }*/
-     
      $this->load->view("layout/page_content");
-
      $this->load->view("layout/footer");  
 
     }
