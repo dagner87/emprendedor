@@ -70,7 +70,6 @@
                                 <table id="example" class="table display manage-u-table">
                                     <thead>
                                         <tr>
-                                          
                                             <th>NOMBRE</th>
                                             <th>REPRESENTANTE</th>
                                             <th>TELEFONO</th>
@@ -95,7 +94,25 @@
 <script type="text/javascript">
         $(document).ready(function() {
             load_data_emp();
-            var table = $('#example').DataTable({
+          
+        });
+ 
+     $(document).on("change","select", function(){
+         //var perfil = $(this).find(':selected')[0];
+         var perfil = $(this).val();
+        console.log(perfil);
+
+      });
+
+        function load_data_emp()
+    {
+        $.ajax({
+            url:"<?php echo base_url(); ?>panel_admin/load_dataemp",
+            method:"POST",
+            success:function(data)
+            {
+             $('#contenido_admin').html(data);
+               var table = $('#example').DataTable({
                 "columnDefs": [{
                     "visible": false,
                     "targets": 2
@@ -129,23 +146,6 @@
                     table.order([2, 'asc']).draw();
                 }
             });
-        });
- 
-     $(document).on("change","select", function(){
-         //var perfil = $(this).find(':selected')[0];
-         var perfil = $(this).val();
-        console.log(perfil);
-
-      });
-
-        function load_data_emp()
-    {
-        $.ajax({
-            url:"<?php echo base_url(); ?>panel_admin/load_dataemp",
-            method:"POST",
-            success:function(data)
-            {
-             $('#contenido_admin').html(data);
             }
         })
     }

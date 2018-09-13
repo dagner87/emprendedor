@@ -56,7 +56,7 @@ class Panel_admin extends CI_Controller
                                     <br/><span class="text-muted">'.$row->email.'</span></td>
                                 <td>--</td>
                                 <td><span class="text-muted">'.$row->telefono_emp.'</span></td>
-                                <td><span class="text-muted">'.$row->fecha_insc.'</span></td>
+                               
                                 <td>
                                     <select class="form-control" id="sel_perfil">
                                         <option value ="emprendedor" '.$selected.'>Emprendedor</option>
