@@ -139,6 +139,11 @@ class Modelogeneral extends CI_Model {
       }
   }
 
+  public function Total_emp($tabla){
+    $resultados = $this->db->get($tabla);
+    return $resultados->num_rows();
+  }
+
    
 
    /*-----Devuelve el consecutivo de la orden -----------*/

@@ -23,11 +23,13 @@ class Panel_admin extends CI_Controller
             redirect(base_url() . 'login');
         }
      $id_emp = $this->session->userdata('id_emp');
-     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);        
-    $this->load->view("layout/header",$data);
-    $this->load->view("admin_general/side_menuAdmin");
-    $this->load->view("admin_general/page_inicioAdmin");
-    $this->load->view("layout/footer");  
+     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp); 
+     $data['total_emp']  = $this->modelogeneral->Total_emp("emprendedor");       
+     
+     $this->load->view("layout/header",$data);
+     $this->load->view("admin_general/side_menuAdmin");
+     $this->load->view("admin_general/page_inicioAdmin",$data);
+     $this->load->view("layout/footer");  
 
     }
 
@@ -49,24 +51,24 @@ class Panel_admin extends CI_Controller
 
                 $count++;
                 $output .= '<tr>
-                    <td class="text-center">'.$count.'</td>
-                    <td><span class="font-medium">'.$row->nombre_emp.'</span>
-                        <br/><span class="text-muted">'.$row->email.'</span></td>
-                    <td><span class="text-muted">'.$row->telefono_emp.'</span></td>
-                    <td><span class="text-muted">'.$row->fecha_insc.'</span></td>
-                    <td>
-                        <select class="form-control" id="sel_perfil">
-                            <option value ="emprendedor" '.$selected.'>Emprendedor</option>
-                            <option value ="administrador" '.$selected.' >Administrador</option>
-                        </select>
-                    </td>
-                    <td>
-                       <span class="label label-danger">Registro no completado</span>
-                    </td>
-                    <td>
-                    <button type="button" data="'.$row->id_emp.'" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
-                    </td>
-                     </tr>';
+                               <td></td>
+                                <td><span class="font-medium">'.$row->nombre_emp.'</span>
+                                    <br/><span class="text-muted">'.$row->email.'</span></td>
+                                <td><span class="text-muted">'.$row->telefono_emp.'</span></td>
+                                <td><span class="text-muted">'.$row->fecha_insc.'</span></td>
+                                <td>
+                                    <select class="form-control" id="sel_perfil">
+                                        <option value ="emprendedor" '.$selected.'>Emprendedor</option>
+                                        <option value ="administrador" '.$selected.' >Administrador</option>
+                                    </select>
+                                </td>
+                                <td>
+                                   <span class="label label-danger">Registro no completado</span>
+                                </td>
+                                <td>
+                                <button type="button" data="'.$row->id_emp.'" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>';
                 
             }
         }

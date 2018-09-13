@@ -177,12 +177,25 @@
 
     $(document).ready(function(){
       load_data();
+
        // console.log("cargo");
         $('#add_asoc').submit(function(e) {
         e.preventDefault();
          enviardatos();
         
       });
+
+      function load_data_emp()
+     {
+        $.ajax({
+            url:"<?php echo base_url(); ?>panel_admin/load_dataemp",
+            method:"POST",
+            success:function(data)
+            {
+             $('#contenido_admin').html(data);
+            }
+        })
+     }   
 
       //enviar solicitud a asociado
         
@@ -214,7 +227,7 @@
                   }) 
                   .always(function(){
                      load_data();
- 
+                     load_data_emp();
                   });
         
       }); 
@@ -233,6 +246,8 @@
             }
         })
     }
+
+    
 
      function enviardatos(){
           var url = '<?php echo base_url() ?>capacitacion/insert_add_asoc';

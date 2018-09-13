@@ -30,7 +30,7 @@
                         <div class="white-box">
                             <h3 class="box-title">TOTAL DE EMPRENDEDORES</h3>
                             <div class="text-right"> <span class="text-muted">Cantidad</span>
-                                <h1><sup><i class="ti-arrow-down text-danger"></i></sup>5,000</h1> </div> <span class="text-danger">30%</span>
+                                <h1><sup><i class="ti-arrow-down text-danger"></i></sup><?= $total_emp; ?></h1> </div> <span class="text-danger">30%</span>
                             <div class="progress m-b-0">
                                 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:30%;"> <span class="sr-only">230% Complete</span> </div>
                             </div>
@@ -59,42 +59,96 @@
                 </div>
                 </div>
 
+               
+
                  <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel">
-                            <div class="panel-heading">ADMINISTAR EMPRENDEDORES</div>
+                     <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">ADMINISTAR EMPRENDEDORES</h3>
+                            <p class="text-muted m-b-30"></p>
                             <div class="table-responsive">
-                                <table class="table table-hover manage-u-table" id="tabla-emp">
+                                <table id="example" class="table display manage-u-table">
                                     <thead>
                                         <tr>
-                                            <th class="text-center" style="width: 70px">#</th>
+                                             <th class="text-center" style="width: 70px">&nbsp;</th>
                                             <th>NOMBRE</th>
+                                            <th>REPRESENTANTE</th>
                                             <th>TELEFONO</th>
-                                            <th>FECHA INGRESO</th>
                                             <th>PERFIL</th>
                                             <th>ESTADO</th>
                                             <th>ACCION</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="contenido">
-
+                                    <tbody id="contenido_admin">
+                                    
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                  
                 </div>
 
                 
             </div>
             <!-- /.container-fluid -->
 <script type="text/javascript">
+        $(document).ready(function() {
+            load_data_emp();
+            var table = $('#example').DataTable({
+                "columnDefs": [{
+                    "visible": false,
+                    "targets": 2
+                }],
+                "order": [
+                    [2, 'asc']
+                ],
+                "displayLength": 25,
+                "drawCallback": function(settings) {
+                    var api = this.api();
+                    var rows = api.rows({
+                        page: 'current'
+                    }).nodes();
+                    var last = null;
+                    api.column(2, {
+                        page: 'current'
+                    }).data().each(function(group, i) {
+                        if (last !== group) {
+                            $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                            last = group;
+                        }
+                    });
+                }
+            });
+            // Order by the grouping
+            $('#example tbody').on('click', 'tr.group', function() {
+                var currentOrder = table.order()[0];
+                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                    table.order([2, 'desc']).draw();
+                } else {
+                    table.order([2, 'asc']).draw();
+                }
+            });
+        });
+ 
      $(document).on("change","select", function(){
          //var perfil = $(this).find(':selected')[0];
          var perfil = $(this).val();
         console.log(perfil);
 
       });
+
+        function load_data_emp()
+    {
+        $.ajax({
+            url:"<?php echo base_url(); ?>panel_admin/load_dataemp",
+            method:"POST",
+            success:function(data)
+            {
+             $('#contenido_admin').html(data);
+            }
+        })
+    }
 
       $(document).on("click",".delete-row-btn", function(){
         $(this).closest("tr").remove();
