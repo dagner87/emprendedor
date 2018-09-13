@@ -14,11 +14,11 @@
                     </div>
                 </div>
 
-
+  <?php if ($datos_emp->id_cap  == 8): ?>
  <button id="view_car" class="botonF1 tooltip-demo" title=" Ver Carrito">
   <span><i class="ti-shopping-cart"></i></span>
 </button>
-
+ <?php endif; ?> 
 <!--button type="button" class="botonF1 popover-primary" title="" data-toggle="popover" data-placement="top" data-content="Cantidad de Productos:10000" data-original-title="Carrito"><span><i class="ti-shopping-cart"></i></span></button-->
 
 
