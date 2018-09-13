@@ -153,7 +153,7 @@
                         <ul class="dropdown-menu dropdown-user animated flipInY">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img src="<?php echo base_url();?>assets/plugins/images/users/varun.jpg" alt="user" /></div>
+                                    <div class="u-img"><img src="<?php echo base_url();?>assets/plugins/images/users/<?= $datos_emp->foto_emp; ?>" alt="user" /></div>
                                     <div class="u-text">
                                         <br>
                                         <h4><?= $this->session->userdata('nombre');?></h4>
@@ -162,8 +162,12 @@
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-wallet"></i> Mi Balance</a></li>
-                            <li role="separator" class="divider"></li>
+                            <?php  if ($this->session->userdata('perfil')!="administrador") {?>
+                                <li><a href="#"><i class="ti-wallet"></i> Mi Balance</a></li>
+                                <li role="separator" class="divider"></li>
+                            <?php }  ?>
+                            
+                            
                             <li><a href="my_perfil"><i class="ti-settings"></i> Mi Perfil</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="salir"><i class="fa fa-power-off"></i> Salir</a></li>
@@ -212,7 +216,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                            <button type="submit" class="btn btn-primary">Agregar</button>
+                                            <button type="submit" class="btn btn-success">Agregar</button>
                                         </div>
                                          </form>
                                     </div>
