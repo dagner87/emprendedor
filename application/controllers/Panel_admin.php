@@ -200,10 +200,10 @@ class Panel_admin extends CI_Controller
           foreach($result as $row)
             {
              $output .= '<tr>
+                         <td><span class="text-muted"><img src="'.base_url().'assets/uploads/img_productos/'.$row->url_imagen.'" alt="user" class="img-circle" /></td>
                          <td><span class="font-medium">'.$row->nombre_prod.'</span></td>
                          <td><span class="text-muted">'.$row->stock.'</span></td>
                          <td><span class="text-muted">'.$row->precio_unitario.'</span></td>
-                         <td><span class="text-muted">'.$row->url_imagen.'</span></td>
                          <td><span class="text-muted"> <button type="button" data="'.$row->id_producto.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span></td>
                         </tr>';
             }

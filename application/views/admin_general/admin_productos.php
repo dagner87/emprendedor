@@ -69,13 +69,13 @@
     <div class="white-box">
         <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#insetcapModal">Agregar Producto</button></h3>
 
-        <table class="table table-striped table-bordered table-responsive" id="editable-datatable">
+        <table class="table table-striped table-bordered table-responsive  contact-list" id="editable-datatable">
             <thead>
                 <tr>
+                    <th>IMAGEN</th>
                     <th>NOMBRE PRODUCTO</th>
                     <th>STOCK</th>
                     <th>PRECIO</th>
-                    <th>IMAGEN</th>
                     <th>ACCION</th>
                 </tr>
             </thead>
