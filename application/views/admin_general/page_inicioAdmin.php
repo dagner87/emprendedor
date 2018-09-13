@@ -113,29 +113,23 @@
             {
              $('#contenido_admin').html(data);
                var table = $('#example').DataTable({
-                "columnDefs": [{
-                    "visible": false,
-                    "targets": 2
-                }],
-                "order": [
-                    [2, 'asc']
-                ],
-                "displayLength": 25,
-                "drawCallback": function(settings) {
-                    var api = this.api();
-                    var rows = api.rows({
-                        page: 'current'
-                    }).nodes();
-                    var last = null;
-                    api.column(2, {
-                        page: 'current'
-                    }).data().each(function(group, i) {
-                        if (last !== group) {
-                            $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
-                            last = group;
-                        }
-                    });
-                }
+                responsive: true,
+                                     language: {
+                                                  "lengthMenu": "Mostrar _MENU_ registros por pagina",
+                                                  "zeroRecords": "No se encontraron resultados en su busqueda",
+                                                  "searchPlaceholder": "Buscar registros",
+                                                  "info": "Mostrando  _START_ al _END_ de un total de  _TOTAL_ registros",
+                                                  "infoEmpty": "No existen registros",
+                                                  "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                                  "search": "Buscar:",
+                                                  "paginate": {
+                                                                "first": "Primero",
+                                                                "last": "Último",
+                                                                "next": "Siguiente",
+                                                                "previous": "Anterior"
+                                                              },
+                                        }
+                
             });
             // Order by the grouping
             $('#example tbody').on('click', 'tr.group', function() {
