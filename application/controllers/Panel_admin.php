@@ -21,8 +21,10 @@ class Panel_admin extends CI_Controller
     {
     if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
             redirect(base_url() . 'login');
-        }    
-    $this->load->view("layout/header");
+        }
+     $id_emp = $this->session->userdata('id_emp');
+     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);        
+    $this->load->view("layout/header",$data);
     $this->load->view("admin_general/side_menuAdmin");
     $this->load->view("admin_general/page_inicioAdmin");
     $this->load->view("layout/footer");  
@@ -174,8 +176,10 @@ class Panel_admin extends CI_Controller
     {
     if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
             redirect(base_url() . 'login');
-        }    
-    $this->load->view("layout/header");
+        }
+    $id_emp = $this->session->userdata('id_emp');
+    $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+    $this->load->view("layout/header",$data);
     $this->load->view("admin_general/side_menuAdmin");
     $this->load->view("admin_general/admin_productos");
     $this->load->view("layout/footer");  
@@ -185,8 +189,10 @@ class Panel_admin extends CI_Controller
     {
     if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
             redirect(base_url() . 'login');
-        }    
-    $this->load->view("layout/header");
+        }
+    $id_emp = $this->session->userdata('id_emp');
+    $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+    $this->load->view("layout/header",$data);
     $this->load->view("admin_general/side_menuAdmin");
     $this->load->view("admin_general/admin_videos");
     $this->load->view("layout/footer");  

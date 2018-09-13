@@ -134,7 +134,7 @@ class Capacitacion extends CI_Controller
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
      $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
     
-    $this->load->view("layout/header");
+    $this->load->view("layout/header",$data);
     $this->load->view("layout/side_menu",$data);
     $this->load->view("layout/perfil",$data);
     $this->load->view("layout/footer");  
