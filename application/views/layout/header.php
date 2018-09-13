@@ -174,7 +174,7 @@
                         <ul class="dropdown-menu dropdown-user animated flipInY">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img src="<?php echo base_url();?>assets/plugins/images/users/<?= $datos_emp->foto_emp; ?>" alt="user" /></div>
+                                    <div class="u-img"><img src="<?php echo base_url();?>assets/plugins/images/users/<?= $datos_emp->foto_emp; ?>" alt="user" /></div> 
                                     <div class="u-text">
                                         <br>
                                         <h4><?= $this->session->userdata('nombre');?></h4>
