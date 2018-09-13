@@ -86,7 +86,7 @@
                       </div>
                     </div>
                   </form>
-                  <form class="form-horizontal" id="recoverform" action="">
+                  <form class="form-horizontal" id="recoverform" action="<?php echo base_url() ?>panel_admin/forgot_pass" method="post">
                     <div class="form-group ">
                       <div class="col-xs-12">
                         <h3>Recuperar contraseña</h3>
@@ -95,7 +95,7 @@
                     </div>
                     <div class="form-group ">
                       <div class="col-xs-12">
-                        <input class="form-control" type="text" id="email_rest" required="" placeholder="Correo">
+                        <input class="form-control" type="text" id="email_rest" name="email_rest" required="true" placeholder="Correo">
                       </div>
                     </div>
                     <div class="form-group text-center m-t-20">
@@ -125,14 +125,16 @@
 <!--Style Switcher -->
 <script src="<?php echo base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
 <script type="text/javascript">
+  
   $(document).on("click","#forgot_pass", function(e){
     e.preventDefault();
+    forgot();
+    /*e.preventDefault();
     var email_rest = $("#email_rest").val();
-    console.log(email_rest);
-     var url = '<?php echo base_url() ?>panel_admin/forgot_pass';
+    var url = '<?php echo base_url() ?>panel_admin/forgot_pass';
           $.ajax({
                     type: 'ajax',
-                    method: 'get',
+                    method: 'post',
                     url: url,
                     data: {email:email_rest},
                     dataType: 'json',
@@ -141,9 +143,44 @@
                         console.log("enviando....");
                       }
                  })
+                  .done(function(data){
+                    console.log(data);
+
+                     swal("Correo enviado", "Cheque su buzón de correo", "success");
+                     
+                  })
+                  .fail(function(){
+                     //sweetalertclickerror();
+                  }) 
+                  .always(function(){
+                    /* setTimeout(function(){
+                      redireccionar();
+                     },2000);/
+
+                  });
+                */
+
+
+      });
+
+  function forgot(){
+          var url = '<?php echo base_url() ?>panel_admin/forgot_pass';
+          var data = $('#recoverform').serialize();
+          $.ajax({
+                    type: 'ajax',
+                    method: 'post',
+                    url: url,
+                    data: data,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        //sweetalert_proceso();
+                        console.log("enviando....");
+                      }
+                 })
                   .done(function(){
                     console.log(data);
-                     swal("Correo enviado", "Cheque su buzón de correo", "success");
+                    
+                     swal("Buen Trabajo!!", "Nuevo Asociado Agregado.", "success");
                      
                   })
                   .fail(function(){
@@ -155,8 +192,44 @@
                      },2000);*/
 
                   });
+        } 
 
-      });
+   $('#import_form').on('submit', function(event){
+    event.preventDefault();
+    $.ajax({
+      url:"<?php echo base_url(); ?>excel_import/import",
+      method:"POST",
+      data:new FormData(this),
+      contentType:false,
+      cache:false,
+      processData:false,
+       beforeSend:function(){
+                $('#import').html('Importando...<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+            },
+      success:function(data){
+        $('#file').val('');
+        $('#tabla-mensaje').html(data);
+        if ($.fn.DataTable.isDataTable( '#dataTables-import' ) ) {
+          table = $('#dataTables-import').DataTable();
+          table.destroy();
+          console.log("estoy dentro el if");
+          load_data();
+          }
+          else {
+               console.log("estoy en el else");
+              load_data();
+              }
+
+        $("#import").removeClass("btn btn-primary");
+        $("#import").addClass("btn btn-success");
+        $('#import').html('Importación Completada  <i class="fa fa-check-circle"></i>');  
+        $("#panel_datos").removeClass("btn btn-primary");
+        $("#panel_datos").addClass("panel panel-success");
+       
+      }
+
+          })
+  });
 </script>
 
 

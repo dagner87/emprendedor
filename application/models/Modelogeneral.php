@@ -58,11 +58,14 @@ class Modelogeneral extends CI_Model {
       }
   }
 
-  public function comprobar_email($email){
+  public function comprobar_email($email,$password){
+
+       $data = array('password' => md5($password));
       $this->db->where('email', $email);
+      $this->db->update('password',$password);
       $query = $this->db->get('emprendedor');
       if($query->num_rows() > 0){
-        return $query->num_rows();
+        return $query->row();
       }else{
         return false;
       }
@@ -138,11 +141,19 @@ class Modelogeneral extends CI_Model {
    } 
       /*-----actualiza consecutivo de la orden -----------*/
    public function update_orden_compra($year) {
-     $data = array('no_orden' => $no_orden+1);
+   $data = array('no_orden' => $no_orden+1);
    $this->db->where('year',$year);
    $this->db->update('orden_compra',$data);
   
-   } 
+   }
+
+   /*-----actualiza consecutivo de la orden -----------*/
+   public function update_datosEmp($data_ins) {
+   $data = array('password' => $data_ins['password']);
+   $this->db->where('email',$data_ins['email']);
+   $this->db->update('emprendedor',$data);
+  
+   }  
 
     
     /*-----Devuelve dato del producto -----------*/

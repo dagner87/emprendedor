@@ -118,44 +118,24 @@ class Panel_admin extends CI_Controller
         echo $output;
     }
 
-    public function cuerpo_mail($datos)
+    public function forgot_pass()
     {
-        $message = '<html><head>';
-        $message .='<head>';
-        $message .='<meta charset="UTF-8">';
-        $message .='<meta http-equiv="X-UA-Compatible" content="IE=edge">';
-        $message .='</head>';
-        $message = '<html><body>';
-        $message .= '<table  style=""  cellpadding="10">';
-        $message .= "<tr ><td bgcolor='#1696e0' colspan='2'><div align='center'><h3>Datos de Registro  </h3></div> </td></tr>";
-        $message .= "<tr style='background: #eee;'><td><strong>Fecha de registro:</strong> </td><td>" . $datos['fecha']. "</td></tr>";
-        $message .= "<tr style='background: #eee;'><td><strong>Usuario:</strong> </td><td>" .$datos['usuario']. "</td></tr>";
-        $message .= "<tr style='background: #eee;'><td><strong>Correo:</strong> </td><td>" .$datos['mail']. "</td></tr>";
-        $message .= "<tr style='background: #eee;'><td><strong>DNI:</strong> </td><td>" . $datos['dni']. "</td></tr>";
-        $message .= "<tr style='background: #eee;'><td><strong>Contrase&ntilde;a:</strong> </td><td>" . $datos['pass']. "</td></tr>";
-        $message .= "<tr ><td colspan='2'> <a href='http://panel.shoppingads.com.ar/' target='_blank'>Acceso al Panel</a></td></tr>";
-        $message .= "</table>";
-    
-        return  $message;
-    } 
-
-     public function forgot_pass()
-    {
-        $email  = $this->input->post('email');
-        $result = $this->modelogeneral->comprobar_email($email);
-        $pass = base64_decode($result->password);
-        $msg['comprobador'] = false;
+         $email  = $this->input->post('email_rest');
+          $pass = '1234';
+         $result = $this->modelogeneral->comprobar_email($email,$password);
+        
+         $msg['comprobador'] = false;
         if($result)
              {
                $msg['comprobador'] = TRUE;
                $asunto = "Olvidó su contraseña";
-               $cuerpo_mensaje = "Contraseña:".$result->$pass;
+               $cuerpo_mensaje = "Nueva Contraseña es :".$pass;
                $url = base_url()."login";
                $cuerpo_mensaje .= "<a href='".$url."' target='_blank'> Ingresar</a>";
-               $this->sendMailMandril($param['email'],$asunto, $cuerpo_mensaje);
+              $this->sendMailMandril($email,$asunto, $cuerpo_mensaje);
              }
        
-        echo json_encode($msg);
+        echo json_encode($pass);
     }
 
 

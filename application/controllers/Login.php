@@ -98,6 +98,14 @@ class Login extends CI_Controller
 	public function registro(){
 		$data['token'] = $this->token();
 		$this->load->view('layout/registro',$data);
+		if ($this->input->post('confir_password')) {
+			$email             = $this->input->post('email');
+		    $confir_password   = md5($this->input->post('confir_password'));
+			$data_ins['password'] = $confir_password;
+			$data_ins['email']    = $email;
+			$this->modelogeneral->update_datosEmp($data_ins);
+
+		}
 	}
 	
 
