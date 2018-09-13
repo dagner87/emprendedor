@@ -108,7 +108,6 @@ class Capacitacion extends CI_Controller
 
     }
 
-
     public function modulos()
     {
       if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
@@ -122,6 +121,22 @@ class Capacitacion extends CI_Controller
     $this->load->view("layout/header");
     $this->load->view("layout/side_menu",$data);
     $this->load->view("emprendedor/capacitacion_videos",$data);
+    $this->load->view("layout/footer");  
+    }
+
+     public function Myperfil()
+    {
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor'&&
+        $this->session->userdata('perfil') != 'administrador') {
+            redirect(base_url() . 'login');
+        }   
+     $id_emp = $this->session->userdata('id_emp');
+     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
+    
+    $this->load->view("layout/header");
+    $this->load->view("layout/side_menu",$data);
+    $this->load->view("layout/perfil",$data);
     $this->load->view("layout/footer");  
     }
 
