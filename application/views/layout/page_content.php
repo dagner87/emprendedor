@@ -77,7 +77,7 @@
                             <div class="row sales-report">
                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                     <h2><?= date("F j, Y");?></h2>
-                                    <p>SALES REPORT</p>
+                                    <p></p>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-6 ">
                                    <h1 class="text-right text-info m-t-20">$3,690</h1>
