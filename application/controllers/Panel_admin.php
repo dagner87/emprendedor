@@ -52,7 +52,6 @@ class Panel_admin extends CI_Controller
                     <td><span class="font-medium">'.$row->nombre_emp.'</span>
                         <br/><span class="text-muted">'.$row->email.'</span></td>
                     <td><span class="text-muted">'.$row->telefono_emp.'</span></td>
-                    <td><span class="text-muted">'.$row->email.'</span></td>
                     <td><span class="text-muted">'.$row->fecha_insc.'</span></td>
                     <td>
                         <select class="form-control" id="sel_perfil">
@@ -62,6 +61,9 @@ class Panel_admin extends CI_Controller
                     </td>
                     <td>
                           <span class="label label-danger">Registro no completado</span>
+                    </td>
+                    <td>
+                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
                     </td>
                      </tr>';
                 
@@ -73,10 +75,10 @@ class Panel_admin extends CI_Controller
     public function insert_emp()
     {
         $id_emprendedor        = $this->session->userdata('id_emp');
-        $param['nombre_emp']   = $this->input->post('nombre_emp');
+       // $param['nombre_emp']   = $this->input->post('nombre_emp');
         $param['foto_emp']     = 'no_img.jpg';
         $param['email']        = $this->input->post('email');
-        $param['telefono_emp'] = $this->input->post('telefono_emp');
+       // $param['telefono_emp'] = $this->input->post('telefono_emp');
         $param['fecha_insc']   = date('Y-m-d');
         
         $data['id_hijo']       = $this->modelogeneral->insert_emp($param);
@@ -85,8 +87,8 @@ class Panel_admin extends CI_Controller
         $nombre       = $this->session->userdata('nombre');
         
         $asunto = $nombre." te invita";
-        $cuerpo_mensaje = "Hola ".$param['nombre_emp']." te invito a que formes parte de nuestro negocio como emprendedor";
-        $url = base_url()."registro";
+        $cuerpo_mensaje = "Hola te invito a que formes parte de nuestro negocio como emprendedor";
+        $url = base_url()."registro?id=".$data['id_hijo'];
         $cuerpo_mensaje .= "<a href='".$url."' target='_blank'> Completar Registro</a>";
 
         $this->sendMailMandril($param['email'],$asunto, $cuerpo_mensaje);

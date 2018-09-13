@@ -193,12 +193,12 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="add_emp" action="<?php echo base_url() ?>panel_admin/insert_emp" method="post">
-                                        <div class="form-group">
+                                        <!--div class="form-group">
                                             <label for="exampleInputuname">Nombre Completo</label>
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="ti-user"></i></div>
                                                 <input type="text" class="form-control" name="nombre_emp" id="nombre_emp" placeholder=" Escriba Nombre Completo"> </div>
-                                        </div>
+                                        </div-->
                                         
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Correo</label>
@@ -206,12 +206,12 @@
                                                 <div class="input-group-addon"><i class="ti-email"></i></div>
                                                 <input type="email" class="form-control"  name="email" id="email" placeholder=" Escriba Email"> </div>
                                         </div>
-                                        <div class="form-group">
+                                        <!--div class="form-group">
                                             <label for="exampleInputphone">Teléfono</label>
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="ti-mobile"></i></div>
                                                 <input type="tel" class="form-control" name="telefono_emp" id="telefono_emp" placeholder="Escriba telefono"> </div>
-                                        </div>
+                                        </div-->
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

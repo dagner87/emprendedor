@@ -68,12 +68,12 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center" style="width: 70px">#</th>
-                                            <th>NAME</th>
+                                            <th>NOMBRE</th>
                                             <th>TELEFONO</th>
-                                            <th>EMAIL</th>
                                             <th>FECHA INGRESO</th>
-                                            <th style="width: 250px">PERFIL</th>
-                                            <!--th style="width: 300px">ACCION</th-->
+                                            <th>PERFIL</th>
+                                            <th>ESTADO</th>
+                                            <th>ACCION</th>
                                         </tr>
                                     </thead>
                                     <tbody id="contenido">
