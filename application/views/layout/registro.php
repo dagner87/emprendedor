@@ -32,7 +32,6 @@
 <section id="wrapper" class="new-login-register">
       <div class="lg-info-panel">
               <div class="inner-panel">
-                  <a href="javascript:void(0)" class="p-20 di"><img src="<?php echo base_url();?>assets/plugins/images/admin-text-dark.png" alt="home" class="light-logo" /></a>
                   <div class="lg-content">
                       <h2>BIENVENIDO AL SISTEMA DE  EMPRENDEDORES DVIGI</h2>
                       <p class="text-muted"> </p>
@@ -40,6 +39,7 @@
               </div>
       </div>
       <div class="new-login-box">
+         <a href="javascript:void(0)" class="p-20 di"><img src="<?php echo base_url();?>assets/plugins/images/admin-text-dark.png" alt="home" class="light-logo" /></a>
                 <div class="white-box">
                     <h3 class="box-title m-b-0">Completa el registro</h3>
                             <?php 
