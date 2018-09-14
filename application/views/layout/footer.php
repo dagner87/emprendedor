@@ -75,10 +75,83 @@
         
     <!--Wave Effects -->
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/waves.js"></script>
+    <!-- Form Wizard JavaScript -->
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/jquery-wizard-master/dist/jquery-wizard.min.js"></script>
+    <!-- FormValidation -->
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.css">
+    <!-- FormValidation plugin and the class supports validating Bootstrap form -->
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.js"></script>
+    
+
     <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bower_components/gallery/js/animated-masonry-gallery.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bower_components/gallery/js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bower_components/fancybox/ekko-lightbox.min.js"></script>
     <script type="text/javascript">
+      (function() {
+        
+        $('#exampleValidator').wizard({
+            onInit: function() {
+                $('#validation').formValidation({
+                    framework: 'bootstrap',
+                    fields: {
+                        username: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The username is required'
+                                },
+                                stringLength: {
+                                    min: 6,
+                                    max: 30,
+                                    message: 'The username must be more than 6 and less than 30 characters long'
+                                },
+                                regexp: {
+                                    regexp: /^[a-zA-Z0-9_\.]+$/,
+                                    message: 'The username can only consist of alphabetical, number, dot and underscore'
+                                }
+                            }
+                        },
+                        email: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The email address is required'
+                                },
+                                emailAddress: {
+                                    message: 'The input is not a valid email address'
+                                }
+                            }
+                        },
+                        password: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The password is required'
+                                },
+                                different: {
+                                    field: 'username',
+                                    message: 'The password cannot be the same as username'
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            validator: function() {
+                var fv = $('#validation').data('formValidation');
+                var $this = $(this);
+                // Validate the container
+                fv.validateContainer($this);
+                var isValidStep = fv.isValidContainer($this);
+                if (isValidStep === false || isValidStep === null) {
+                    return false;
+                }
+                return true;
+            },
+            onFinish: function() {
+                $('#validation').submit();
+                swal("Message Finish!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
+            }
+        });
+       
+    })();
 
        $(document).ready(function($) {
      

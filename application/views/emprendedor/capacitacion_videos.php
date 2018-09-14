@@ -16,41 +16,45 @@
     <div class="col-md-12">
         <div class="alert alert-warning"> DEBE COMPLETAR LOS VIDEOS DE CAPACITACION PARA TENER ACCESO A LAS DEMAS PESTAÑAS DEL MENU. </div>
         <div class="panel-group" role="tablist" aria-multiselectable="true">
-            <!--pestañas de videos-->    
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                    <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="font-bold">  Video #1 </a> </h4> </div>
-                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body"> 
-                        <div class="col-md-12">
-                            <div class="white-box">
-                                <h3 class="box-title">INTRODUCCION</h3>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <a class="popup-youtube btn btn-default" title="Ver Video" href="https://www.youtube.com/watch?v=zMVw3QamjA0"><img src="<?php echo base_url();?>assets/videos/purificador-gris.jpg" class="img-responsive" /></a></div>
-                                    <div class="col-sm-9" id="slimtest1">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus, felis interdum condimentum consectetur, nisl libero elementum eros, vehicula congue lacus eros non diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                                        <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
-                                        <p><a class="popup-with-form btn btn-success" href="#test-form">Evaluación #1</a></p>
+
+            <?php  if (!empty($list_cap)):
+                        $cont = 1;
+                        $videoact = $datos_emp->id_cap;
+                     foreach ($list_cap as $key): ?> 
+                      <!--pestañas de videos-->    
+                      <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne<?= $key->id_cap ?>" aria-expanded="true" aria-controls="collapseOne" class="font-bold">  Video # <?= $cont++ ?> </a> </h4> </div>
+                    <div id="collapseOne<?= $key->id_cap ?>" class="panel-collapse collapse <?php if($key->id_cap == $videoact){ echo "in";}?>" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body"> 
+                            <div class="col-md-12">
+                                <div class="white-box">
+                                    <h3 class="box-title"><?= $key->titulo_video ?></h3>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <a class="popup-youtube btn btn-default" title="Ver Video" href="<?= $key->url_video ?>"><img src="<?php echo base_url();?>assets/videos/<?= $key->imag_portada ?>" class="img-responsive" /></a></div>
+                                        <div class="col-sm-9" id="slimtest1">
+                                            <p><?= $key->descripcion ?> </p>
+                                            <?php if($key->id_cap == $videoact):  ?> 
+                                                 <p><a class="popup-with-form btn btn-success" href="#test-form">Formulario de Evaluación #<?= $cont++ ?></a></p>
+
+
+                                           <?php endif ?> 
+                                           
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-           <!--pestañas de videos-->      
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
-                    <h4 class="panel-title"> <a class="collapsed font-bold" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" > How to modify Navigation ? </a> </h4> </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                    <div class="panel-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, </div>
-                </div>
-            </div>
+                      </div>
+                 <?php endforeach; ?> 
+            <?php endif ?>  
         </div>
     </div>
 </div>  
- <!-- .row -->
+
 
 <!-- form itself -->
             <form id="test-form" class="mfp-hide white-popup-block">

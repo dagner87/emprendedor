@@ -28,7 +28,21 @@
                 <label for="exampleInputuname">Titulo</label>
                 <div class="input-group">
                     <div class="input-group-addon"><i class="ti-video-clapper"></i></div>
-                    <input type="text" class="form-control" name="nombre_video" id="nombre_video" placeholder=" Escriba Titulo Video"> </div>
+                    <input type="text" class="form-control" name="titulo_video" id="titulo_video" placeholder=" Escriba Titulo Video"> </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputphone">Imagen</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i id="cargando" class="ti-camera"> </i></div>
+                    <input type="file" class="form-control btn-file" name="url_imagen" id="url_imagen" placeholder="Subir Imagen" required> </div>
+                     <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
+
+            </div>
+            <div class="form-group">
+                <label for="exampleInputuname">Descripción</label>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="ti-video-clapper"></i></div>
+                    <textarea type="text" class="form-control" name="descripcion" id="descripcion" placeholder=" Escriba descripcion"></textarea></div>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">URL </label>
@@ -42,13 +56,7 @@
                     <div class="input-group-addon"><i class="ti-write"></i></div>
                     <input type="tel" class="form-control" name="evaluacion" id="evaluacion" placeholder="Escriba Evaluación"> </div>
             </div>
-            <div class="form-group">
-                <label for="exampleInputphone">Nivel</label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="ti-bar-chart-alt"></i></div>
-                    <input type="tel" class="form-control" name="nivel" id="nivel" placeholder="Escriba Evaluacion"> </div>
-            </div>
-            </div>
+         </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-success">Agregar</button>
@@ -138,7 +146,38 @@
                           load_data_cap();
                           }
                   });
+        });
+
+      $('.btn-file').on("change", function(evt){
+        var base_url= "<?php echo base_url();?>";
+        // declaro la variable formData e instancio el objeto nativo de javascript new FormData
+        var formData = new FormData(document.getElementById("add_cap"));
+       // iniciar el ajax
+        $.ajax({
+            url: base_url + "panel_admin/subir_imgVideo",
+            // el metodo para enviar los datos es POST
+            type: "POST",
+            // colocamos la variable formData para el envio de la imagen
+            data: formData,
+            contentType: false,
+            processData: false,
+            beforeSend: function(data) 
+            {
+             $('#cargando').html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+            },
+            success: function(data)
+            {
+               let objJson = JSON.parse(data);
+               console.log(objJson.imagen);
+               $('.btn-file').addClass('btn btn-info');
+               $('#nombre_archivo').val(objJson.imagen); //agrego el nombre del archivo subido
+               $('#cargando').fadeOut("fast",function(){
+               $('#cargando').html('<i class=""> </i>');
+                });
+               $('#cargando').fadeIn("slow");
+            } 
         }); 
+      }); 
         
     });//onready
     $(document).on("click",".deletecap-row-btn", function(){

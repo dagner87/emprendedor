@@ -48,7 +48,6 @@
                     <div class="input-group-addon"><i id="cargando" class="ti-camera"> </i></div>
                     <input type="file" class="form-control btn-file" name="url_imagen" id="url_imagen" placeholder="Subir Imagen" required> </div>
                      <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
-
             </div>
             </div>
             <div class="modal-footer">

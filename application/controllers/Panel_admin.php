@@ -41,6 +41,7 @@ class Panel_admin extends CI_Controller
     $this->load->view("layout/perfil",$data);
     $this->load->view("layout/footer");  
     }
+
     function load_dataemp()
     {
         $id_emp = $this->session->userdata('id_emp');
@@ -56,6 +57,12 @@ class Panel_admin extends CI_Controller
                 }else{
                     $selected = '';
                 }
+
+                if ($row->estado == 1) {
+                    $estado = '<span class="label label-success">Registro completado</span>';
+                }else{
+                    $estado = '<span class="label label-danger">Registro no completado</span>';
+                }
                 $count++;
                 $output .= '<tr>
                               <td><span class="font-medium">'.$row->nombre_emp.'</span>
@@ -70,7 +77,7 @@ class Panel_admin extends CI_Controller
                                   </select>
                               </td>
                               <td>
-                                 <span class="label label-danger">Registro no completado</span>
+                                    '.$estado.'
                               </td>
                               <td>
                               <button type="button" data="'.$row->id_emp.'" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
@@ -129,7 +136,7 @@ class Panel_admin extends CI_Controller
           foreach($result as $row)
             {
              $output .= '<tr>
-                         <td><span class="font-medium">'.$row->nombre_video.'</span></td>
+                         <td><span class="font-medium">'.$row->titulo_video.'</span></td>
                          <td><span class="text-muted">'.$row->url_video.'</span></td>
                         <td><span class="text-muted">'.$row->evaluacion.'</span></td>
                         <td><span class="text-muted"> <button type="button" data="'.$row->id_cap.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span></td>
@@ -143,10 +150,12 @@ class Panel_admin extends CI_Controller
     public function insert_cap()
     {
        
-        $param['nombre_video']   = $this->input->post('nombre_video');
-        $param['evaluacion']     = $this->input->post('evaluacion');
+        $param['titulo_video']   = $this->input->post('titulo_video');
+        $param['descripcion']    = $this->input->post('descripcion');
+        $param['imag_portada']   = $this->input->post('nombre_archivo');
         $param['url_video']      = $this->input->post('url_video');
-        $param['nivel']          = $this->input->post('nivel');
+        $param['evaluacion']     = $this->input->post('evaluacion');
+        
         $result                  = $this->modelogeneral->insert_cap($param);
         $msg['comprobador'] = false;
         if($result)
@@ -250,6 +259,22 @@ class Panel_admin extends CI_Controller
            echo json_encode($msg);
         }
     }
+
+ public function subir_imgVideo()
+    {
+        $config['upload_path'] = 'assets/videos';
+        $config['allowed_types'] = 'pdf|jpg|png|jpeg';
+        $config['max_size'] = 4048;
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('url_imagen')) { #Aquí me refiero a "foto", el nombre que pusimos en FormData
+            $error = array('error' => $this->upload->display_errors());
+            echo json_encode($error);
+        } else {
+          $datos_img = array('upload_data' =>$this->upload->data());
+          $msg['imagen'] = $datos_img['upload_data']['file_name'];
+           echo json_encode($msg);
+        }
+    }   
     
  /*------update perfil--------*/
  public function update_perfil()

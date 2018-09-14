@@ -24,13 +24,14 @@ class Capacitacion extends CI_Controller
      $id_emp = $this->session->userdata('id_emp'); 
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
      $data['result']     = $this->modelogeneral->mostrar_asoc($id_emp);
-     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
-
+     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
+    
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
 
      if ($data['datos_emp']->id_cap != 8)
       {
+        $data['list_cap']   = $this->modelogeneral->listar_data_cap(); 
         $this->load->view("emprendedor/capacitacion_videos",$data);
       }else {
              $this->load->view("layout/page_content");
@@ -143,7 +144,8 @@ class Capacitacion extends CI_Controller
      $result = $this->modelogeneral->mostrar_asoc($id_emp);
      $data = array('asociados' => $result);
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
-     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp); 
+     $data['list_cap']   = $this->modelogeneral->listar_data_cap();          
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
      $this->load->view("emprendedor/capacitacion_videos",$data);
