@@ -1,19 +1,15 @@
-
 <?php
 class Modelogeneral extends CI_Model {
-
-	
+  
   public function __construct() {
       parent::__construct();
       $this->load->database();
    }
-
    public function insert_emp($data)
   {
       $this->db->insert('emprendedor',$data);
       return $this->db->insert_id();
   }
-
   public function insert_emp_asoc($data)
   {
       $this->db->insert('emp_asoc',$data);
@@ -21,12 +17,22 @@ class Modelogeneral extends CI_Model {
           return true;
         
         }else{
-
           return false;
         }
      
   }
-
+  /* insertar videos */
+   public function insert_cap($data)
+  {
+      $this->db->insert('capacitacion',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        
+        }else{
+          return false;
+        }
+     
+  }
    public function insert_toCar($data)
   {
       $this->db->insert('carrito',$data);
@@ -36,7 +42,6 @@ class Modelogeneral extends CI_Model {
               return false;
              }
   }
-
   public function update_prodCar($param) {
    $this->db->where('id_car',$param['id_car']);
    $this->db->update('carrito',$param);
@@ -46,7 +51,6 @@ class Modelogeneral extends CI_Model {
          return false;
         }
    } 
-
   public function rowCountAsoc($id_emp){
       $this->db->where('e_a.id_padre', $id_emp);
       $this->db->join('emprendedor as emp ', 'e_a.id_hijo = emp.id_emp');
@@ -57,9 +61,7 @@ class Modelogeneral extends CI_Model {
         return false;
       }
   }
-
   public function comprobar_email($email,$password){
-
        $data = array('password' => md5($password));
       $this->db->where('email', $email);
       $this->db->update('password',$password);
@@ -70,9 +72,7 @@ class Modelogeneral extends CI_Model {
         return false;
       }
   }
-
   
-
   public function mostrar_asoc($id_emp)
   {
       $this->db->where('e_a.id_padre', $id_emp);
@@ -84,8 +84,6 @@ class Modelogeneral extends CI_Model {
         return false;
       }
   }
-
-
   public function mostrar_carrito($id_emp)
   {
       $this->db->select('id_car,no_orden,url_imagen,nombre_prod,precio_car,cantidad,importe');
@@ -98,7 +96,6 @@ class Modelogeneral extends CI_Model {
         return false;
       }
   }
-
    public function mostrar_producto()
   {
      $query = $this->db->get('producto');
@@ -109,7 +106,6 @@ class Modelogeneral extends CI_Model {
       }
   } 
   /*mostrar lista de  emprendedores */
-
     public function mostrar_emp($id_emp)
   {
      $this->db->where('id_emp !=',$id_emp);
@@ -128,7 +124,6 @@ class Modelogeneral extends CI_Model {
    return $query-> row();
   
    } 
-
    public function listar_data_cap()
   {
      $query = $this->db->get('capacitacion');
@@ -138,14 +133,48 @@ class Modelogeneral extends CI_Model {
         return false;
       }
   }
-
   public function Total_emp($tabla){
     $resultados = $this->db->get($tabla);
     return $resultados->num_rows();
   }
-
+  /*CRUD PRODUCTOS*/
+    public function listar_data_prod()
+  {
+     $query = $this->db->get('producto');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+  /*Insertar*/
+  
+     public function insert_prod($data)
+  {
+      $this->db->insert('producto',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        
+        }else{
+          return false;
+        }
+     
+  }
+  /*Editar*/
+  
+  /*Eliminar*/
+     public function eliminar_prod($id_producto)
+    {
+     $this->db->where('id_producto',$id_producto);
+     $this->db->delete('producto');
+     if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+  }
+  /*----------------*/
    
-
    /*-----Devuelve el consecutivo de la orden -----------*/
    public function N_orden_compra($year) {
     
@@ -162,7 +191,6 @@ class Modelogeneral extends CI_Model {
    $this->db->update('orden_compra',$data);
   
    }
-
    /*-----actualiza consecutivo de la orden -----------*/
    public function update_datosEmp($data_ins) {
    $data = array('password' => $data_ins['password'],'estado'=> 1);
@@ -170,7 +198,6 @@ class Modelogeneral extends CI_Model {
    $this->db->update('emprendedor',$data);
   
    }  
-
     
     /*-----Devuelve dato del producto -----------*/
    public function datos_prod($id_producto) {
@@ -180,8 +207,6 @@ class Modelogeneral extends CI_Model {
    return $query-> row();
   
    }
-
-
     public function eliminar_prodCar($id_car)
     {
      $this->db->where('id_car',$id_car);
@@ -191,10 +216,18 @@ class Modelogeneral extends CI_Model {
       }else{
         return false;
       }
-
   }
-
-    public function eliminar_emp($id_emp)
+    public function eliminar_cap($id_cap)
+    {
+     $this->db->where('id_cap',$id_cap);
+     $this->db->delete('capacitacion');
+     if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+  }
+  public function eliminar_emp($id_emp)
     {
      $this->db->where('id_emp',$id_emp);
      $this->db->delete('emprendedor');
@@ -203,24 +236,20 @@ class Modelogeneral extends CI_Model {
       }else{
         return false;
       }
-
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
+   /*-----------------------editar Perfil-----------------------*/ 
+   
+  public function update_perfil($param) 
+  {
+    $this->db->where('id_emp',$param['id_emp']);
+    $this->db->update('emprendedor',$param);
+     if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+  }
   
-
-
   /*-----Devuelve los datos de una tienda especifica-----------*/
    public function datos_tienda($id_tienda) {
     
@@ -237,8 +266,6 @@ class Modelogeneral extends CI_Model {
      $query = $this->db->get('plan_pago');
     return $query-> row();
   }
-
-
   /*-------devuelve los datos del usuario------------*/
   public function datos_usuario($id_usuario) 
   {
@@ -246,9 +273,7 @@ class Modelogeneral extends CI_Model {
      $query = $this->db->get('usuario');
     return $query-> row();
   }
-
   /*------------devuelve los datos del usuario------------------*/
-
    public function datos_usuarioT($id_usuario){
       
         $this->db->where('id_usuario', $id_usuario);
@@ -260,7 +285,6 @@ class Modelogeneral extends CI_Model {
           return false;
         }
     }
-
   /*-------devuelve los datos del plan------------*/
   public function update_plan($id_plan,$id_usuario) 
   {
@@ -279,12 +303,10 @@ class Modelogeneral extends CI_Model {
          return false;
         }
   }
-
     /*-------actualiza el plan solicitado------------*/
   public function update_planSol($plan_sol,$id_usuario) 
   {
       $data = array('id_plan' => $plan_sol ,'plan_solicitado' => 0 );// el plan solicitado se pone en cero y se actualiza el id_plan
-
       $this->db->where('id_usuario',$id_usuario);
       $this->db->update('usuario',$data);
       
@@ -294,7 +316,6 @@ class Modelogeneral extends CI_Model {
          return false;
         }
   }
-
     //----------------------------
   public function eliminar_usuarioTienda($id_usuario)
     {
@@ -305,11 +326,8 @@ class Modelogeneral extends CI_Model {
       }else{
         return false;
       }
-
   }
-
   
-
 /*-------update los datos de los productos de una tienda------------*/
    public function update_producto_tienda($id_producto)
   {
@@ -322,8 +340,6 @@ class Modelogeneral extends CI_Model {
          return false;
         }
    }
-
-
 /*-------retorna los  productos a productos generales de la  tienda------------*/
    public function retorna_producto_tienda($id_producto)
   {
@@ -333,13 +349,11 @@ class Modelogeneral extends CI_Model {
      $this->insertar_eliminacion_prio($id_producto);
     
      if($this->db->affected_rows() > 0){
-
       return true;
        }else{
          return false;
         }
    }
-
  public function insertar_eliminacion_prio($id_producto)
   {
    $this->db->select('store_id'); 
@@ -348,15 +362,12 @@ class Modelogeneral extends CI_Model {
    $tienda = $query-> row();
    $dato_prod = array('id_producto' => $id_producto,'store_id' => $tienda->store_id);
    $this->db->insert('eliminacion_prio',$dato_prod); 
-
   }
-
    public function rowCount($seleccionado,$cargado,$aprobado){
     $this->db->where('seleccionado',$seleccionado);
     $this->db->where('cargado',$cargado);
     $this->db->where('aprobado',$aprobado);
     $resultados = $this->db->get('productos_tienda');
-
     return $resultados->num_rows();
   }
 /*-------insertar consulta de soporte tecnico------------*/
@@ -367,15 +378,10 @@ class Modelogeneral extends CI_Model {
           return true;
         
         }else{
-
           return false;
         }
      
   }
-
-
-
-
       public function insertar_wizard($data)
   {
       $this->db->insert('usuario',$data);
@@ -383,27 +389,10 @@ class Modelogeneral extends CI_Model {
           return true;
         
         }else{
-
           return false;
         }
      
   }
-
- /*-----------------------editar Perfil-----------------------*/ 
-   
-  public function update_perfil($data,$id_usuario) 
-  {
-      
-      $this->db->where('id_usuario',$id_usuario);
-      $this->db->update('usuario',$data);
-      
-     if($this->db->affected_rows() > 0){
-      return true;
-       }else{
-         return false;
-        }
-  }
-
   /*------------get datos de producto-------------------*/
   public function editar_producto($id_producto)
   {
@@ -415,7 +404,6 @@ class Modelogeneral extends CI_Model {
       return false;
     }
   }
-
   /*------------insertar usuarios registrados--------*/
      public function InsertDatosUsuario($param)
   {
@@ -424,49 +412,30 @@ class Modelogeneral extends CI_Model {
           return true;
         
         }else{
-
           return false;
         }
      
   }
-
-
   /*-----------------------update datos de productos---------------------*/
-
     public function udpdateDatosProd($param)
-
   {
     
     $campos = array(
-
                    'descripton'  => $param['descripton'],
                    'id_categoria'=> $param['id_categoria'],
                    'listo'       =>1
                   );
      $this->db->where('id_producto',$param['id_producto']);
      $this->db->update('productos_tienda',$campos);
-
      if($this->db->affected_rows() > 0){
       return true;
        }else{
          return false;
         }
    } 
-
-
-
    
-
   
-
-
-
-
-
-
-
     //-----------------codigo viejo -----------
-
 public function aumentar_valoboleta()
   {
    $datos['valor_inicial'] = $this->getValorInicial();
@@ -474,7 +443,6 @@ public function aumentar_valoboleta()
    $data = array('valor' => $text);
    $this->db->where('parametro','bol_inicial');
    $this->db->update('configuracion',$data);
-
   }
   //--------------actualizar valor_inicial del curso------------------------
   public function aumentar_valor_curso()
@@ -484,9 +452,7 @@ public function aumentar_valoboleta()
    $data = array('valor' => $text);
    $this->db->where('parametro','valor_inicialcurso');
    $this->db->update('configuracion',$data);
-
   }
-
 //----------------------------------------   
  public function count_all()
   {
@@ -494,26 +460,25 @@ public function aumentar_valoboleta()
     $this->db->where('stado','1');
     return $this->db->count_all_results();
   }
-
   //--------------contar Productos--------
    public function count_Productos($store_id)
   {
     $this->db->from('productos_tienda');
-    $this->db->where('store_id',$store_id);	
+    $this->db->where('store_id',$store_id); 
     return $this->db->count_all_results();
   }
    public function count_Productos_generales($store_id)
   {
     $this->db->from('productos_tienda');
     $this->db->where('store_id',$store_id);
-	$this->db->where('seleccionado',0);
+  $this->db->where('seleccionado',0);
     return $this->db->count_all_results();
   }
   public function count_Productos_seleccionados($store_id)
   {
     $this->db->from('productos_tienda');
     $this->db->where('store_id',$store_id);
-	$this->db->where('seleccionado',1);
+  $this->db->where('seleccionado',1);
     return $this->db->count_all_results();
   }
     //--------------contar Productos SELECCIONADO DADO UNA TIENDA--------
@@ -524,7 +489,6 @@ public function aumentar_valoboleta()
     $this->db->where('seleccionado',1);
     return $this->db->count_all_results();
   }
-
      //--------------contar Nuevas Solitudes--------
    public function count_NuevasSolitudPlan()
   {
@@ -532,7 +496,6 @@ public function aumentar_valoboleta()
     $this->db->where('plan_solicitado !=',0);
     return $this->db->count_all_results();
   }
-
    public function getNewNoticaciones()
   {
    $this->db->select('*');    
@@ -543,7 +506,6 @@ public function aumentar_valoboleta()
    $query = $this->db->get();
    return $query->result();    
   }
-
     public function getPlanes()
   {
    $this->db->from('plan_pago');
@@ -551,7 +513,6 @@ public function aumentar_valoboleta()
    return $query->result();    
   }
 
-  
 
   //------------------ contar alumnos inscritos curso----
 

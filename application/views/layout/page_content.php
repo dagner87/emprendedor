@@ -86,40 +86,23 @@
                                 <table id="example23" class="display nowrap table m-t-30 table-hover contact-list" data-page-size="10"" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                           <th>Asociado</th>
-                                                <th>Compras</th>
-                                                <th>Enero</th>
-                                                <th>Febrero</th>
-                                                <th>Marzo</th>
-                                                <th>Abril</th>
-                                                <th>Mayo</th>
-                                                <th>Junio</th>
-                                                <th>Julio</th>
-                                                <th>Agosto</th>
-                                                <th>Septiembre</th>
-                                                <th>Octubre</th>
-                                                <th>Noviembre</th>
-                                                <th>Diciembre</th>
+                                            <th>Asociado</th>
+                                            <th>Compras</th>
+                                            <th>Enero</th>
+                                            <th>Febrero</th>
+                                            <th>Marzo</th>
+                                            <th>Abril</th>
+                                            <th>Mayo</th>
+                                            <th>Junio</th>
+                                            <th>Julio</th>
+                                            <th>Agosto</th>
+                                            <th>Septiembre</th>
+                                            <th>Octubre</th>
+                                            <th>Noviembre</th>
+                                            <th>Diciembre</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Asociado</th>
-                                                <th>Compras</th>
-                                                <th>Enero</th>
-                                                <th>Febrero</th>
-                                                <th>Marzo</th>
-                                                <th>Abril</th>
-                                                <th>Mayo</th>
-                                                <th>Junio</th>
-                                                <th>Julio</th>
-                                                <th>Agosto</th>
-                                                <th>Septiembre</th>
-                                                <th>Octubre</th>
-                                                <th>Noviembre</th>
-                                                <th>Diciembre</th>
-                                        </tr>
-                                    </tfoot>
+                                  
                                     <tbody>
                                         
                                     </tbody>
@@ -149,14 +132,15 @@
             method:"POST",
             success:function(data)
             {
-             $('#reporte_asoc').html(data);
+             //$('#reporte_asoc').html(data);
+              $('#example23 tbody').html(data);
              $('#example23').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                    'copy','excel', 'pdf', 'print'
                 ]
             });
-             $('#example23 tbody').html(data);
+             
              
             }
         })

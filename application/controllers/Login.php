@@ -63,7 +63,7 @@ class Login extends CI_Controller
 		                'id_emp' 	          =>  $check_user->id_emp,
 		                'nombre' 	          =>  $check_user->nombre_emp,
 		                );
-				echo json_encode($data);
+				
 				$this->session->set_userdata($data);
 				$this->index();
 
@@ -98,6 +98,98 @@ class Login extends CI_Controller
 	public function registro(){
 		$data['token'] = $this->token();
 		$this->load->view('layout/registro',$data);
+	}
+
+	public function n_registro(){
+
+		if($this->input->post('token') == $this->session->userdata('token'))
+		{
+			 $param['nombre_emp']   = $this->input->post('nombre_emp');
+			 $param['foto_emp']     = 'no_img.jpg';
+			 $param['email']        = $this->input->post('email');	
+			 $param['dni_emp']      = $this->input->post('dni_emp');
+			 $param['telefono_emp'] = $this->input->post('telefono_emp');
+             $param['fecha_insc']   = date('Y-m-d');
+             $param['password']     = md5($this->input->post('confir_password'));
+		     
+		     $data['id_hijo']      = $this->modelogeneral->insert_emp($param);	
+		     $data['id_padre']     = 1;
+             $result = $this->modelogeneral->insert_emp_asoc($data);
+             $msg['comprobador'] = false;
+             if($result)
+             { 
+              
+              $this->ingreso($param);
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+         }
+	}
+
+	public function ingreso($data)
+    {
+     $check_user = $this->Login_model->login_user($data['email'],$data['password']);
+	  if($check_user == TRUE)
+	   {
+	    $data = array(
+						'is_logued_in' 	      =>  TRUE,
+	                    'perfil'		      =>  $check_user->perfil,
+		                'email' 		      =>  $check_user->email,
+		                'id_emp' 	          =>  $check_user->id_emp,
+		                'nombre' 	          =>  $check_user->nombre_emp,
+		                );
+				
+		$this->session->set_userdata($data);	
+         $id_emp = $this->session->userdata('id_emp'); 
+	     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
+	     $data['result']     = $this->modelogeneral->mostrar_asoc($id_emp);
+	     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+
+	     $this->load->view("layout/header",$data);
+	     $this->load->view("layout/side_menu",$data);
+	     if ($data['datos_emp']->id_cap != 8)
+	      {
+	        $this->load->view("emprendedor/capacitacion_videos",$data);
+	      }else {
+	             $this->load->view("layout/page_content");
+	            }
+	       $this->load->view("layout/footer"); 
+	     }    
+    }
+
+	public function sendMailGmail($param)
+	{		
+		//cargamos la libreria email de ci
+		$this->load->library("email");
+       // $cuerpo_mensaje = $this->cuerpo_mail($datos);
+        $cuerpo_mensaje = "Prueba";
+ 
+		//configuracion para gmail
+		$configGmail = array(
+			'protocol'  => 'smtp',
+			'smtp_host' => 'ssl://smtp.gmail.com',
+			'smtp_port' => 465,
+			'smtp_user' => 'info@shoppingads.com.ar', //googleshopping.com.ar
+			'smtp_pass' => 'Googleads2018',
+			'mailtype'  => 'html',
+			'charset'   => 'utf-8',
+			'newline'   => "\r\n"
+		);    
+ 
+		//cargamos la configuración para enviar con gmail
+		$this->email->initialize($configGmail);
+ 
+		$this->email->from('info@shoppingads.com.ar', 'Notificaciones de Registro');
+		$this->email->to($param['email']);
+		$this->email->subject('Proceso de registro Completado');
+        $this->email->message($cuerpo_mensaje)->set_mailtype('html');
+		$this->email->send();
+		
+	}
+
+	/*public function registro(){
+		$data['token'] = $this->token();
+		$this->load->view('layout/registro',$data);
 		if ($this->input->post('confir_password')) {
 			$email             = $this->input->post('email');
 		    $confir_password   = md5($this->input->post('confir_password'));
@@ -106,7 +198,7 @@ class Login extends CI_Controller
 			$this->modelogeneral->update_datosEmp($data_ins);
 
 		}
-	}
+	}*/
 	
 
 }

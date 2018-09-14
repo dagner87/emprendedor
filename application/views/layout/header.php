@@ -99,12 +99,12 @@
         background-color: #fff;
         left: 50%;
         top: 0;
-<<<<<<< HEAD
+
         transform: translateY(-100%); } 
         .botonF1{
-              width:100px;
-              height:100px;
-              border-radius:110%;
+              width:80px;
+              height:80px;
+              border-radius:90%;
               background:#2ea3f2;
               right:0;
               bottom:0;
@@ -119,11 +119,9 @@
               transition:.3s;  
             }
             .botonF1:active{
-              transform:scale(2.2);
+              transform:scale(1.1);
             } 
-=======
-        transform: translateY(-100%); }  
->>>>>>> parent of 0bcd500... perfil ok
+
 
 </style>
 
@@ -186,13 +184,16 @@
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <?php  if ($this->session->userdata('perfil')!="administrador") {?>
+                             <?php  if ($this->session->userdata('perfil')!="administrador") {?>
                                 <li><a href="#"><i class="ti-wallet"></i> Mi Balance</a></li>
                                 <li role="separator" class="divider"></li>
+                              <li><a href="<?php echo base_url();?>my_perfil"><i class="ti-settings"></i> Mi Perfil</a></li>  
+                             <li role="separator" class="divider"></li>
+                            <?php }else{  ?>
+                              <li><a href="<?php echo base_url();?>MyperfilAdmin"><i class="ti-settings"></i> Mi Perfil</a></li>
+                             
+                             <li role="separator" class="divider"></li>
                             <?php }  ?>
-                            
-                            <li><a href="my_perfil"><i class="ti-settings"></i> Mi Perfil</a></li>
-                            <li role="separator" class="divider"></li>
                             <li><a href="<?php echo base_url();?>salir"><i class="fa fa-power-off"></i> Salir</a></li>
                         </ul>
                         <!-- /.dropdown-user -->

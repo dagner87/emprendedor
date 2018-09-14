@@ -79,7 +79,13 @@
     <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bower_components/gallery/js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bower_components/fancybox/ekko-lightbox.min.js"></script>
     <script type="text/javascript">
-      
+
+       $(document).ready(function($) {
+     
+      $('#view_car').click(function(e) {
+            window.location.href = "<?php echo base_url();?>capacitacion/carrito";
+        });
+      });
 
       $(document).on("click",".btn-car",function(){
         car = $(this).val();

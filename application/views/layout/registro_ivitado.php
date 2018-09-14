@@ -52,30 +52,12 @@
                 <?php
                 }
                 ?>
-                  <form class="form-horizontal new-lg-form" id="loginform" method="post" action="<?php echo base_url();?>login/n_registro">
+                  <form class="form-horizontal new-lg-form" id="loginform" method="post" action="<?php echo base_url();?>registro">
                      <?=form_hidden('token',$token)?>
                     <div class="form-group  m-t-20">
                       <div class="col-xs-12">
-                        <label>Nombre y Apellidos</label>
-                        <input class="form-control" type="text" required="true" name="nombre_emp" placeholder="Escriba Nombre y Apellidos">
-                      </div>
-                    </div>
-                    <div class="form-group  m-t-20">
-                      <div class="col-xs-12">
-                        <label>DNI</label>
-                        <input class="form-control" type="text" required="true" name="dni_emp" placeholder="Escriba DNI">
-                      </div>
-                    </div>
-                    <div class="form-group  m-t-20">
-                      <div class="col-xs-12">
-                        <label>telefono</label>
-                        <input class="form-control" type="tel" required="true" name="telefono_emp" placeholder="Escriba Teléfono">
-                      </div>
-                    </div>
-                    <div class="form-group  m-t-20">
-                      <div class="col-xs-12">
                         <label>CORREO</label>
-                        <input class="form-control" type="email" required="true" name="email" placeholder=" Correo">
+                        <input class="form-control" type="text" required="true" name="email" placeholder="Correo">
                       </div>
                     </div>
                     <div class="form-group">

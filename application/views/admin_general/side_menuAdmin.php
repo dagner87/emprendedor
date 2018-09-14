@@ -1,4 +1,4 @@
-    <!-- ============================================================== -->
+ <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
         <div class="navbar-default sidebar" role="navigation">
@@ -44,5 +44,3 @@
 
         <div id="page-wrapper">
              <div class="container-fluid">
-
-           

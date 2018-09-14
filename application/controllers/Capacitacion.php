@@ -38,6 +38,8 @@ class Capacitacion extends CI_Controller
        $this->load->view("layout/footer");  
     }
 
+     
+
     public function checkout()
     {
       if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {

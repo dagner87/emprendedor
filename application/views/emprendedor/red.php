@@ -41,7 +41,7 @@
                                 <div class="person">
                                     <img src="<?php echo base_url();?>assets/plugins/images/users/<?= $key->foto_emp ?>" alt="">
                                     <p class="name">
-                                        <?= $key->nombre_emp ;?> <b>/ <?= $key->telefono_emp; ?></b>
+                                        <?= $key->nombre_emp ;?> <b>/ <?= $key->email; ?></b>
                                     </p>
                                 </div>
                            </div>

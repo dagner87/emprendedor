@@ -17,7 +17,7 @@
                                 <th  colspan=2 class="text-right">Total</th>
                             </tr>
                         </thead>
-                        <tbody id="prod_car1">
+                        <tbody >
                         <?php 
                             if(!empty($result)):
                             foreach ($result as $row) : ?>
