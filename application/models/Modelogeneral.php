@@ -245,9 +245,10 @@ class Modelogeneral extends CI_Model {
    return $query-> row();
   
    }
-    public function eliminar_prodCar($id_car)
+    public function eliminar_prodCar($param)
     {
-     $this->db->where('id_car',$id_car);
+     $this->db->where('id_car',$param['id_car']);
+     $this->db->where('id_emp',$param['id_emp']);
      $this->db->delete('carrito');
      if($this->db->affected_rows() > 0){
         return true;

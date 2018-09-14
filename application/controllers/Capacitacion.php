@@ -310,8 +310,9 @@ class Capacitacion extends CI_Controller
     }
     public function eliminar_prodCar()
     {
-        $id_car = $this->input->get('id_car');
-        $result  = $this->modelogeneral->eliminar_prodCar($id_car);
+        $param['id_car'] = $this->input->get('id_car');
+        $param['id_emp'] = $this->session->userdata('id_emp');
+        $result  = $this->modelogeneral->eliminar_prodCar($param);
         $msg['comprobador'] = false;
         if($result)
              {

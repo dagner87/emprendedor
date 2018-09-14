@@ -42,6 +42,7 @@
                             </tr>
                            <?php endforeach; ?>
                             <?php endif; ?>
+                             <tr> </tr>
                             
                         </tbody>
                     </table>
