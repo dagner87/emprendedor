@@ -1,4 +1,3 @@
-
     <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -14,6 +13,7 @@
                     </div>
                 </div>
 
+<<<<<<< HEAD
   <?php if ($datos_emp->id_cap  == 8): ?>
  <button id="view_car" class="botonF1 tooltip-demo" title=" Ver Carrito">
   <span><i class="ti-shopping-cart"></i></span>
@@ -22,6 +22,8 @@
 <!--button type="button" class="botonF1 popover-primary" title="" data-toggle="popover" data-placement="top" data-content="Cantidad de Productos:10000" data-original-title="Carrito"><span><i class="ti-shopping-cart"></i></span></button-->
 
 
+=======
+>>>>>>> parent of 0bcd500... perfil ok
                  <!--MENU -->
                 <ul class="nav" id="side-menu">
                   <li> <a href="<?php echo base_url();?>" class="waves-effect"><i class="mdi mdi-home-variant fa-fw"></i> <span class="hide-menu">MENU</span></a></li>
@@ -66,7 +68,6 @@
         <!-- ============================================================== -->
         <!-- End Left Sidebar -->
         <!-- ============================================================== -->
-        <div id="page-wrapper">
-          <div class="container-fluid">
-      
 
+        <div id="page-wrapper">
+             <div class="container-fluid">

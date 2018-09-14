@@ -65,7 +65,6 @@
  <script src="<?php echo base_url();?>assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 
 <style type="text/css"> 
-
     .hv-item-parent p {
   font-weight: bold;
   color: #DE5454; }
@@ -100,6 +99,7 @@
         background-color: #fff;
         left: 50%;
         top: 0;
+<<<<<<< HEAD
         transform: translateY(-100%); } 
         .botonF1{
               width:90px;
@@ -121,6 +121,9 @@
             .botonF1:active{
               transform:scale(2.1);
             } 
+=======
+        transform: translateY(-100%); }  
+>>>>>>> parent of 0bcd500... perfil ok
 
 </style>
 
@@ -186,14 +189,10 @@
                             <?php  if ($this->session->userdata('perfil')!="administrador") {?>
                                 <li><a href="#"><i class="ti-wallet"></i> Mi Balance</a></li>
                                 <li role="separator" class="divider"></li>
-                              <li><a href="<?php echo base_url();?>my_perfil"><i class="ti-settings"></i> Mi Perfil</a></li>  
-                             <li role="separator" class="divider"></li>
-                            <?php }else{  ?>
-                              <li><a href="<?php echo base_url();?>MyperfilAdmin"><i class="ti-settings"></i> Mi Perfil</a></li>
-                             
-                             <li role="separator" class="divider"></li>
                             <?php }  ?>
                             
+                            <li><a href="my_perfil"><i class="ti-settings"></i> Mi Perfil</a></li>
+                            <li role="separator" class="divider"></li>
                             <li><a href="<?php echo base_url();?>salir"><i class="fa fa-power-off"></i> Salir</a></li>
                         </ul>
                         <!-- /.dropdown-user -->
@@ -206,37 +205,48 @@
             <!-- /.navbar-static-side -->
         </nav> 
         <!-- End Top Navigation -->
-<!-- .modal for add task -->
-<div class="modal fade" id="enviarInvitacion" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="titulo_invit">Nuevo Miembro </h4>
-            </div>
-            <div class="modal-body">
-                <form id="add_emp" action="<?php echo base_url() ?>panel_admin/insert_emp" method="post">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Correo</label>
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="ti-email"></i></div>
-                            <input type="email" class="form-control"  name="email" id="email" placeholder=" Escriba Email"> </div>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-success">Agregar</button>
-            </div>
-             </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-
-
+        <!-- .modal for add task -->
+                            <div class="modal fade" id="enviarInvitacion" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="titulo_invit">Nuevo Miembro </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="add_emp" action="<?php echo base_url() ?>panel_admin/insert_emp" method="post">
+                                        <!--div class="form-group">
+                                            <label for="exampleInputuname">Nombre Completo</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="ti-user"></i></div>
+                                                <input type="text" class="form-control" name="nombre_emp" id="nombre_emp" placeholder=" Escriba Nombre Completo"> </div>
+                                        </div-->
+                                        
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Correo</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="ti-email"></i></div>
+                                                <input type="email" class="form-control"  name="email" id="email" placeholder=" Escriba Email"> </div>
+                                        </div>
+                                        <!--div class="form-group">
+                                            <label for="exampleInputphone">Teléfono</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="ti-mobile"></i></div>
+                                                <input type="tel" class="form-control" name="telefono_emp" id="telefono_emp" placeholder="Escriba telefono"> </div>
+                                        </div-->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-success">Agregar</button>
+                                        </div>
+                                         </form>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                <!--/.row -->
        
