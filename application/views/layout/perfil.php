@@ -22,6 +22,7 @@
                                         <img src="<?php echo base_url();?>assets/plugins/images/users/<?= $datos_emp->foto_emp; ?>" class="thumb-lg img-circle" alt="img">
                                         <h4 class="text-white"><?= $datos_emp->nombre_emp; ?></h4>
                                         <h5 class="text-white"><?= $datos_emp->email; ?></h5> 
+                                        
                                         <!--div class="col-md-12 m-b-20">
                                         <div class="fileupload btn btn-danger btn-rounded waves-effect waves-light"><span><i class="ion-upload m-r-5"></i>Subir Imagen <i id="cargando" class=""></i></span>
                                             <input type="file" class="upload"> </div>
@@ -71,7 +72,7 @@
                                             <label class="col-md-12">Imagen</label>
                                             <div class="col-md-12">
                                                 <input type="file" name="url_imagen" id="url_imagen" class=" btn-file form-control form-control-line"> </div>
-                                                <input type="hidden" name="foto_emp" id="foto_emp" value="<?= $datos_emp->nombre_emp; ?>" class="form-control"> 
+                                                <input type="hidden" name="foto_emp" id="foto_emp" value="<?= $datos_emp->foto_emp; ?>" class="form-control"> 
                                         </div>
 
                                         <div class="form-group">

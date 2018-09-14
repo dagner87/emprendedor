@@ -27,7 +27,8 @@ class Panel_admin extends CI_Controller
      $this->load->view("admin_general/page_inicioAdmin",$data);
      $this->load->view("layout/footer");  
     }
-       public function MyperfilAdmin()
+    
+     public function MyperfilAdmin()
     {
       if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
             redirect(base_url() . 'login');
@@ -36,10 +37,10 @@ class Panel_admin extends CI_Controller
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
      $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
     
-    $this->load->view("layout/header",$data);
-    $this->load->view("admin_general/side_menuAdmin");
-    $this->load->view("layout/perfil",$data);
-    $this->load->view("layout/footer");  
+      $this->load->view("layout/header",$data);
+      $this->load->view("admin_general/side_menuAdmin");
+      $this->load->view("layout/perfil",$data);
+      $this->load->view("layout/footer");  
     }
 
     function load_dataemp()
