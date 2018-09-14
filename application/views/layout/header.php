@@ -102,9 +102,9 @@
 <<<<<<< HEAD
         transform: translateY(-100%); } 
         .botonF1{
-              width:90px;
-              height:90px;
-              border-radius:100%;
+              width:100px;
+              height:100px;
+              border-radius:110%;
               background:#2ea3f2;
               right:0;
               bottom:0;
@@ -119,7 +119,7 @@
               transition:.3s;  
             }
             .botonF1:active{
-              transform:scale(2.1);
+              transform:scale(2.2);
             } 
 =======
         transform: translateY(-100%); }  
