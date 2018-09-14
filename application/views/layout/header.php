@@ -20,6 +20,8 @@
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
      <!-- Wizard CSS -->
     <link href="<?php echo base_url();?>assets/plugins/bower_components/jquery-wizard-master/css/wizard.css" rel="stylesheet">
+
+    <link href="<?php echo base_url();?>assets/plugins/bower_components/register-steps/steps.css" rel="stylesheet">
      
     <!-- Menu CSS -->
     <link href="<?php echo base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">

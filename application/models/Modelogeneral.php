@@ -10,6 +10,8 @@ class Modelogeneral extends CI_Model {
       $this->db->insert('emprendedor',$data);
       return $this->db->insert_id();
   }
+
+
   public function insert_emp_asoc($data)
   {
       $this->db->insert('emp_asoc',$data);
@@ -33,6 +35,42 @@ class Modelogeneral extends CI_Model {
         }
      
   }
+
+  /* insetar evaluacion **/
+   public function udpate_evalcap($param)
+  {
+    $this->db->where('id_emp',$param['id_emp']);
+    $this->db->where('id_cap',$param['id_cap']);
+    $this->db->update('emp_cap',$param);
+   if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+     
+  }
+
+  /* insetar evaluacion **/
+   public function udpate_emp($datos_upd)
+  {
+    $this->db->where('id_emp',$datos_upd['id_emp']);
+    $this->db->update('emprendedor',$datos_upd);
+    if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+  }
+
+
+   public function las_insetCap()
+  {
+    $this->db->select('id_cap,evaluacion');
+    $this->db->order_by("id_cap","desc"); 
+    $resultados = $this->db->get('capacitacion');
+    return $resultados->row();
+  }
+
    public function insert_toCar($data)
   {
       $this->db->insert('carrito',$data);

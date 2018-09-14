@@ -13,6 +13,8 @@
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Menu Plugin JavaScript -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/register-steps/jquery.easing.min.js"></script>
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/register-steps/register-init.js"></script>
 
     <!-- Calendar JavaScript -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/calendar/jquery-ui.min.js"></script>

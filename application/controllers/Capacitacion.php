@@ -21,15 +21,17 @@ class Capacitacion extends CI_Controller
       if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
             redirect(base_url() . 'login');
         }   
-     $id_emp = $this->session->userdata('id_emp'); 
+     $id_emp             = $this->session->userdata('id_emp'); 
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
      $data['result']     = $this->modelogeneral->mostrar_asoc($id_emp);
      $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
+     $data['ultimo_reg'] = $this->modelogeneral->las_insetCap(); 
+    
     
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
 
-     if ($data['datos_emp']->id_cap != 8)
+     if ($data['datos_emp']->id_cap != $data['ultimo_reg']->id_cap)
       {
         $data['list_cap']   = $this->modelogeneral->listar_data_cap(); 
         $this->load->view("emprendedor/capacitacion_videos",$data);
@@ -38,6 +40,26 @@ class Capacitacion extends CI_Controller
             }
        $this->load->view("layout/footer");  
     }
+
+   /* Insertar Evaluacion*/
+    public function update_evalcap()
+    {
+        $param['id_emp']           = $this->session->userdata('id_emp');
+        $param['evaluacion_video'] = $this->input->post('evaluacion');
+        $param['id_cap']           = $this->input->post('id_cap');
+        
+        $result   = $this->modelogeneral->udpate_evalcap($param);
+        $msg['comprobador'] = false;
+        $msg['qry'] = $this->db->last_query();
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+               $datos_upd['id_emp'] = $this->session->userdata('id_emp');
+               $datos_upd['id_cap'] = 2 ;
+               $msg['updatemp'] = $this->modelogeneral->udpate_emp($datos_upd);
+             }
+        echo json_encode($msg);
+    }  
 
      
 
@@ -142,10 +164,11 @@ class Capacitacion extends CI_Controller
 
      $id_emp = $this->session->userdata('id_emp');
      $result = $this->modelogeneral->mostrar_asoc($id_emp);
-     $data = array('asociados' => $result);
+     $data['asociados']  = $result;
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
      $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp); 
-     $data['list_cap']   = $this->modelogeneral->listar_data_cap();          
+     $data['list_cap']   = $this->modelogeneral->listar_data_cap(); 
+
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
      $this->load->view("emprendedor/capacitacion_videos",$data);
