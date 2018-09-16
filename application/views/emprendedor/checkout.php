@@ -18,10 +18,10 @@
                         <div class="white-box">
                             <h3 class="box-title m-b-0">Form Validation</h3>
                             <p class="text-muted m-b-30"> Bootstrap Form Validation</p>
-                            <form data-toggle="validator">
+                            <form data-toggle="validator" id="prueba" action="<?php echo base_url() ?>capacitacion/prueba" method="post">
                                 <div class="form-group">
                                     <label for="inputName1" class="control-label">Name</label>
-                                    <input type="text" class="form-control" id="inputName1" placeholder="Cina Saffary" required> </div>
+                                    <input type="text" class="form-control" name="id_car" id="id_car" placeholder="Cina Saffary" required> </div>
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Email</label>
                                     <input type="email" class="form-control" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
@@ -65,3 +65,13 @@
                         </div>
                     </div>
                 </div>    
+ <script>
+
+$(document).ready(function(){
+          
+   var old = $.fn.validator;
+   console.log(old);
+
+
+});                              
+</script>              

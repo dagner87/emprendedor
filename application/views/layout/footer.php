@@ -41,6 +41,10 @@
     <!-- Custom Theme JavaScript -->
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/custom.min.js"></script>
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/dashboard1.js"></script>
+    <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/validator.js"></script>
+    <!-- jQuery peity -->
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/peity/jquery.peity.min.js"></script>
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/peity/jquery.peity.init.js"></script>
 
     <script src="<?php echo base_url();?>assets/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
     <!-- start - This is for export functionality only -->

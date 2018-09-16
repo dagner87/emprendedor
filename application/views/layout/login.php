@@ -12,6 +12,7 @@
 <link href="<?php echo base_url();?>assets/ampleadmin-minimal/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- animation CSS -->
 <link href="<?php echo base_url();?>assets/ampleadmin-minimal/css/animate.css" rel="stylesheet">
+<link href="<?php echo base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="<?php echo base_url();?>assets/ampleadmin-minimal/css/style.css" rel="stylesheet">
 <!-- color CSS -->
@@ -40,7 +41,7 @@
               </div>
       </div>
       <div class="new-login-box">
-         <a href="<?php echo base_url();?>" class="p-20 di"><img src="<?php echo base_url();?>assets/plugins/images/admin-text-dark.png" alt="home" class="light-logo" /></a>
+         <a href="<?php echo base_url();?>" class="p-20 di"><img src="<?php echo base_url();?>assets/plugins/images/admin-text-logo.png" alt="home" class="light-logo" /></a>
                 <div class="white-box">
                     <h3 class="box-title m-b-0">Entrada al sistema</h3>
                             <?php 
@@ -53,18 +54,20 @@
                 <?php
                 }
                 ?>
-                  <form class="form-horizontal new-lg-form" id="loginform" method="post" action="<?php echo base_url();?>logusuario">
+                  <form  data-toggle="validator" class="form-horizontal new-lg-form" id="loginform" method="post" action="<?php echo base_url();?>logusuario">
                      <?=form_hidden('token',$token)?>
                     <div class="form-group  m-t-20">
                       <div class="col-xs-12">
                         <label>CORREO</label>
-                        <input class="form-control" type="text" required="true" name="email" placeholder="Correo">
+                        <input class="form-control" type="email" required name="email" placeholder="Correo" data-error="Escriba un correo valido">
+                        <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="col-xs-12">
                         <label>CONTRASEÑA</label>
-                        <input class="form-control" type="password" required="true" name="password"  placeholder="Contraseña">
+                        <input  type="password"  data-minlength="6" class="form-control"   name="password"  placeholder="Contraseña" required>
+                        <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="form-group">
@@ -123,6 +126,8 @@
 <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/waves.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/custom.min.js"></script>
+
+<script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/validator.js"></script>
 <!--Style Switcher -->
 <script src="<?php echo base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
 <script type="text/javascript">

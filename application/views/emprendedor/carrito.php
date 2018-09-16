@@ -5,7 +5,7 @@
             <div class="col-md-10 col-md-offset-2">
                   <h3><b>CARRITO</b> <span class="pull-right"></span></h3>
                 <div class="table-responsive" style="clear: both;">
-                    <table class="table color-bordered-table info-bordered-table m-t-30 table-hover contact-list"
+                    <table class="table color-table info-table m-t-30 table-hover contact-list"
                      id="carrito" data-page-size="10">
                         <thead>
                             <tr>

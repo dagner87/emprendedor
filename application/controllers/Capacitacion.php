@@ -269,6 +269,13 @@ class Capacitacion extends CI_Controller
         echo json_encode($msg);
     }
 
+     public function prueba()
+    {
+       
+       echo  $param['id_car']    = $this->input->post('id_car');
+       
+    }
+
 
 
      function carrito_compra()

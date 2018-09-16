@@ -1,5 +1,5 @@
 <!DOCTYPE html>  
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +10,8 @@
 <title>Registro</title>
 <!-- Bootstrap Core CSS -->
 <link href="<?php echo base_url();?>assets/ampleadmin-minimal/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Menu CSS -->
+<link href="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
 <!-- animation CSS -->
 <link href="<?php echo base_url();?>assets/ampleadmin-minimal/css/animate.css" rel="stylesheet">
 <!-- Custom CSS -->
@@ -52,41 +54,48 @@
                 <?php
                 }
                 ?>
-                  <form class="form-horizontal new-lg-form" id="loginform" method="post" action="<?php echo base_url();?>login/n_registro">
+                  <form  data-toggle="validator" class="form-horizontal new-lg-form" id="loginform" method="post" action="<?php echo base_url();?>login/n_registro">
                      <?=form_hidden('token',$token)?>
                     <div class="form-group  m-t-20">
                       <div class="col-xs-12">
                         <label>Nombre y Apellidos</label>
                         <input class="form-control" type="text" required="true" name="nombre_emp" placeholder="Escriba Nombre y Apellidos">
+                        <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="form-group  m-t-20">
                       <div class="col-xs-12">
                         <label>DNI</label>
                         <input class="form-control" type="text" required="true" name="dni_emp" placeholder="Escriba DNI">
+                        <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="form-group  m-t-20">
                       <div class="col-xs-12">
-                        <label>telefono</label>
+                        <label>Telefono</label>
                         <input class="form-control" type="tel" required="true" name="telefono_emp" placeholder="Escriba Teléfono">
+                        <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="form-group  m-t-20">
                       <div class="col-xs-12">
                         <label>CORREO</label>
                         <input class="form-control" type="email" required="true" name="email" placeholder=" Correo">
+                        <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="col-xs-12">
                         <label>CONTRASEÑA</label>
-                        <input class="form-control" type="password" required="true" name="password"  placeholder="Contraseña">
+                        <input class="form-control" type="password" id="password" required="true" name="password"  placeholder="Contraseña">
+                      <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input class="form-control" type="password" name="confir_password"  required="" placeholder="Confirmar Contraseña"> </div>
+                            <input class="form-control" type="password" name="confir_password"  required placeholder="Confirmar Contraseña" data-match="#password" data-match-error="La contraseña no coincide">
+                            <div class="help-block with-errors"></div>
+                             </div>
                     </div>
                     <div class="form-group text-center m-t-20">
                       <div class="col-xs-12">
@@ -114,6 +123,8 @@
 <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/waves.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/custom.min.js"></script>
+
+<script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/validator.js"></script>
 <!--Style Switcher -->
 <script src="<?php echo base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
 </body>
