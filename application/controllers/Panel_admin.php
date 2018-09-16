@@ -298,9 +298,11 @@ class Panel_admin extends CI_Controller
  /*-----------------------------*/  
     public function forgot_pass()
     {
-         $email  = $this->input->post('email_rest');
-          $pass = '1234';
-         $result = $this->modelogeneral->comprobar_email($email,$password);
+         $msg['email']    = $this->input->post('email_rest');
+         $msg['password'] = '1234';
+          
+
+         /*$result = $this->modelogeneral->comprobar_email($email,$password);
         
          $msg['comprobador'] = false;
         if($result)
@@ -311,9 +313,9 @@ class Panel_admin extends CI_Controller
                $url = base_url()."login";
                $cuerpo_mensaje .= "<a href='".$url."' target='_blank'> Ingresar</a>";
               $this->sendMailMandril($email,$asunto, $cuerpo_mensaje);
-             }
+             }*/
        
-        echo json_encode($pass);
+        echo json_encode($msg);
     }
     public function sendMailMandril($email_destino,$asunto, $cuerpo_mensaje)
     {       

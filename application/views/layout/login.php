@@ -66,7 +66,7 @@
                     <div class="form-group">
                       <div class="col-xs-12">
                         <label>CONTRASEÑA</label>
-                        <input  type="password"  data-minlength="6" class="form-control"   name="password"  placeholder="Contraseña" required>
+                        <input  type="password"  data-minlength="6" class="form-control"   name="password"  placeholder="Contraseña" required data-error="Por favor, no escribas menos de 6 caracteres">
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
@@ -90,7 +90,9 @@
                       </div>
                     </div>
                   </form>
-                  <form class="form-horizontal" id="recoverform" action="<?php echo base_url() ?>panel_admin/forgot_pass" method="post">
+
+                  <form data-toggle="validator" class="form-horizontal" id="recoverform" 
+                  action="<?php echo base_url() ?>panel_admin/forgot_pass" method="post">
                     <div class="form-group ">
                       <div class="col-xs-12">
                         <h3>Recuperar contraseña</h3>
@@ -99,12 +101,14 @@
                     </div>
                     <div class="form-group ">
                       <div class="col-xs-12">
-                        <input class="form-control" type="text" id="email_rest" name="email_rest" required="true" placeholder="Correo">
+                        <input class="form-control" type="email" id="email_rest" name="email_rest" required placeholder="Correo" 
+                        data-error="Escriba un correo valido">
+                      <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="form-group text-center m-t-20">
                       <div class="col-xs-12">
-                        <button id="forgot_pass" class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reiniciar</button>
+                        <button   type="submit" id="forgot_pass" class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light">Reiniciar</button>
                       </div>
                     </div>
                   </form>
@@ -130,114 +134,6 @@
 <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/validator.js"></script>
 <!--Style Switcher -->
 <script src="<?php echo base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
-<script type="text/javascript">
-  
-  $(document).on("click","#forgot_pass", function(e){
-    e.preventDefault();
-    forgot();
-    /*e.preventDefault();
-    var email_rest = $("#email_rest").val();
-    var url = '<?php echo base_url() ?>panel_admin/forgot_pass';
-          $.ajax({
-                    type: 'ajax',
-                    method: 'post',
-                    url: url,
-                    data: {email:email_rest},
-                    dataType: 'json',
-                    beforeSend: function() {
-                        //sweetalert_proceso();
-                        console.log("enviando....");
-                      }
-                 })
-                  .done(function(data){
-                    console.log(data);
-
-                     swal("Correo enviado", "Cheque su buzón de correo", "success");
-                     
-                  })
-                  .fail(function(){
-                     //sweetalertclickerror();
-                  }) 
-                  .always(function(){
-                    /* setTimeout(function(){
-                      redireccionar();
-                     },2000);/
-
-                  });
-                */
-
-
-      });
-
-  function forgot(){
-          var url = '<?php echo base_url() ?>panel_admin/forgot_pass';
-          var data = $('#recoverform').serialize();
-          $.ajax({
-                    type: 'ajax',
-                    method: 'post',
-                    url: url,
-                    data: data,
-                    dataType: 'json',
-                    beforeSend: function() {
-                        //sweetalert_proceso();
-                        console.log("enviando....");
-                      }
-                 })
-                  .done(function(){
-                    console.log(data);
-                    
-                     swal("Buen Trabajo!!", "Nuevo Asociado Agregado.", "success");
-                     
-                  })
-                  .fail(function(){
-                     //sweetalertclickerror();
-                  }) 
-                  .always(function(){
-                    /* setTimeout(function(){
-                      redireccionar();
-                     },2000);*/
-
-                  });
-        } 
-
-   $('#import_form').on('submit', function(event){
-    event.preventDefault();
-    $.ajax({
-      url:"<?php echo base_url(); ?>excel_import/import",
-      method:"POST",
-      data:new FormData(this),
-      contentType:false,
-      cache:false,
-      processData:false,
-       beforeSend:function(){
-                $('#import').html('Importando...<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
-            },
-      success:function(data){
-        $('#file').val('');
-        $('#tabla-mensaje').html(data);
-        if ($.fn.DataTable.isDataTable( '#dataTables-import' ) ) {
-          table = $('#dataTables-import').DataTable();
-          table.destroy();
-          console.log("estoy dentro el if");
-          load_data();
-          }
-          else {
-               console.log("estoy en el else");
-              load_data();
-              }
-
-        $("#import").removeClass("btn btn-primary");
-        $("#import").addClass("btn btn-success");
-        $('#import').html('Importación Completada  <i class="fa fa-check-circle"></i>');  
-        $("#panel_datos").removeClass("btn btn-primary");
-        $("#panel_datos").addClass("panel panel-success");
-       
-      }
-
-          })
-  });
-</script>
-
 
 </body>
 </html>
