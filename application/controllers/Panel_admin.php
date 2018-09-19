@@ -114,7 +114,7 @@ class Panel_admin extends CI_Controller
         
         $asunto = $nombre." te invita";
         $cuerpo_mensaje = "Hola te invito a que formes parte de nuestro negocio como emprendedor";
-        $url = base_url()."reg_asociado?id=".$data['id_hijo'];
+        $url = base_url()."registro_asociado?id=".$data['id_hijo'];
         $cuerpo_mensaje .= "<a href='".$url."' target='_blank'> Completar Registro</a>";
         //$this->sendMailMandril($param['email'],$asunto, $cuerpo_mensaje);
         $this->sendMailGmail($param['email'],$asunto, $cuerpo_mensaje,$id_emp);

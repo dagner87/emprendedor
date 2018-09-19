@@ -29,6 +29,7 @@ class Capacitacion extends CI_Controller
      $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
      $data['sumatoriaComp']  = $this->modelogeneral->sumatoriaCompraEmp($id_emp);
      $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
+
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
 
@@ -41,6 +42,34 @@ class Capacitacion extends CI_Controller
             }
        $this->load->view("layout/footer");  
     }
+
+
+     public function cron_fin_Mes()
+    {
+        
+     $id_emp                 = $this->session->userdata('id_emp'); 
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['result']         = $this->modelogeneral->mostrar_asoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
+     $data['sumatoriaComp']  = $this->modelogeneral->sumatoriaCompraEmp($id_emp);
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
+     $this->load->view("layout/header",$data);
+     $this->load->view("layout/side_menu",$data);
+
+     if ($data['datos_emp']->id_cap != $data['ultimo_reg']->id_cap)
+      {
+        $data['list_cap']   = $this->modelogeneral->listar_data_cap(); 
+        $this->load->view("emprendedor/capacitacion_videos",$data);
+      }else {
+             $this->load->view("layout/page_content");
+            }
+       $this->load->view("layout/footer");  
+    }
+
+
+
 
 
      public function modulos()
@@ -138,45 +167,153 @@ class Capacitacion extends CI_Controller
                 $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
                 $output .= '<tr>
                             <td>
-                            <a href="contact-detail.html"><img src="'.base_url().'assets/plugins/images/users/'.$row->foto_emp.'" alt="user" class="img-circle" /> '.$row->nombre_emp.'</a>
+                            <strong><img src="'.base_url().'assets/plugins/images/users/'.$row->foto_emp.'" alt="user" class="img-circle" /> '.$row->nombre_emp.'</strong>
                             </td>
-                            <td>'.$sumatoriaComp->total_comp.'</td>';
+                            <td> $ '.$sumatoriaComp->total_comp.'</td>';
                              $data['mes'] ++;
                              $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'  </td>';
+                             if ($S_ConsumoMensual->total_comp == 0) {
+                                $msg ="error";
+                             }else{
+                                $msg ="success";
+                             }
+
+                             $output .= '<td> <div class="col-md-12">
+                                                <div class="form-group has-'.$msg.'">
+                                                    <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
+                                                </div></td>';
                              $data['mes']++;
                              $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             if ($S_ConsumoMensual->total_comp == 0) {
+                                $msg ="error";
+                             }else{
+                                $msg ="success";
+                             }
+
+                             $output .= '<td> <div class="col-md-12">
+                                                <div class="form-group has-'.$msg.'">
+                                                    <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
+                                                </div></td>';
                              $data['mes'] ++;
                              $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             if ($S_ConsumoMensual->total_comp == 0) {
+                                $msg ="error";
+                             }else{
+                                $msg ="success";
+                             }
+
+                             $output .= '<td> <div class="col-md-12">
+                                                <div class="form-group has-'.$msg.'">
+                                                    <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
+                                                </div></td>';
                              $data['mes']++;
                              $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             if ($S_ConsumoMensual->total_comp == 0) {
+                                $msg ="error";
+                             }else{
+                                $msg ="success";
+                             }
+
+                             $output .= '<td> <div class="col-md-12">
+                                                <div class="form-group has-'.$msg.'">
+                                                    <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
+                                                </div></td>';
                              $data['mes']++;
                              $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             if ($S_ConsumoMensual->total_comp == 0) {
+                                $msg ="error";
+                             }else{
+                                $msg ="success";
+                             }
+
+                             $output .= '<td> <div class="col-md-12">
+                                                <div class="form-group has-'.$msg.'">
+                                                    <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
+                                                </div></td>';
                              $data['mes']++;
                              $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             if ($S_ConsumoMensual->total_comp == 0) {
+                                $msg ="error";
+                             }else{
+                                $msg ="success";
+                             }
+
+                             $output .= '<td> <div class="col-md-12">
+                                                <div class="form-group has-'.$msg.'">
+                                                    <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
+                                                </div></td>';
                              $data['mes']++;
                              $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             if ($S_ConsumoMensual->total_comp == 0) {
+                                $msg ="error";
+                             }else{
+                                $msg ="success";
+                             }
+
+                             $output .= '<td> <div class="col-md-12">
+                                                <div class="form-group has-'.$msg.'">
+                                                    <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
+                                                </div></td>';
                              $data['mes']++;
                              $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             if ($S_ConsumoMensual->total_comp == 0) {
+                                $msg ="error";
+                             }else{
+                                $msg ="success";
+                             }
+
+                             $output .= '<td> <div class="col-md-12">
+                                                <div class="form-group has-'.$msg.'">
+                                                    <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
+                                                </div></td>';
                              $data['mes']++;
                              $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             if ($S_ConsumoMensual->total_comp == 0) {
+                                $msg ="error";
+                             }else{
+                                $msg ="success";
+                             }
+
+                             $output .= '<td> <div class="col-md-12">
+                                                <div class="form-group has-'.$msg.'">
+                                                    <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
+                                                </div></td>';
                              $data['mes']++;
                              $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             if ($S_ConsumoMensual->total_comp == 0) {
+                                $msg ="error";
+                             }else{
+                                $msg ="success";
+                             }
+
+                             $output .= '<td> <div class="col-md-12">
+                                                <div class="form-group has-'.$msg.'">
+                                                    <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
+                                                </div></td>';
                              $data['mes']++;
                              $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             if ($S_ConsumoMensual->total_comp == 0) {
+                                $msg ="error";
+                             }else{
+                                $msg ="success";
+                             }
+
+                             $output .= '<td> <div class="col-md-12">
+                                                <div class="form-group has-'.$msg.'">
+                                                    <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
+                                                </div></td>';
                              $data['mes']++;
                              $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td></tr>';
+                             if ($S_ConsumoMensual->total_comp == 0) {
+                                $msg ="error";
+                             }else{
+                                $msg ="success";
+                             }
+
+                             $output .= '<td> <div class="col-md-12">
+                                                <div class="form-group has-'.$msg.'">
+                                                    <input  type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
+                                                </div></td></tr>';
 
                       
                 
@@ -191,12 +328,11 @@ class Capacitacion extends CI_Controller
      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
             redirect(base_url() . 'login');
         }   
-     $id_emp = $this->session->userdata('id_emp');
-     $result = $this->modelogeneral->mostrar_asoc($id_emp);
+     $id_emp                 = $this->session->userdata('id_emp');
      $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
      $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
      $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
-     $data['asociados']      = $result;
+     $data['asociados']      = $this->modelogeneral->mostrar_asoc($id_emp);
      $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
      $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
      $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);

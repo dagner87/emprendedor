@@ -120,6 +120,7 @@ class Modelogeneral extends CI_Model {
         }
    } 
   public function rowCountAsoc($id_emp){
+      $this->db->where('emp.estado','1');
       $this->db->where('e_a.id_padre', $id_emp);
       $this->db->join('emprendedor as emp ', 'e_a.id_hijo = emp.id_emp');
       $query = $this->db->get('emp_asoc as e_a');
@@ -148,7 +149,7 @@ class Modelogeneral extends CI_Model {
   
   public function mostrar_asoc($id_emp)
   {
-     // $this->db->select('id_emp,foto_emp');
+      $this->db->where('emp.estado','1');
       $this->db->where('e_a.id_padre', $id_emp);
       $this->db->join('emprendedor as emp ', 'e_a.id_hijo = emp.id_emp');
       $query = $this->db->get('emp_asoc as e_a');

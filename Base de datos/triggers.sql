@@ -14,3 +14,13 @@ DELETE FROM `emp_cap` WHERE `emp_cap`.`id_emp_cap` = 1
 
 
 DROP TABLE `capacitacion`, `carrito`, `emprendedor`, `emp_asoc`, `orden_compra`, `producto
+
+delimiter //
+
+CREATE TRIGGER update_alumnos AFTER INSERT ON Alumnos
+FOR EACH ROW BEGIN
+INSERT INTO Procesos VALUES (new.id,1,1);
+INSERT INTO Validar_residencia VALUES (new.id,0,'sin observaciones');
+END;//
+
+delimiter ;
