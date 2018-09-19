@@ -25,12 +25,14 @@
                                 <div class="col-sm-4">
                                     <br>
                                     <a href="<?php echo base_url();?>assets/uploads/img_productos/<?= $key->url_imagen;?>" data-effect="mfp-zoom-in"><img src="<?php echo base_url();?>assets/uploads/img_productos/<?= $key->url_imagen;?>" class="img-responsive" />
-                                    <br/><?=  $key->nombre_prod;?></a><br/>
-                                    &nbsp; <?= " $".$key->precio_unitario;?>
-                                    <br/>
-
+                                    
+                                    <div align="text-left"><?=  $key->nombre_prod;?></a></div>
                                      <div class="col-md-4 col-md-offset-4">
-                                     <div class="form-group item-prod">
+                                     <span style="color:#2ea3f2"><?= " $<s>".$key->precio_original;?></s></span>
+                                   
+                                     <strong><span style="color:#2ea3f2" ><?= " $".$key->precio_unitario;?></span></strong>
+                                    <br/>
+                                     <div class="form-group item-prod has-error" for="state-danger">
                                             <input class="" type="text" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline" value="" id="cantidad<?=  $key->id_producto;?>"> </div>
                                    <div class="pull-left">
                                     <button value="<?=  $key->id_producto;?>" class="btn btn-outline btn-info btn-sm btn-car"><i class="ti-shopping-cart"></i> Añadir al Carrito</button>
@@ -49,10 +51,50 @@
                     </div>
                     <!-- .col -->
                 </div>
-                <!-- .row -->
-                <!-- /.row -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
+<script type="text/javascript">
+
+$(document).on("click",".btn-car",function(){
+        car = $(this).val();
+        cantidad = $('#cantidad'+car).val();
+        console.log(car+"*"+cantidad);
+        if(cantidad ==''){
+          $.toast({
+                      heading: 'Alerta',
+                      text: 'Debe seleccionar una cantidad minima',
+                      position: 'top-center',
+                      loaderBg: '#ff6849',
+                      icon: 'warning',
+                      hideAfter: 3500,
+                      stack: 8
+                  });
+
+
+       }else{
+                $.ajax({
+                      type: 'ajax',
+                      method: 'post',
+                      url: '<?php echo base_url() ?>capacitacion/add_toCar',
+                      data: {id_producto:car,cantidad:cantidad},
+                      async: false,
+                      dataType: 'json',
+                    success: function(data){
+                      console.log(data);
+                        $.toast({
+                                  heading: 'Producto Agregado',
+                                  text: 'Se agregó corectamente el producto al  carrito.',
+                                  position: 'top-right',
+                                  loaderBg: '#ff6849',
+                                  icon: 'success',
+                                  hideAfter: 3500,
+                                  stack: 6
+                              });
+                    },
+                    error: function(){
+                         alert('No hay pudo agregar al carrito');
+                      }
+                });
+            }
+
  
+});
+</script>

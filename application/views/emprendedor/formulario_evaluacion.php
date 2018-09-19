@@ -1,120 +1,144 @@
- <form id="test-form" class="mfp-hide white-popup-block">
-        <!-- progressbar -->
-        <ul id="eliteregister">
-        <li class="active">Account Setup</li>
-        <li>Social Profiles</li>
-        <li>Personal Details</li>
-        </ul>
-        <!-- fieldsets -->
-        <fieldset>
-        <h2 class="fs-title">Create your account</h2>
-        <h3 class="fs-subtitle">This is step 1</h3>
-        <input type="text" name="email" placeholder="Email" />
-        <input type="password" name="pass" placeholder="Password" />
-        <input type="password" name="cpass" placeholder="Confirm Password" />
-        <input type="button" name="next" class="next action-button" value="Next" />
-        </fieldset>
-        <fieldset>
-        <h2 class="fs-title">Social Profiles</h2>
-        <h3 class="fs-subtitle">Your presence on the social network</h3>
-        <input type="text" name="twitter" placeholder="Twitter" />
-        <input type="text" name="facebook" placeholder="Facebook" />
-        <input type="text" name="gplus" placeholder="Google Plus" />
-        <input type="button" name="previous" class="previous action-button" value="Previous" />
-        <input type="button" name="next" class="next action-button" value="Next" />
-        </fieldset>
-        <fieldset>
-        <h2 class="fs-title">Personal Details</h2>
-        <h3 class="fs-subtitle">We will never sell it</h3>
-        <input type="text" name="fname" placeholder="First Name" />
-        <input type="text" name="lname" placeholder="Last Name" />
-        <input type="text" name="phone" placeholder="Phone" />
-        <textarea name="address" placeholder="Address"></textarea>
-        <input type="button" name="previous" class="previous action-button" value="Previous" />
-        <input type="submit" name="submit" class="submit action-button" value="Submit" />
-        </fieldset>
- </form>
-
-
-  <div class="col-sm-6">
-                        <div class="white-box">
-                            <h3 class="box-title m-b-0">Form Validation</h3>
-                            <p class="text-muted m-b-30"> Bootstrap Form Validation11</p>
-                            <form data-toggle="validator">
-                                <div class="form-group">
-                                    <label for="inputName" class="control-label">Name</label>
-                                    <input type="text" class="form-control" id="inputName" placeholder="Cina Saffary" required> </div>
-                                <div class="form-group">
-                                    <label for="inputEmail2" class="control-label">Email</label>
-                                    <input type="email" class="form-control" id="inputEmail2" placeholder="Email" data-error="Bruh, that email address is invalid" required>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword2" class="control-label">Password</label>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <input type="password" data-toggle="validator" data-minlength="6" class="form-control" id="inputPassword2" placeholder="Password" required> <span class="help-block">Minimum of 6 characters</span> </div>
-                                        <div class="form-group col-sm-6">
-                                            <input type="password" class="form-control" id="inputPasswordConfirm2" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
-                                            <div class="help-block with-errors"></div>
+<form action=""  id="evaluacion_form">
+                                        <input type="text" name="id_cap" id="id_cap" value="<?= $id_cap  ?>">
+                                        <div class="form-body">
+                                            <h3 class="box-title">cuestionario</h3>
+                                            <hr>
+                                            <!--/row-->
+                                            <?php   
+                                            if (!empty($preguntas)):
+                                                     foreach ($preguntas as $key): 
+                                                       
+                                             ?>  
+                                            <div class="row">
+                                                <!--/span-->
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label"><?= $key->pregunta ?></label>
+                                                        <div class="radio-list">
+                                                            <label class="radio-inline p-0">
+                                                                <div class="checkbox checkbox-info checkbox-circle">
+                                                                    <input id="blanco" type="checkbox">
+                                                                    <label for="blanco"> Blanco </label>
+                                                                </div>
+                                                            </label>
+                                                            <label class="radio-inline p-0">
+                                                                <div class="checkbox checkbox-info checkbox-circle">
+                                                                    <input id="plata" type="checkbox">
+                                                                    <label for="plata"> Plata </label>
+                                                                </div>
+                                                            </label>
+                                                            <label class="radio-inline p-0">
+                                                                <div class="checkbox checkbox-info checkbox-circle">
+                                                                    <input id="champagne" type="checkbox">
+                                                                    <label for="champagne"> Champagne </label>
+                                                                </div>
+                                                            </label>
+                                                            <label class="radio-inline p-0">
+                                                                <div class="checkbox checkbox-info checkbox-circle">
+                                                                    <input id="negro" type="checkbox">
+                                                                    <label for="negro"> Negro </label>
+                                                                </div>
+                                                            </label>
+                                                            <label class="radio-inline p-0">
+                                                                <div class="checkbox checkbox-info checkbox-circle">
+                                                                    <input id="azul" type="checkbox">
+                                                                    <label for="azul"> Azul </label>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <hr>
+                                              <?php endforeach; ?> 
+                                            <?php endif ?>    
+                                            <!--/row->
+                                             <div class="row">
+                                                <--/span->
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">El cambio de respuesto se debe hacer cada:</label>
+                                                        <div class="radio-list">
+                                                            <label class="radio-inline p-0">
+                                                                <div class="radio radio-info">
+                                                                    <input type="radio" name="radio" id="radio1" value="option1">
+                                                                    <label for="radio1">3 Meses</label>
+                                                                </div>
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <div class="radio radio-info">
+                                                                    <input type="radio" name="radio" id="radio2" value="option2">
+                                                                    <label for="radio2">6 Meses </label>
+                                                                </div>
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <div class="radio radio-info">
+                                                                    <input type="radio" name="radio" id="radio2" value="option2">
+                                                                    <label for="radio2">1 Año</label>
+                                                                </div>
+                                                            </label>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <--/span->
+                                            </div>
+                                            <hr-->
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="terms2" data-error="Before you wreck yourself" required>
-                                        <label for="terms"> Remember Me?</label>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div> 
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Evaluar</button>
+                                            <button type="button" class="btn btn-default btn_reset">Cancelar</button>
+                                        </div>
+                                    </form>
+
+ <script type="text/javascript">
+     $(document).ready(function($) {
+
+        $('#evaluacion_form').submit(function(e) {
+        e.preventDefault();
+        var data = $('#evaluacion_form').serialize();
+        var  evaluacion = 10 ;
+        //alert(data);
+        enviar_evaluacion(evaluacion); 
+      });
+
+      $('.btn_reset').click(function(e){
+            $('#evaluacion_form')[0].reset();
+        });
+     
+        
+    }); 
 
 
-   <script>
+     function enviar_evaluacion(evaluacion){
+          var url = '<?php echo base_url() ?>capacitacion/update_evalcap';
+          //var data = $('#evaluacion_form').serialize();
+          var id_cap = $('#id_cap').val();
+          $.ajax({
+                    type: 'ajax',
+                    method: 'post',
+                    url: url,
+                    data: {id_cap:id_cap,evaluacion:evaluacion},
+                    dataType: 'json',
+                    beforeSend: function() {
+                        //sweetalert_proceso();
+                        console.log("enviando....");
+                      }
+                 })
+                  .done(function(data){
+                    console.log(data);
+                    swal("Buen Trabajo!!", "Su evaluación es de "+evaluacion+" puntos" , "success");
+                     setTimeout('document.location.reload()',2000);
+                  })
+                  .fail(function(){
+                     //sweetalertclickerror();
+                  }) 
+                  .always(function(){
+                    /* setTimeout(function(){
+                      redireccionar();
+                     },2000);*/
 
-$(document).ready(function(){
-           jQuery.validator.setDefaults({
-      debug: true,
-      success: "valid"
-    });
-
-    jQuery.extend(jQuery.validator.messages, {
-      required: "<strong style='color: red'>*Este campo es obligatorio.</strong>",
-      remote: "Por favor, rellena este campo.",
-      email: "Por favor, escribe una dirección de correo válida",
-      url: "Por favor, escribe una URL válida.",
-      date: "Por favor, escribe una fecha válida.",
-      dateISO: "Por favor, escribe una fecha (ISO) válida.",
-      number: "<strong style='color: red'>*Por favor, escribe un número entero válido.</strong>",
-      digits: "Por favor, escribe sólo dígitos.",
-      creditcard: "Por favor, escribe un número de tarjeta válido.",
-      equalTo: "Por favor, escribe el mismo valor de nuevo.",
-      accept: "Por favor, escribe un valor con una extensión aceptada.",
-      maxlength: jQuery.validator.format("<strong style='color: red'>*Por favor, no escribas más de {0} caracteres.</strong>"),
-      minlength: jQuery.validator.format("<strong style='color: red'>*Por favor, no escribas menos de {0} caracteres.</strong>"),
-      rangelength: jQuery.validator.format("Por favor, escribe un valor entre {0} y {1} caracteres."),
-      range: jQuery.validator.format("Por favor, escribe un valor entre {0} y {1}."),
-      max: jQuery.validator.format("Por favor, escribe un valor menor o igual a {0}."),
-      min: jQuery.validator.format("Por favor, escribe un valor mayor o igual a {0}.")
-    });
-    
-   $( "#test-form" ).validate({
-    rules: {
-      email:{
-        required: true,
-        number: true,
-        minlength: 1
-      },
-      horas_fact_cap_aux:{
-         number: true,
-        minlength: 1
-      }
-    }
-  });
-
-});                              
+                  });
+        }         
+</script>                                 

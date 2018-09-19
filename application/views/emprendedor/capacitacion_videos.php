@@ -11,7 +11,7 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- .row -->
-
+ 
 <div class="row">
     <div class="col-md-12">
         <div class="alert alert-warning"> DEBE COMPLETAR LOS VIDEOS DE CAPACITACION PARA TENER ACCESO A LAS DEMAS PESTAÑAS DEL MENU. </div>
@@ -42,14 +42,14 @@
                                         <div class="col-sm-9" id="slimtest1">
                                             
                                             <?php if($key->id_cap == $videoact):  ?> 
-                                                 <p><a class="popup-with-form btn btn-success" href="#test-form">Formulario de Evaluación #<?= $cont ?></a></p>
+                                                 <p><a class="popup-with-form btn btn-success btn-view-formEval" href="#test-form" data="<?= $key->id_cap ?>">Formulario de Evaluación #<?= $cont ?></a></p>
                                               <?php endif ?> 
                                             <div class="panel-group wiz-aco" id="accordion" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingOne">
                                     <h4 class="panel-title">
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Description del Video <?= $cont ?> 
+                        Descripcion del Video <?= $cont ?> 
                       </a>
                     </h4> </div>
                                 <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
@@ -81,93 +81,8 @@
                     <div class="col-md-12">
                         <div class="panel panel-info">
                                 <div class="panel-wrapper collapse in" aria-expanded="true">
-                                <div class="panel-body">
-                                    <form action=""  id="evaluacion_form">
-                                        <input type="hidden" name="id_cap" id="id_cap" value="<?= $datos_emp->id_cap  ?>">
-                                        <div class="form-body">
-                                            <h3 class="box-title">cuestionario</h3>
-                                            <hr>
-                                            <!--/row-->
-                                            <div class="row">
-                                                <!--/span-->
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Seleccione las gamas de colores de purificadores dvigi:</label>
-                                                        <div class="radio-list">
-                                                            <label class="radio-inline p-0">
-                                                                <div class="checkbox checkbox-info checkbox-circle">
-                                                                    <input id="blanco" type="checkbox">
-                                                                    <label for="blanco"> Blanco </label>
-                                                                </div>
-                                                            </label>
-                                                            <label class="radio-inline p-0">
-                                                                <div class="checkbox checkbox-info checkbox-circle">
-                                                                    <input id="plata" type="checkbox">
-                                                                    <label for="plata"> Plata </label>
-                                                                </div>
-                                                            </label>
-                                                            <label class="radio-inline p-0">
-                                                                <div class="checkbox checkbox-info checkbox-circle">
-                                                                    <input id="champagne" type="checkbox">
-                                                                    <label for="champagne"> Champagne </label>
-                                                                </div>
-                                                            </label>
-                                                            <label class="radio-inline p-0">
-                                                                <div class="checkbox checkbox-info checkbox-circle">
-                                                                    <input id="negro" type="checkbox">
-                                                                    <label for="negro"> Negro </label>
-                                                                </div>
-                                                            </label>
-                                                            <label class="radio-inline p-0">
-                                                                <div class="checkbox checkbox-info checkbox-circle">
-                                                                    <input id="azul" type="checkbox">
-                                                                    <label for="azul"> Azul </label>
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--/span-->
-                                            </div>
-                                            <hr>
-                                            <!--/row-->
-                                             <div class="row">
-                                                <!--/span-->
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label class="control-label">El cambio de respuesto se debe hacer cada:</label>
-                                                        <div class="radio-list">
-                                                            <label class="radio-inline p-0">
-                                                                <div class="radio radio-info">
-                                                                    <input type="radio" name="radio" id="radio1" value="option1">
-                                                                    <label for="radio1">3 Meses</label>
-                                                                </div>
-                                                            </label>
-                                                            <label class="radio-inline">
-                                                                <div class="radio radio-info">
-                                                                    <input type="radio" name="radio" id="radio2" value="option2">
-                                                                    <label for="radio2">6 Meses </label>
-                                                                </div>
-                                                            </label>
-                                                            <label class="radio-inline">
-                                                                <div class="radio radio-info">
-                                                                    <input type="radio" name="radio" id="radio2" value="option2">
-                                                                    <label for="radio2">1 Año</label>
-                                                                </div>
-                                                            </label>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--/span-->
-                                            </div>
-                                            <hr>
-                                        </div>
-                                        <div class="form-actions">
-                                            <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Evaluar</button>
-                                            <button type="button" class="btn btn-default btn_reset">Cancelar</button>
-                                        </div>
-                                    </form>
+                                <div class="panel-body" id="form_eval">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -177,51 +92,25 @@
             </div>
 
 <script type="text/javascript">
-     $(document).ready(function($) {
+   
+     var base_url= "<?php echo base_url();?>";
 
-        $('#evaluacion_form').submit(function(e) {
-        e.preventDefault();
-        var  evaluacion = 10 ;
-        enviar_evaluacion(evaluacion); 
-        
-        
-      });
-     
-      $('.btn_reset').click(function(e){
-            $('#evaluacion_form')[0].reset();
+     $(document).on("click",".btn-view-formEval",function(){
+        //valor_id = $(this).val();
+        var valor_id = $(this).attr('data');
+        //alert(valor_id);
+        $.ajax({
+            url: base_url + "capacitacion/view_formEval",
+            type:"POST",
+            dataType:"html",
+            data:{id:valor_id},
+            success:function(data){
+                $("#form_eval").html(data);
+            }
         });
-      });
+    }); 
 
-     function enviar_evaluacion(evaluacion){
-          var url = '<?php echo base_url() ?>capacitacion/update_evalcap';
-          //var data = $('#evaluacion_form').serialize();
-          var id_cap = $('#id_cap').val();
-          $.ajax({
-                    type: 'ajax',
-                    method: 'post',
-                    url: url,
-                    data: {id_cap:id_cap,evaluacion:evaluacion},
-                    dataType: 'json',
-                    beforeSend: function() {
-                        //sweetalert_proceso();
-                        console.log("enviando....");
-                      }
-                 })
-                  .done(function(data){
-                    console.log(data);
-                    swal("Buen Trabajo!!", "Su evaluación es de"+evaluacion+"puntos" , "success")
-                    // setTimeout('document.location.reload()',2000);
-                  })
-                  .fail(function(){
-                     //sweetalertclickerror();
-                  }) 
-                  .always(function(){
-                    /* setTimeout(function(){
-                      redireccionar();
-                     },2000);*/
-
-                  });
-        }        
+      
 </script>            
 
            

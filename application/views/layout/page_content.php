@@ -45,7 +45,7 @@
                                 <li>
                                     <div id="sparklinedash3"></div>
                                 </li>
-                                <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info">911</span></li>
+                                <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info"><?= $sumatoriaComp->total_comp  ?></span></li>
                             </ul>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                                    <h1 class="text-right text-info m-t-20">$3,690</h1>
                                 </div>
                             </div> <div class="table-responsive">
-                                <table id="example23" class="display nowrap table m-t-30 table-hover contact-list" data-page-size="10"" cellspacing="0" width="100%">
+                                <table id="example23" class="table color-table info-table m-t-30 table-hover contact-list" data-page-size="10"" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
                                             <th>Asociado</th>
@@ -134,12 +134,24 @@
             {
              //$('#reporte_asoc').html(data);
               $('#example23 tbody').html(data);
-             $('#example23').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy','excel', 'pdf', 'print'
-                ]
-            });
+              var table = $('#example23').DataTable({
+                 responsive: true,
+                 language: {
+                              "lengthMenu": "Mostrar _MENU_ registros por pagina",
+                              "zeroRecords": "No se encontraron resultados en su busqueda",
+                              "searchPlaceholder": "Buscar registros",
+                              "info": "Mostrando  _START_ al _END_ de un total de  _TOTAL_ registros",
+                              "infoEmpty": "No existen registros",
+                              "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                              "search": "Buscar:",
+                              "paginate": {
+                                            "first": "Primero",
+                                            "last": "Último",
+                                            "next": "Siguiente",
+                                            "previous": "Anterior"
+                                          },
+                    }
+               });
              
              
             }

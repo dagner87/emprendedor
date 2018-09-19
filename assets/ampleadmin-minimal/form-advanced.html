@@ -769,13 +769,16 @@
                                     <form class="p-r-20">
                                         <div class="form-group">
                                             <label class="control-label">Vertical Touchspin</label>
-                                            <input class="vertical-spin" type="text" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline" value="" name="vertical-spin"> </div>
+                                            <input class="vertical-spin" type="text" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline" value="" name="vertical-spin">
+
+                                             </div>
                                         <div class="form-group">
                                             <label class="control-label">Postfix</label>
                                             <input id="tch1" type="text" value="55" name="tch1" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline"> </div>
                                         <div class="form-group m-b-0">
                                             <label class="control-label">Prefix</label>
-                                            <input id="tch2" type="text" value="0" name="tch2" class=" form-control" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline"> </div>
+                                            <input id="tch2" type="text" value="0" name="tch2" class=" form-control" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline">
+                                        </div>
                                     </form>
                                 </div>
                                 <div class="col-md-6">
@@ -785,6 +788,7 @@
                                             <input id="tch3" type="text" value="" name="tch3" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline"> </div>
                                         <div class="form-group">
                                             <label class="control-label">Value set 30 </label>
+
                                             <input id="tch3_22" type="text" value="30" name="tch3_22" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline"> </div>
                                         <div class="form-group m-b-0">
                                             <label class="control-label">Button group</label>
@@ -1380,11 +1384,11 @@
                 postfix: '%'
             });
             $("input[name='tch2']").TouchSpin({
-                min: -1000000000,
-                max: 1000000000,
+                min: 1,
+                max: 350,
                 stepinterval: 50,
-                maxboostedstep: 10000000,
-                prefix: '$'
+                maxboostedstep: 350,
+                //prefix: '$'
             });
             $("input[name='tch3']").TouchSpin();
             $("input[name='tch3_22']").TouchSpin({

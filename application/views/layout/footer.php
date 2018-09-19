@@ -166,35 +166,7 @@
         });
       });
 
-      $(document).on("click",".btn-car",function(){
-        car = $(this).val();
-        cantidad = $('#cantidad'+car).val();
-        console.log(car+"*"+cantidad);
-       $.ajax({
-              type: 'ajax',
-              method: 'post',
-              url: '<?php echo base_url() ?>capacitacion/add_toCar',
-              data: {id_producto:car,cantidad:cantidad},
-              async: false,
-              dataType: 'json',
-            success: function(data){
-              console.log(data);
-                $.toast({
-                          heading: 'Producto Agregado',
-                          text: 'Se agregó corectamente el producto al  carrito.',
-                          position: 'top-right',
-                          loaderBg: '#ff6849',
-                          icon: 'success',
-                          hideAfter: 3500,
-                          stack: 6
-                      });
-            },
-            error: function(){
-                 alert('No hay pudo agregar al carrito');
-              }
-        });
- 
-    });
+     
 
     $(document).ready(function($) {
        //Bootstrap-TouchSpin

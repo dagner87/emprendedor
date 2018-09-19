@@ -14,20 +14,21 @@ class Capacitacion extends CI_Controller
         $this->load->library('grocery_CRUD');
         $this->load->library('session');
         $this->load->library('form_validation');
-       
+    
     }
      public function index()
     {
       if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
             redirect(base_url() . 'login');
         }   
-     $id_emp             = $this->session->userdata('id_emp'); 
-     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
-     $data['result']     = $this->modelogeneral->mostrar_asoc($id_emp);
-     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
-     $data['ultimo_reg'] = $this->modelogeneral->las_insetCap(); 
-    
-    
+     $id_emp                 = $this->session->userdata('id_emp'); 
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['result']         = $this->modelogeneral->mostrar_asoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
+     $data['sumatoriaComp']  = $this->modelogeneral->sumatoriaCompraEmp($id_emp);
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
 
@@ -41,24 +42,58 @@ class Capacitacion extends CI_Controller
        $this->load->view("layout/footer");  
     }
 
+
+     public function modulos()
+    {
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        } 
+
+     $id_emp = $this->session->userdata('id_emp');
+     $result = $this->modelogeneral->mostrar_asoc($id_emp);
+     $data['asociados']      = $result;
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp); 
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
+    
+     $this->load->view("layout/header",$data);
+     $this->load->view("layout/side_menu",$data);
+     $this->load->view("emprendedor/capacitacion_videos",$data);
+     $this->load->view("layout/footer");  
+    }
+
+    public function view_formEval(){
+
+        $id_cap = $this->input->post("id");
+        $data = array(
+            "id_cap"  =>$id_cap,
+            "preguntas" => $this->modelogeneral->listar_preguntas_cap($id_cap),
+            
+        );
+        $this->load->view("emprendedor/formulario_evaluacion",$data);
+    }
+
+
    /* Insertar Evaluacion*/
     public function update_evalcap()
     {
         $param['id_emp']           = $this->session->userdata('id_emp');
-        $param['evaluacion_video'] = $this->input->post('evaluacion');
         $param['id_cap']           = $this->input->post('id_cap');
+        $param['evaluacion_video'] = $this->input->post('evaluacion');
         
         $result   = $this->modelogeneral->udpate_evalcap($param);
         $msg['comprobador'] = false;
-        $msg['qry'] = $this->db->last_query();
+        $id_cap = $param['id_cap']+ 1;
         if($result)
              {
-               $msg['comprobador'] = TRUE;
+               $msg['comprobador']  = TRUE;
                $datos_upd['id_emp'] = $this->session->userdata('id_emp');
-               $datos_upd['id_cap'] = 2 ;
+               $datos_upd['id_cap'] = $id_cap;
                $msg['updatemp'] = $this->modelogeneral->udpate_emp($datos_upd);
              }
-        echo json_encode($msg);
+        echo json_encode($param);
     }  
 
      
@@ -91,28 +126,59 @@ class Capacitacion extends CI_Controller
         $output = '';
         if(!empty($result))
         {
+            
+            $mes= 0;
             foreach($result as $row)
             {
-                $count++;
+                
+                $sumatoriaComp  = $this->modelogeneral->sumatoriaCompraEmp($row->id_emp);
+                $data['mes']    = 0;
+                $data['year']   = date('Y');
+                $data['id_emp'] = $row->id_emp;
+                $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
                 $output .= '<tr>
                             <td>
-                            <a href="contact-detail.html"><img src="'.base_url().'assets/plugins/images/users/genu.jpg" alt="user" class="img-circle" /> '.$row->nombre_emp.'</a>
+                            <a href="contact-detail.html"><img src="'.base_url().'assets/plugins/images/users/'.$row->foto_emp.'" alt="user" class="img-circle" /> '.$row->nombre_emp.'</a>
                             </td>
-                            <td>'.$row->nombre_emp.'</td>
-                            <td>'.$row->nombre_emp.'</td>
-                            <td><span class="label label-danger">'.$row->nombre_emp.'</span></td>
-                            <td>'.$row->nombre_emp.'</td>
-                            <td>'.$row->nombre_emp.'</td>
-                            <td>'.$row->nombre_emp.'</td>
-                            <td>'.$row->nombre_emp.'</td>
-                            <td>'.$row->nombre_emp.'</td>
-                            <td>'.$row->nombre_emp.'</td>
-                            <td>'.$row->nombre_emp.'</td>
-                            <td>'.$row->nombre_emp.'</td>
-                            <td>'.$row->nombre_emp.'</td>
-                            <td>'.$row->nombre_emp.'</td>
-                            
-                        </tr>';
+                            <td>'.$sumatoriaComp->total_comp.'</td>';
+                             $data['mes'] ++;
+                             $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'  </td>';
+                             $data['mes']++;
+                             $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             $data['mes'] ++;
+                             $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             $data['mes']++;
+                             $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             $data['mes']++;
+                             $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             $data['mes']++;
+                             $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             $data['mes']++;
+                             $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             $data['mes']++;
+                             $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             $data['mes']++;
+                             $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             $data['mes']++;
+                             $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             $data['mes']++;
+                             $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td>';
+                             $data['mes']++;
+                             $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                             $output .= '<td>'.$S_ConsumoMensual->total_comp.'</td></tr>';
+
+                      
                 
             }
         }
@@ -127,11 +193,14 @@ class Capacitacion extends CI_Controller
         }   
      $id_emp = $this->session->userdata('id_emp');
      $result = $this->modelogeneral->mostrar_asoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
+     $data['asociados']      = $result;
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
     
-     $data = array('asociados' => $result, 
-                   'cant_asoc' => $this->modelogeneral->rowCountAsoc($id_emp),
-                   'datos_emp' => $this->modelogeneral->datos_emp($id_emp),
-                   );
     $this->load->view("layout/header",$data);
     $this->load->view("layout/side_menu",$data);
     $this->load->view("emprendedor/red",$data);
@@ -144,10 +213,13 @@ class Capacitacion extends CI_Controller
       if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
             redirect(base_url() . 'login');
         }   
-     $id_emp = $this->session->userdata('id_emp');
-     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
-     $data['result']  = $this->modelogeneral->mostrar_carrito($id_emp);
-     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+     $id_emp                 = $this->session->userdata('id_emp');
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['result']         = $this->modelogeneral->mostrar_carrito($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion"); 
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);         
     
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
@@ -156,24 +228,278 @@ class Capacitacion extends CI_Controller
 
     }
 
-    public function modulos()
+    public function comprar($id_compra)
     {
       if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
             redirect(base_url() . 'login');
-        } 
+        }   
+     $id_emp                 = $this->session->userdata('id_emp');
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['result']         = $this->modelogeneral->mostrar_carrito($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion"); 
 
-     $id_emp = $this->session->userdata('id_emp');
-     $result = $this->modelogeneral->mostrar_asoc($id_emp);
-     $data['asociados']  = $result;
-     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
-     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp); 
-     $data['list_cap']   = $this->modelogeneral->listar_data_cap(); 
+
+     $data['detalle']   = $this->modelogeneral->getDetalleCompra($id_compra);
+     $data['compra']    = $this->modelogeneral->getdatosCompra($id_compra);
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);    
 
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
-     $this->load->view("emprendedor/capacitacion_videos",$data);
+     $this->load->view("emprendedor/compra_completada",$data);
      $this->load->view("layout/footer");  
+
     }
+
+
+
+   public function validar_carrito(){
+
+    if ($this->input->post()) 
+        {
+        
+         $this->form_validation->set_rules('cantidades','...', 'callback_verficar_cantidad');
+         $this->form_validation->set_rules('sub_total', '...', 'callback_verficar_monto');
+         
+          if($this->form_validation->run() === TRUE) 
+            {
+
+                 $id_emp                 = $this->session->userdata('id_emp');
+                 $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+                 $data['result']         = $this->modelogeneral->mostrar_carrito($id_emp);
+                 $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
+                 $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+                 $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion"); 
+
+
+                 $idproductos            = $this->input->post("idproductos");
+                 $cantidades             = $this->input->post("cantidades");
+                 $precio_comp            = $this->input->post("precios");
+                 $importes               = $this->input->post("importes");
+                 $micartera              = $this->input->post("micartera");
+                 $datos_upd['comision_acumulada'] = $micartera - $data['datos_emp']->comision_acumulada;
+                 $datos_upd['id_emp']   = $id_emp;
+
+                 $this->modelogeneral->udpate_emp($datos_upd);
+                
+                 $param['total_comp']    = $this->input->post("total");
+                 $param['fecha_comp']    = date('Y-m-d H:i:s');
+                 $param['id_emp']        = $this->session->userdata('id_emp');
+                 $year                   = date('Y');
+                 $param['no_compra']     = $this->modelogeneral->N_orden_compra($year);
+
+
+
+                  if ($this->modelogeneral->save_compra($param)) {
+                        $id_compra = $this->modelogeneral->lastID();
+                        $this->save_detalleCompra($idproductos,$id_compra,$precio_comp,$cantidades,$importes);
+                        $this->modelogeneral->limpiar_carrito($id_emp);
+                        $this->modelogeneral->update_orden_compra($year);
+                    }
+
+                 /*$data['detalle']   = $this->modelogeneral->getDetalleCompra($id_compra);
+                 $data['compra']    = $this->modelogeneral->getdatosCompra($id_compra);     
+                 $this->load->view("layout/header",$data);
+                 $this->load->view("layout/side_menu",$data);
+                 $this->load->view("emprendedor/compra_completada",$data);
+                 $this->load->view("layout/footer"); */
+                 $this->comprar($id_compra); 
+
+            }else{
+                    $this->carrito();
+                 
+                 }
+        }                   
+  
+  } 
+
+
+   function verficar_monto() {
+    if ($_POST['sub_total'] >= 1000){
+        return true;
+       }else{
+        $this->form_validation->set_message('verficar_monto', 'Por Favor debe comprar un monto mayor a 10000');
+        return false;
+        }
+    }
+
+ public function verficar_cantidad($str)
+        {
+                if ($_POST['cantidades'] == 0)
+                {
+                        $this->form_validation->set_message('verficar_cantidad', 'Por Favor debe colocar una cantidad  mayor a 0');
+                        return FALSE;
+                }
+                else
+                {
+                        return TRUE;
+                }
+        }     
+     
+
+protected function save_detalleCompra($productos,$id_compra,$precio_comp,$cantidades,$importes){ 
+        for ($i=0; $i < count($productos); $i++) { 
+           
+                $data  = array(
+                    'id_producto'   => $productos[$i], 
+                    'id_compra'     => $id_compra,
+                    'precio_comp'   => $precio_comp[$i],
+                    'cantidad_comp' => $cantidades[$i], 
+                    'importe'       => $importes[$i]
+                );  
+            //$this->updateAlmacen_clientesResta($dato_alcli);        
+            $this->modelogeneral->save_detalleCompra($data);
+        
+        }
+}  
+
+public function mis_compras()
+    {
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        }   
+     $id_emp                 = $this->session->userdata('id_emp');
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['result']         = $this->modelogeneral->mostrar_carrito($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion"); 
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
+        
+     $this->load->view("layout/header",$data);
+     $this->load->view("layout/side_menu",$data);
+     $this->load->view("emprendedor/mis_compras",$data);
+     $this->load->view("layout/footer"); 
+    } 
+
+ function load_misCompras()
+    {
+       $id_emp  = $this->session->userdata('id_emp');
+        $result = $this->modelogeneral->lista_compra($id_emp);
+        
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+             $output .= '<tr>
+                         
+                         <td><span class="">'.$row->fecha.'</span></td>
+                         <td><span class="">'.$row->no_compra.'</span></td>
+                         <td><span class="">'.$row->total_comp.'</span></td>
+                         <td><button type="button" class="btn btn-info view-detalle-compra" data-toggle="modal" data-target="#detalleModal" data="'.$row->id_compra.'" class="btn-outline btn-circle btn-lg m-r-5"><i class="ti-eye"></i></button>
+                        </tr>';
+            }
+        }
+    
+        echo $output;
+    }
+
+function load_detalleCarrito()
+    {
+       $id_emp  = $this->session->userdata('id_emp');
+        $result = $this->modelogeneral->mostrar_detallecarrito($id_emp);
+        $cantidad_prod = $this->modelogeneral->count_cantProdCar($id_emp);
+        
+
+        
+        $output = '';
+        if(!empty($result))
+        {
+          $output = '<div class="drop-title">'.$cantidad_prod.' Productos</div>';
+          foreach($result as $row)
+            {
+             $output .= '<li>
+                            <div class="message-center">
+                                <a>
+                                    <div class="user-img"> <img src="'.base_url().'assets/uploads/img_productos/'.$row->url_imagen.'" alt="producto" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                    <div class="mail-contnet">
+                                        <h5>'.$row->nombre_prod.'</h5> <span class="mail-desc">'.$row->precio_car.' X $'.$row->cantidad.'</span> </div>
+                                </a>
+                            </div>
+                        </li>';
+                            
+            }
+
+            $output .= '<li>
+                          <a class="text-center" href="'.base_url().'capacitacion/carrito"> <strong>Ver Cesta </strong> <i class="fa fa-angle-right"></i> </a>
+                            </li>';
+        }
+    
+        echo $output;
+    }    
+
+
+
+    /*
+
+  <li>
+                               
+    */ 
+
+ public function mi_cartera()
+    {
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        }   
+     $id_emp                 = $this->session->userdata('id_emp');
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['result']         = $this->modelogeneral->mostrar_carrito($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp); 
+        
+     $this->load->view("layout/header",$data);
+     $this->load->view("layout/side_menu",$data);
+     $this->load->view("emprendedor/mi_cartera",$data);
+     $this->load->view("layout/footer"); 
+    }
+
+ function load_miCartera()
+    {
+       $id_emp  = $this->session->userdata('id_emp');
+        $result = $this->modelogeneral->lista_miCartera($id_emp);
+        
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+             $output .= '<tr>
+                         
+                         <td><span class="">'.$row->fecha.'</span></td>
+                         <td><span class="">'.$row->no_compra.'</span></td>
+                         <td><span class="">'.$row->gasto_cartera.'</span></td>
+                         <td><span class="">'.$row->saldo.'</span></td>
+                        </tr>';
+            }
+        }
+    
+        echo $output;
+    }  
+   
+
+
+     public function view_detalleCompra(){
+
+        $id = $this->input->post("id");
+        $data = array(
+            "result" => $this->modelogeneral->getDetalleCompra($id),
+            "total" => $this->modelogeneral->get_sumatoriaCompra($id)
+            
+            
+        );
+        //var_dump($data['total']);
+        $this->load->view("emprendedor/detalle_compra",$data);
+    }
+
+
+
+
+
+  
 
      public function Myperfil()
     {
@@ -181,8 +507,11 @@ class Capacitacion extends CI_Controller
             redirect(base_url() . 'login');
         }   
      $id_emp = $this->session->userdata('id_emp');
-     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
-     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
 
     
     $this->load->view("layout/header",$data);
@@ -200,8 +529,9 @@ class Capacitacion extends CI_Controller
      $id_emp = $this->session->userdata('id_emp');
      $result = $this->modelogeneral->mostrar_asoc($id_emp);
      $data = array('asociados' => $result);
-     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
-     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);          
      
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
@@ -219,8 +549,12 @@ class Capacitacion extends CI_Controller
      $id_emp = $this->session->userdata('id_emp');
      $result = $this->modelogeneral->mostrar_producto();
      $data   = array('productos' => $result);
-     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
-     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
+              
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
      $this->load->view("emprendedor/tienda",$data);
@@ -260,7 +594,7 @@ class Capacitacion extends CI_Controller
         $param['id_car']    = $this->input->get('id_car');
         $param['cantidad']  = $this->input->get('cantidad');
         $param['importe']   = $this->input->get('importe');
-        $result = $this->modelogeneral->update_prodCar($param);
+        $result             = $this->modelogeneral->update_prodCar($param);
         $msg['comprobador'] = false;
         if($result)
              {

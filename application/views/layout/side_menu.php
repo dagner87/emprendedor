@@ -14,7 +14,7 @@
                 </div>
 
 
-  <?php if ($datos_emp->id_cap  == 8): ?>
+  <?php if ($datos_emp->id_cap  == $ultimo_reg->id_cap): ?>
  <button id="view_car" class="botonF1 tooltip-demo" title=" Ver Carrito">
   <span><i class="ti-shopping-cart"></i></span>
 </button>
@@ -25,13 +25,15 @@
                  <!--MENU -->
                 <ul class="nav" id="side-menu">
                   <li> <a href="<?php echo base_url();?>" class="waves-effect"><i class="mdi mdi-home-variant fa-fw"></i> <span class="hide-menu">MENU</span></a></li>
-                    <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-rename-box fa-fw"></i> <span class="hide-menu">Capacitación<span class="fa arrow"></span> <span class="label label-rouded label-info pull-right">7</span> </span></a>
+                    <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-rename-box fa-fw"></i> <span class="hide-menu">Capacitación<span class="fa arrow"></span> <span class="label label-rouded label-info pull-right"><?= $cantidadVideos ?></span> </span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="<?php echo base_url();?>capacitacion/modulos"><i class="fa fa-file-video-o fa-fw"></i> <span class="hide-menu">Videos</span></a></li>
                           <!--li><a href="<?php echo base_url();?>capacitacion/calendario"><i class="fa fa-calendar fa-fw"></i> <span class="hide-menu">Calendario</span></a></li-->
                         </ul>
                     </li>
-                    <?php if ($datos_emp->id_cap  == 8): ?>
+                    
+                     
+                    <?php if ($datos_emp->id_cap  == $ultimo_reg->id_cap): ?>
                        
                     
                     <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-store fa-fw"></i> <span class="hide-menu">Tienda<span class="fa arrow"></span></span></a>
@@ -51,8 +53,8 @@
 
                      <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-wallet fa-fw"></i> <span class="hide-menu">Mi cuenta Corriente<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="carousel.html"><i class="fa fa-tasks fa-fw"></i><span class="hide-menu">Ver Historial</span></a></li>
-                         
+                            <li><a href="<?php echo base_url();?>capacitacion/mis_compras"><i class="fa fa-tasks fa-fw"></i><span class="hide-menu">Ver Historial</span></a></li>
+                            <li><a href="<?php echo base_url();?>capacitacion/mi_cartera"><i class="mdi mdi-cash-multiple fa-fw"></i><span class="hide-menu">Mi Cartera</span></a></li>
                         </ul>
                     </li>
                      <?php endif; ?> 

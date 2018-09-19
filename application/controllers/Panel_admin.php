@@ -192,6 +192,7 @@ class Panel_admin extends CI_Controller
                          <td><span class="font-medium">'.$row->nombre_prod.'</span></td>
                          <td><span class="text-muted">'.$row->stock.'</span></td>
                          <td><span class="text-muted">'.$row->precio_unitario.'</span></td>
+                         <td><span class="text-muted">'.$row->precio_original.'</span></td>
                          <td><span class="text-muted"> <button type="button" data="'.$row->id_producto.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span></td>
                         </tr>';
             }
@@ -205,6 +206,7 @@ class Panel_admin extends CI_Controller
        
         $param['nombre_prod']     = $this->input->post('nombre_prod');
         $param['stock']           = $this->input->post('stock');
+        $param['precio_original'] = $this->input->post('precio_original');
         $param['precio_unitario'] = $this->input->post('precio_unitario');
         $param['url_imagen']      = $this->input->post('nombre_archivo');
         
@@ -295,6 +297,47 @@ class Panel_admin extends CI_Controller
              }
         echo json_encode($msg);
     }
+
+/*-------------TABLA DE COMSIONES-------------*/
+
+/*LISTAR RANGO DE COMISIONES*/
+function load_dataRango()
+    {
+        $result = $this->modelogeneral->listar_rango();
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+             $output .= '<tr>
+                         <td><span class="font-medium">'.$row->rango_inicial.'</span></td>
+                         <td><span class="font-medium">'.$row->rango_final.'</span></td>
+                        <td><span class="font-medium">'.$row->valor_comision.'</span></td>
+                        <td><span class="font-medium"> <button type="button" data="'.$row->id_tbl_comisiones.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span></td>
+                        </tr>';
+            }
+        }
+    
+        echo $output;
+    }
+
+  /* Insertar*/
+    public function insert_comision()
+    {
+       
+        $param['rango_inicial']  = $this->input->post('rango_inicial');
+        $param['rango_final']    = $this->input->post('rango_final');
+        $param['valor_comision'] = $this->input->post('valor_comision');
+        $result                  = $this->modelogeneral->insert_comisiones($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
  /*-----------------------------*/  
     public function forgot_pass()
     {
@@ -346,6 +389,39 @@ class Panel_admin extends CI_Controller
         //var_dump($this->email->print_debugger());
         //print_r('entro');die();
     }
+
+    public function sendMailGmail()
+    {   
+      //cargamos la libreria email de ci
+      $this->load->library("email");
+
+      $cuerpo_mensaje ="PRUEBA";
+      $email_destino ="dalenag87@gmail.com";
+   
+      //configuracion para gmail
+      $configGmail = array(
+        'protocol' => 'smtp',
+        'smtp_host' => 'ssl://smtp.gmail.com',
+        'smtp_port' => 465,
+        'smtp_user' => 'consultas@dvigi.com.ar',
+        'smtp_pass' => 'Amorpleno2018',
+        'mailtype' => 'html',
+        'charset' => 'utf-8',
+        'newline' => "\r\n"
+      );    
+   
+      //cargamos la configuración para enviar con gmail
+      $this->email->initialize($configGmail);
+   
+      $this->email->from('consultas@dvigi.com.ar <consultas@dvigi.com.ar>', 'Notificaciones Dvigi');
+      $this->email->to("$email_destino");
+      $this->email->subject('Información de despacho');
+      $this->email->message('<h2>Email enviado desde el Sistema DVIGI ,</h2><hr></br>'.  $cuerpo_mensaje);
+      $this->email->send();
+      //con esto podemos ver el resultado
+      //var_dump($this->email->print_debugger());
+    }
+
     public function admin_prod()
     {
     if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
@@ -370,6 +446,40 @@ class Panel_admin extends CI_Controller
     $this->load->view("admin_general/admin_videos");
     $this->load->view("layout/footer");  
     }
+
+     public function rango_comisiones()
+    {
+    if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
+            redirect(base_url() . 'login');
+        }
+    $id_emp = $this->session->userdata('id_emp');
+    $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+    $this->load->view("layout/header",$data);
+    $this->load->view("admin_general/side_menuAdmin");
+    $this->load->view("admin_general/rango_comisiones");
+    $this->load->view("layout/footer");  
+    } 
+
+
+/*-----------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function datos_usuarioT()
     {
      $id_usuario = $_GET['id_usuario'];

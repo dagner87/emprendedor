@@ -30,6 +30,13 @@
                          
                         </ul>
                     </li>
+
+                    <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-settings fa-fw"></i> <span class="hide-menu">Configuración<span class="fa arrow"></span></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="<?php echo base_url();?>panel_admin/rango_comisiones"><i class="fa fa-sliders fa-fw"></i><span class="hide-menu">Adm. Rango Comisiones</span></a></li>
+                         
+                        </ul>
+                    </li>
                   
                     <li class="devider"></li>
                     <li><a href="<?php echo base_url();?>salir" class="waves-effect"><i class="mdi mdi-logout fa-fw"></i> <span class="hide-menu">Salir</span></a></li>

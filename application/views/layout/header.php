@@ -127,6 +127,9 @@
             } 
 
 
+     
+
+
 </style>
 
     
@@ -155,7 +158,7 @@
             <div class="navbar-header">
                 <div class="top-left-part">
                     <!-- Logo -->
-                    <a class="logo" href="#">
+                    <a class="logo" href="<?php echo base_url();?>">
                         <!-- Logo icon image, you can use font-icon also --><b>
                         <!--This is dark logo icon-->
                         <img src="<?php echo base_url();?>assets/plugins/images/admin-logo-dark.png" alt="home" class="light-logo">
@@ -171,11 +174,27 @@
                 <!-- Search input and Toggle icon -->
                 <ul class="nav navbar-top-links navbar-left">
                     <li><a href="javascript:void(0)" class="open-close waves-effect waves-light"><i class="ti-menu"></i></a></li>
+                    <?php if ($this->session->userdata('perfil')!="administrador"):?>
+                    <?php if ($cantidad_prod > 0): ?>
+                      <li class="dropdown">
+                        <a class="dropdown-toggle waves-effect waves-light detalle_carrito" data-toggle="dropdown"> <i class="  ti-shopping-cart"> </i>
+                            <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                        </a>
+                        <ul class="dropdown-menu mailbox animated bounceInDown" id="cesta">
+                          
+                        </ul>
+                        <!-- /.dropdown-messages -->
+                    </li>
+                      
+                    <?php endif ?>
+                    <?php endif ?>
+                     
+                   
                    
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
-                    <li class="dropdown">
 
+                    <li class="dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="<?php echo base_url();?>assets/plugins/images/users/<?= $datos_emp->foto_emp; ?>" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><?= $this->session->userdata('email');?></b><span class="caret"></span> </a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
                             <li>
@@ -223,12 +242,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="add_emp" action="<?php echo base_url() ?>panel_admin/insert_emp" method="post">
-                                        <!--div class="form-group">
-                                            <label for="exampleInputuname">Nombre Completo</label>
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="ti-user"></i></div>
-                                                <input type="text" class="form-control" name="nombre_emp" id="nombre_emp" placeholder=" Escriba Nombre Completo"> </div>
-                                        </div-->
+                                        
                                         
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Correo</label>
@@ -236,12 +250,6 @@
                                                 <div class="input-group-addon"><i class="ti-email"></i></div>
                                                 <input type="email" class="form-control"  name="email" id="email" placeholder=" Escriba Email"> </div>
                                         </div>
-                                        <!--div class="form-group">
-                                            <label for="exampleInputphone">Teléfono</label>
-                                            <div class="input-group">
-                                                <div class="input-group-addon"><i class="ti-mobile"></i></div>
-                                                <input type="tel" class="form-control" name="telefono_emp" id="telefono_emp" placeholder="Escriba telefono"> </div>
-                                        </div-->
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -255,4 +263,17 @@
                             </div>
                             <!-- /.modal -->
                 <!--/.row -->
-       
+  <script type="text/javascript">
+
+    $(document).on("click",".detalle_carrito", function(){
+       $.ajax({
+            url:"<?php echo base_url(); ?>capacitacion/load_detalleCarrito",
+            method:"get",
+            success:function(data)
+            {
+             $('#cesta').html(data);
+            }
+        })
+    });
+    
+  </script>     

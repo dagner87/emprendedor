@@ -36,6 +36,8 @@ class Modelogeneral extends CI_Model {
      
   }
 
+  
+
   /* insetar evaluacion **/
    public function udpate_evalcap($param)
   {
@@ -45,10 +47,13 @@ class Modelogeneral extends CI_Model {
    if($this->db->affected_rows() > 0){
       return true;
        }else{
-         return false;
+            $this->db->insert('emp_cap',$param);
+             return true;
         }
      
   }
+
+  
 
   /* insetar evaluacion **/
    public function udpate_emp($datos_upd)
@@ -61,6 +66,31 @@ class Modelogeneral extends CI_Model {
          return false;
         }
   }
+
+  /*----------tabla de comsiones--------*/
+
+  /*listar*/
+   public function listar_rango()
+  {
+     $query = $this->db->get('tbl_comisiones');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+    /* insertar videos */
+   public function insert_comisiones($data)
+  {
+      $this->db->insert('tbl_comisiones',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        }else{
+          return false;
+        }
+     
+  }
+  /*------------------------------------*/
 
 
    public function las_insetCap()
@@ -99,6 +129,11 @@ class Modelogeneral extends CI_Model {
         return false;
       }
   }
+
+  public function rowCount($tabla){
+    $resultados = $this->db->get($tabla);
+    return $resultados->num_rows();
+  }
   public function comprobar_email($email,$password){
        $data = array('password' => md5($password));
       $this->db->where('email', $email);
@@ -113,6 +148,7 @@ class Modelogeneral extends CI_Model {
   
   public function mostrar_asoc($id_emp)
   {
+     // $this->db->select('id_emp,foto_emp');
       $this->db->where('e_a.id_padre', $id_emp);
       $this->db->join('emprendedor as emp ', 'e_a.id_hijo = emp.id_emp');
       $query = $this->db->get('emp_asoc as e_a');
@@ -124,7 +160,7 @@ class Modelogeneral extends CI_Model {
   }
   public function mostrar_carrito($id_emp)
   {
-      $this->db->select('id_car,no_orden,url_imagen,nombre_prod,precio_car,cantidad,importe');
+      $this->db->select('id_car,car.id_producto,no_orden,url_imagen,nombre_prod,precio_car,cantidad,importe');
       $this->db->where('car.id_emp',$id_emp);
       $this->db->join('producto as prod','prod.id_producto = car.id_producto');
       $query = $this->db->get('carrito as car');
@@ -134,6 +170,131 @@ class Modelogeneral extends CI_Model {
         return false;
       }
   }
+
+  public function mostrar_detallecarrito($id_emp)
+  {
+      $this->db->select('url_imagen,nombre_prod,precio_car,cantidad');
+      $this->db->where('car.id_emp',$id_emp);
+      $this->db->join('producto as prod','prod.id_producto = car.id_producto');
+      $query = $this->db->get('carrito as car');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+    public function count_cantProdCar($id_emp)
+  {
+    $this->db->from('carrito');
+    $this->db->where('id_emp',$id_emp);
+    return $this->db->count_all_results();
+  }
+ 
+ /*----------INSERTAR COMPRA ------------------*/
+ public function save_compra($data){
+    return $this->db->insert("compra",$data);
+  }
+
+  public function lastID(){
+    return $this->db->insert_id();
+  }
+
+  public function save_detalleCompra($data){
+    $this->db->insert("detalle_compra",$data);
+  }
+
+  public function getDetalleCompra($id_compra){
+    $this->db->select("prod.nombre_prod,cantidad_comp,precio_comp,importe");
+    $this->db->from("detalle_compra d_c");
+    $this->db->where("d_c.id_compra",$id_compra);
+    $this->db->join("producto as prod","prod.id_producto = d_c.id_producto");
+    $resultados = $this->db->get();
+    if ($resultados->num_rows() > 0) {
+      return $resultados->result();
+    }else 
+    {
+      return false;
+    }
+  }
+
+     public function lista_compra($id_emp)
+  {
+     $this->db->select("DATE_FORMAT(fecha_comp,'%d/%m/%Y') as fecha,no_compra,total_comp,id_compra");
+     $this->db->where("id_emp",$id_emp);
+     $query = $this->db->get('compra');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  } 
+
+  /*----------mi cartera------------*/
+  public function lista_miCartera($id_emp)
+  {
+     $this->db->select("DATE_FORMAT(fecha,'%d/%m/%Y'),no_compra,gasto_cartera,saldo");
+     $this->db->where("id_emp",$id_emp);
+     $query = $this->db->get('cartera_comisiones');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+    public function getdatosCompra($id_compra)
+  {
+    $this->db->where('id_compra',$id_compra);
+    $query = $this->db->get('compra');
+  return  $query-> row();
+  } 
+
+
+   public function get_sumatoriaCompra($id_compra)
+  {
+    $this->db->where('id_compra',$id_compra);
+    $this->db->select_sum('importe');
+    $query = $this->db->get('detalle_compra');
+  return  $query-> row();
+  }
+
+   public function sumatoriaCompraEmp($id_emp)
+  {
+    $this->db->where('id_emp',$id_emp);
+    $this->db->select_sum('total_comp');
+    $query = $this->db->get('compra');
+  return  $query-> row();
+  }
+
+   public function sumatoriaCompraEmpMensual($data)//$id_emp,$mes,$año
+  {
+    $this->db->where('id_emp',$data['id_emp']);
+    $this->db->select_sum('total_comp');
+    $this->db->where("MONTH(fecha_comp)",$data['mes']);
+    $this->db->where("YEAR(fecha_comp)",$data['year']);
+    $query = $this->db->get('compra');
+    if($query->num_rows() > 0){
+        return $query-> row();
+      }else{
+        return 0;
+      }
+
+  }
+
+  
+
+  /*limpiar carrito*/
+
+ public function limpiar_carrito($id_emp)
+    {
+     $this->db->where('id_emp',$id_emp);
+     $this->db->delete('carrito');
+     
+  }
+
+/*--------------compra----------------*/  
+  
+
    public function mostrar_producto()
   {
      $query = $this->db->get('producto');
@@ -171,6 +332,19 @@ class Modelogeneral extends CI_Model {
         return false;
       }
   }
+  /*lista de preguntas por id_cap */
+   public function listar_preguntas_cap($id_cap)
+  {
+     $this->db->where('id_cap',$id_cap);
+     $query = $this->db->get('evaluacion');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+
   public function Total_emp($tabla){
     $resultados = $this->db->get($tabla);
     return $resultados->num_rows();
@@ -218,13 +392,16 @@ class Modelogeneral extends CI_Model {
     
    $this->db->where('year',$year);
    $query = $this->db->get('orden_compra');
-   
-   return $query-> row();
+   $row = $query-> row();
+   return $row->no_orden;
   
    } 
       /*-----actualiza consecutivo de la orden -----------*/
    public function update_orden_compra($year) {
-   $data = array('no_orden' => $no_orden+1);
+   $orden = $this->N_orden_compra($year);
+   $i=3;
+   $n_orden = str_pad($orden, $i, 0, STR_PAD_LEFT);
+   $data = array('no_orden' => $n_orden+1);
    $this->db->where('year',$year);
    $this->db->update('orden_compra',$data);
   
@@ -288,7 +465,33 @@ class Modelogeneral extends CI_Model {
          return false;
         }
   }
-  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /*-----Devuelve los datos de una tienda especifica-----------*/
    public function datos_tienda($id_tienda) {
     
@@ -402,13 +605,7 @@ class Modelogeneral extends CI_Model {
    $dato_prod = array('id_producto' => $id_producto,'store_id' => $tienda->store_id);
    $this->db->insert('eliminacion_prio',$dato_prod); 
   }
-   public function rowCount($seleccionado,$cargado,$aprobado){
-    $this->db->where('seleccionado',$seleccionado);
-    $this->db->where('cargado',$cargado);
-    $this->db->where('aprobado',$aprobado);
-    $resultados = $this->db->get('productos_tienda');
-    return $resultados->num_rows();
-  }
+  
 /*-------insertar consulta de soporte tecnico------------*/
      public function insertar_consulta($data)
   {
