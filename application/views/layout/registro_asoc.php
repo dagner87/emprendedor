@@ -54,7 +54,7 @@
                 <?php
                 }
                 ?>
-                  <form  data-toggle="validator" class="form-horizontal new-lg-form" id="loginform" method="post" action="<?php echo base_url();?>login/registro_asociado">
+                  <form  data-toggle="validator" class="form-horizontal new-lg-form" id="loginform" method="post" action="<?php echo base_url();?>login/update_registro">
                      <?=form_hidden('token',$token)?>
                      <?=form_hidden('id_emp',$id_emp)?>
                      

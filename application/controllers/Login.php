@@ -121,7 +121,7 @@ class Login extends CI_Controller
              $param['fecha_insc']   = date('Y-m-d');
              $param['password']     = md5($this->input->post('confir_password'));
 		     $param['estado']      = 1;
-		     $result = $this->modelogeneral->udpate_emp($data);
+		     $result = $this->modelogeneral->udpate_emp($param);
              $msg['comprobador'] = false;
              if($result)
              { 
