@@ -100,6 +100,39 @@ class Login extends CI_Controller
 		$this->load->view('layout/registro',$data);
 	}
 
+	public function reg_asociado(){
+		$data['token']     = $this->token();
+        $data['id_emp']    = $_GET['id'];
+		$data['datos_emp'] = $this->modelogeneral->datos_emp($data['id_emp']);	
+
+		$this->load->view('layout/registro_asoc',$data);
+	}
+
+
+	public function update_registro(){
+
+		if($this->input->post('token') == $this->session->userdata('token'))
+		{
+			 $param['id_emp']        = $this->input->post('id_emp');
+			 $param['nombre_emp']   = $this->input->post('nombre_emp');
+			 $param['foto_emp']     = 'no_img.jpg';
+			 $param['dni_emp']      = $this->input->post('dni_emp');
+			 $param['telefono_emp'] = $this->input->post('telefono_emp');
+             $param['fecha_insc']   = date('Y-m-d');
+             $param['password']     = md5($this->input->post('confir_password'));
+		     $param['estado']      = 1;
+		     $result = $this->modelogeneral->udpate_emp($data);
+             $msg['comprobador'] = false;
+             if($result)
+             { 
+              
+              $this->ingreso($param);
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+         }
+	}
+
 	public function n_registro(){
 
 		if($this->input->post('token') == $this->session->userdata('token'))
@@ -143,11 +176,12 @@ class Login extends CI_Controller
          $id_emp = $this->session->userdata('id_emp'); 
 	     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
 	     $data['result']     = $this->modelogeneral->mostrar_asoc($id_emp);
-	     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+	     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
+	     $data['ultimo_reg'] = $this->modelogeneral->las_insetCap();           
 
 	     $this->load->view("layout/header",$data);
 	     $this->load->view("layout/side_menu",$data);
-	     if ($data['datos_emp']->id_cap != 8)
+	     if ($data['datos_emp']->id_cap !=  $data['ultimo_reg']->id_cap)
 	      {
 	        $this->load->view("emprendedor/capacitacion_videos",$data);
 	      }else {

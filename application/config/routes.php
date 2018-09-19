@@ -9,6 +9,11 @@ $route['logusuario'] = "login/new_user";
 $route['salir'] = "login/salir";
 //-------usuarios--------------------------
 $route['registro'] = "login/registro";
+
+$route['registro_asociado'] = "login/reg_asociado";
+
+
+
 //-------Perfiles--------------------------
 $route['MyperfilAdmin'] = "panel_admin/MyperfilAdmin";
 $route['my_perfil'] = "capacitacion/Myperfil";

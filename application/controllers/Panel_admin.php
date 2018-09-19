@@ -101,25 +101,23 @@ class Panel_admin extends CI_Controller
              }
         echo json_encode($msg);
     }
+   
     public function insert_emp()
     {
-        $id_emprendedor        = $this->session->userdata('id_emp');
-       // $param['nombre_emp']   = $this->input->post('nombre_emp');
+        $id_emp                = $this->session->userdata('id_emp');
         $param['foto_emp']     = 'no_img.jpg';
         $param['email']        = $this->input->post('email');
-       // $param['telefono_emp'] = $this->input->post('telefono_emp');
         $param['fecha_insc']   = date('Y-m-d');
-        
         $data['id_hijo']       = $this->modelogeneral->insert_emp($param);
         $data['id_padre']      = $this->session->userdata('id_emp');
-        $nombre       = $this->session->userdata('nombre');
+        $nombre                = $this->session->userdata('nombre');
         
         $asunto = $nombre." te invita";
         $cuerpo_mensaje = "Hola te invito a que formes parte de nuestro negocio como emprendedor";
-        $url = base_url()."registro?id=".$data['id_hijo'];
+        $url = base_url()."reg_asociado?id=".$data['id_hijo'];
         $cuerpo_mensaje .= "<a href='".$url."' target='_blank'> Completar Registro</a>";
         //$this->sendMailMandril($param['email'],$asunto, $cuerpo_mensaje);
-        $this->sendMailGmail($param['email'],$asunto, $cuerpo_mensaje);
+        $this->sendMailGmail($param['email'],$asunto, $cuerpo_mensaje,$id_emp);
        
         $result = $this->modelogeneral->insert_emp_asoc($data);
         $msg['comprobador'] = false;
