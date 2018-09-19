@@ -118,7 +118,9 @@ class Panel_admin extends CI_Controller
         $cuerpo_mensaje = "Hola te invito a que formes parte de nuestro negocio como emprendedor";
         $url = base_url()."registro?id=".$data['id_hijo'];
         $cuerpo_mensaje .= "<a href='".$url."' target='_blank'> Completar Registro</a>";
-        $this->sendMailMandril($param['email'],$asunto, $cuerpo_mensaje);
+        //$this->sendMailMandril($param['email'],$asunto, $cuerpo_mensaje);
+        $this->sendMailGmail($param['email'],$asunto, $cuerpo_mensaje);
+       
         $result = $this->modelogeneral->insert_emp_asoc($data);
         $msg['comprobador'] = false;
         if($result)
@@ -390,13 +392,13 @@ function load_dataRango()
         //print_r('entro');die();
     }
 
-    public function sendMailGmail()
+    public function sendMailGmail($email_destino,$asunto, $cuerpo_mensaje)
     {   
       //cargamos la libreria email de ci
       $this->load->library("email");
 
-      $cuerpo_mensaje ="PRUEBA";
-      $email_destino ="dalenag87@gmail.com";
+      //$cuerpo_mensaje ="PRUEBA";
+     // $email_destino ="dalenag87@gmail.com";
    
       //configuracion para gmail
       $configGmail = array(
