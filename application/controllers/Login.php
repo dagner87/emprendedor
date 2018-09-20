@@ -152,7 +152,9 @@ class Login extends CI_Controller
 				
 		 $this->session->set_userdata($data);	
          $id_emp = $this->session->userdata('id_emp'); 
-	     $this->index();    
+	     $this->index();
+	  }   
+
     }
 
 
