@@ -139,7 +139,7 @@ class Login extends CI_Controller
 
 	public function ingreso($param)
     {
-     $check_user = $this->Login_model->login_user($param['email']->mail ,$param['password']);
+     $check_user = $this->Login_model->login_user($param['email']->email ,$param['password']);
 	  if($check_user == TRUE)
 	   {
 	    $data = array(
