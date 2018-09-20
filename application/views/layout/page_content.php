@@ -27,20 +27,10 @@
                             </ul>
                         </div>
                     </div>
+                    
                     <div class="col-lg-3 col-sm-6 col-xs-12">
                         <div class="white-box analytics-info">
-                            <h3 class="box-title">COMISION ACUMULADA</h3>
-                            <ul class="list-inline two-part">
-                                <li>
-                                    <div id="sparklinedash2"></div>
-                                </li>
-                                <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple">869</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-xs-12">
-                        <div class="white-box analytics-info">
-                            <h3 class="box-title">COMPRAS</h3>
+                            <h3 class="box-title"> MIS COMPRAS</h3>
                             <ul class="list-inline two-part">
                                 <li>
                                     <div id="sparklinedash3"></div>
@@ -49,14 +39,26 @@
                             </ul>
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-sm-6 col-xs-12">
                         <div class="white-box analytics-info">
-                            <h3 class="box-title">COMISION  ACTUAL</h3>
+                            <h3 class="box-title">MI % COMISION  ACTUAL</h3>
                             <ul class="list-inline two-part">
                                 <li>
                                     <div id="sparklinedash4"></div>
                                 </li>
                                 <li class="text-right"><i class="ti-arrow-down text-danger"></i> <span class="text-danger">1%</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-xs-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title"> MI COMISION ACUMULADA</h3>
+                            <ul class="list-inline two-part">
+                                <li>
+                                    <div id="sparklinedash2"></div>
+                                </li>
+                                <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple">869</span></li>
                             </ul>
                         </div>
                     </div>
