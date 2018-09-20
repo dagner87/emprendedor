@@ -262,6 +262,7 @@ class Modelogeneral extends CI_Model {
    public function sumatoriaCompraEmp($id_emp)
   {
     $this->db->where('id_emp',$id_emp);
+   // $this->db->where("YEAR(fecha_comp)",$data['year']);
     $this->db->select_sum('total_comp');
     $query = $this->db->get('compra');
   return  $query-> row();
@@ -281,6 +282,61 @@ class Modelogeneral extends CI_Model {
       }
 
   }
+
+
+ public function cantidadVentas($data){    
+    $total_plata = 0;
+    $porcientos = [];
+
+    $this->db->select("id_hijo, sum(comp.total_comp) as total");
+    $this->db->where("e_a.id_padre",$data['id_emp']);
+    $this->db->where("MONTH(comp.fecha_comp)",$data['mes']);
+    $this->db->where("YEAR(comp.fecha_comp)",$data['year']);
+    $this->db->join("compra as comp","e_a.id_hijo = comp.id_emp");
+    $this->db->group_by("e_a.id_hijo");
+    $query = $this->db->get('emp_asoc as e_a');
+
+    $cantidad_ventas = $query->num_rows();    
+    foreach ($query->result() as $row)
+      {
+        $total_plata += $row->total;              
+      }
+    $porcientos = $this->obtener_porciento($cantidad_ventas);
+    $comision = $this->calcular_porciento($porcientos['porciento'], $total_plata);
+
+    $datos = array('cantidad_ventas' => $cantidad_ventas, 'total_plata' => $total_plata,'porciento' => $porcientos['porciento'], 'categoria' => $porcientos['categoria'], 'comision' => $comision);
+
+    return $datos;
+    
+
+  }
+
+   public function obtener_porciento($cantidad)
+    {
+      $porciento = 0;
+      $categoria = '';
+      $this->db->select("valor_comision,categoria");
+      $this->db->where('rango_inicial <=',$cantidad);
+      $this->db->where('rango_final >=',$cantidad);
+      $query = $this->db->get('tbl_comisiones');
+      foreach ($query->result() as $row)
+        {
+          $porciento = $row->valor_comision;
+          $categoria = $row->categoria;              
+        }
+      $datos = array('porciento' => $porciento, 'categoria' => $categoria);  
+      return  $datos;
+    }
+
+    public function calcular_porciento($porc, $plata)
+    {
+      $total = ($porc * $plata)/100;  
+      return  $total;
+    }
+
+
+
+
 
   
 

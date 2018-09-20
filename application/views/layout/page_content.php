@@ -67,20 +67,20 @@
                   <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                           <div class="col-md-3 col-sm-4 col-xs-6 pull-right">
+                           <!--div class="col-md-3 col-sm-4 col-xs-6 pull-right">
                                 <select class="form-control pull-right row b-none">
                                     <option> 2017</option>
                                     <option> 2018</option>
                                 </select>
-                            </div>
+                            </div-->
                             <h3 class="box-title">Reporte de asociados</h3>
                             <div class="row sales-report">
                                 <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <h2><?= date("F j, Y");?></h2>
+                                    <h2></h2>
                                     <p></p>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-6 ">
-                                   <h1 class="text-right text-info m-t-20">$3,690</h1>
+                                   <h1 class="text-right text-info m-t-20">Total de Comisión: <strong> $<?= $total_comision ?></strong></h1>
                                 </div>
                             </div> <div class="table-responsive">
                                 <table id="example23" class="table color-table info-table m-t-30 table-hover contact-list" data-page-size="10"" cellspacing="0" width="100%">
@@ -88,18 +88,18 @@
                                         <tr>
                                             <th>Asociado</th>
                                             <th>Compras</th>
-                                            <th>Enero</th>
-                                            <th>Febrero</th>
-                                            <th>Marzo</th>
-                                            <th>Abril</th>
-                                            <th>Mayo</th>
-                                            <th>Junio</th>
-                                            <th>Julio</th>
-                                            <th>Agosto</th>
-                                            <th>Septiembre</th>
-                                            <th>Octubre</th>
-                                            <th>Noviembre</th>
-                                            <th>Diciembre</th>
+                                            <th class="text-center">Enero</th>
+                                            <th class="text-center">Febrero</th>
+                                            <th class="text-center">Marzo</th>
+                                            <th class="text-center">Abril</th>
+                                            <th class="text-center">Mayo</th>
+                                            <th class="text-center">Junio</th>
+                                            <th class="text-center">Julio</th>
+                                            <th class="text-center">Agosto</th>
+                                            <th class="text-center">Septiembre</th>
+                                            <th class="text-center">Octubre</th>
+                                            <th class="text-center">Noviembre</th>
+                                            <th class="text-center">Diciembre</th>
                                         </tr>
                                     </thead>
                               
@@ -108,7 +108,7 @@
                         <?php 
                             $count = 0;
                             $output = '';
-                            $acumulado = [];
+                            
                             if(!empty($result))
                             {
 
@@ -132,6 +132,7 @@
                                         $msg ="error";
                                      }else{
                                         $msg ="success";
+
                                      }
 
                                      $output .= '<td> <div class="col-md-12">
@@ -139,13 +140,15 @@
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
                                     //*ENERO*/
+
                                      $data['mes']++;
-                                     $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                                     $acumulado['enero'] = $S_ConsumoMensual->total_comp;
+                                     $S_ConsumoMensual          = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                                     $cantidad_venta['enero']    = $this->modelogeneral->cantidadVentas($data);
                                      if ($S_ConsumoMensual->total_comp == 0) {
                                         $msg ="error";
                                      }else{
                                         $msg ="success";
+                                    
                                      }
 
                                      $output .= '<td> <div class="col-md-12">
@@ -164,8 +167,10 @@
                                                         <div class="form-group has-'.$msg.'">
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
+                                    /*febrero*/                    
                                      $data['mes']++;
                                      $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
+                                    
                                      if ($S_ConsumoMensual->total_comp == 0) {
                                         $msg ="error";
                                      }else{
@@ -200,6 +205,7 @@
                                                         <div class="form-group has-'.$msg.'">
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
+                                    
                                      $data['mes']++;
                                      $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
                                      if ($S_ConsumoMensual->total_comp == 0) {
@@ -272,10 +278,10 @@
                                                         <div class="form-group has-'.$msg.'">
                                                             <input  type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td></tr>';
-
-                              
-                           // $Acumulado = $S_ConsumoMensual->total_comp;                            
+   
+                                                   
                             }
+                            
 
                             }
                             echo $output;
@@ -286,36 +292,15 @@
            <tfoot >
         <tr>
             <th>Comisión</th>
-            <th>%</th>
-
-            <th>%</th>
-            <th>0%</th>
-            <th>0%</th>
-            <th>0%</th>
-            <th>0%</th>
-            <th>0%</th>
-            <th>0%</th>
-            <th>0%</th>
-            <th>0%</th>
-            <th>0%</th>
-            <th>0%</th>
-            <th>0%</th>
-        </tr>
+            <th>-</th>
+          
+            <?= $foot  ?>
+            
         <tr>
             <th>Total</th>
-            <th>$<?= $Acumulado['enero'] ?></th>
-            <th>$</th>
-            <th>$</th>
-            <th>$</th>
-            <th>$</th>
-            <th>$</th>
-            <th>$</th>
-            <th>$</th>
-            <th>$</th>
-            <th>$</th>
-            <th>$</th>
-            <th>$</th>
-            <th>$</th>
+            <th>$ <?= $total_comision ?></th>
+             <?= $foot_comisiones  ?>
+            
         </tr>
        
     </tfoot>

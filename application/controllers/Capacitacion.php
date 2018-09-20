@@ -30,6 +30,8 @@ class Capacitacion extends CI_Controller
      $data['sumatoriaComp']  = $this->modelogeneral->sumatoriaCompraEmp($id_emp);
      $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
 
+     
+
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
 
@@ -38,10 +40,31 @@ class Capacitacion extends CI_Controller
         $data['list_cap']   = $this->modelogeneral->listar_data_cap(); 
         $this->load->view("emprendedor/capacitacion_videos",$data);
       }else {
-             $this->load->view("layout/page_content");
+            
+           $data['foot']="";
+           $data['foot_comisiones'] ="";
+           $i=1;
+           $total_comision = 0;
+            while ($i <= 12):
+                 $dato['year'] = date('Y');
+                 $dato['mes']= $i;  
+                 $dato['id_emp'] = $id_emp;
+                 $valores_comisiones = $this->modelogeneral->cantidadVentas($dato); 
+                 $data['foot'] .=  '<th class="text-center">'.$valores_comisiones['porciento'].'%</th>';
+                 $data['foot_comisiones'] .=  '<th class="text-center">$ '.$valores_comisiones['comision'].'</th>';                
+                $i++;
+                $total_comision += $valores_comisiones['comision'];
+            endwhile;
+
+             $data['total_comision']= $total_comision;            
+             $this->load->view("layout/page_content",$data);
             }
        $this->load->view("layout/footer");  
     }
+
+
+
+
 
 
      public function cron_fin_Mes()
