@@ -103,7 +103,7 @@ class Login extends CI_Controller
 	public function reg_asociado(){
 		$data['token']     = $this->token();
         $data['id_emp']    = $_GET['id'];
-		$data['datos_emp'] = $this->modelogeneral->datos_emp($data['id_emp']);	
+			
 
 		$this->load->view('layout/registro_asoc',$data);
 	}
@@ -112,8 +112,9 @@ class Login extends CI_Controller
 	public function update_registro(){
 
 		if($this->input->post('token') == $this->session->userdata('token'))
+
 		{
-			 $param['id_emp']        = $this->input->post('id_emp');
+			 $param['id_emp']       = $this->input->post('id_emp');
 			 $param['nombre_emp']   = $this->input->post('nombre_emp');
 			 $param['foto_emp']     = 'no_img.jpg';
 			 $param['dni_emp']      = $this->input->post('dni_emp');
@@ -121,17 +122,52 @@ class Login extends CI_Controller
              $param['fecha_insc']   = date('Y-m-d');
              $param['password']     = md5($this->input->post('confir_password'));
 		     $param['estado']      = 1;
+
+
 		     $result = $this->modelogeneral->udpate_emp($param);
              $msg['comprobador'] = false;
              if($result)
              { 
-              
-              $this->ingreso($param);
+               $param['email'] = $this->modelogeneral->datos_emp($param['id_emp']);
+               $this->ingreso($param);
                $msg['comprobador'] = TRUE;
              }
         echo json_encode($msg);
          }
 	}
+
+
+	public function ingreso($param)
+    {
+     $check_user = $this->Login_model->login_user($param['email']->mail ,$param['password']);
+	  if($check_user == TRUE)
+	   {
+	    $data = array(
+						'is_logued_in' 	      =>  TRUE,
+	                    'perfil'		      =>  $check_user->perfil,
+		                'email' 		      =>  $check_user->email,
+		                'id_emp' 	          =>  $check_user->id_emp,
+		                'nombre' 	          =>  $check_user->nombre_emp,
+		                );
+				
+		 $this->session->set_userdata($data);	
+         $id_emp = $this->session->userdata('id_emp'); 
+	     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
+	     $data['result']     = $this->modelogeneral->mostrar_asoc($id_emp);
+	     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
+	     $data['ultimo_reg'] = $this->modelogeneral->las_insetCap();           
+
+	     $this->load->view("layout/header",$data);
+	     $this->load->view("layout/side_menu",$data);
+	     if ($data['datos_emp']->id_cap !=  $data['ultimo_reg']->id_cap)
+	      {
+	        $this->load->view("emprendedor/capacitacion_videos",$data);
+	      }
+
+	       $this->load->view("layout/footer"); 
+	     }    
+    }
+
 
 	public function n_registro(){
 
@@ -147,7 +183,7 @@ class Login extends CI_Controller
 		     $param['estado']      = 1;
 		     $data['id_hijo']      = $this->modelogeneral->insert_emp($param);	
 		     $data['id_padre']     = 1;
-             $result = $this->modelogeneral->insert_emp_asoc($data);
+             $result               = $this->modelogeneral->insert_emp_asoc($data);
              $msg['comprobador'] = false;
              if($result)
              { 
@@ -158,38 +194,6 @@ class Login extends CI_Controller
         echo json_encode($msg);
          }
 	}
-
-	public function ingreso($data)
-    {
-     $check_user = $this->Login_model->login_user($data['email'],$data['password']);
-	  if($check_user == TRUE)
-	   {
-	    $data = array(
-						'is_logued_in' 	      =>  TRUE,
-	                    'perfil'		      =>  $check_user->perfil,
-		                'email' 		      =>  $check_user->email,
-		                'id_emp' 	          =>  $check_user->id_emp,
-		                'nombre' 	          =>  $check_user->nombre_emp,
-		                );
-				
-		$this->session->set_userdata($data);	
-         $id_emp = $this->session->userdata('id_emp'); 
-	     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
-	     $data['result']     = $this->modelogeneral->mostrar_asoc($id_emp);
-	     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
-	     $data['ultimo_reg'] = $this->modelogeneral->las_insetCap();           
-
-	     $this->load->view("layout/header",$data);
-	     $this->load->view("layout/side_menu",$data);
-	     if ($data['datos_emp']->id_cap !=  $data['ultimo_reg']->id_cap)
-	      {
-	        $this->load->view("emprendedor/capacitacion_videos",$data);
-	      }else {
-	             $this->load->view("layout/page_content");
-	            }
-	       $this->load->view("layout/footer"); 
-	     }    
-    }
 
 	public function sendMailGmail($param)
 	{		

@@ -83,12 +83,12 @@
                         <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit">Entrar</button>
                       </div>
                     </div>
-                    <div class="form-group m-b-0">
+                    <!--div class="form-group m-b-0">
                       <div class="col-sm-12 text-center">
                         <p> No tengo cuenta <a href="registro" class="text-primary m-l-5"><b>Registrate
 </b></a></p>
                       </div>
-                    </div>
+                    </div-->
                   </form>
 
                   <form data-toggle="validator" class="form-horizontal" id="recoverform" 
