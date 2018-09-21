@@ -63,6 +63,28 @@ class Capacitacion extends CI_Controller
     }
 
 
+     public function modulos()
+    {
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        } 
+
+     $id_emp = $this->session->userdata('id_emp');
+     $result = $this->modelogeneral->mostrar_asoc($id_emp);
+     $data['asociados']      = $result;
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp); 
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
+    
+     $this->load->view("layout/header",$data);
+     $this->load->view("layout/side_menu",$data);
+     $this->load->view("emprendedor/capacitacion_videos",$data);
+     $this->load->view("layout/footer");  
+    }
+
+
 
 
 
@@ -95,26 +117,7 @@ class Capacitacion extends CI_Controller
 
 
 
-     public function modulos()
-    {
-      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
-            redirect(base_url() . 'login');
-        } 
-
-     $id_emp = $this->session->userdata('id_emp');
-     $result = $this->modelogeneral->mostrar_asoc($id_emp);
-     $data['asociados']      = $result;
-     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
-     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp); 
-     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
-     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
-     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
     
-     $this->load->view("layout/header",$data);
-     $this->load->view("layout/side_menu",$data);
-     $this->load->view("emprendedor/capacitacion_videos",$data);
-     $this->load->view("layout/footer");  
-    }
 
     public function view_formEval(){
 

@@ -81,7 +81,7 @@
                                     <h2></h2>
                                     <p></p>
                                 </div>
-                                <div class="col-md-6 col-sm-6 col-xs-6 ">
+                                <div class="col-md-12 col-sm-12 col-xs-12 ">
                                    <h1 class="text-right text-info m-t-20">Total de Comisión: <strong> $<?= $total_comision ?></strong></h1>
                                 </div>
                             </div> <div class="table-responsive">
