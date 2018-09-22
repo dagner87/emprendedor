@@ -230,7 +230,7 @@ if ( typeof Object.create !== 'function' ) {
                 return false;
             }
 
-            var loader = this._toastEl.find('.jq-toast-loader');
+            //var loader = this._toastEl.find('.jq-toast-loader');
 
             // 400 is the default time that jquery uses for fade/slide
             // Divide by 1000 for milliseconds to seconds conversion

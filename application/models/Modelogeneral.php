@@ -416,6 +416,17 @@ class Modelogeneral extends CI_Model {
         return false;
       }
   }
+
+  /*---------productos----------*/
+     public function listar_productos()
+  {
+     $query = $this->db->get('productos');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
   /*Insertar*/
   
      public function insert_prod($data)

@@ -57,6 +57,21 @@
                             <li><a href="<?php echo base_url();?>capacitacion/mi_cartera"><i class="mdi mdi-cash-multiple fa-fw"></i><span class="hide-menu">Mi Cartera</span></a></li>
                         </ul>
                     </li>
+
+                    <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-account-card-details fa-fw"></i> <span class="hide-menu">Consultas Cartera<span class="fa arrow"></span></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="<?php echo base_url();?>clientes_consultor_rev"><i class="mdi mdi-account-check fa-fw"></i><span class="hide-menu">Alta Cliente</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-account-card-details fa-fw"></i> <span class="hide-menu">Vencimientos<span class="fa arrow"></span></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="<?php echo base_url();?>clientes_consultor_rev"><i class="mdi mdi-account-check fa-fw"></i><span class="hide-menu">Alta Cliente</span></a></li>
+                        </ul>
+                    </li>
+                    
+
+
+
                      <?php endif; ?> 
                     <li class="devider"></li>
                     <li><a href="<?php echo base_url();?>salir" class="waves-effect"><i class="mdi mdi-logout fa-fw"></i> <span class="hide-menu">Salir</span></a></li>

@@ -11,7 +11,6 @@ class Capacitacion extends CI_Controller
         $this->load->database();
         $this->load->helper('url');
         $this->load->model('modelogeneral');
-        $this->load->library('grocery_CRUD');
         $this->load->library('session');
         $this->load->library('form_validation');
     

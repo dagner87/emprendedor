@@ -465,33 +465,4 @@ function load_dataRango()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function datos_usuarioT()
-    {
-     $id_usuario = $_GET['id_usuario'];
-     $result = $this->modelogeneral->datos_usuarioT($id_usuario);
-      echo json_encode($result);
-    }
-    
-    public function updEvento(){
-        $param['id'] = $this->input->post('id');
-        $param['fecini'] = $this->input->post('fecini');
-        $param['fecfin'] = $this->input->post('fecfin');
-        $r = $this->mcalendar->updEvento($param);
-        echo $r;
-    }
 }

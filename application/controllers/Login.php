@@ -152,9 +152,26 @@ class Login extends CI_Controller
 				
 		 $this->session->set_userdata($data);	
          $id_emp = $this->session->userdata('id_emp'); 
+<<<<<<< HEAD
 	     $this->index();
 	  }   
 
+=======
+	     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
+	     $data['result']     = $this->modelogeneral->mostrar_asoc($id_emp);
+	     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
+	     $data['ultimo_reg'] = $this->modelogeneral->las_insetCap();           
+
+	     $this->load->view("layout/header",$data);
+	     $this->load->view("layout/side_menu",$data);
+	     if ($data['datos_emp']->id_cap !=  $data['ultimo_reg']->id_cap)
+	      {
+	        $this->load->view("emprendedor/capacitacion_videos",$data);
+	      }
+
+	       $this->load->view("layout/footer"); 
+	     }    
+>>>>>>> parent of 8b84276... login registro asoc
     }
 
 

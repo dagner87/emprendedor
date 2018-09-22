@@ -1,5 +1,6 @@
  $(document).ready(function () {
-     "use strict";
+    
+    /* "use strict";
      // toat popup js
      $.toast({
          heading: 'Welcome to Ample admin',
@@ -9,7 +10,7 @@
          icon: 'warning',
          hideAfter: 3500,
          stack: 6
-     })
+     })*/
 
 
      //ct-visits
