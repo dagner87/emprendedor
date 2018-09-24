@@ -89,7 +89,7 @@
     <script src="<?php echo base_url();?>assets/plugins/bower_components/tiny-editable/mindmup-editabletable.js"></script>
     <script src="<?php echo base_url();?>assets/plugins/bower_components/tiny-editable/numeric-input-example.js"></script>
     <script>
-    //$('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
+    
     
     $(document).ready(function() {
         load_data_cap();
@@ -111,7 +111,7 @@
                   .done(function(){
                     console.log(data);
                       $.toast({
-                          heading: 'Rango de comision Agregado',
+                          heading: 'Rango de comisión Agregado',
                           text: 'Se agregó correctamente la información.',
                           position: 'top-right',
                           loaderBg: '#ff6849',
@@ -147,11 +147,12 @@
         $.ajax({
                 type: 'ajax',
                 method: 'get',
-                url: '<?php echo base_url() ?>panel_admin/eliminar_cap',
+                url: '<?php echo base_url() ?>panel_admin/eliminar_rango',
                 data: {id: id},
                 async: false,
                 dataType: 'json',
                 success: function(data){
+                  
                   $.toast({
                         heading: 'Video eliminado ',
                         text: 'El video a sido eliminado.',
@@ -208,5 +209,4 @@
         })
     }
     </script>
-    <!--Style Switcher -->
-    <script src="<?php echo base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+    

@@ -1,11 +1,11 @@
 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">ADMINISTACION DE PRODUCTOS</h4> </div>
+                        <h4 class="page-title">ADMINISTACION DE COMBOS</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <ol class="breadcrumb">
                             <li><a href="#">Inicio</a></li>
                             <li><a href="#">Tienda</a></li>
-                            <li class="active">Adm.Productos</li>
+                            <li class="active">Adm.Combos</li>
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -70,7 +70,7 @@
 <div class="row">
   <div class="col-xs-12">
                         <div class="panel panel-info">
-                            <div class="panel-heading">Datos del producto</div>
+                            <div class="panel-heading">Datos del Combo</div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
                                   <div class="alert alert-warning"><p><i class="mdi mdi-alert-outline fa-fw"></i><strong>Pulse el botón para desplegar el formulario </strong> </p></div>
@@ -79,39 +79,25 @@
                                         <div class="well">
                                           <div class="panel-wrapper collapse in" aria-expanded="true">
                 <div class="panel-body">
-                    <form  id="add_prod" action="<?php echo base_url() ?>panel_admin/insert_prod" method="post" data-toggle="validator" >
+                    <form  id="add_prod" action="<?php echo base_url() ?>panel_admin/insert_combo" method="post" data-toggle="validator" >
                         <div class="form-body">
                             <div class="row">
                               <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Categorías</label>
-                                        <select class="form-control" data-placeholder="Seleccione una Categoria" tabindex="1" name="id_categoria" id="id_categoria">
-                                          <?php if(!empty($categorias))
-                                            {
-                                              foreach($categorias as $row)
-                                                {
-                                                 echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
-                                                }
-                                            } ?>
-                                        </select>
+                                        <label class="control-label">Nombre Combo</label>
+                                         <input type="text" id="nombre_combo" name="nombre_combo" class="form-control" placeholder="Escriba nombre del combo"> <span class="help-block">  </span>
                                     </div>
+
+                                    
                                     <div class="form-group">
-                                        <label class="control-label">Detalle</label>
-                                        <div class="radio-list">
-                                            <label class="radio-inline p-0">
-                                                <div class="radio radio-info">
-                                                    <input type="radio" name="es_repuesto" value="1" checked="true">
-                                                    <label for="radio1">Producto</label>
-                                                </div>
-                                            </label>
-                                            <label class="radio-inline">
-                                                <div class="radio radio-info">
-                                                    <input type="radio" name="es_repuesto" value="2">
-                                                    <label for="radio2">Repuesto </label>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
+                                        <label class="control-label">Precio</label>
+                                        <input type="text" id="precio_combo" class="form-control" name="precio_combo" placeholder=""> <span class="help-block"> </span>
+                                     </div>
+
+                                      <div class="form-group">
+                                        <label class="control-label">Existencia</label>
+                                        <input type="text" id="existencia" class="form-control" name="existencia" placeholder=""> <span class="help-block"> </span> </div>
+
                                 </div>
        
                                 <div class="col-md-6 col-xs-12 btn-file">
@@ -124,68 +110,34 @@
 
                             <!--/row-->
                             <div class="row">
-                               <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Nombre</label>
-                                        <input type="text" id="nombre_prod" name="nombre_prod" class="form-control" placeholder="Escriba nombre del producto"> <span class="help-block">  </span> </div>
+                                <div class="col-md-12">
+                                  <div class="form-group">
+                                        <label class="control-label">Productos</label>
+                                        <select class="form-control select2"  name="id_producto" id="id_producto" data-placeholder="Seleccione">
+                                          <?=  $productos ?>
+                                        </select>
+                                    </div>
+                                   
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Precio</label>
-                                        <input type="text" id="precio" class="form-control" name="precio" placeholder=""> <span class="help-block"> </span> </div>
-                                </div>
-                                <!--/span-->
-                               
-                                <!--/span-->
+                                
                             </div>
                             <!--/row-->
                             <div class="row">
-                                  <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Existencia</label>
-                                            <input type="text" id="existencia" name="existencia" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                    </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Vencimiento</label>
-                                        <input type="num" id="vencimiento" name="vencimiento" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                  <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Alto</label>
-                                            <input type="text" id="alto" name="alto" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                    </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Ancho</label>
-                                        <input type="text" id="ancho" name="ancho" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                  <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Largo</label>
-                                            <input type="text" id="largo" name="largo" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                    </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Peso</label>
-                                        <input type="text" id="peso" name="peso" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                  <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">SKU</label>
-                                            <input type="text" id="sku"  name="sku" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                    </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Valor Declarado</label>
-                                        <input type="text" id="valor_declarado" name="valor_declarado" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                </div>
+                               <div class="col-lg-12">
+                                 <table id="tb-combo" class="table table-bordered table-striped table-hover">
+                                  <thead>
+                                      <tr>
+                                          <th>Producto</th>
+                                          <th>Cantidad</th>
+                                          <th></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    
+                                  
+                                  </tbody>
+                              </table>
+                            </div>   
                             </div>
 
                         <div class="form-actions">
@@ -208,10 +160,10 @@
             <thead>
                 <tr>
                     <th>IMAGEN</th>
-                    <th>NOMBRE PRODUCTO</th>
-                    <th>EXISTENCIA</th>
+                    <th>NOMBRE COMBO</th>
+                    <th>PRODUCTOS</th>
                     <th>PRECIO VENTA</th>
-                    <th>PRECIO DE TIENDA</th>
+                    <th>EXISTENCIA</th>
                     <th>ACCION</th>
                 </tr>
             </thead>
@@ -239,10 +191,12 @@
     <script>
     
     $(document).ready(function() {
+
         load_data_cap();
+        
         $('#add_prod').submit(function(e) {
             e.preventDefault();
-            var url = '<?php echo base_url() ?>panel_admin/insert_prod';
+            var url = '<?php echo base_url() ?>panel_admin/insert_combo';
             var data = $('#add_prod').serialize();
             $.ajax({
                     type: 'ajax',
@@ -251,11 +205,12 @@
                     data: data,
                     dataType: 'json',
                     beforeSend: function() {
-                        //sweetalert_proceso();
+                        $("#add_prod")[0].reset();
                         console.log("enviando....");
                       }
                  })
-                  .done(function(){
+                  .done(function(data){
+
                     console.log(data);
                       $.toast({
                           heading: 'Producto Agregado',
@@ -284,6 +239,27 @@
                           }
                   });
         });
+
+
+        $("#id_producto").on("change",function(){
+         $(this).find('select :first').attr("disabled",'true');
+         data = $(this).val();
+         var option        = $(this).find(':selected')[0];//obtiene el producto seleccionado
+         var nombre_prod   =  $('select[name="id_producto"] option:selected').text();
+         $(option).attr('disabled', 'disabled'); // y lo desabilita para no volverlo a seleccionar
+        
+        if (data !='') {
+            html = "<tr>";
+            html += "<td><input type='hidden' name='productos[]' value='"+data+"'>"+nombre_prod+"</td>";
+            html += "<td><input type='text' name='cantidades[]' value='' class='cantidades' required data-parsley-minlength='2'></td>";
+            html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-remove'></span></button></td>";
+            html += "</tr>";
+            $("#tb-combo tbody").append(html);
+           
+        }else{
+            alert("seleccione un producto...");
+        }
+    });
 
      
 
@@ -337,7 +313,7 @@
         $.ajax({
                 type: 'ajax',
                 method: 'get',
-                url: '<?php echo base_url() ?>panel_admin/eliminar_prod',
+                url: '<?php echo base_url() ?>panel_admin/eliminar_combo',
                 data: {id: id},
                 async: false,
                 dataType: 'json',
@@ -370,7 +346,7 @@
        function load_data_cap()
     {
         $.ajax({
-            url:"<?php echo base_url(); ?>panel_admin/load_dataProp",
+            url:"<?php echo base_url(); ?>panel_admin/load_dataCombos",
             method:"POST",
             success:function(data)
             {
@@ -393,8 +369,8 @@
                                           },
                     }
                });
-               var cont = $('#editable-datatable').editableTableWidget().numericInputExample().find('td:first').focus();
-               console.log(cont.text());
+              // var cont = $('#editable-datatable').editableTableWidget().numericInputExample().find('td:first').focus();
+              // console.log(cont.text());
             }
         })
     }

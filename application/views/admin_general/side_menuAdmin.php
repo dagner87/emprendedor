@@ -24,12 +24,18 @@
                             <li><a href="<?php echo base_url();?>panel_admin/admin_capacitacion"><i class="fa fa-file-video-o fa-fw"></i> <span class="hide-menu">Adm. Videos</span></a></li>
                         </ul>
                     </li>
-                    <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-store fa-fw"></i> <span class="hide-menu">Tienda<span class="fa arrow"></span></span></a>
+
+                    <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-store fa-fw"></i> <span class="hide-menu">Tienda<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="<?php echo base_url();?>panel_admin/admin_prod"><i class="fa fa-shopping-cart fa-fw"></i><span class="hide-menu">Adm. Productos</span></a></li>
-                         
+
+                            <li><a href="<?php echo base_url();?>panel_admin/admin_prod"><i class="fa fa-product-hunt fa-fw"></i> <span class="hide-menu">Adm. Productos</span></a></li>
+                            <li><a href="<?php echo base_url();?>panel_admin/admin_combos"><i class="fa fa-shopping-basket fa-fw"></i> <span class="hide-menu">Adm. Combos</span></a></li>
+                            <li><a href="<?php echo base_url();?>panel_admin/admin_promo"><i class="fa fa-star-o fa-fw"></i> <span class="hide-menu">Adm. Promociones</span></a></li>
+                            
                         </ul>
                     </li>
+
+                   
 
                     <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-settings fa-fw"></i> <span class="hide-menu">Configuración<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">

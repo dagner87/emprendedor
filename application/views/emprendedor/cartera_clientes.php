@@ -1,11 +1,11 @@
 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">ADMINISTACION DE PRODUCTOS</h4> </div>
+                        <h4 class="page-title">ADMINISTACION DE COMBOS</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <ol class="breadcrumb">
                             <li><a href="#">Inicio</a></li>
                             <li><a href="#">Tienda</a></li>
-                            <li class="active">Adm.Productos</li>
+                            <li class="active">Adm.Combos</li>
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -70,7 +70,7 @@
 <div class="row">
   <div class="col-xs-12">
                         <div class="panel panel-info">
-                            <div class="panel-heading">Datos del producto</div>
+                            <div class="panel-heading">Alta Cliente</div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
                                   <div class="alert alert-warning"><p><i class="mdi mdi-alert-outline fa-fw"></i><strong>Pulse el botón para desplegar el formulario </strong> </p></div>
@@ -79,113 +79,128 @@
                                         <div class="well">
                                           <div class="panel-wrapper collapse in" aria-expanded="true">
                 <div class="panel-body">
-                    <form  id="add_prod" action="<?php echo base_url() ?>panel_admin/insert_prod" method="post" data-toggle="validator" >
+                    <form  id="add_prod" action="<?php echo base_url() ?>capacitacion/insert_cliente" method="post" data-toggle="validator" >
                         <div class="form-body">
                             <div class="row">
-                              <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Categorías</label>
-                                        <select class="form-control" data-placeholder="Seleccione una Categoria" tabindex="1" name="id_categoria" id="id_categoria">
-                                          <?php if(!empty($categorias))
-                                            {
-                                              foreach($categorias as $row)
-                                                {
-                                                 echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
-                                                }
-                                            } ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Detalle</label>
-                                        <div class="radio-list">
-                                            <label class="radio-inline p-0">
-                                                <div class="radio radio-info">
-                                                    <input type="radio" name="es_repuesto" value="1" checked="true">
-                                                    <label for="radio1">Producto</label>
-                                                </div>
-                                            </label>
-                                            <label class="radio-inline">
-                                                <div class="radio radio-info">
-                                                    <input type="radio" name="es_repuesto" value="2">
-                                                    <label for="radio2">Repuesto </label>
-                                                </div>
-                                            </label>
-                                        </div>
+                                        <label class="control-label">Nombre</label>
+                                         <input type="text" id="nombre_cliente" name="nombre_cliente" class="form-control" placeholder="Escriba nombre "> <span class="help-block">  </span>
                                     </div>
                                 </div>
-       
-                                <div class="col-md-6 col-xs-12 btn-file">
-                                    <label for="input-file-now">Subir imagen</label>
-                                    <input type="file" id="url_imagen" name="url_imagen" class="dropify " />
-                                    <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Apellidos</label>
+                                         <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Escriba apellidos"> <span class="help-block">  </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">No.Identidad</label>
+                                         <input type="text" id="dni" name="dni" class="form-control" placeholder="Escriba dni"> <span class="help-block">  </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Teléfono</label>
+                                         <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Escriba Telefono "> <span class="help-block">  </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                         <input type="text" id="email" name="email" class="form-control" placeholder="Escriba email"> <span class="help-block">  </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Celular</label>
+                                         <input type="text" id="celular" name="celular" class="form-control" placeholder="Escriba celular"> <span class="help-block">  </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Fecha Nacimiento</label>
+                                         <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" placeholder="Escriba fecha nacimiento "> <span class="help-block">  </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Provincia</label>
+                                          <select class="form-control select2"  name="id_provincia" id="id_provincia" data-placeholder="Seleccione">
+                                          <?php 
+                                          if(!empty($provincias))
+                                                  {
+                                                    foreach($provincias as $row)
+                                                      {
+                                                      echo '<option value="'.$row->id_provincia.'">'.$row->nombre.'</option>';
+                                                      }
+                                                  }
+
+                                                  ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Comuna</label>
+                                         <select class="form-control select2"  name="id_municipio" id="id_municipio" data-placeholder="Seleccione">
+                                        </select>
+                                    </div>
                                 </div>
                                 
                             </div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Dirección:</label>
+                                         <textarea type="text" id="direccion" name="direccion" class="form-control" placeholder="Escriba Dirección compra "> </textarea><span class="help-block">  </span>
+                                    </div>
+                                </div>
+                            </div>    
 
                             <!--/row-->
                             <div class="row">
-                               <div class="col-md-6">
+                              <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Nombre</label>
-                                        <input type="text" id="nombre_prod" name="nombre_prod" class="form-control" placeholder="Escriba nombre del producto"> <span class="help-block">  </span> </div>
+                                        <label class="control-label">Fecha compra:</label>
+                                         <input type="date" id="fecha_incio" name="fecha_incio" class="form-control" placeholder="Escriba fecha compra "> <span class="help-block">  </span>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Precio</label>
-                                        <input type="text" id="precio" class="form-control" name="precio" placeholder=""> <span class="help-block"> </span> </div>
+                                <div class="col-md-12">
+                                  <div class="form-group">
+                                        <label class="control-label">Productos</label>
+                                        <select class="form-control select2"  name="id_producto" id="id_producto" data-placeholder="Seleccione">
+                                          <?=  $productos ?>
+                                        </select>
+                                    </div>
+                                   
                                 </div>
-                                <!--/span-->
-                               
-                                <!--/span-->
+                                
                             </div>
                             <!--/row-->
                             <div class="row">
-                                  <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Existencia</label>
-                                            <input type="text" id="existencia" name="existencia" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                    </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Vencimiento</label>
-                                        <input type="num" id="vencimiento" name="vencimiento" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                  <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Alto</label>
-                                            <input type="text" id="alto" name="alto" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                    </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Ancho</label>
-                                        <input type="text" id="ancho" name="ancho" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                  <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Largo</label>
-                                            <input type="text" id="largo" name="largo" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                    </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Peso</label>
-                                        <input type="text" id="peso" name="peso" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                  <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">SKU</label>
-                                            <input type="text" id="sku"  name="sku" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                    </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Valor Declarado</label>
-                                        <input type="text" id="valor_declarado" name="valor_declarado" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
-                                </div>
+                               <div class="col-lg-12">
+                                 <table id="tb-combo" class="table table-bordered table-striped table-hover">
+                                  <thead>
+                                      <tr>
+                                          <th>Producto</th>
+                                          <th>Cantidad</th>
+                                          <th></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    
+                                  
+                                  </tbody>
+                              </table>
+                            </div>   
                             </div>
 
                         <div class="form-actions">
@@ -199,30 +214,32 @@
      </div>
    </div>
    <div class="row">
-   <div class="col-lg-12">
+                    <div class="col-md-12">
+                      <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" >Alta Manual</button></h3>
+                        <div class="panel">
+                            <div class="panel-heading">Cartera de clientes</div>
+                            <div class="table-responsive">
+<br>
+                                <table class="table table-hover manage-u-table" id="editable-datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>No.Identidad</th>
+                                            <th>Cliente</th>
+                                            <th>Teléfono</th>
+                                            <th>Celular</th>
+                                            <th width="250">Email</th>
+                                            <th width="300">Historial</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="contenido_video">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="white-box">
-        <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" >Agregar Producto</button></h3>
-
-        <table class="table table-striped table-bordered table-responsive  contact-list" id="editable-datatable">
-            <thead>
-                <tr>
-                    <th>IMAGEN</th>
-                    <th>NOMBRE PRODUCTO</th>
-                    <th>EXISTENCIA</th>
-                    <th>PRECIO VENTA</th>
-                    <th>PRECIO DE TIENDA</th>
-                    <th>ACCION</th>
-                </tr>
-            </thead>
-            <tbody id="contenido_video">
-               
-            </tbody>
-            
-        </table>
-    </div>
-   </div>
-</div>
 
 </div>
         </div>
@@ -240,9 +257,10 @@
     
     $(document).ready(function() {
         load_data_cap();
+        
         $('#add_prod').submit(function(e) {
             e.preventDefault();
-            var url = '<?php echo base_url() ?>panel_admin/insert_prod';
+            var url = '<?php echo base_url() ?>capacitacion/insert_cliente';
             var data = $('#add_prod').serialize();
             $.ajax({
                     type: 'ajax',
@@ -251,14 +269,15 @@
                     data: data,
                     dataType: 'json',
                     beforeSend: function() {
-                        //sweetalert_proceso();
+                        $("#add_prod")[0].reset();
                         console.log("enviando....");
                       }
                  })
-                  .done(function(){
+                  .done(function(data){
+
                     console.log(data);
                       $.toast({
-                          heading: 'Producto Agregado',
+                          heading: 'Cliente Agregado',
                           text: 'Se agregó corectamente la información.',
                           position: 'top-right',
                           loaderBg: '#ff6849',
@@ -285,59 +304,63 @@
                   });
         });
 
+
+        $("#id_producto").on("change",function(){
+         $(this).find('select :first').attr("disabled",'true');
+         data = $(this).val();
+         var option        = $(this).find(':selected')[0];//obtiene el producto seleccionado
+         var nombre_prod   =  $('select[name="id_producto"] option:selected').text();
+         $(option).attr('disabled', 'disabled'); // y lo desabilita para no volverlo a seleccionar
+        
+        if (data !='') {
+            html = "<tr>";
+            html += "<td><input type='hidden' name='productos[]' value='"+data+"'>"+nombre_prod+"</td>";
+            html += "<td><input type='text' name='cantidades[]' value='' class='cantidades' required data-parsley-minlength='2'></td>";
+            html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-remove'></span></button></td>";
+            html += "</tr>";
+            $("#tb-combo tbody").append(html);
+           
+        }else{
+            alert("seleccione un producto...");
+        }
+    });
+
+     $('#id_provincia').on("click", function(evt){
+          var id = $('#id_provincia').val();
+          console.log(id);
+          $.ajax({
+            type: "POST",
+            url: "<?php echo base_url();?>capacitacion/select_municipio",
+            data: {id: id},
+            success: function (data) {
+              $('#id_municipio').html(data);
+             }
+          });
+    });    
+
      
 
-     $('.btn-file').on("change", function(evt){
-        var base_url= "<?php echo base_url();?>";
-        // declaro la variable formData e instancio el objeto nativo de javascript new FormData
-        var formData = new FormData(document.getElementById("add_prod"));
-       // iniciar el ajax
-        $.ajax({
-            url: base_url + "panel_admin/subir_img",
-            // el metodo para enviar los datos es POST
-            type: "POST",
-            // colocamos la variable formData para el envio de la imagen
-            data: formData,
-            contentType: false,
-            processData: false,
-            beforeSend: function(data) 
-            {
-             $('#cargando').html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
-            },
-            success: function(data)
-            {
-               let objJson = JSON.parse(data);
-               console.log(objJson.imagen);
-               $('.btn-file').addClass('btn btn-info');
-              var nombre_archivo = $('#nombre_archivo').val(objJson.imagen); //agrego el nombre del archivo subido
-               $('#cargando').fadeOut("fast",function(){
-               $('#cargando').html('<i class=""> </i>');
-                });
-               $('#cargando').fadeIn("slow");
-            } 
-        }); 
-      }); 
+   
 
-       // Basic
-        $('.dropify').dropify({
-            messages: {
-                default: 'No hay archivo seleccionado',
-                replace: nombre_archivo ,
-                remove: 'Remover',
-                error: 'No se pudo mostrar'
-            }
-        });
+    
         
            
         
     });//onready
+
+    $(document).on("click",".hist-cliente", function(){
+           var id = $(this).attr('data');
+            window.location.href = "<?php echo base_url();?>historial_cliente/"+id;
+        });
+
+    
     $(document).on("click",".deletecap-row-btn", function(){
         $(this).closest("tr").remove();
         var id = $(this).attr('data');
         $.ajax({
                 type: 'ajax',
                 method: 'get',
-                url: '<?php echo base_url() ?>panel_admin/eliminar_prod',
+                url: '<?php echo base_url() ?>panel_admin/eliminar_combo',
                 data: {id: id},
                 async: false,
                 dataType: 'json',
@@ -370,7 +393,7 @@
        function load_data_cap()
     {
         $.ajax({
-            url:"<?php echo base_url(); ?>panel_admin/load_dataProp",
+            url:"<?php echo base_url(); ?>capacitacion/load_dataClientes",
             method:"POST",
             success:function(data)
             {
@@ -393,11 +416,11 @@
                                           },
                     }
                });
-               var cont = $('#editable-datatable').editableTableWidget().numericInputExample().find('td:first').focus();
-               console.log(cont.text());
+             
             }
         })
     }
+
     </script>
     <!--Style Switcher -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>

@@ -29,8 +29,6 @@ class Capacitacion extends CI_Controller
      $data['sumatoriaComp']  = $this->modelogeneral->sumatoriaCompraEmp($id_emp);
      $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
 
-     
-
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
 
@@ -82,6 +80,223 @@ class Capacitacion extends CI_Controller
      $this->load->view("emprendedor/capacitacion_videos",$data);
      $this->load->view("layout/footer");  
     }
+
+
+      public function cartera_clientes()
+    {
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        } 
+
+     $id_emp                 = $this->session->userdata('id_emp');
+     $data['productos']      = $this->modelogeneral->seleccion_productos();
+     $data['provincias']     = $this->modelogeneral->select_provincias();  
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp); 
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
+ 
+     $this->load->view("layout/header",$data);
+     $this->load->view("layout/side_menu",$data);
+     $this->load->view("emprendedor/cartera_clientes",$data);
+     $this->load->view("layout/footer");  
+    }
+
+    public function historial_cliente($id_cliente)
+    {
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        } 
+
+       
+     $data['datos_cliente']  = $this->modelogeneral->datos_cliente($id_cliente);
+     
+     $id_emp                 = $this->session->userdata('id_emp');
+     $data['provincias']     = $this->modelogeneral->select_provincias();  
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp); 
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
+     
+     
+ 
+     $this->load->view("layout/header",$data);
+     $this->load->view("layout/side_menu",$data);
+     $this->load->view("emprendedor/ficha_cliente",$data);
+     $this->load->view("layout/footer");  
+    }
+
+    function load_dataClientes()
+    {
+        $result = $this->modelogeneral->listar_clientes();
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+              $output .= ' <tr>
+                         <td>'.$row->dni.'</td>
+                         <td>'.$row->nombre_cliente.' '.$row->apellidos.' </td>
+                         <td>'.$row->telefono.'</td>
+                         <td>'.$row->celular.'</td>
+                         <td>'.$row->email.'</td>
+                         <td>
+                         <button type="button" data="'.$row->id_cliente.'" class="btn btn-info btn-outline btn-circle btn-sm hist-cliente"><i class="fa fa-history"></i></button>
+                          </td>
+                         </tr>';                                        
+            }
+        }
+    
+        echo $output;
+    }
+
+      function load_historialCompra()
+    {
+         $id_cliente         = $this->input->post('id');
+        $result = $this->modelogeneral->listado_pedidos($id_cliente);
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+              $productos = $this->modelogeneral->listado_pedidosProd($row->id_pedidos);  
+              $output .= ' <tr>
+                         <td>'.$row->no_pedido.'</td>';
+                         $output .= '<td>';
+                         foreach($productos as $prod):
+                          $output .= '<span class="text-muted">'.$prod->nombre_prod.'</br></span>';
+                          endforeach ; 
+                         $output .= '</td>
+                         <td>'.$row->total.'</td>
+                         <td>'.$row->fecha_solicitud.'</td>
+                         <td>'.$row->fecha_solicitud.'</td>
+                         </tr>';                                        
+            }
+        }
+    
+        echo $output;
+    }
+
+   function select_municipio()
+    {
+        $id_provincia = $this->input->post("id");
+        $result = $this->modelogeneral->select_municipio($id_provincia);
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+             $output .= '<option value="'.$row->id_municipio.'">'.$row->nombre.'</option>';
+            }
+        }
+    
+        echo $output;
+    }
+    public function insert_cliente()
+    {
+         if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        } 
+
+        $param['id_emp']            = $this->session->userdata('id_emp');
+        $param['nombre_cliente']    = $this->input->post('nombre_cliente');
+        $param['apellidos']         = $this->input->post('apellidos');
+        $param['dni']               = $this->input->post('dni');
+        $param['telefono']          = $this->input->post('telefono');
+        $param['email']             = $this->input->post('email');
+        $param['celular']           = $this->input->post('celular');
+        $param['direccion']         = $this->input->post('direccion');
+        $param['fecha_nacimiento']  = $this->input->post('fecha_nacimiento');
+        $param['fecha_incio']       = $this->input->post('fecha_incio');
+        $param['id_municipio']      = $this->input->post('id_municipio');
+        $param['id_provincia']      = $this->input->post('id_provincia');
+        $datos_emp                  = $this->modelogeneral->datos_emp($param['id_emp']);
+        $param['id_pais']           = $datos_emp->id_pais;
+       
+
+        $result = $this->modelogeneral->insert_cliente($param);
+        
+         $msg['comprobador'] = false;
+        if($result)
+             {
+               $data['id_cliente']      =  $this->modelogeneral->lastID();
+               $data['id_emp']          = $this->session->userdata('id_emp');
+
+               $data['no_pedido']       = 'ing-manual-001';
+               $data['fecha_solicitud'] = $this->input->post('fecha_incio');
+              
+               if($this->modelogeneral->save_Pedido($data)){
+
+                 $data['id_pedidos'] =  $this->modelogeneral->lastID();
+                 $data['productos']  = $this->input->post('productos');
+                 $data['cantidad']   = $this->input->post('cantidades');
+                 $this->save_detallePedido($data);
+               } 
+              $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($data);
+    }
+
+protected function updateComprobante($idcomprobante){
+        $comprobanteActual = $this->modelogeneral->getComprobante($idcomprobante);
+        $data  = array(
+            'cantidad' => $comprobanteActual->cantidad + 1, 
+        );
+        $this->modelogeneral->updateComprobante($idcomprobante,$data);
+    }    
+
+protected function save_detallePedido($data){ 
+    for ($i=0; $i < count($data['productos']); $i++) { 
+      
+          $dato_combo = array(
+              'id_producto' => $data['productos'][$i], 
+              'id_pedidos'    => $data['id_pedidos'],
+              'cantidad'    => $data['cantidad'][$i] 
+          );
+        
+        $this->modelogeneral->save_detallePedido($dato_combo);
+    
+    }
+}
+
+
+public function update_datosCliente()
+    {
+        $param['id_cliente']        = $this->input->post('id_cliente');
+        $param['nombre_cliente']    = $this->input->post('nombre_cliente');
+        $param['apellidos']         = $this->input->post('apellidos');
+        $param['dni']               = $this->input->post('dni');
+        $param['telefono']          = $this->input->post('telefono');
+        $param['email']             = $this->input->post('email');
+        $param['celular']           = $this->input->post('celular');
+        $param['direccion']         = $this->input->post('direccion');
+        $param['fecha_nacimiento']  = $this->input->post('fecha_nacimiento');
+        $param['fecha_incio']       = $this->input->post('fecha_incio');
+        $param['id_municipio']      = $this->input->post('id_municipio');
+        $param['id_provincia']      = $this->input->post('id_provincia');
+
+        
+        $result   = $this->modelogeneral->update_datosCliente($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador']  = TRUE;
+               
+             }
+        echo json_encode($param);
+    } 
+
+
+
+
+    
+
+
+
+    
 
 
 

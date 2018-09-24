@@ -20,7 +20,7 @@
 </button>
  <?php endif; ?> 
 
-<!--button type="button" class="botonF1 popover-primary" title="" data-toggle="popover" data-placement="top" data-content="Cantidad de Productos:10000" data-original-title="Carrito"><span><i class="ti-shopping-cart"></i></span></button-->
+
 
                  <!--MENU -->
                 <ul class="nav" id="side-menu">
@@ -58,16 +58,21 @@
                         </ul>
                     </li>
 
-                    <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-account-card-details fa-fw"></i> <span class="hide-menu">Consultas Cartera<span class="fa arrow"></span></span></a>
+
+                     <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-account-card-details fa-fw"></i> <span class="hide-menu">Consultas Cartera<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="<?php echo base_url();?>clientes_consultor_rev"><i class="mdi mdi-account-check fa-fw"></i><span class="hide-menu">Alta Cliente</span></a></li>
+                            <li><a href="<?php echo base_url();?>cartera_clientes"><i class="fa fa-flag-checkered fa-fw"></i><span class="hide-menu">Alta de Clientes</span></a></li>
+                         
                         </ul>
                     </li>
-                    <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-account-card-details fa-fw"></i> <span class="hide-menu">Vencimientos<span class="fa arrow"></span></span></a>
+
+                     <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-alarm-multiple fa-fw"></i> <span class="hide-menu">Vencimientos<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="<?php echo base_url();?>clientes_consultor_rev"><i class="mdi mdi-account-check fa-fw"></i><span class="hide-menu">Alta Cliente</span></a></li>
+                            <li><a href="<?php echo base_url();?>capacitacion/tienda"><i class="fa fa-bell-o fa-fw"></i><span class="hide-menu">Venc. de Productos</span></a></li>
+                         
                         </ul>
                     </li>
+                    
                     
 
 

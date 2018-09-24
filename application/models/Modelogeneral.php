@@ -23,6 +23,114 @@ class Modelogeneral extends CI_Model {
         }
      
   }
+
+  /*-----------crud clientes----------------*/
+
+    public function insert_cliente($data)
+  {
+      $this->db->insert('cliente',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        
+        }else{
+          return false;
+        }
+  }
+
+  public function listar_clientes()
+  {
+     $query = $this->db->get('cliente');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+   public function update_datosCliente($param)
+  {
+    $this->db->where('id_cliente',$param['id_cliente']);
+    $this->db->update('cliente',$param);
+   if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+             return true;
+            }
+     
+  }
+
+   public function listado_pedidosProd($id_pedido){
+        $this->db->select('prod.nombre_prod');
+        $this->db->where('de_pe.id_pedidos', $id_pedido);
+        $this->db->join('productos as prod', 'prod.id_producto = de_pe.id_producto');
+        $query = $this->db->get('detalle_pedido as de_pe');
+        return $query->result();
+       
+    }
+
+     public function listado_pedidos($id_cliente){
+        $this->db->where('id_cliente', $id_cliente);
+        $query = $this->db->get('pedidos');
+        return $query->result();
+       
+    }
+
+
+
+   public function datos_cliente($id_cliente) {
+   $this->db->where('id_cliente',$id_cliente);
+   $query = $this->db->get('cliente');
+   return $query-> row();
+  
+   }
+
+
+/*----------------------------------**/   
+
+public function getComprobante(){
+    $this->db->where("nombre",'no_pedido');
+    $resultado = $this->db->get("tipo_comprobante");
+    return $resultado->row();
+  }   
+
+
+public function save_Pedido($data){
+    return $this->db->insert("pedidos",$data);
+  }
+
+  public function save_detallePedido($data){
+    return $this->db->insert("detalle_pedido",$data);
+  } 
+
+   public function select_provincias()
+  {
+     $query = $this->db->get('provincias');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+    public function select_municipio($id_provincia)
+  {
+     $this->db->where('id_provincia',$id_provincia);
+     $query = $this->db->get('municipios');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+
+
+  
+   
+
+
+
+
+
   /* insertar videos */
    public function insert_cap($data)
   {
@@ -90,6 +198,29 @@ class Modelogeneral extends CI_Model {
         }
      
   }
+
+  public function eliminar_rango($id)
+    {
+     $this->db->where('id_tbl_comisiones',$id);
+     $this->db->delete('tbl_comisiones');
+     if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+  } 
+  /*------------------------------------*/
+
+   public function listar_categorias_prod()
+  {
+     $query = $this->db->get('p_categorias');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
   /*------------------------------------*/
 
 
@@ -409,7 +540,7 @@ class Modelogeneral extends CI_Model {
   /*CRUD PRODUCTOS*/
     public function listar_data_prod()
   {
-     $query = $this->db->get('producto');
+     $query = $this->db->get('productos');
       if($query->num_rows() > 0){
         return $query->result();
       }else{
@@ -417,9 +548,74 @@ class Modelogeneral extends CI_Model {
       }
   }
 
+     public function seleccion_productos()
+  {
+     $result =$this->listar_categorias_prod(); 
+     $mostarcategorias = "";
+     foreach($result as  $value):
+      $mostarcategorias .='<optgroup label="'.$value->nombre.'">';
+      $result_prod =$this->listar_productos(); 
+       if(!empty($result_prod))
+        {
+          $mostarcategorias .='<option value=" " seleted >Seleccione</option>';
+            foreach($result_prod as $row):
+              $mostarcategorias .='<option value="'.$row->id_producto.'">'.$row->nombre_prod.'</option>';
+            endforeach ; 
+                                  } 
+      $mostarcategorias .= '</optgroup>';
+      endforeach ; 
+   return $mostarcategorias;
+  }
+
+  /*Insertar combo*/
+
+     public function insert_combo($data)
+  {
+      $this->db->insert('combo',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        
+        }else{
+          return false;
+        }
+     
+  }
+
+
+  public function save_combos($data){
+    return $this->db->insert("combo_producto",$data);
+  }
+
+
+  public function eliminar_combo($id)
+    {
+     $this->db->where('id_combo',$id);
+     $this->db->delete('combo');
+     if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+  } 
+
+  public function prod_delcombo($id_combo){
+        $this->db->select('prod.nombre_prod');
+        $this->db->where('com_p.id_combo', $id_combo);
+        $this->db->join('productos as prod', 'prod.id_producto = com_p.id_producto');
+        $query = $this->db->get('combo_producto as com_p');
+        return $query->result();
+       
+    }
+
+
+
+
+
+
   /*---------productos----------*/
      public function listar_productos()
   {
+    $this->db->select("id_categoria,id_producto,nombre_prod");
      $query = $this->db->get('productos');
       if($query->num_rows() > 0){
         return $query->result();
@@ -431,7 +627,7 @@ class Modelogeneral extends CI_Model {
   
      public function insert_prod($data)
   {
-      $this->db->insert('producto',$data);
+      $this->db->insert('productos',$data);
      if($this->db->affected_rows() > 0){
           return true;
         
@@ -443,10 +639,10 @@ class Modelogeneral extends CI_Model {
   /*Editar*/
   
   /*Eliminar*/
-     public function eliminar_prod($id_producto)
+     public function eliminar_prod($id)
     {
-     $this->db->where('id_producto',$id_producto);
-     $this->db->delete('producto');
+     $this->db->where('id_producto',$id);
+     $this->db->delete('productos');
      if($this->db->affected_rows() > 0){
         return true;
       }else{
@@ -454,6 +650,17 @@ class Modelogeneral extends CI_Model {
       }
   }
   /*----------------*/
+
+    /*CRUD COMBOS*/
+    public function listar_data_combos()
+  {
+     $query = $this->db->get('combo');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
    
    /*-----Devuelve el consecutivo de la orden -----------*/
    public function N_orden_compra($year) {

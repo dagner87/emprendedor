@@ -1,7 +1,7 @@
  </div>
  <!-- /.container-fluid -->
 
-            <footer class="footer text-center"> 2017 &copy; SOFTCOM SAS </footer>
+            <footer class="footer text-center"> 2018 &copy; SOFTCOM SAS </footer>
         </div>
         <!-- ============================================================== -->
         <!-- End Page Content -->
@@ -42,6 +42,9 @@
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/custom.min.js"></script>
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/dashboard1.js"></script>
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/validator.js"></script>
+    <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/jasny-bootstrap.js"></script>
+     <!-- jQuery file upload -->
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/dropify/dist/js/dropify.min.js"></script>
 
      <!-- Date Picker Plugin JavaScript -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
@@ -69,11 +72,11 @@
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/toastr.js"></script>  
 
     <script src="<?php echo base_url();?>assets/plugins/bower_components/switchery/dist/switchery.min.js"></script>
-        <script src="<?php echo base_url();?>assets/plugins/bower_components/custom-select/custom-select.min.js" type="text/javascript"></script>
-        <script src="<?php echo base_url();?>assets/plugins/bower_components/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
-        <script src="<?php echo base_url();?>assets/plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
-        <script src="<?php echo base_url();?>assets/plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
-        <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bower_components/multiselect/js/jquery.multi-select.js"></script>
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/custom-select/custom-select.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/multiselect/js/jquery.multi-select.js"></script>
 
      <!-- Magnific popup JavaScript -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
@@ -96,71 +99,7 @@
     <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bower_components/gallery/js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bower_components/fancybox/ekko-lightbox.min.js"></script>
     <script type="text/javascript">
-      (function() {
-        
-        $('#exampleValidator').wizard({
-            onInit: function() {
-                $('#validation').formValidation({
-                    framework: 'bootstrap',
-                    fields: {
-                        username: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'The username is required'
-                                },
-                                stringLength: {
-                                    min: 6,
-                                    max: 30,
-                                    message: 'The username must be more than 6 and less than 30 characters long'
-                                },
-                                regexp: {
-                                    regexp: /^[a-zA-Z0-9_\.]+$/,
-                                    message: 'The username can only consist of alphabetical, number, dot and underscore'
-                                }
-                            }
-                        },
-                        email: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'The email address is required'
-                                },
-                                emailAddress: {
-                                    message: 'The input is not a valid email address'
-                                }
-                            }
-                        },
-                        password: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'The password is required'
-                                },
-                                different: {
-                                    field: 'username',
-                                    message: 'The password cannot be the same as username'
-                                }
-                            }
-                        }
-                    }
-                });
-            },
-            validator: function() {
-                var fv = $('#validation').data('formValidation');
-                var $this = $(this);
-                // Validate the container
-                fv.validateContainer($this);
-                var isValidStep = fv.isValidContainer($this);
-                if (isValidStep === false || isValidStep === null) {
-                    return false;
-                }
-                return true;
-            },
-            onFinish: function() {
-                $('#validation').submit();
-                swal("Message Finish!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
-            }
-        });
-       
-    })();
+    
 
        $(document).ready(function($) {
      

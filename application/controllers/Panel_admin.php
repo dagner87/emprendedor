@@ -13,7 +13,7 @@ class Panel_admin extends CI_Controller
         $this->load->library('form_validation');
        
     }
-       public function index()
+    public function index()
     {
     if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
             redirect(base_url() . 'login');
@@ -188,11 +188,11 @@ class Panel_admin extends CI_Controller
           foreach($result as $row)
             {
              $output .= '<tr>
-                         <td><span class="text-muted"><img src="'.base_url().'assets/uploads/img_productos/'.$row->url_imagen.'" alt="user" class="img-circle" /></td>
+                         <td><span class="text-muted"><img src="'.base_url().'assets/uploads/img_productos/'.$row->url_imagen.'" alt="'.$row->nombre_prod.'" class="img-circle" /></td>
                          <td><span class="font-medium">'.$row->nombre_prod.'</span></td>
-                         <td><span class="text-muted">'.$row->stock.'</span></td>
-                         <td><span class="text-muted">'.$row->precio_unitario.'</span></td>
-                         <td><span class="text-muted">'.$row->precio_original.'</span></td>
+                         <td><span class="text-muted">'.$row->existencia.'</span></td>
+                         <td><span class="text-muted">'.$row->precio.'</span></td>
+                         <td><span class="text-muted">'.$row->vencimiento.'</span></td>
                          <td><span class="text-muted"> <button type="button" data="'.$row->id_producto.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span></td>
                         </tr>';
             }
@@ -203,12 +203,19 @@ class Panel_admin extends CI_Controller
        /* Insertar producto*/
     public function insert_prod()
     {
-       
-        $param['nombre_prod']     = $this->input->post('nombre_prod');
-        $param['stock']           = $this->input->post('stock');
-        $param['precio_original'] = $this->input->post('precio_original');
-        $param['precio_unitario'] = $this->input->post('precio_unitario');
-        $param['url_imagen']      = $this->input->post('nombre_archivo');
+        $param['nombre_prod']    = $this->input->post('nombre_prod');
+        $param['url_imagen']     = $this->input->post('nombre_archivo');
+        $param['precio']         = $this->input->post('precio');
+        $param['es_repuesto']    = $this->input->post('es_repuesto');
+        $param['existencia']     = $this->input->post('existencia');
+        $param['vencimiento']    = $this->input->post('vencimiento');
+        $param['alto']           = $this->input->post('alto');
+        $param['ancho']          = $this->input->post('ancho');
+        $param['largo']          = $this->input->post('largo');
+        $param['peso']           = $this->input->post('peso');
+        $param['sku']            = $this->input->post('sku');
+        $param['id_categoria']   = $this->input->post('id_categoria');
+        $param['valor_declarado']= $this->input->post('valor_declarado');       
         
         $result = $this->modelogeneral->insert_prod($param);
         $msg['comprobador'] = false;
@@ -216,7 +223,7 @@ class Panel_admin extends CI_Controller
              {
                $msg['comprobador'] = TRUE;
              }
-        echo json_encode($msg);
+        echo json_encode($param);
     }
      /* eliminar producto */
       public function eliminar_prod()
@@ -338,6 +345,18 @@ function load_dataRango()
         echo json_encode($msg);
     }
 
+      /* eliminar videos de capacitacion */
+  public function eliminar_rango()
+    {
+        $id = $this->input->get('id');
+        $result  = $this->modelogeneral->eliminar_rango($id);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }  
  /*-----------------------------*/  
     public function forgot_pass()
     {
@@ -428,12 +447,118 @@ function load_dataRango()
             redirect(base_url() . 'login');
         }
     $id_emp = $this->session->userdata('id_emp');
-    $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+    $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
+    $data['categorias']  = $this->modelogeneral->listar_categorias_prod();  
+
     $this->load->view("layout/header",$data);
     $this->load->view("admin_general/side_menuAdmin");
-    $this->load->view("admin_general/admin_productos");
+    $this->load->view("admin_general/admin_productos",$data);
     $this->load->view("layout/footer");  
     }
+
+  /* administracion de combos*/
+
+     public function admin_combos()
+    {
+    if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
+            redirect(base_url() . 'login');
+        }
+    $id_emp = $this->session->userdata('id_emp');
+    $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
+    $data['productos']  = $this->modelogeneral->seleccion_productos();  
+
+
+    $this->load->view("layout/header",$data);
+    $this->load->view("admin_general/side_menuAdmin");
+    $this->load->view("admin_general/admin_combos",$data);
+    $this->load->view("layout/footer");  
+    }
+
+       function load_dataCombos()
+    {
+        $result = $this->modelogeneral->listar_data_combos();
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+           $productos = $this->modelogeneral->prod_delcombo($row->id_combo);
+            {
+             $output .= '<tr>
+                         <td><span class="text-muted"><img src="'.base_url().'assets/uploads/img_productos/'.$row->url_imagen_combo.'" alt="'.$row->nombre_combo.'" class="img-circle" /></td>
+                         <td><span class="font-medium">'.$row->nombre_combo.'</span></td>';
+                         $output .= '<td>';
+                         foreach($productos as $prod):
+                          $output .= '<span class="text-muted">'.$prod->nombre_prod.'</br></span>';
+                          endforeach ; 
+                         $output .= '</td>';
+                         $output .= '<td><span class="text-muted">'.$row->precio_combo.'</span></td>
+                         <td><span class="text-muted">'.$row->existencia.'</span></td>
+                         <td><span class="text-muted"> <button type="button" data="'.$row->id_combo.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span></td>
+                        </tr>';
+            }
+        }
+    
+        echo $output;
+    }
+
+
+   /* Insertar combo*/
+  
+    public function insert_combo()
+    {
+        $param['nombre_combo']     = $this->input->post('nombre_combo');
+        $param['url_imagen_combo'] = $this->input->post('nombre_archivo');
+        $param['precio_combo']     = $this->input->post('precio_combo');
+        $param['existencia']       = $this->input->post('existencia');
+
+        $result = $this->modelogeneral->insert_combo($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+              $data['id_combo']   =  $this->modelogeneral->lastID();
+              $data['productos']  = $this->input->post('productos');
+              $data['cantidad']   = $this->input->post('cantidades');
+
+              $this->save_combo_prod($data);
+              $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($data);
+    }
+
+    
+
+      public function eliminar_combo()
+    {
+        $id = $this->input->get('id');
+        $result  = $this->modelogeneral->eliminar_combo($id);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
+
+
+    protected function save_combo_prod($data){ 
+    for ($i=0; $i < count($data['productos']); $i++) { 
+      
+          $dato_combo = array(
+              'id_producto' => $data['productos'][$i], 
+              'id_combo'    => $data['id_combo'],
+              'cantidad'    => $data['cantidad'][$i] 
+          );
+        
+        $this->modelogeneral->save_combos($dato_combo);
+    
+    }
+}
+
+
+
+
      public function admin_capacitacion()
     {
     if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {

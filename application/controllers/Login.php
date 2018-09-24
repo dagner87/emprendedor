@@ -139,6 +139,7 @@ class Login extends CI_Controller
 
 	public function ingreso($param)
     {
+
      $check_user = $this->Login_model->login_user($param['email']->email ,$param['password']);
 	  if($check_user == TRUE)
 	   {
@@ -155,23 +156,6 @@ class Login extends CI_Controller
 
 	     $this->index();
 	  }   
-
-	     $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
-	     $data['result']     = $this->modelogeneral->mostrar_asoc($id_emp);
-	     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
-	     $data['ultimo_reg'] = $this->modelogeneral->las_insetCap();           
-
-	     $this->load->view("layout/header",$data);
-	     $this->load->view("layout/side_menu",$data);
-	     if ($data['datos_emp']->id_cap !=  $data['ultimo_reg']->id_cap)
-	      {
-	        $this->load->view("emprendedor/capacitacion_videos",$data);
-	      }
-
-	       $this->load->view("layout/footer"); 
-	     }    
-
-	     $this->index();    
 
     }
 
