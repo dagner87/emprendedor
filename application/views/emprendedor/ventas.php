@@ -424,7 +424,7 @@
     });
 
 
-        $("#id_producto_alm").on("click",function(){
+        $("#id_producto_alm").on("change",function(){
          $(this).find('select :first').attr("disabled",'true');
          data = $(this).val();
          infoproducto = data.split("*");
@@ -439,7 +439,7 @@
             html += "<td><input type='hidden' name='productos[]' value='"+infoproducto[0]+"'>"+nombre_prod+"</td>";
             html += "<td>"+infoproducto[1]+"</td>";
             html += "<td><input type='text' name='cantidades[]' value='' class='cantidades' required data-parsley-minlength='2'></td>";
-            html += "<td><input type='text' name='precio[]' value='' class='precio' required data-parsley-minlength='1'></td>";
+            html += "<td><input type='text' name='precios[]' value='' class='precios' required data-parsley-minlength='1'></td>";
             html += "<td><input type='hidden' name='importes[]' value=''><p></p></td>";
             html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-remove'></span></button></td>";
             html += "</tr>";
@@ -450,6 +450,7 @@
         }
     });
 
+       
      
      $(document).on("click",".btn-check",function(){
         var id = $(this).attr('data');
@@ -579,6 +580,38 @@
         });
         
     });
+    $(document).on("keyup","#tb-combo input.precios", function(){
+
+        precio = $(this).val();
+        alert(precio);
+        cantidad = $(this).closest("tr").find("td:eq(2)").children("input").val();
+        importe = cantidad * precio;
+        $(this).closest("tr").find("td:eq(4)").children("p").text(importe.toFixed(2));
+        $(this).closest("tr").find("td:eq(4)").children("input").val(importe.toFixed(2));s
+        sumar();
+    });
+
+    $(document).on("keyup","#tb-combo input.cantidades", function(){
+        cantidad = $(this).val();
+        precio = $(this).closest("tr").find("td:eq(3)").children("input").val();
+        importe = cantidad * precio;
+        $(this).closest("tr").find("td:eq(4)").children("p").text(importe.toFixed(2));
+        $(this).closest("tr").find("td:eq(4)").children("input").val(importe.toFixed(2));
+        sumar();
+    });
+
+    $(document).on("click",".btn-remove-producto", function(){
+        $(this).closest("tr").remove();
+        sumar();
+    });
+
+     function sumar(){
+        total = 0;
+        $("#tb-combo tbody tr").each(function(){
+            total = total + Number($(this).find("td:eq(4)").text());
+        });
+        $("input[name=total]").val(total.toFixed(2));
+   }
        function load_data_cap()
     {
         $.ajax({

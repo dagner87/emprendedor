@@ -184,6 +184,7 @@ class Capacitacion extends CI_Controller
         $mostarprod ="";
         if(!empty($resultado))
         {
+            $mostarprod .='<option value="">Seleccione</option>';
             foreach($resultado as $row):
               $mostarprod .='<option value="'.$row->id_producto.'*'.$row->existencia.'">'.$row->nombre_prod.'</option>';
             endforeach ; 
@@ -314,9 +315,10 @@ class Capacitacion extends CI_Controller
               
                if($this->modelogeneral->save_Pedido($data)){
 
-                 $data['id_pedidos'] =  $this->modelogeneral->lastID();
-                 $data['productos']  = $this->input->post('productos');
-                 $data['cantidad']   = $this->input->post('cantidades');
+                 $data['id_pedidos']      =  $this->modelogeneral->lastID();
+                 $data['productos']       = $this->input->post('productos');
+                 $data['cantidad']        = $this->input->post('cantidades');
+                 $data['precio_pedido']   = $this->input->post('precios');
                  $this->save_detallePedido($data);
                } 
               $msg['comprobador'] = TRUE;
