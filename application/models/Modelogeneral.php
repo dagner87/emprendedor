@@ -24,6 +24,18 @@ class Modelogeneral extends CI_Model {
      
   }
 
+
+  public function check_cliente($data)
+  {
+    $datos_cliente = $this->datos_cliente($data['id_cliente']);
+    if ($datos_cliente) {
+      
+    }else{
+         $this->insert_cliente($data);
+        }
+     
+  }
+
   /*-----------crud clientes----------------*/
 
     public function insert_cliente($data)
@@ -75,7 +87,15 @@ class Modelogeneral extends CI_Model {
        
     }
 
-
+    public function listar_datosAlmacen($id_emp){
+        $this->db->select('prod.nombre_prod,prod.sku,alm.existencia');
+        $this->db->join('productos as prod', 'prod.id_producto = alm.id_producto');
+        $this->db->where('alm.id_emp', $id_emp);
+        $this->db->where('alm.existencia >',0);
+        $query = $this->db->get('almacen_emp as alm');
+        return $query->result();
+       
+    }
 
    public function datos_cliente($id_cliente) {
    $this->db->where('id_cliente',$id_cliente);
@@ -219,6 +239,20 @@ public function save_Pedido($data){
       }else{
         return false;
       }
+  }
+
+    public function selec_categorias_prod()
+  {
+     $mostarcategorias ="";
+      $result_c =$this->listar_categorias_prod(); 
+       if(!empty($result_c))
+        {
+          foreach($result_c as $row):
+              $mostarcategorias .='<option value="'.$row->id.'">'.$row->nombre.'</option>';
+           endforeach ; 
+        } 
+     
+   return $mostarcategorias;
   }
 
   /*------------------------------------*/
@@ -561,12 +595,27 @@ public function save_Pedido($data){
             foreach($result_prod as $row):
               $mostarcategorias .='<option value="'.$row->id_producto.'">'.$row->nombre_prod.'</option>';
             endforeach ; 
-                                  } 
+        } 
       $mostarcategorias .= '</optgroup>';
       endforeach ; 
    return $mostarcategorias;
   }
 
+
+  public function productos_almacen($data)
+  {
+    
+    $this->db->select('prod.id_producto,prod.nombre_prod,alm.existencia');
+    $this->db->join('productos as prod', 'prod.id_producto = alm.id_producto');
+    $this->db->where('alm.id_emp', $data['id_emp']);
+    $this->db->where('prod.id_categoria', $data['id_categoria']);
+    $this->db->where('alm.existencia >',0);
+    $query = $this->db->get('almacen_emp as alm');
+    return $query->result();
+
+  }
+
+ 
   /*Insertar combo*/
 
      public function insert_combo($data)

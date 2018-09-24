@@ -102,6 +102,107 @@ class Capacitacion extends CI_Controller
      $this->load->view("emprendedor/cartera_clientes",$data);
      $this->load->view("layout/footer");  
     }
+  /*-------------------------*/
+    public function almacen()
+    {
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        } 
+
+     $id_emp                 = $this->session->userdata('id_emp');
+     $data['productos']      = $this->modelogeneral->seleccion_productos();
+     $data['provincias']     = $this->modelogeneral->select_provincias();  
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp); 
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
+ 
+     $this->load->view("layout/header",$data);
+     $this->load->view("layout/side_menu",$data);
+     $this->load->view("emprendedor/almacen",$data);
+     $this->load->view("layout/footer");  
+    }
+
+    
+
+    function load_dataAlmacen()
+    {
+       if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        } 
+        $id_emp                 = $this->session->userdata('id_emp');
+        $result = $this->modelogeneral->listar_datosAlmacen($id_emp);
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+              $output .= ' <tr>
+                         <td>'.$row->nombre_prod.'</td>
+                         <td>'.$row->sku.'</td>
+                         <td>'.$row->existencia.'</td>
+                         </tr>';                                        
+            }
+        }
+    
+        echo $output;
+    }
+    /*-------------------------------*/
+    public function ventas()
+    {
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        } 
+
+     $id_emp             = $this->session->userdata('id_emp');
+     $data['categorias']  = $this->modelogeneral->selec_categorias_prod();
+
+     $data['provincias']     = $this->modelogeneral->select_provincias();  
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp); 
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
+ 
+     $this->load->view("layout/header",$data);
+     $this->load->view("layout/side_menu",$data);
+     $this->load->view("emprendedor/ventas",$data);
+     $this->load->view("layout/footer");  
+    }
+
+    
+    public function productos_almacen()
+    {
+       if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+           redirect(base_url() . 'login');
+       }
+       
+        $data['id_categoria']  = $this->input->post('id');
+        $data['id_emp']      = $this->session->userdata('id_emp');
+        $resultado = $this->modelogeneral->productos_almacen($data);
+        $mostarprod ="";
+        if(!empty($resultado))
+        {
+            foreach($resultado as $row):
+              $mostarprod .='<option value="'.$row->id_producto.'*'.$row->existencia.'">'.$row->nombre_prod.'</option>';
+            endforeach ; 
+        } 
+        echo $mostarprod;
+    }
+
+    /*-------------------------------*/
+ 
+    public function datos_cliente()
+    {
+       if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+           redirect(base_url() . 'login');
+       }
+        $id_cliente = $this->input->get('id');
+        $resultado = $this->modelogeneral->datos_cliente($id_cliente);
+        echo json_encode($resultado);
+    }
+
 
     public function historial_cliente($id_cliente)
     {
@@ -151,6 +252,76 @@ class Capacitacion extends CI_Controller
         }
     
         echo $output;
+    }
+
+    function load_dataClientesVentas()
+    {
+        $result = $this->modelogeneral->listar_clientes();
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+              $output .= ' <tr>
+                         <td>
+                         <button type="button" data="'.$row->id_cliente.'" class="btn btn-success btn-outline btn-circle btn-sm btn-check"><i class="fa  fa-check"></i></button>
+                          </td>   
+                         <td>'.$row->dni.'</td>
+                         <td>'.$row->nombre_cliente.' '.$row->apellidos.' </td>
+                         <td>'.$row->telefono.'</td>
+                         <td>'.$row->celular.'</td>
+                         <td>'.$row->email.'</td>
+                         
+                         </tr>';                                        
+            }
+        }
+    
+        echo $output;
+    }
+
+    public function add_pedido()
+    {
+         if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        } 
+
+        $param['id_emp']            = $this->session->userdata('id_emp');
+        $param['nombre_cliente']    = $this->input->post('nombre_cliente');
+        $param['apellidos']         = $this->input->post('apellidos');
+        $param['dni']               = $this->input->post('dni');
+        $param['telefono']          = $this->input->post('telefono');
+        $param['email']             = $this->input->post('email');
+        $param['celular']           = $this->input->post('celular');
+        $param['direccion']         = $this->input->post('direccion');
+        $param['fecha_nacimiento']  = $this->input->post('fecha_nacimiento');
+        $param['fecha_incio']       = $this->input->post('fecha_incio');
+        $param['id_municipio']      = $this->input->post('id_municipio');
+        $param['id_provincia']      = $this->input->post('id_provincia');
+        $datos_emp                  = $this->modelogeneral->datos_emp($param['id_emp']);
+        $param['id_pais']           = $datos_emp->id_pais;
+       
+        $result = $this->modelogeneral->check_cliente($param);
+        
+         $msg['comprobador'] = false;
+        if($result)
+             {
+               $data['id_cliente']      =  $this->modelogeneral->lastID();
+               $data['id_emp']          = $this->session->userdata('id_emp');
+
+               $data['no_pedido']       = 'ing-manual-001';
+               $data['fecha_solicitud'] = $this->input->post('fecha_incio');
+              
+               if($this->modelogeneral->save_Pedido($data)){
+
+                 $data['id_pedidos'] =  $this->modelogeneral->lastID();
+                 $data['productos']  = $this->input->post('productos');
+                 $data['cantidad']   = $this->input->post('cantidades');
+                 $this->save_detallePedido($data);
+               } 
+              $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($data);
     }
 
       function load_historialCompra()

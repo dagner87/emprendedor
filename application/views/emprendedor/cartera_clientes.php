@@ -1,11 +1,11 @@
 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">ADMINISTACION DE COMBOS</h4> </div>
+                        <h4 class="page-title">Consultas Cartera</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <ol class="breadcrumb">
                             <li><a href="#">Inicio</a></li>
-                            <li><a href="#">Tienda</a></li>
-                            <li class="active">Adm.Combos</li>
+                            <li><a href="#">Consultas Cartera</a></li>
+                            <li class="active">Alta de Clientes</li>
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -23,7 +23,7 @@
                 <h4 class="modal-title" id="titulo_invit">Nuevo Producto </h4>
             </div>
             <div class="modal-body">
-                <form  action="<?php echo base_url() ?>panel_admin/insert_prod" method="post">
+            <form  action="<?php echo base_url() ?>panel_admin/insert_prod" method="post">
             <div class="form-group">
                 <label for="exampleInputuname">Nombre producto</label>
                 <div class="input-group">

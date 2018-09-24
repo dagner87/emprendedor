@@ -66,6 +66,14 @@
                         </ul>
                     </li>
 
+                    <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-buffer fa-fw"></i> <span class="hide-menu">Ventas<span class="fa arrow"></span></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="<?php echo base_url();?>ventas"><i class="fa fa-circle-thin fa-fw"></i><span class="hide-menu">Gestión de Ventas</span></a></li>
+                            <li><a href="<?php echo base_url();?>almacen"><i class="fa fa-circle-thin fa-fw"></i><span class="hide-menu">Almacen de productos</span></a></li>
+                         
+                        </ul>
+                    </li>
+
                      <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-alarm-multiple fa-fw"></i> <span class="hide-menu">Vencimientos<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="<?php echo base_url();?>capacitacion/tienda"><i class="fa fa-bell-o fa-fw"></i><span class="hide-menu">Venc. de Productos</span></a></li>

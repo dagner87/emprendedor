@@ -23,5 +23,12 @@ $route['cartera_clientes'] = "capacitacion/cartera_clientes";
 $route['historial_cliente'] = "capacitacion/historial_cliente";
 $route['historial_cliente/(:num)'] = "capacitacion/historial_cliente/$1";
 
-/*-------------------------------------------------*/
+//-------Almacen--------------------------
+$route['almacen'] = "capacitacion/almacen";
+$route['almacen/(:num)'] = "capacitacion/almacen/$1";
 
+//-------ventas--------------------------
+$route['ventas'] = "capacitacion/ventas";
+$route['ventas/(:num)'] = "capacitacion/ventas/$1";
+
+/*-------------------------------------------------*/
