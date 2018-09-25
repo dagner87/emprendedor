@@ -303,28 +303,70 @@ class Capacitacion extends CI_Controller
         $param['id_pais']           = $datos_emp->id_pais;
        
         $result = $this->modelogeneral->check_cliente($param);
+        $msg['comprobador'] = false;
         
-         $msg['comprobador'] = false;
-        if($result)
+        if($result == true)
              {
                $data['id_cliente']      =  $this->modelogeneral->lastID();
                $data['id_emp']          = $this->session->userdata('id_emp');
-
-               $data['no_pedido']       = 'ing-manual-001';
+               $comprobante             =  $this->modelogeneral->getComprobante();
+               $data['no_pedido']       = $comprobante->cantidad+1;
                $data['fecha_solicitud'] = $this->input->post('fecha_incio');
+               $data['total']           = $this->input->post('total');
               
                if($this->modelogeneral->save_Pedido($data)){
 
                  $data['id_pedidos']      =  $this->modelogeneral->lastID();
                  $data['productos']       = $this->input->post('productos');
                  $data['cantidad']        = $this->input->post('cantidades');
-                 $data['precio_pedido']   = $this->input->post('precios');
-                 $this->save_detallePedido($data);
+                 $data['precios']         = $this->input->post('precios');
+                 $data['importe']         = $this->input->post('importes');
+
+                 $this->save_detallePedidoConfirmado($data);
                } 
               $msg['comprobador'] = TRUE;
+             }else{
+
+               $data['id_cliente']      =  $result;
+               $data['id_emp']          = $this->session->userdata('id_emp');
+               $comprobante             =  $this->modelogeneral->getComprobante();
+               $data['no_pedido']       = $comprobante->cantidad+1;
+               $data['fecha_solicitud'] = $this->input->post('fecha_incio');
+               $data['total']           = $this->input->post('total');
+              
+               if($this->modelogeneral->save_Pedido($data)){
+
+                 $data['id_pedidos']      =  $this->modelogeneral->lastID();
+                 $data['productos']       = $this->input->post('productos');
+                 $data['cantidad']        = $this->input->post('cantidades');
+                 $data['precios']         = $this->input->post('precios');
+                 $data['importe']         = $this->input->post('importes');
+
+                 $this->save_detallePedidoConfirmado($data);
+               } 
+              $msg['comprobador'] = TRUE;
+
+
              }
+
         echo json_encode($data);
     }
+
+    protected function save_detallePedidoConfirmado($data){ 
+    for ($i=0; $i < count($data['productos']); $i++) { 
+      
+          $dato_pedido = array(
+              'id_producto'   => $data['productos'][$i], 
+              'id_pedidos'    => $data['id_pedidos'],
+              'precio_pedido' => $data['precios'][$i], 
+              'cantidad'      => $data['cantidad'][$i],
+              'importe'       => $data['importe'][$i] 
+          );
+        
+        $this->modelogeneral->save_detallePedido($dato_pedido);
+    
+    }
+}
 
       function load_historialCompra()
     {
@@ -434,6 +476,8 @@ protected function save_detallePedido($data){
     
     }
 }
+
+
 
 
 public function update_datosCliente()

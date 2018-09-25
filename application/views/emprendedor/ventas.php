@@ -26,11 +26,12 @@
                
             
             <div class="form-group">
-                <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
-                <form class="form-group" role="search">
+                
+                <!--form class="form-group" role="search">
+                  <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
                                 <div class="input-group">
                                     <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Busqueda Avanzada"> <span class="input-group-btn"><button type="button" class="btn waves-effect waves-light btn-info"><i class="fa fa-search"></i></button></span> </div>
-                            </form>
+                            </form-->
             </div>
             <div class="row">
                     <div class="col-md-12">
@@ -74,33 +75,30 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="titulo_invit">Vista Previa </h4>
+                <h3><b>Detalle de Compra</b> <span class="pull-right"></span></h3>
             </div>
             <div class="modal-body">
           
                 <div class="row">
                     <div class="col-md-12">
                         <div class="white-box printableArea">
-                          <h3><b>Detalle de Compra</b> <span class="pull-right"></span></h3>
-                            <hr>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="pull-left">
                                         <address>
-                                            <h3> &nbsp;<b class="text-info" >DVIGI</b></h3>
-                                        </address>
-                                    </div>
-                                    <div class="pull-right text-right">
-                                        <address>
-                                            <h3>To,</h3>
+                                            <h3> &nbsp;<b class="text-info" >Cliente:</b></h3>
                                             <h4 class="font-bold" id="v_nombre_cliente"></h4>
                                             <p class="text-muted m-l-30">DNI:<span id="v_dni"></span>
                                               <br/>Teléfono:<span id="v_telefono"></span>
                                               <br/>Celular: <span id="v_celular"></span></p>
                                               <br/>Correo: <span id="v_email"></span>
                                               <br/>Direccion: <span id="v_direccion"></span>
-                                            <p class="m-t-30" ><b>Fecha:</b> <i class="fa fa-calendar"></i> <span id="v_fecha_incio"></span>  </p>
+                                            <p class="m-t-30" ><b><i class="fa fa-calendar"></i> Fecha: </b><span id="v_fecha_incio"></span>  </p>
+
                                         </address>
+                                    </div>
+                                    <div class="">
+                                        
 
                                     </div>
                                 </div>
@@ -110,10 +108,10 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">#</th>
-                                                    <th>Description</th>
-                                                    <th class="text-right">Quantity</th>
-                                                    <th class="text-right">Unit Cost</th>
-                                                    <th class="text-right">Total</th>
+                                                    <th>Producto</th>
+                                                    <th class="text-right">Cantidad</th>
+                                                    <th class="text-right">Precio</th>
+                                                    <th class="text-right">Importe</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -124,41 +122,17 @@
                                                     <td class="text-right"> $24 </td>
                                                     <td class="text-right"> $48 </td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="text-center">2</td>
-                                                    <td>Air Conditioner</td>
-                                                    <td class="text-right"> 3 </td>
-                                                    <td class="text-right"> $500 </td>
-                                                    <td class="text-right"> $1500 </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center">3</td>
-                                                    <td>RC Cars</td>
-                                                    <td class="text-right"> 20 </td>
-                                                    <td class="text-right"> %600 </td>
-                                                    <td class="text-right"> $12000 </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center">4</td>
-                                                    <td>Down Coat</td>
-                                                    <td class="text-right"> 60 </td>
-                                                    <td class="text-right">$5 </td>
-                                                    <td class="text-right"> $300 </td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="pull-right m-t-30 text-right">
-                                        <p>Sub - Total amount: $13,848</p>
-                                        <p>vat (10%) : $138 </p>
-                                        <hr>
                                         <h3><b>Total :</b> $13,986</h3> </div>
                                     <div class="clearfix"></div>
                                     <hr>
                                     <div class="text-right">
-                                        <button class="btn btn-danger" type="submit"> Proceed to payment </button>
+                                        <button class="btn btn-info " id="confirmar_pedido" type="submit"> Procesar Pedido </button>
                                         <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
                                     </div>
                                 </div>
@@ -186,12 +160,12 @@
                                 <div class="panel-body">
                                   <div class="row">
                                 <div class="col-md-4">
-                                    <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#insetcapModal">Buscar Cliente</button> <!--button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#insetcapModal">Nuevo Cliente</button--></h3>
+                                    <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#insetcapModal"><i class="fa fa-search"></i> Buscar Cliente</button> </h3>
                                    
                                 </div>
                                
                             </div>
-                    <form  id="add_prod" action="<?php echo base_url() ?>capacitacion/insert_cliente" method="post" data-toggle="validator" >
+                    <form  id="add_pedido" action="" method="post" data-toggle="validator" >
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-md-4">
@@ -338,7 +312,7 @@
                             </div>
 
                         <div class="form-actions">
-                            <button type="" class="btn btn-success btn-vista-previa" data-toggle="modal" data-target="#vistaPrevia"> <i class="fa fa-check"></i> Vista Previa</button>
+                            <a  class="btn btn-success btn-outline btn-vista-previa" data-toggle="modal" data-target="#vistaPrevia"> <i class="fa fa-check"></i> Vista Previa</a>
                             <!--button type="submit" class="btn btn-success collapseble"> <i class="fa fa-check"></i> Guardar</button-->
                             <button type="button" class="btn btn-default">Limpiar</button>
                         </div>
@@ -364,7 +338,52 @@
 
         load_data_cap();
         
-        $('#add_pedido').submit(function(e) {
+        
+
+        $('#id_categoria').on("click", function(evt){
+          var id = $('#id_categoria').val();
+          
+          $.ajax({
+            type: "POST",
+            url: "<?php echo base_url();?>capacitacion/productos_almacen",
+            data: {id: id},
+            success: function (data) {
+              $('#id_producto_alm').html(data);
+             }
+          });
+    });
+
+
+        $("#id_producto_alm").on("change",function(){
+         $(this).find('select :first').attr("disabled",'true');
+         data = $(this).val();
+         infoproducto = data.split("*");
+
+         var option        = $(this).find(':selected')[0];//obtiene el producto seleccionado
+         var nombre_prod   =  $('select[name="id_producto_alm"] option:selected').text();
+         $(option).attr('disabled', 'disabled'); // y lo desabilita para no volverlo a seleccionar
+          
+        
+        if (data !='') {
+            html = "<tr>";
+            html += "<td><input type='hidden' name='productos[]' value='"+infoproducto[0]+"'>"+nombre_prod+"</td>";
+            html += "<td>"+infoproducto[1]+"</td>";
+            html += "<td><input type='text' name='cantidades[]' value='' class='cantidades' required data-parsley-minlength='1'></td>";
+            html += "<td><input type='text' name='precios[]' value='' class='precios' required data-parsley-minlength='1'></td>";
+            html += "<td><input type='hidden' name='importes[]' value=''><p></p></td>";
+            html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-remove'></span></button></td>";
+            html += "</tr>";
+            $("#tb-combo tbody").append(html);
+            sumar();
+           
+        }else{
+            alert("seleccione un producto...");
+        }
+    });
+
+
+    $(document).on("click","#confirmar_pedido",function(e){
+      alert(aq);
             e.preventDefault();
             var url = '<?php echo base_url() ?>capacitacion/add_pedido';
             var data = $('#add_prod').serialize();
@@ -408,47 +427,7 @@
                           load_data_cap();
                           }
                   });
-        });
-
-        $('#id_categoria').on("click", function(evt){
-          var id = $('#id_categoria').val();
-          
-          $.ajax({
-            type: "POST",
-            url: "<?php echo base_url();?>capacitacion/productos_almacen",
-            data: {id: id},
-            success: function (data) {
-              $('#id_producto_alm').html(data);
-             }
-          });
-    });
-
-
-        $("#id_producto_alm").on("change",function(){
-         $(this).find('select :first').attr("disabled",'true');
-         data = $(this).val();
-         infoproducto = data.split("*");
-
-         var option        = $(this).find(':selected')[0];//obtiene el producto seleccionado
-         var nombre_prod   =  $('select[name="id_producto_alm"] option:selected').text();
-         $(option).attr('disabled', 'disabled'); // y lo desabilita para no volverlo a seleccionar
-          
-        
-        if (data !='') {
-            html = "<tr>";
-            html += "<td><input type='hidden' name='productos[]' value='"+infoproducto[0]+"'>"+nombre_prod+"</td>";
-            html += "<td>"+infoproducto[1]+"</td>";
-            html += "<td><input type='text' name='cantidades[]' value='' class='cantidades' required data-parsley-minlength='2'></td>";
-            html += "<td><input type='text' name='precios[]' value='' class='precios' required data-parsley-minlength='1'></td>";
-            html += "<td><input type='hidden' name='importes[]' value=''><p></p></td>";
-            html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-remove'></span></button></td>";
-            html += "</tr>";
-            $("#tb-combo tbody").append(html);
-           
-        }else{
-            alert("seleccione un producto...");
-        }
-    });
+        });    
 
        
      
@@ -505,15 +484,16 @@
 
 
     $(document).on("click",".btn-vista-previa",function(){
-     var v_nombre_cliente = $('input[name=nombre_cliente]').val();
-     var dni         =  $('input[name=dni]').val();
-     var telefono    =  $('input[name=telefono]').val();
-     var celular     =  $('input[name=celular]').val();
-     var email       =  $('input[name=email]').val();
-     var fecha_incio =  $('input[name=fecha_incio]').val();
-     var direccion   =  $('textarea[name=direccion]').val();
+     var nombre_cliente = $('input[name=nombre_cliente]').val();
+     var apellidos      = $('input[name=apellidos]').val();
+     var dni            =  $('input[name=dni]').val();
+     var telefono       =  $('input[name=telefono]').val();
+     var celular        =  $('input[name=celular]').val();
+     var email          =  $('input[name=email]').val();
+     var fecha_incio    =  $('input[name=fecha_incio]').val();
+     var direccion      =  $('textarea[name=direccion]').val();
      
-      $('#v_nombre_cliente').text(v_nombre_cliente);  
+      $('#v_nombre_cliente').text(nombre_cliente+" "+apellidos);  
       $('#v_dni').text(dni);
       $('#v_telefono').text(telefono);
       $('#v_email').text(celular); 
@@ -581,13 +561,11 @@
         
     });
     $(document).on("keyup","#tb-combo input.precios", function(){
-
         precio = $(this).val();
-        alert(precio);
         cantidad = $(this).closest("tr").find("td:eq(2)").children("input").val();
         importe = cantidad * precio;
         $(this).closest("tr").find("td:eq(4)").children("p").text(importe.toFixed(2));
-        $(this).closest("tr").find("td:eq(4)").children("input").val(importe.toFixed(2));s
+        $(this).closest("tr").find("td:eq(4)").children("input").val(importe.toFixed(2));
         sumar();
     });
 

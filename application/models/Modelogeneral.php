@@ -27,14 +27,27 @@ class Modelogeneral extends CI_Model {
 
   public function check_cliente($data)
   {
-    $datos_cliente = $this->datos_cliente($data['id_cliente']);
+    $datos_cliente = $this->buscar_dnicli($data['dni']); //verifico si exite el cliente
     if ($datos_cliente) {
-      
+       return $dato['id_cliente'] = $datos_cliente->id_cliente; 
     }else{
-         $this->insert_cliente($data);
+        return $this->insert_cliente($data);
         }
      
   }
+
+  public function buscar_dnicli($dni) {
+   $this->db->where('dni',$dni);
+   $query = $this->db->get('cliente');
+   if($this->db->affected_rows() > 0){
+          return $query->row();
+        
+      }else{
+             return false;
+           }
+   
+  
+   }
 
   /*-----------crud clientes----------------*/
 
