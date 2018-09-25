@@ -165,7 +165,7 @@
                                 </div>
                                
                             </div>
-                    <form  id="add_pedido" action="" method="post" data-toggle="validator" >
+                    <form  id="add_pedido" action="<?php echo base_url() ?>capacitacion/add_pedido" method="post" data-toggle="validator" >
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-md-4">
@@ -312,8 +312,8 @@
                             </div>
 
                         <div class="form-actions">
-                            <a  class="btn btn-success btn-outline btn-vista-previa" data-toggle="modal" data-target="#vistaPrevia"> <i class="fa fa-check"></i> Vista Previa</a>
-                            <!--button type="submit" class="btn btn-success collapseble"> <i class="fa fa-check"></i> Guardar</button-->
+                            <!--a  class="btn btn-success btn-outline btn-vista-previa" data-toggle="modal" data-target="#vistaPrevia"> <i class="fa fa-check"></i> Vista Previa</a-->
+                            <button type="submit" class="btn btn-success collapseble"> <i class="fa fa-check"></i> Guardar</button>
                             <button type="button" class="btn btn-default">Limpiar</button>
                         </div>
                     </form>

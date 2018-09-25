@@ -25,29 +25,65 @@ class Modelogeneral extends CI_Model {
   }
 
 
-  public function check_cliente($data)
+  public function check_cliente($parametro, $valor)
   {
-    $datos_cliente = $this->buscar_dnicli($data['dni']); //verifico si exite el cliente
-    if ($datos_cliente) {
-       return $dato['id_cliente'] = $datos_cliente->id_cliente; 
-    }else{
-        return $this->insert_cliente($data);
-        }
-     
+    $this->db->where($parametro,$valor);
+    $query = $this->db->get('cliente');
+    if($this->db->affected_rows() > 0){
+          return true;        
+      }else{
+             return false;
+           }
   }
 
   public function buscar_dnicli($dni) {
    $this->db->where('dni',$dni);
    $query = $this->db->get('cliente');
-   if($this->db->affected_rows() > 0){
-          return $query->row();
-        
-      }else{
-             return false;
-           }
-   
-  
+   return $query->row();
+       
    }
+   public function buscar_emailcli($email) {
+   $this->db->where('email',$email);
+   $query = $this->db->get('cliente');
+   return $query->row();
+       
+   }
+
+    public function resto_almacen($data) {
+   
+     $datos_almacen = $this->datos_prodAlmacen($data);
+     $saldo = $datos_almacen->existencia - $data['cantidad'];
+
+     $param = array('existencia' => $saldo);
+   
+     $this->db->where('id_emp',$data['id_emp']);
+     $this->db->where('id_producto',$data['id_producto']);
+     $this->db->update('almacen_emp',$param);
+   
+     if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+            
+           return false;
+        }
+       
+   }
+
+   
+
+   public function datos_prodAlmacen($data) {
+  
+   $this->db->where('id_emp',$data['id_emp']);
+   $this->db->where('id_producto',$data['id_producto']);
+   $query = $this->db->get('almacen_emp');
+   return $query->row();
+       
+   }
+
+   
+
+  
+  
 
   /*-----------crud clientes----------------*/
 
@@ -123,8 +159,12 @@ class Modelogeneral extends CI_Model {
 public function getComprobante(){
     $this->db->where("nombre",'no_pedido');
     $resultado = $this->db->get("tipo_comprobante");
-    return $resultado->row();
-  }   
+    $row = $resultado->row();
+    $no_pedido = $row->cantidad +1;
+    $param = array('cantidad' => $no_pedido);
+    $this->db->update('tipo_comprobante',$param);
+   return $no_pedido;
+   }   
 
 
 public function save_Pedido($data){
@@ -267,6 +307,100 @@ public function save_Pedido($data){
      
    return $mostarcategorias;
   }
+
+      public function selec_respuestos_prod()
+  {
+     $mostarrespuesto ="";
+      $result_r =$this->listar_respuesto(); 
+       if(!empty($result_r))
+        {
+          foreach($result_r as $row):
+              $mostarrespuesto .='<option value="'.$row->id_producto.'">'.$row->nombre_prod.'</option>';
+           endforeach ; 
+        } 
+     
+   return $mostarrespuesto;
+  }
+
+
+
+   public function listar_respuesto()
+  {
+     $this->db->where('es_repuesto',1);
+     $query = $this->db->get('productos');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+  public function insert_repuesto($data)
+  {
+      $this->db->insert('respuestos',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        }else{
+              return false;
+             }
+  }
+
+   public function datos_respuestoPadre($id_producto)
+  {
+     $this->db->where('id_producto',$id_producto);
+     $query = $this->db->get('respuestos');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+   public function datos_respuestoHijo($id_producto)
+  {
+     $this->db->where('id_respuesto_hijo',$id_producto);
+     $query = $this->db->get('respuestos');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+   public function verificador_vencimiento($id_cliente,$id_resp_prod)
+  {
+     $this->db->where('id_cliente',$id_cliente);
+     $this->db->where('id_resp_prod',$id_resp_prod);
+     $query = $this->db->get('prod_vencimiento');
+     return $query->row();
+      
+  }
+
+  
+  public function updateverfi_vencimiento($id_prod_vencimiento,$fecha_ven_final) {
+    $param = array('fecha_vencimiento' => $fecha_ven_final );
+   $this->db->where('id_prod_vencimiento',$id_prod_vencimiento);
+   $this->db->update('prod_vencimiento',$param);
+   if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+   }
+
+
+ public function insertverfi_vencimiento($data)
+  {
+      $this->db->insert('prod_vencimiento',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        }else{
+              return false;
+             }
+  }
+  
+
+
 
   /*------------------------------------*/
 
@@ -749,7 +883,15 @@ public function save_Pedido($data){
    $this->db->where('email',$data_ins['email']);
    $this->db->update('emprendedor',$data);
   
-   }  
+   } 
+
+    public function datos_productos($id_producto) {
+    
+   $this->db->where('id_producto',$id_producto);
+   $query = $this->db->get('productos');
+   return $query-> row();
+  
+   } 
     
     /*-----Devuelve dato del producto -----------*/
    public function datos_prod($id_producto) {

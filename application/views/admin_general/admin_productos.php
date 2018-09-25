@@ -12,6 +12,58 @@
                   
                 </div>
 
+ <!-- .modal for add task -->
+                            <div class="modal fade" id="asociar-respuesto" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="titulo_invit">Asociar Repuestos </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="add_respuesto" action="<?php echo base_url() ?>panel_admin/insert_repuesto" method="post">
+                                        
+                                            <input type="hidden" name="id_producto" id="id_producto" value="">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                              <div class="form-group">
+                                                    <label class="control-label">Repuestos</label>
+                                                    <select class="form-control select2"  name="id_repuesto" id="id_repuesto" data-placeholder="Seleccione">
+                                                      <?=  $respuestos ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                         <div class="row">
+                                           <div class="col-lg-12">
+                                             <table id="tb-combo" class="table table-bordered table-striped table-hover">
+                                              <thead>
+                                                  <tr>
+                                                      <th>Repuesto</th>
+                                                      <th></th>
+                                                  </tr>
+                                              </thead>
+                                              <tbody>
+                                              
+                                              </tbody>
+                                          </table>
+                                        </div>   
+                                        </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-success">Agregar</button>
+                                        </div>
+                                         </form>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->                
+
 
 <div class="row">
   <div class="col-xs-12">
@@ -183,9 +235,80 @@
     <script src="<?php echo base_url();?>assets/plugins/bower_components/tiny-editable/mindmup-editabletable.js"></script>
     <script src="<?php echo base_url();?>assets/plugins/bower_components/tiny-editable/numeric-input-example.js"></script>
     <script>
+
+
     
     $(document).ready(function() {
         load_data_cap();
+
+         $("#id_repuesto").on("click",function(){
+         $(this).find('select :first').attr("disabled",'true');
+         data = $(this).val();
+         var option        = $(this).find(':selected')[0];//obtiene el producto seleccionado
+         var nombre_prod   =  $('select[name="id_repuesto"] option:selected').text();
+         $(option).attr('disabled', 'disabled'); // y lo desabilita para no volverlo a seleccionar
+        
+        if (data !='') {
+            html = "<tr>";
+            html += "<td><input type='hidden' name='respuestos[]' value='"+data+"'>"+nombre_prod+"</td>";
+            html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-remove'></span></button></td>";
+            html += "</tr>";
+            $("#tb-combo tbody").append(html);
+           
+        }else{
+            alert("seleccione un producto...");
+        }
+    });
+
+
+         $('#add_respuesto').submit(function(e) {
+            e.preventDefault();
+            var url = '<?php echo base_url() ?>panel_admin/insert_repuesto';
+            var data = $('#add_respuesto').serialize();
+            $.ajax({
+                    type: 'ajax',
+                    method: 'post',
+                    url: url,
+                    data: data,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        
+                      $('#asociar-respuesto').modal("hide");
+                        console.log("enviando....");
+                      }
+                 })
+                  .done(function(){
+                    console.log(data);
+                      $.toast({
+                          heading: 'Respuesto Agregado',
+                          text: 'Se agregó corectamente la información.',
+                          position: 'top-right',
+                          loaderBg: '#ff6849',
+                          icon: 'success',
+                          hideAfter: 3500,
+                          stack: 6
+                      });
+                     
+                  })
+                  .fail(function(){
+                     //sweetalertclickerror();
+                  }) 
+                  .always(function(){
+                    if ($.fn.DataTable.isDataTable('#editable-datatable')) {
+                      table = $('#editable-datatable').DataTable();
+                      table.destroy();
+                      console.log("estoy dentro el if");
+                      load_data_cap();
+                      }
+                      else {
+                           console.log("estoy en el else");
+                          load_data_cap();
+                          }
+                  });
+        });
+
+
+
         $('#add_prod').submit(function(e) {
             e.preventDefault();
             var url = '<?php echo base_url() ?>panel_admin/insert_prod';
@@ -273,10 +396,55 @@
                 error: 'No se pudo mostrar'
             }
         });
-        
+       
+
            
         
     });//onready
+
+
+$(document).on("click",".btn-remove-producto", function(){
+        $(this).closest("tr").remove();
+        sumar();
+    });
+    
+    $(document).on("click",".asociar-respuesto", function(){
+        $(this).closest("tr").remove();
+        var id = $(this).attr('data');
+        $('#id_producto').val(id);
+       /* $.ajax({
+                type: 'ajax',
+                method: 'get',
+                url: '<?php echo base_url() ?>panel_admin/eliminar_prod',
+                data: {id: id},
+                async: false,
+                dataType: 'json',
+                success: function(data){
+                  $.toast({
+                        heading: 'Video eliminado ',
+                        text: 'El video a sido eliminado.',
+                        position: 'top-right',
+                        loaderBg: '#ff6849',
+                        icon: 'error',
+                        hideAfter: 2500
+                    });
+                  if ($.fn.DataTable.isDataTable( '#editable-datatable' ) ) {
+                      table = $('#editable-datatable').DataTable();
+                      table.destroy();
+                      console.log("estoy dentro el if");
+                      load_data_cap();
+                      }
+                      else {
+                           console.log("estoy en el else");
+                          load_data_cap();
+                          }
+                },
+                error: function(){
+                  alert('No se pudo eliminar');
+                }
+        });*/
+        
+    });
     $(document).on("click",".deletecap-row-btn", function(){
         $(this).closest("tr").remove();
         var id = $(this).attr('data');

@@ -302,19 +302,33 @@ class Capacitacion extends CI_Controller
         $datos_emp                  = $this->modelogeneral->datos_emp($param['id_emp']);
         $param['id_pais']           = $datos_emp->id_pais;
        
-        $result = $this->modelogeneral->check_cliente($param);
-        $msg['comprobador'] = false;
         
-        if($result == true)
-             {
-               $data['id_cliente']      =  $this->modelogeneral->lastID();
+        $exite_dni   = $this->modelogeneral->check_cliente('dni',$param['dni']);
+        $exite_email = $this->modelogeneral->check_cliente('email',$param['email']);
+        $msg['comprobador'] = false;    
+       
+        if ($exite_dni == true || $exite_email==true){
+            if ($exite_dni) {
+                $id_cliente = $this->modelogeneral->buscar_dnicli($param['dni']);
+                $data['id_cliente'] = $id_cliente->id_cliente;  
+            } else {
+                $id_cliente = $this->modelogeneral->buscar_emailcli($param['email']); 
+                $data['id_cliente'] = $id_cliente->id_cliente;
+            }
+        } else {
+
+               $this->modelogeneral->insert_cliente($param);
+               $data['id_cliente']     =  $this->modelogeneral->lastID();
+               
+              }
+
                $data['id_emp']          = $this->session->userdata('id_emp');
-               $comprobante             =  $this->modelogeneral->getComprobante();
-               $data['no_pedido']       = $comprobante->cantidad+1;
+               $data['no_pedido']       =  $this->modelogeneral->getComprobante();
                $data['fecha_solicitud'] = $this->input->post('fecha_incio');
                $data['total']           = $this->input->post('total');
               
                if($this->modelogeneral->save_Pedido($data)){
+
 
                  $data['id_pedidos']      =  $this->modelogeneral->lastID();
                  $data['productos']       = $this->input->post('productos');
@@ -322,32 +336,13 @@ class Capacitacion extends CI_Controller
                  $data['precios']         = $this->input->post('precios');
                  $data['importe']         = $this->input->post('importes');
 
+                 
                  $this->save_detallePedidoConfirmado($data);
-               } 
-              $msg['comprobador'] = TRUE;
-             }else{
-
-               $data['id_cliente']      =  $result;
-               $data['id_emp']          = $this->session->userdata('id_emp');
-               $comprobante             =  $this->modelogeneral->getComprobante();
-               $data['no_pedido']       = $comprobante->cantidad+1;
-               $data['fecha_solicitud'] = $this->input->post('fecha_incio');
-               $data['total']           = $this->input->post('total');
-              
-               if($this->modelogeneral->save_Pedido($data)){
-
-                 $data['id_pedidos']      =  $this->modelogeneral->lastID();
-                 $data['productos']       = $this->input->post('productos');
-                 $data['cantidad']        = $this->input->post('cantidades');
-                 $data['precios']         = $this->input->post('precios');
-                 $data['importe']         = $this->input->post('importes');
-
-                 $this->save_detallePedidoConfirmado($data);
-               } 
-              $msg['comprobador'] = TRUE;
-
-
-             }
+                 
+               
+                 $msg['comprobador'] = TRUE;
+               }      
+            
 
         echo json_encode($data);
     }
@@ -364,6 +359,71 @@ class Capacitacion extends CI_Controller
           );
         
         $this->modelogeneral->save_detallePedido($dato_pedido);
+        $dato_pedido['id_emp'] = $data['id_emp'] ;
+        $this->modelogeneral->resto_almacen($dato_pedido);
+        
+        //pregunto si el producto es repuesto no
+        $infoProducto =  $this->modelogeneral->datos_productos($dato_pedido['id_producto']);
+
+        if ($infoProducto->es_repuesto == 0) {
+             
+             $result =  $this->modelogeneral->datos_respuestoPadre($dato_pedido['id_producto']);
+            
+             foreach ($result as $key):
+                $existencia_venci =  $this->modelogeneral->verificador_vencimiento($data['id_cliente'],$key->id_resp_prod);
+
+                if ($existencia_venci != NULL){
+
+                     $id_prod_vencimiento = $existencia_venci->id_prod_vencimiento;
+
+                     $meses =  $infoProducto->vencimiento;
+                     $fecha_actual = $existencia_venci->fecha_vencimiento;
+
+                     $fecha_ven_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));
+
+                     $this->modelogeneral->updateverfi_vencimiento($id_prod_vencimiento,$fecha_ven_final);
+                }else{
+                         $id_resp_prod = $key->id_resp_prod;
+                         $meses =  $infoProducto->vencimiento;
+                         $fecha_actual =  $data['fecha_solicitud'];
+                         $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));
+                         $param = array('fecha_vencimiento' => $fecha_final,
+                                        'id_cliente' => $data['id_cliente'] ,
+                                        'id_resp_prod' => $id_resp_prod);
+
+                         $this->modelogeneral->insertverfi_vencimiento($param);  
+                     }             
+              endforeach;             
+         } else {
+
+            $result =  $this->modelogeneral->datos_respuestoHijo($dato_pedido['id_producto']);
+            
+             foreach ($result as $key):
+                $existencia_venci =  $this->modelogeneral->verificador_vencimiento($data['id_cliente'],$key->id_resp_prod);
+
+                if ($existencia_venci != NULL){
+
+                     $id_prod_vencimiento = $existencia_venci->id_prod_vencimiento;
+                     $meses =  $infoProducto->vencimiento;
+                     $fecha_actual = $existencia_venci->fecha_vencimiento;
+
+                     $fecha_ven_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));
+
+                     $this->modelogeneral->updateverfi_vencimiento($id_prod_vencimiento,$fecha_ven_final);
+                }else{
+                         $id_resp_prod = $key->id_resp_prod;
+                         $meses =  $infoProducto->vencimiento;
+                         $fecha_actual =  $data['fecha_solicitud'];
+                         $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));
+                         $param = array('fecha_vencimiento' => $fecha_final,
+                                        'id_cliente' => $data['id_cliente'] ,
+                                        'id_resp_prod' => $id_resp_prod);
+
+                         $this->modelogeneral->insertverfi_vencimiento($param);  
+                     }             
+              endforeach;
+            
+         }
     
     }
 }

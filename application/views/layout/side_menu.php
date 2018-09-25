@@ -33,7 +33,8 @@
                     </li>
                     
                      
-                    <?php if ($datos_emp->id_cap  == $ultimo_reg->id_cap): ?>
+                    <?php 
+                     if ($datos_emp->id_cap  == $ultimo_reg->id_cap): ?>
                        
                     
                     <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-store fa-fw"></i> <span class="hide-menu">Tienda<span class="fa arrow"></span></span></a>

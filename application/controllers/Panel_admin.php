@@ -193,8 +193,11 @@ class Panel_admin extends CI_Controller
                          <td><span class="text-muted">'.$row->existencia.'</span></td>
                          <td><span class="text-muted">'.$row->precio.'</span></td>
                          <td><span class="text-muted">'.$row->vencimiento.'</span></td>
-                         <td><span class="text-muted"> <button type="button" data="'.$row->id_producto.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span></td>
-                        </tr>';
+                         <td><span class="text-muted"> <button type="button" data="'.$row->id_producto.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span>';
+                          if ($row->es_repuesto == 0) {
+                            $output .= ' <span class="text-muted"> <button type="button" data="'.$row->id_producto.'" class="btn btn-sm btn-icon btn-pure btn-outline asociar-respuesto"  data-toggle="modal" data-target="#asociar-respuesto" ><i class="fa fa-bullseye" aria-hidden="true"></i></button></span>'; 
+                          } 
+                         $output .= '</td></tr>';
             }
         }
     
@@ -448,13 +451,39 @@ function load_dataRango()
         }
     $id_emp = $this->session->userdata('id_emp');
     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
-    $data['categorias']  = $this->modelogeneral->listar_categorias_prod();  
+    $data['categorias']  = $this->modelogeneral->listar_categorias_prod(); 
+    $data['respuestos']  = $this->modelogeneral->selec_respuestos_prod(); 
+     
 
     $this->load->view("layout/header",$data);
     $this->load->view("admin_general/side_menuAdmin");
     $this->load->view("admin_general/admin_productos",$data);
     $this->load->view("layout/footer");  
     }
+
+
+    
+
+     public function insert_repuesto()
+    {
+        $param['id_producto']     = $this->input->post('id_producto');
+        $param['respuestos']        = $this->input->post('respuestos');
+
+        for ($i=0; $i < count($param['respuestos']); $i++) { 
+      
+          $dato = array(
+              'id_producto'       => $param['id_producto'], 
+              'id_respuesto_hijo' => $param['respuestos'][$i] 
+          );
+        
+         $msg['comprobador'] = $this->modelogeneral->insert_repuesto($dato);
+    
+       }
+     echo json_encode($msg);
+    }
+
+   
+    
 
   /* administracion de combos*/
 
