@@ -310,10 +310,8 @@
                             </div>   
                             </div>
                             <!--/row-->
-                            <br>
-                            <br>
-                            <br>
-                            <div class="row" id="existencia_respuesto" style="">
+                            
+                            <!--div class="row" id="existencia_respuesto" style="">
                                <div class="col-lg-12">
                                
                                 <h3 class="box-title">Reposición de unidades filtrantes</h3>
@@ -336,11 +334,7 @@
                                   </tbody>
                               </table>
                             </div>   
-                            </div>
-                            <br>
-                            <br>
-
-
+                            </div--->
                             
 
                         <div class="form-actions">

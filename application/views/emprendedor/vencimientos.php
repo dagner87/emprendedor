@@ -163,10 +163,10 @@
                                
                             </div>
 
-                            <div class="row" id="existencia_respuesto" style="">
-                               <div class="col-lg-12">
+                            <div class="row " id="existencia_respuesto" style="">
+                               <div class="col-lg-12 block2">
                                 <h3 class="box-title">Cliente con vencimientos</h3>
-                                 <table id="tb-lista_cli" class="table table-bordered table-striped table-hover">
+                                 <table id="tb-lista_cli" class="table table-bordered table-striped table-hover color-bordered-table warning-bordered-table">
                                   <thead>
                                       <tr>
                                           <th>Cliente</th>
@@ -186,14 +186,19 @@
 
                               <br><br>
 
+                              
+
 
 
                     <form  id="" action="<?php echo base_url() ?>capacitacion/add_reposicion" method="post" data-toggle="validator" >
 
                         <div class="row" id="existencia_respuesto" style="">
+
                                <div class="col-lg-12">
-                                <h3 class="box-title">Reposición de unidades filtrantes</h3>
-                                 <table id="tb-exist_resp" class="table table-bordered table-striped table-hover">
+                                <h3 class="box-title">Reposición de unidades filtrantes  </h3>
+                                <span class="text-right"><a class="btn btn-default btn-outline m-b-20" id="unblockbtn2">Desbloquear Panel</a></span>
+                  
+                                 <table id="tb-exist_resp" class="table table-bordered table-striped table-hover color-bordered-table info-bordered-table ">
                                   <thead>
                                       <tr>
                                           <th>Cliente</th>
@@ -221,10 +226,7 @@
                             </div>
                             </div>   
                             </div>
-
                          <br>
-                         <br>   
-                        
                         <div class="form-body">
                           <h3 class="box-title">Compra de otros productos</h3>
                              <div class="row">
@@ -247,7 +249,7 @@
                             </div>
                             <div class="row">
                                <div class="col-lg-12">
-                                 <table id="tb-combo" class="table table-bordered table-striped table-hover">
+                                 <table id="tb-combo" class="table table-bordered table-striped table-hover color-bordered-table success-bordered-table">
                                   <thead>
                                       <tr>
                                           <th>Producto</th>
@@ -258,7 +260,7 @@
                                           <th></th>
                                       </tr>
                                   </thead>
-                                  <tbody>
+                                  <tbody id="compra">
                                     
                                   
                                   </tbody>
@@ -290,13 +292,20 @@
 
 </div>
 
-
+  <script src="<?php echo base_url();?>assets/plugins/bower_components/blockUI/jquery.blockUI.js"></script>
   <!-- Editable -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/jquery-datatables-editable/jquery.dataTables.js"></script>
     <script src="<?php echo base_url();?>assets/plugins/bower_components/datatables/dataTables.bootstrap.js"></script>
     <script src="<?php echo base_url();?>assets/plugins/bower_components/tiny-editable/mindmup-editabletable.js"></script>
     <script src="<?php echo base_url();?>assets/plugins/bower_components/tiny-editable/numeric-input-example.js"></script>
+    
     <script>
+
+
+    $('#unblockbtn2').click(function() {
+        $('div.block2').unblock();
+        $('#tb-combo tbody').children('tr:gt(0)').remove();
+    });
     
     $(document).ready(function() {
 
@@ -414,11 +423,21 @@
        var nombre_prod        =infoproducto[2];
        var existencia         =infoproducto[3];
        var id_cliente         =infoproducto[4];
-
-
-        var tableData = $('tr.resingao'+id_prod_vencimiento).children("td").children("input").map(function() {
+       var tableData = $('tr.resingao'+id_prod_vencimiento).children("td").children("input").map(function() {
         return $(this).val();
     }).get();
+
+       $('div.block2').block({
+            message: '<h3>Solo puede seleccionar un cliente a la vez</h3>',
+            overlayCSS: {
+                backgroundColor: '#02bec9'
+            },
+            css: {
+                border: '1px solid #fff'
+            }
+        });
+
+       
 
      var cantida     = $.trim(tableData[0]); 
      var precio      = $.trim(tableData[1]);
@@ -440,13 +459,6 @@
     
  
     });
-
- 
-
-  
-
-     
-
 
     $(document).on("click",".btn-vista-previa",function(){
      var nombre_cliente = $('input[name=nombre_cliente]').val();
@@ -511,6 +523,8 @@
         $(this).closest("tr").find("td:eq(5)").children("input").val(importe.toFixed(2));
         sumar_venc();
     });
+
+  
 
    
 
