@@ -141,13 +141,33 @@ class Capacitacion extends CI_Controller
               $output .= ' <tr>
                          <td>'.$row->nombre_prod.'</td>
                          <td>'.$row->sku.'</td>
-                         <td>'.$row->existencia.'</td>
+                         <td><input type="text" name="exitencia[]" id="exitencia_'.$row->id_almacen.'" value="'.$row->existencia.'" required>
+                         <i id="capa_stock'.$row->id_almacen.'"></i></td>
                          </tr>';                                        
             }
         }
     
         echo $output;
     }
+
+      public function updateTable()
+    {
+
+        $id_emp      = $this->session->userdata('id_emp');
+        $id_producto = $_GET['id_producto'];
+        $valor       = $_GET['valor'];
+
+        $param = array('id_almacen' => $id_producto,'existencia' => $valor, 'id_emp'=> $id_emp);
+        $result =  $this->modelogeneral->update_tablaAlmacen($param);
+
+      $msg['success'] = false;
+       if($result){
+        $msg['success'] = true;
+      }
+      echo json_encode($param);
+
+      
+  }
     /*-------------------------------*/
     public function ventas()
     {
@@ -170,6 +190,30 @@ class Capacitacion extends CI_Controller
      $this->load->view("emprendedor/ventas",$data);
      $this->load->view("layout/footer");  
     }
+
+    public function vencimientos()
+    {
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        } 
+
+     $id_emp             = $this->session->userdata('id_emp');
+     $data['categorias']  = $this->modelogeneral->selec_categorias_prod();
+
+     $data['provincias']     = $this->modelogeneral->select_provincias();  
+     $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
+     $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp); 
+     $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
+     $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
+ 
+     $this->load->view("layout/header",$data);
+     $this->load->view("layout/side_menu",$data);
+     $this->load->view("emprendedor/vencimientos",$data);
+     $this->load->view("layout/footer");  
+    }
+
+    
 
     
     public function productos_almacen()
@@ -281,6 +325,222 @@ class Capacitacion extends CI_Controller
         echo $output;
     }
 
+      function load_data_vencimientos()
+    {
+        $fecha_vencimiento = date('Y-m-d');
+        $id_respuesto_hijo  = 2; 
+        $respuestos_v = array('id_respuesto_hijo' =>$id_respuesto_hijo ,'fecha_vencimiento' => $fecha_vencimiento  );
+
+        $result = $this->modelogeneral->buscarProdVencidos($respuestos_v);
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+              $output .= ' <tr>
+                          <td>'.$row->nombre_prod.'</td>
+                          <td>'.$row->fecha_vencimiento.' </td>
+                          <td> </td>
+                          <td><input type="text" name="" value="" id=""> </td>
+                          <td><input type="text" name="" value="" id=""> </td>
+                          <td></td>
+                          <td><button type="button" data="" class="btn btn-success btn-outline btn-circle btn-sm btn-check"><i class="fa  fa-check"></i></button> </td>
+                         </tr>';                                        
+            }
+        }
+    
+        echo $output;
+    }
+
+     function lista_vencimientos()
+    {
+        $fecha_vencimiento = date('Y-m-d');
+        $id_respuesto_hijo  = 2; 
+        $respuestos_v = array('id_respuesto_hijo' =>$id_respuesto_hijo ,'fecha_vencimiento' => $fecha_vencimiento  );
+
+        $result = $this->modelogeneral->buscarProdVencidos($respuestos_v);
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+              $output .= ' <tr>
+                          <td>Marianela </td>
+                          <td>'.$row->nombre_prod.'</td>
+                          <td>'.$row->fecha_vencimiento.' </td>
+                          <td><input type="text" name="" value="" id=""> </td>
+                          <td><button type="button" data="" class="btn btn-success btn-outline btn-circle btn-sm btn-check"><i class="fa  fa-check"></i></button> </td>
+                         </tr>';                                        
+            }
+        }
+    
+        echo $output;
+    }
+
+
+     function clientes_vencimiento()
+    {
+        
+         $id_emp  = $this->session->userdata('id_emp');
+        
+        $result = $this->modelogeneral->clientes_vencimiento($id_emp);
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+              $output .= ' <tr>
+                          <td>'.$row->nombre_cliente.'</td>
+                          <td>'.$row->nombre_prod.' </td>
+                          <td>'.$row->fecha_vencimiento.' </td>
+                          <td><button type="button" data="'.$row->id_cliente.'" class="btn btn-success btn-outline btn-circle btn-sm btn-select-cli"><i class="fa  fa-check"></i></button> </td>
+                         </tr>';                                        
+            }
+        }
+    
+        echo $output;
+    }
+
+      function Seccion_clientes_venc()
+    {
+        
+        $id_emp     = $this->session->userdata('id_emp');
+        $id_cliente = $this->input->post('id');    
+        $data = array('id_emp' =>$id_emp,'id_cliente' => $id_cliente);
+        $result = $this->modelogeneral->Seccion_clientes_venc($data);
+
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+
+               $array = array('id_emp' =>$id_emp,'id_producto' => $row->id_producto);
+               $existencia = $this->modelogeneral->dame_existencia($array);
+               $output .= '<tr class="resingao'.$row->id_prod_vencimiento.'">
+                          <td>'.$row->nombre_cliente.' </td> 
+                          <td>'.$row->nombre_prod.' </td>
+                          <td>'.$row->fecha_vencimiento.' </td>
+                          <td><input type="text" name="resp_cantidades[]" value="" class="resp_cantidades" required data-parsley-minlength="1"> </td>
+                          <td><input type="text" name="resp_precios[]" value=""  class="resp_precios" required data-parsley-minlength="1"> </td>
+                          <td><input type="hidden" name="resp_importes[]" value=" "><p></p></td>
+
+                          <td><input type="hidden" name="reposicion" value="1" id=""><button type="button" data="'.$row->id_prod_vencimiento.'*'.$row->id_producto.'*'.$row->nombre_prod.'*'.$existencia->existencia.'*'.$row->id_cliente.'" class="btn btn-success btn-outline btn-circle btn-sm btn-add-car"><i class="fa  fa-check"></i></button> </td>
+                           
+                         </tr>';                                        
+            }
+        }
+    
+        echo $output;
+    }
+
+    
+
+     function lista_vencimientoSugeridos()
+    {
+        $fecha_vencimiento = date('Y-m-d');
+        $respuestos_v = array('fecha_vencimiento' => $fecha_vencimiento );
+
+        $result = $this->modelogeneral->buscarRespuestosVencidos($respuestos_v);
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+              $output .= ' <tr>
+                          <td>Marianela </td>
+                          <td>'.$row->nombre_prod.'</td>
+                          <td>'.$row->fecha_vencimiento.' </td>
+                          <td><input type="text" name="" value="" id=""> </td>
+                          <td><button type="button" data="" class="btn btn-success btn-outline btn-circle btn-sm btn-check"><i class="fa  fa-check"></i></button> </td>
+                         </tr>';                                        
+            }
+        }
+    
+        echo $output;
+    }
+
+
+     public function add_reposicion()
+    {
+         if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        } 
+
+        $param['id_emp']            = $this->session->userdata('id_emp');
+
+        // productos en resposicion
+         $param['rep_productos']   = $this->input->post('rep_productos');
+        
+         $param['rep_idproductos'] = $this->input->post('rep_idproductos');
+         $param['rep_cantidades']  = $this->input->post('rep_cantidades');
+         $param['rep_precios']     = $this->input->post('rep_precios');
+         $param['rep_importes']    = $this->input->post('rep_importes');
+
+         
+
+         //nuevos pedidos
+         $data['productos']       = $this->input->post('productos');
+         $data['cantidad']        = $this->input->post('cantidades');
+         $data['precios']         = $this->input->post('precios');
+         $data['importe']         = $this->input->post('importes');
+
+         //logica productos en resposicion
+         $this->save_detalleReposicion($param);
+         //guardo el pedido
+         $data_pedidos['id_emp']          = $this->session->userdata('id_emp');
+         $data_pedidos['id_cliente']      = $this->input->post('id_cliente');
+         $data_pedidos['no_pedido']       =  $this->modelogeneral->getComprobante();
+         $data_pedidos['fecha_solicitud'] =  date('Y-m-d');
+         $data_pedidos['total']           = $this->input->post('total');
+
+         if($this->modelogeneral->save_Pedido($data_pedidos)){
+
+                 $data['id_pedidos']   =  $this->modelogeneral->lastID(); 
+                 $param['id_pedidos']  =  $data['id_pedidos'];
+
+                 $repo_detalle = array('productos' => $param['rep_idproductos'],
+                                       'cantidad'  => $param['rep_cantidades'],
+                                       'precios'   => $param['rep_precios'],
+                                       'importe'   => $param['rep_importes'],
+                                       'id_emp'    => $param['id_emp']);
+
+                 //guardar_detalle_pedido
+                 $this->save_detallePedidoConfirmado($data);
+                 $this->save_detallePedidoConfirmado($repo_detalle);               
+                 $msg['comprobador'] = TRUE;
+               } 
+         
+
+        echo json_encode($data);        
+        
+    }
+
+    protected function save_detalleReposicion($param){ 
+    for ($i=0; $i < count($param['rep_productos']); $i++){ 
+          
+          $dato_repo = array(
+              'id_prod_vencimiento'   => $param['rep_productos'][$i]
+
+          );
+
+          $data = $this->modelogeneral->actualizar_vencimientos($dato_repo);
+          
+          $rep_cantidades  = $param['rep_cantidades'][$i];
+          $meses = $data->vencimiento * $rep_cantidades;
+          $fecha_inicial = $data->fecha_vencimiento;
+          $fecha_final = date("Y-m-d", strtotime("$fecha_inicial + $meses month"));
+
+          $dato_repo['fecha_vencimiento'] = $fecha_final;
+          $this->modelogeneral->update_venc($dato_repo);
+        }
+    }
+
+
     public function add_pedido()
     {
          if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
@@ -296,7 +556,7 @@ class Capacitacion extends CI_Controller
         $param['celular']           = $this->input->post('celular');
         $param['direccion']         = $this->input->post('direccion');
         $param['fecha_nacimiento']  = $this->input->post('fecha_nacimiento');
-        $param['fecha_incio']       = $this->input->post('fecha_incio');
+        $param['fecha_incio']       =  date('Y-m-d'); //$this->input->post('fecha_incio');
         $param['id_municipio']      = $this->input->post('id_municipio');
         $param['id_provincia']      = $this->input->post('id_provincia');
         $datos_emp                  = $this->modelogeneral->datos_emp($param['id_emp']);
@@ -324,7 +584,7 @@ class Capacitacion extends CI_Controller
 
                $data['id_emp']          = $this->session->userdata('id_emp');
                $data['no_pedido']       =  $this->modelogeneral->getComprobante();
-               $data['fecha_solicitud'] = $this->input->post('fecha_incio');
+               $data['fecha_solicitud'] =  date('Y-m-d');
                $data['total']           = $this->input->post('total');
               
                if($this->modelogeneral->save_Pedido($data)){
@@ -359,41 +619,45 @@ class Capacitacion extends CI_Controller
           );
         
         $this->modelogeneral->save_detallePedido($dato_pedido);
-        $dato_pedido['id_emp'] = $data['id_emp'] ;
-        $this->modelogeneral->resto_almacen($dato_pedido);
+        //$dato['id_emp'] = $this->session->userdata('id_emp');
+        //$this->modelogeneral->resto_almacen($dato);
         
         //pregunto si el producto es repuesto no
-        $infoProducto =  $this->modelogeneral->datos_productos($dato_pedido['id_producto']);
+       // $infoProducto =  $this->modelogeneral->datos_productos($dato_pedido['id_producto']);
 
-        if ($infoProducto->es_repuesto == 0) {
+        /*if ($infoProducto->es_repuesto == 0) {
              
+             // buscamos los respuestos dado el producto
              $result =  $this->modelogeneral->datos_respuestoPadre($dato_pedido['id_producto']);
+
+             $arrayVencimientos = [];
             
              foreach ($result as $key):
-                $existencia_venci =  $this->modelogeneral->verificador_vencimiento($data['id_cliente'],$key->id_resp_prod);
+                //inserto en la tabla producto_vencimiento el vencimiento de cada respuesto
+                     $infoRespuesto =  $this->modelogeneral->datos_productos($key->id_respuesto_hijo);                     
+                     $meses =  $infoRespuesto->vencimiento;
+                     $fecha_actual =  $data['fecha_solicitud'];
+                     $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));                     
+                     $venc_resp = array('fecha_vencimiento' => $fecha_final,
+                                       'id_cliente' => $data['id_cliente'] ,
+                                       'id_respuesto' => $key->id_respuesto_hijo);
+                     $this->modelogeneral->insertverfi_vencimiento($venc_resp);
+                     $id_prod_vencimiento  =  $this->modelogeneral->lastID();
+                     $arrayVencimientos[] = $id_prod_vencimiento;
+              endforeach;
 
-                if ($existencia_venci != NULL){
+                 $prod_cliente = array('fecha_compra' => $data['fecha_solicitud'],
+                                       'id_producto'   => $dato_pedido['id_producto'],
+                                       'id_cliente'    =>  $data['id_cliente']);
+                 $this->modelogeneral->insert_prod_cliente($prod_cliente);
+                 $id_prod_cli  =  $this->modelogeneral->lastID();
 
-                     $id_prod_vencimiento = $existencia_venci->id_prod_vencimiento;
-
-                     $meses =  $infoProducto->vencimiento;
-                     $fecha_actual = $existencia_venci->fecha_vencimiento;
-
-                     $fecha_ven_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));
-
-                     $this->modelogeneral->updateverfi_vencimiento($id_prod_vencimiento,$fecha_ven_final);
-                }else{
-                         $id_resp_prod = $key->id_resp_prod;
-                         $meses =  $infoProducto->vencimiento;
-                         $fecha_actual =  $data['fecha_solicitud'];
-                         $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));
-                         $param = array('fecha_vencimiento' => $fecha_final,
-                                        'id_cliente' => $data['id_cliente'] ,
-                                        'id_resp_prod' => $id_resp_prod);
-
-                         $this->modelogeneral->insertverfi_vencimiento($param);  
-                     }             
-              endforeach;             
+                 for ($i=0; $i < count($arrayVencimientos) ; $i++) { 
+                    $prod_cli_venc = array('id_prod_vencimiento' => $arrayVencimientos[$i],
+                                           'id_prod_cli'         => $id_prod_cli);
+                    $this->modelogeneral->insert_prod_cli_venc($prod_cli_venc);                      
+                 }
+                        
          } else {
 
             $result =  $this->modelogeneral->datos_respuestoHijo($dato_pedido['id_producto']);
@@ -423,7 +687,7 @@ class Capacitacion extends CI_Controller
                      }             
               endforeach;
             
-         }
+         }*/
     
     }
 }
@@ -564,16 +828,9 @@ public function update_datosCliente()
                
              }
         echo json_encode($param);
-    } 
+    }
 
-
-
-
-    
-
-
-
-    
+   
 
 
 
@@ -1233,6 +1490,25 @@ function load_detalleCarrito()
         $param['precio_car']      = $row['datos']->precio_unitario;
         $param['importe']         = $param['precio_car'] * $param['cantidad'];
         $result = $this->modelogeneral->insert_toCar($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
+
+    public function insert_prodAlmacen()
+    {
+     if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+            redirect(base_url() . 'login');
+        }   
+        $param['id_emp']          = $this->session->userdata('id_emp');
+        $param['id_producto']     = $this->input->post('id_producto');
+        $param['existencia']        = $this->input->post('existencia');
+        
+        $result = $this->modelogeneral->insert_prodAlmacen($param);
         $msg['comprobador'] = false;
         if($result)
              {

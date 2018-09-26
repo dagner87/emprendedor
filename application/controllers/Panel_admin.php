@@ -193,11 +193,11 @@ class Panel_admin extends CI_Controller
                          <td><span class="text-muted">'.$row->existencia.'</span></td>
                          <td><span class="text-muted">'.$row->precio.'</span></td>
                          <td><span class="text-muted">'.$row->vencimiento.'</span></td>
-                         <td><span class="text-muted"> <button type="button" data="'.$row->id_producto.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span>';
+                         <td>';
                           if ($row->es_repuesto == 0) {
-                            $output .= ' <span class="text-muted"> <button type="button" data="'.$row->id_producto.'" class="btn btn-sm btn-icon btn-pure btn-outline asociar-respuesto"  data-toggle="modal" data-target="#asociar-respuesto" ><i class="fa fa-bullseye" aria-hidden="true"></i></button></span>'; 
+                            $output .= ' <span class="text-muted"> <button type="button" data="'.$row->id_producto.'" class="btn btn-sm btn-icon btn-pure btn-outline asociar-respuesto"  data-toggle="modal" data-target="#asociar-respuesto" title ="Asociar Respuestos" ><i class=" icon-list" aria-hidden="true"></i></button></span>'; 
                           } 
-                         $output .= '</td></tr>';
+                         $output .= '<span class="text-muted"> <button type="button" data="'.$row->id_producto.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span></td></tr>';
             }
         }
     

@@ -1,11 +1,11 @@
 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">ADMINISTACION DE VENTAS</h4> </div>
+                        <h4 class="page-title">ADMINISTACION DE VENCIMIENTOS</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <ol class="breadcrumb">
                             <li><a href="#">Inicio</a></li>
-                            <li><a href="#">Ventas</a></li>
-                            <li class="active">Nueva Venta</li>
+                            <li><a href="#">Vencimientos</a></li>
+                            <li class="active">Venc. Productos</li>
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -37,7 +37,7 @@
                     <div class="col-md-12">
                         <div class="panel">
                             <div class="table-responsive">
-                                <table class="table table-hover manage-u-table" id="editable-datatable">
+                                <table class="table table-hover manage-u-table" id="clientes-datatable">
                                     <thead>
                                         <tr>
                                           <th width="50">Seleccione</th>
@@ -49,7 +49,7 @@
                                             
                                         </tr>
                                     </thead>
-                                    <tbody id="contenido_video">
+                                    <tbody id="lista_clientes">
                                         
                                     </tbody>
                                 </table>
@@ -154,112 +154,79 @@
 <div class="row">
       <div class="col-xs-12">
                         <div class="panel panel-info">
-                            <div class="panel-heading">Detalle Venta</div>
+                            <div class="panel-heading">Vencimientos sugeridos</div>
                             <div class="panel-wrapper collapse in">
-
                                 <div class="panel-body">
                                   <div class="row">
                                 <div class="col-md-4">
-                                    <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#insetcapModal"><i class="fa fa-search"></i> Buscar Cliente</button> </h3>
-                                   
                                 </div>
                                
                             </div>
-                    <form  id="add_pedido" action="<?php echo base_url() ?>capacitacion/add_pedido" method="post" data-toggle="validator" >
+
+                            <div class="row" id="existencia_respuesto" style="">
+                               <div class="col-lg-12">
+                                <h3 class="box-title">Cliente con vencimientos</h3>
+                                 <table id="tb-lista_cli" class="table table-bordered table-striped table-hover">
+                                  <thead>
+                                      <tr>
+                                          <th>Cliente</th>
+                                          <th>Producto Vencido</th>
+                                          <th>Fecha Vencimiento</th>
+                                          <th>Seleccionar</th>
+                                      </tr>
+
+                                  </thead>
+                                  <tbody id="listaCli_vencimientos">
+                                  
+                                  </tbody>
+                                 
+                              </table>
+                            </div>   
+                            </div>
+
+                              <br><br>
+
+
+
+                    <form  id="" action="<?php echo base_url() ?>capacitacion/add_reposicion" method="post" data-toggle="validator" >
+
+                        <div class="row" id="existencia_respuesto" style="">
+                               <div class="col-lg-12">
+                                <h3 class="box-title">Reposición de unidades filtrantes</h3>
+                                 <table id="tb-exist_resp" class="table table-bordered table-striped table-hover">
+                                  <thead>
+                                      <tr>
+                                          <th>Cliente</th>
+                                          <th>Vencimientos sugeridos</th>
+                                          <th>Fecha Vencimiento</th>
+                                          <th>Cantidad</th>
+                                           <th>Precio</th>
+                                          <th>Importe</th>
+                                          <th>Agregar</th>
+                                      </tr>
+
+                                  </thead>
+                                  <tbody id="contenido_vencimientos">
+                                   
+                                  
+                                  </tbody>
+                              </table>
+                              <div class="form-group">
+                                <div class="col-md-3 col-md-offset-9">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">SubTotal:</span>
+                                        <input type="text" class="form-control" placeholder="0.00" name="resp_total" readonly="readonly">
+                                    </div>
+                                </div>
+                            </div>
+                            </div>   
+                            </div>
+
+                         <br>
+                         <br>   
+                        
                         <div class="form-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Nombre</label>
-                                         <input type="text" id="nombre_cliente" name="nombre_cliente" class="form-control" placeholder="Escriba nombre "> <span class="help-block">  </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Apellidos</label>
-                                         <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Escriba apellidos"> <span class="help-block">  </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">No.Identidad</label>
-                                         <input type="text" id="dni" name="dni" class="form-control" placeholder="Escriba dni"> <span class="help-block">  </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Teléfono</label>
-                                         <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Escriba Telefono "> <span class="help-block">  </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Email</label>
-                                         <input type="text" id="email" name="email" class="form-control" placeholder="Escriba email"> <span class="help-block">  </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Celular</label>
-                                         <input type="text" id="celular" name="celular" class="form-control" placeholder="Escriba celular"> <span class="help-block">  </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Fecha Nacimiento</label>
-                                         <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" placeholder="Escriba fecha nacimiento "> <span class="help-block">  </span>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Provincia</label>
-                                          <select class="form-control select2"  name="id_provincia" id="id_provincia" data-placeholder="Seleccione">
-                                          <?php 
-                                          if(!empty($provincias))
-                                                  {
-                                                    foreach($provincias as $row)
-                                                      {
-                                                      echo '<option value="'.$row->id_provincia.'">'.$row->nombre.'</option>';
-                                                      }
-                                                  }
-
-                                                  ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Comuna</label>
-                                         <select class="form-control select2"  name="id_municipio" id="id_municipio" data-placeholder="Seleccione">
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="row">
-                              <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Dirección:</label>
-                                         <textarea type="text" id="direccion" name="direccion" class="form-control" placeholder="Escriba Dirección compra "> </textarea><span class="help-block">  </span>
-                                    </div>
-                                </div>
-                            </div>    
-
-                            <!--/row-->
-                            <!--div class="row">
-                              <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Fecha compra:</label>
-                                         <input type="date" id="fecha_incio" name="fecha_incio" class="form-control" placeholder="Escriba fecha compra "> <span class="help-block">  </span>
-                                    </div>
-                                </div>
-                            </div-->
+                          <h3 class="box-title">Compra de otros productos</h3>
                              <div class="row">
                                 <div class="col-md-6">
                                   <div class="form-group">
@@ -268,18 +235,15 @@
                                           <?=  $categorias ?>
                                         </select>
                                     </div>
-                                   
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="form-group">
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
                                         <label class="control-label">Productos</label>
                                         <select class="form-control select2"  name="id_producto_alm" id="id_producto_alm" data-placeholder="Seleccione">
                                           
                                         </select>
                                     </div>
-                                   
-                                </div>
-                                
+                                 </div>
                             </div>
                             <div class="row">
                                <div class="col-lg-12">
@@ -310,39 +274,7 @@
                             </div>   
                             </div>
                             <!--/row-->
-                            <br>
-                            <br>
-                            <br>
-                            <div class="row" id="existencia_respuesto" style="">
-                               <div class="col-lg-12">
-                               
-                                <h3 class="box-title">Reposición de unidades filtrantes</h3>
-                                 <table id="tb-exist_resp" class="table table-bordered table-striped table-hover">
-                                  <thead>
-                                      <tr>
-                                          <th>Producto</th>
-                                          <th>Vencimiento</th>
-                                          <th>Existencia</th>
-                                          <th>Cantidad</th>
-                                          <th>Precio</th>
-                                          <th>Importe</th>
-                                          <th>Reponer</th>
-                                      </tr>
-
-                                  </thead>
-                                  <tbody id="contenido_vencimientos">
-                                    
-                                  
-                                  </tbody>
-                              </table>
-                            </div>   
-                            </div>
-                            <br>
-                            <br>
-
-
-                            
-
+                  
                         <div class="form-actions">
                             <!--a  class="btn btn-success btn-outline btn-vista-previa" data-toggle="modal" data-target="#vistaPrevia"> <i class="fa fa-check"></i> Vista Previa</a-->
                             <button type="submit" class="btn btn-success collapseble"> <i class="fa fa-check"></i> Guardar</button>
@@ -402,7 +334,7 @@
             html += "<td><input type='text' name='cantidades[]' value='' class='cantidades' required data-parsley-minlength='1'></td>";
             html += "<td><input type='text' name='precios[]' value='' class='precios' required data-parsley-minlength='1'></td>";
             html += "<td><input type='hidden' name='importes[]' value=''><p></p></td>";
-            html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-remove'></span></button></td>";
+            html += "<td><input type='hidden' name='reposicion' value='0'><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-remove'></span></button></td>";
             html += "</tr>";
             $("#tb-combo tbody").append(html);
             sumar();
@@ -462,56 +394,58 @@
 
        
      
-     $(document).on("click",".btn-check",function(){
+  $(document).on("click",".btn-select-cli",function(){
         var id = $(this).attr('data');
-
         $.ajax({
-              type: 'ajax',
-              method: 'get',
-              url: '<?php echo base_url() ?>capacitacion/datos_cliente',
-              data: {id:id},
-              async: false,
-              dataType: 'json',
-            success: function(data){
+            type: "POST",
+            url: "<?php echo base_url() ?>capacitacion/Seccion_clientes_venc",
+            data: {id: id},
+            success: function (data) {
+              $('#contenido_vencimientos').html(data);
+             }
+          });
+ 
+    });
+  $(document).on("click",".btn-add-car",function(){
+       var data = $(this).attr('data');
+       var infoproducto = data.split("*");
+       var id_prod_vencimiento =infoproducto[0];
+       var id_producto        =infoproducto[1];       
+       var nombre_prod        =infoproducto[2];
+       var existencia         =infoproducto[3];
+       var id_cliente         =infoproducto[4];
 
-                $('input[name=nombre_cliente]').val(data.nombre_cliente);
-                $('input[name=apellidos]').val(data.apellidos);
-                $('input[name=dni]').val(data.dni);
-                $('input[name=telefono]').val(data.telefono);
-                $('input[name=email]').val(data.email); 
-                $('input[name=celular]').val(data.celular); 
-                $('input[name=fecha_nacimiento]').val(data.fecha_nacimiento); 
-                $('select[name=id_provincia]').val(data.id_provincia).attr('selected','selected');
-                 var muni = data.id_municipio;
-                var id_provincia = $('#id_provincia').val();
-                    console.log(muni);
-                    $.ajax({
-                      type: "POST",
-                      url: "<?php echo base_url();?>capacitacion/select_municipio",
-                      data: {id: id_provincia},
-                      success: function (data) {
-                        $('#id_municipio').html(data);
-                        
-                       }
-                    });
 
-                $('select[name=id_municipio]').val(muni).attr('selected','selected');
-                $('textarea[name=direccion]').val(data.direccion);
-                $("#insetcapModal").modal("hide");
-                
-                
-                
-                
-                 
-            },
-            error: function(){
-                 alert('No hay datos q mostrar');
-              }
-        });
+        var tableData = $('tr.resingao'+id_prod_vencimiento).children("td").children("input").map(function() {
+        return $(this).val();
+    }).get();
 
-       
+     var cantida     = $.trim(tableData[0]); 
+     var precio      = $.trim(tableData[1]);
+     var importe     = $.trim(tableData[2]); 
+     var reposicion  = $.trim(tableData[3]);
+     
 
-    }); 
+     var  html = "<tr>";
+          html += "<td><input type='hidden' name='id_cliente' value='"+id_cliente+"'><input type='hidden' name='rep_productos[]' value='"+id_prod_vencimiento+"'>"+nombre_prod+"</td>";
+          html += "<td><input type='hidden' name='rep_idproductos[]' value='"+id_producto+"'>"+existencia+"</td>";
+          html += "<td><input type='text' name='rep_cantidades[]' value='"+cantida+"' class='cantidades' required data-parsley-minlength='1'></td>";
+          html += "<td><input type='text' name='rep_precios[]' value='"+precio+"' class='precios' required data-parsley-minlength='1'></td>";
+          html += "<td><input type='hidden' name='rep_importes[]' value='"+importe+"' ><p>"+importe+"</p></td>";
+          html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-remove'></span></button></td>";
+          html += "</tr>";
+          $("#tb-combo tbody").append(html);
+          sumar();
+
+    
+ 
+    });
+
+ 
+
+  
+
+     
 
 
     $(document).on("click",".btn-vista-previa",function(){
@@ -555,6 +489,40 @@
            
         
     });//onready
+
+   
+
+
+ $(document).on("keyup","#tb-exist_resp input.resp_cantidades", function(){
+        cantidad = $(this).val();
+        precio = $(this).closest("tr").find("td:eq(4)").children("input").val();
+        importe = cantidad * precio;
+        $(this).closest("tr").find("td:eq(5)").children("p").text(importe.toFixed(2));
+        $(this).closest("tr").find("td:eq(5)").children("input").val(importe.toFixed(2));
+        sumar_venc();
+    });
+
+  $(document).on("keyup","#tb-exist_resp input.resp_precios", function(){
+
+        precio = $(this).val();
+        cantidad = $(this).closest("tr").find("td:eq(3)").children("input").val();
+        importe = cantidad * precio;
+        $(this).closest("tr").find("td:eq(5)").children("p").text(importe.toFixed(2));
+        $(this).closest("tr").find("td:eq(5)").children("input").val(importe.toFixed(2));
+        sumar_venc();
+    });
+
+   
+
+     function sumar_venc(){
+        total = 0;
+        $("#tb-exist_resp tbody tr").each(function(){
+            total = total + Number($(this).find("td:eq(5)").text());
+        });
+        $("input[name=resp_total]").val(total.toFixed(2));
+      } 
+
+
     $(document).on("click",".deletecap-row-btn", function(){
         $(this).closest("tr").remove();
         var id = $(this).attr('data');
@@ -623,15 +591,19 @@
    }
 
 
-    function load_data_vencimientos()
+
+
+   
+
+      function load_data_vencimientos()
     {
         $.ajax({
-            url:"<?php echo base_url(); ?>capacitacion/load_data_vencimientos",
+            url:"<?php echo base_url(); ?>capacitacion/clientes_vencimiento",
             method:"POST",
             success:function(data)
             {
-             $('#contenido_vencimientos').html(data);
-               var table = $('#tb-exist_resp').DataTable({
+             $('#listaCli_vencimientos').html(data);
+               var table = $('#tb-lista_cli').DataTable({
                  responsive: true,
                  language: {
                               "lengthMenu": "Mostrar _MENU_ registros por pagina",
@@ -649,11 +621,14 @@
                                           },
                     }
                });
-              // var cont = $('#editable-datatable').editableTableWidget().numericInputExample().find('td:first').focus();
-              // console.log(cont.text());
+              
+             
             }
         })
     }
+
+
+    
        function load_data_cap()
     {
         $.ajax({
@@ -680,8 +655,7 @@
                                           },
                     }
                });
-              // var cont = $('#editable-datatable').editableTableWidget().numericInputExample().find('td:first').focus();
-              // console.log(cont.text());
+              
             }
         })
     }

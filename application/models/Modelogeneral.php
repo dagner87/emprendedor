@@ -137,7 +137,7 @@ class Modelogeneral extends CI_Model {
     }
 
     public function listar_datosAlmacen($id_emp){
-        $this->db->select('prod.nombre_prod,prod.sku,alm.existencia');
+        $this->db->select('alm.id_almacen,prod.nombre_prod,prod.sku,alm.existencia');
         $this->db->join('productos as prod', 'prod.id_producto = alm.id_producto');
         $this->db->where('alm.id_emp', $id_emp);
         $this->db->where('alm.existencia >',0);
@@ -314,6 +314,7 @@ public function save_Pedido($data){
       $result_r =$this->listar_respuesto(); 
        if(!empty($result_r))
         {
+          $mostarrespuesto .='<option value="">Seleccionar</option>';
           foreach($result_r as $row):
               $mostarrespuesto .='<option value="'.$row->id_producto.'">'.$row->nombre_prod.'</option>';
            endforeach ; 
@@ -398,7 +399,180 @@ public function save_Pedido($data){
               return false;
              }
   }
+
   
+  public function insert_prod_cliente($data)
+  {
+      $this->db->insert('producto_cliente',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        }else{
+              return false;
+             }
+  }
+
+  public function insert_prod_cli_venc($data)
+  {
+      $this->db->insert('prod_cli_venc',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        }else{
+              return false;
+             }
+  }
+
+
+  public function buscarProdVencidos($data){
+      
+      $this->db->select('pro.nombre_prod,pro_ven.fecha_vencimiento');
+      $this->db->where('res.id_respuesto_hijo',$data['id_respuesto_hijo']);
+      $this->db->where('pro_ven.fecha_vencimiento <=', $data['fecha_vencimiento']);
+      $this->db->join('respuestos as res', 'res.id_producto = prod_cli.id_producto');
+      $this->db->join('prod_cli_venc as  prod_cli_v','prod_cli_v.id_prod_cli = prod_cli.id_prod_cli');
+      $this->db->join('prod_vencimiento as pro_ven', 'pro_ven.id_prod_vencimiento = prod_cli_v.id_prod_vencimiento');
+      $this->db->join('productos as pro', 'pro.id_producto = prod_cli.id_producto');
+      $query = $this->db->get('producto_cliente as prod_cli');
+
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+    public function buscarRespuestosVencidos($data){
+      
+      $this->db->select('pro.nombre_prod,pro_ven.fecha_vencimiento');
+      //$this->db->where('res.id_respuesto_hijo',$data['id_respuesto_hijo']);
+      $this->db->where('pro_ven.fecha_vencimiento <=', $data['fecha_vencimiento']);
+      $this->db->join('respuestos as res', 'res.id_respuesto_hijo = prod_cli.id_producto');
+      $this->db->join('prod_cli_venc as  prod_cli_v','prod_cli_v.id_prod_cli = prod_cli.id_prod_cli');
+      $this->db->join('prod_vencimiento as pro_ven', 'pro_ven.id_prod_vencimiento = prod_cli_v.id_prod_vencimiento');
+      $this->db->join('productos as pro', 'pro.id_producto = prod_cli.id_producto');
+      $query = $this->db->get('producto_cliente as prod_cli');
+
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+   public function clientes_vencimiento($id_emp){
+      
+      $this->db->select('prov.id_prod_vencimiento,prov.id_cliente,cli.nombre_cliente,prod.nombre_prod,prov.fecha_vencimiento');
+      $this->db->where('prov.fecha_vencimiento <', date('Y-m-d'));
+      $this->db->where('cli.id_emp', $id_emp);
+      $this->db->join('cliente as cli', 'cli.id_cliente = prov.id_cliente');
+      $this->db->join('productos as prod','prod.id_producto = prov.id_respuesto');
+      $query = $this->db->get('prod_vencimiento as prov');
+
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+   public function Seccion_clientes_venc($data){
+      
+      $this->db->select('prov.id_prod_vencimiento,prov.id_cliente,cli.nombre_cliente,prod.nombre_prod,prod.id_producto,prov.fecha_vencimiento');
+      $this->db->where('prov.fecha_vencimiento <', date('Y-m-d'));
+      $this->db->where('cli.id_emp', $data['id_emp']);
+      $this->db->where('prov.id_cliente',$data['id_cliente']);
+      $this->db->join('cliente as cli', 'cli.id_cliente = prov.id_cliente');
+      $this->db->join('productos as prod','prod.id_producto = prov.id_respuesto');
+      $query = $this->db->get('prod_vencimiento as prov');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+   public function actualizar_vencimientos($data){
+      
+      $this->db->select('prod.vencimiento,prod_v.fecha_vencimiento');
+      $this->db->where('prod_v.id_prod_vencimiento',$data['id_prod_vencimiento']);
+      $this->db->join('productos as prod','prod.id_producto = prod_v.id_respuesto');
+      $query = $this->db->get('prod_vencimiento` as prod_v');
+      if($query->num_rows() > 0){
+        return $query->row();
+      }else{
+        return false;
+      }
+  }
+
+  
+   public function update_venc($param)
+  {
+   $campo = array('fecha_vencimiento' => $param['fecha_vencimiento']);
+   $this->db->where('id_prod_vencimiento',$param['id_prod_vencimiento']);
+   $this->db->update('prod_vencimiento',$campo);
+      if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+  }
+
+
+
+
+   public function update_tablaAlmacen($param)
+  {
+    $campo = array('existencia' => $param['existencia']);
+
+   $this->db->where('id_emp',$param['id_emp']);
+   $this->db->where('id_almacen',$param['id_almacen']);
+   $this->db->update('almacen_emp',$campo);
+      if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+  }
+  
+
+   public function insert_prodAlmacen($data)
+  {
+    
+     $param = array('id_emp' =>$data['id_emp'] ,'id_producto' => $data['id_producto'] );
+     $exitencia = $this->buscar_productoAlmacen($param);
+      if ($exitencia) {
+        return false;
+      } else {
+        $this->db->insert('almacen_emp',$data);
+      }
+    
+
+     
+  }
+
+
+   public function buscar_productoAlmacen($param)
+  {
+   $this->db->where('id_producto',$param['id_producto']);
+   $this->db->where('id_emp',$param['id_emp']);
+   $resultados =$this->db->get('almacen_emp');
+   if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+  }
+
+   public function dame_existencia($param)
+  {
+   $this->db->where('id_producto',$param['id_producto']);
+   $this->db->where('id_emp',$param['id_emp']);
+   $resultados =$this->db->get('almacen_emp');
+   if($this->db->affected_rows() > 0){
+        return $resultados->row();
+      }else{
+        return false;
+      }
+  }
 
 
 

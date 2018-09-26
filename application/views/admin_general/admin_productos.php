@@ -241,7 +241,7 @@
     $(document).ready(function() {
         load_data_cap();
 
-         $("#id_repuesto").on("click",function(){
+         $("#id_repuesto").on("change",function(){
          $(this).find('select :first').attr("disabled",'true');
          data = $(this).val();
          var option        = $(this).find(':selected')[0];//obtiene el producto seleccionado
@@ -403,7 +403,7 @@
     });//onready
 
 
-$(document).on("click",".btn-remove-producto", function(){
+    $(document).on("click",".btn-remove-producto", function(){
         $(this).closest("tr").remove();
         sumar();
     });
@@ -412,39 +412,8 @@ $(document).on("click",".btn-remove-producto", function(){
         $(this).closest("tr").remove();
         var id = $(this).attr('data');
         $('#id_producto').val(id);
-       /* $.ajax({
-                type: 'ajax',
-                method: 'get',
-                url: '<?php echo base_url() ?>panel_admin/eliminar_prod',
-                data: {id: id},
-                async: false,
-                dataType: 'json',
-                success: function(data){
-                  $.toast({
-                        heading: 'Video eliminado ',
-                        text: 'El video a sido eliminado.',
-                        position: 'top-right',
-                        loaderBg: '#ff6849',
-                        icon: 'error',
-                        hideAfter: 2500
-                    });
-                  if ($.fn.DataTable.isDataTable( '#editable-datatable' ) ) {
-                      table = $('#editable-datatable').DataTable();
-                      table.destroy();
-                      console.log("estoy dentro el if");
-                      load_data_cap();
-                      }
-                      else {
-                           console.log("estoy en el else");
-                          load_data_cap();
-                          }
-                },
-                error: function(){
-                  alert('No se pudo eliminar');
-                }
-        });*/
-        
     });
+
     $(document).on("click",".deletecap-row-btn", function(){
         $(this).closest("tr").remove();
         var id = $(this).attr('data');

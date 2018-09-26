@@ -32,3 +32,10 @@ $route['ventas'] = "capacitacion/ventas";
 $route['ventas/(:num)'] = "capacitacion/ventas/$1";
 
 /*-------------------------------------------------*/
+
+//-------vencimientos--------------------------
+$route['vencimientos'] = "capacitacion/vencimientos";
+$route['vencimientos/(:num)'] = "capacitacion/vencimientos/$1";
+
+/*-------------------------------------------------*/
+

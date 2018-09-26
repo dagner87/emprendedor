@@ -190,20 +190,19 @@
                             <div class="panel panel-info">
                                 <div class="table-responsive">
                             <br>
-                                    <table class="table table-hover manage-u-table" id="datatable-contenido_filtros">
-                                        <thead>
-                                            <tr>
-                                                <th>Producto</th>
-                                                <th>Repuesto</th>
-                                                <th>Fecha Compra</th>
-                                                <th>Fecha Vcto</th>
-                                                <th width="250">Estado</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="contenido_filtros">
-                                            
-                                        </tbody>
-                                    </table>
+                                    <table id="tb-exist_resp" class="table table-bordered table-striped table-hover">
+                                  <thead>
+                                      <tr>
+                                          <th>Producto</th>
+                                          <th>Vencimiento</th>
+                                          <th></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody id="contenido_vencimientos">
+                                    
+                                  
+                                  </tbody>
+                              </table>
                                 </div>
                             </div>
                             </div>
@@ -219,7 +218,7 @@
     
     $(document).ready(function() {
         load_data_cap();
-        load_data_rep_cli();
+        load_data_vencimientos();
      
         $('#add_prod').submit(function(e) {
                 e.preventDefault();
@@ -350,6 +349,38 @@
                     }
                });
              
+            }
+        })
+    }
+
+    function load_data_vencimientos()
+    {
+        $.ajax({
+            url:"<?php echo base_url(); ?>capacitacion/load_data_vencimientos",
+            method:"POST",
+            success:function(data)
+            {
+             $('#contenido_vencimientos').html(data);
+               var table = $('#tb-exist_resp').DataTable({
+                 responsive: true,
+                 language: {
+                              "lengthMenu": "Mostrar _MENU_ registros por pagina",
+                              "zeroRecords": "No se encontraron resultados en su busqueda",
+                              "searchPlaceholder": "Buscar registros",
+                              "info": "Mostrando  _START_ al _END_ de un total de  _TOTAL_ registros",
+                              "infoEmpty": "No existen registros",
+                              "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                              "search": "Buscar:",
+                              "paginate": {
+                                            "first": "Primero",
+                                            "last": "Último",
+                                            "next": "Siguiente",
+                                            "previous": "Anterior"
+                                          },
+                    }
+               });
+              // var cont = $('#editable-datatable').editableTableWidget().numericInputExample().find('td:first').focus();
+              // console.log(cont.text());
             }
         })
     }
