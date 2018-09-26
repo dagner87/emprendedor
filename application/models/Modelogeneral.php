@@ -474,6 +474,25 @@ public function save_Pedido($data){
       }
   }
 
+  // lista de repuestos vencidos para el  historial de cliente
+  public function repustosVencidos_cliente($data){
+      
+      $this->db->select('prod.nombre_prod,prov.fecha_vencimiento,prod.vencimiento,ped.fecha_solicitud');
+      $this->db->where('prov.fecha_vencimiento <', date('Y-m-d'));
+      $this->db->where('prov.id_cliente',$data['id_cliente']);
+      $this->db->join('cliente as cli', 'cli.id_cliente = prov.id_cliente');
+      $this->db->join('pedidos as ped', 'ped.id_cliente = prov.id_cliente');
+      $this->db->join('productos as prod','prod.id_producto = prov.id_respuesto');
+      $query = $this->db->get('prod_vencimiento as prov');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+//reposicion de unidades filtrantes
+
    public function Seccion_clientes_venc($data){
       
       $this->db->select('prov.id_prod_vencimiento,prov.id_cliente,cli.nombre_cliente,prod.nombre_prod,prod.id_producto,prov.fecha_vencimiento');

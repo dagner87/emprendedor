@@ -19,7 +19,6 @@
                                 <div class="panel-body">
                                     <h3 class="box-title"><?= $datos_cliente->nombre_cliente." ".$datos_cliente->apellidos  ?></h3>
                                     <dl>
-
                                         <dt>DNI:</dt>
                                         <dd><?= $datos_cliente->dni     ?></dd>
                                         <dt>Telefono:</dt>
@@ -30,8 +29,6 @@
                                         <dd><?= $datos_cliente->email ?></dd>
                                         <dt>Dirección:</dt>
                                         <dd><?= $datos_cliente->direccion ?></dd>
-                                      
-                                        
                                     </dl>
                                 </div>
                             </div>
@@ -193,9 +190,11 @@
                                     <table id="tb-exist_resp" class="table table-bordered table-striped table-hover">
                                   <thead>
                                       <tr>
-                                          <th>Producto</th>
+                                          <th>Repuesto</th>
+                                          <th>Fecha compra</th>
                                           <th>Vencimiento</th>
-                                          <th></th>
+                                          <th>Fecha vencimiento</th>
+                                           <th>Estado</th>
                                       </tr>
                                   </thead>
                                   <tbody id="contenido_vencimientos">
@@ -320,44 +319,13 @@
         })
     }
 
-        function load_data_rep_cli()
-    {
-        $.ajax({
-            url:"<?php echo base_url(); ?>capacitacion/load_data_rep_cli",
-            method:"POST",
-            success:function(data)
-            {
-             
-             $('#contenido_filtros').html(data);
-
-              var table = $('#datatable-contenido_filtros').DataTable({
-                 responsive: true,
-                 language: {
-                              "lengthMenu": "Mostrar _MENU_ registros por pagina",
-                              "zeroRecords": "No se encontraron resultados en su busqueda",
-                              "searchPlaceholder": "Buscar registros",
-                              "info": "Mostrando  _START_ al _END_ de un total de  _TOTAL_ registros",
-                              "infoEmpty": "No existen registros",
-                              "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                              "search": "Buscar:",
-                              "paginate": {
-                                            "first": "Primero",
-                                            "last": "Último",
-                                            "next": "Siguiente",
-                                            "previous": "Anterior"
-                                          },
-                    }
-               });
-             
-            }
-        })
-    }
-
     function load_data_vencimientos()
-    {
+    { 
+       id = $('#id_cliente').val();
         $.ajax({
-            url:"<?php echo base_url(); ?>capacitacion/load_data_vencimientos",
+            url:"<?php echo base_url(); ?>capacitacion/vencimientosRepuestosCli",
             method:"POST",
+            data:{id:id},
             success:function(data)
             {
              $('#contenido_vencimientos').html(data);

@@ -192,11 +192,13 @@
 
                     <form  id="" action="<?php echo base_url() ?>capacitacion/add_reposicion" method="post" data-toggle="validator" >
 
-                        <div class="row" id="existencia_respuesto" style="">
+                        <div class="row" id="" style="">
 
                                <div class="col-lg-12">
                                 <h3 class="box-title">Reposición de unidades filtrantes  </h3>
-                                <span class="text-right"><a class="btn btn-default btn-outline m-b-20" id="unblockbtn2">Desbloquear Panel</a></span>
+                                <div class="col-md-2 col-md-offset-10 mostrar-btn-clientes" style="display: none;" id="">
+                                  <span class="text-right"><a class="btn btn-default btn-outline m-b-20" id="mostrar_clientes" >Mostrar Clientes</a></span></div>
+                                
                   
                                  <table id="tb-exist_resp" class="table table-bordered table-striped table-hover color-bordered-table info-bordered-table ">
                                   <thead>
@@ -302,7 +304,8 @@
     <script>
 
 
-    $('#unblockbtn2').click(function() {
+    $('#mostrar_clientes').click(function() {
+      $('div.block2').show();
         $('div.block2').unblock();
         $('#tb-combo tbody').children('tr:gt(0)').remove();
     });
@@ -416,6 +419,7 @@
  
     });
   $(document).on("click",".btn-add-car",function(){
+       
        var data = $(this).attr('data');
        var infoproducto = data.split("*");
        var id_prod_vencimiento =infoproducto[0];
@@ -427,7 +431,7 @@
         return $(this).val();
     }).get();
 
-       $('div.block2').block({
+      /* $('div.block2').block({
             message: '<h3>Solo puede seleccionar un cliente a la vez</h3>',
             overlayCSS: {
                 backgroundColor: '#02bec9'
@@ -435,10 +439,10 @@
             css: {
                 border: '1px solid #fff'
             }
-        });
-
+        });*/
+       $('div.mostrar-btn-clientes').show();
+       $('div.block2').css('display','none');
        
-
      var cantida     = $.trim(tableData[0]); 
      var precio      = $.trim(tableData[1]);
      var importe     = $.trim(tableData[2]); 

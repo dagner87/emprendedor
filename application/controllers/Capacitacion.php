@@ -353,6 +353,33 @@ class Capacitacion extends CI_Controller
         echo $output;
     }
 
+    function vencimientosRepuestosCli()
+    {
+        $id_cliente = $this->input->post('id');
+        $respuestos_vencicli = array('id_cliente' => $id_cliente );
+        $result = $this->modelogeneral->repustosVencidos_cliente($respuestos_vencicli);
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+             {
+               
+
+              $output .= '<tr>
+                          <td>'.$row->nombre_prod.'</td>
+                          <td>'.$row->fecha_solicitud.'</td>
+                          <td>'.$row->vencimiento.'</td>
+                          <td>'.$row->fecha_vencimiento.'</td>
+                          <td><span class="label label-warning">Vencido</span></td>
+                         </tr>';                                        
+            }
+        }
+    
+        echo $output;
+    }
+
+
+
      function lista_vencimientos()
     {
         $fecha_vencimiento = date('Y-m-d');
@@ -396,7 +423,7 @@ class Capacitacion extends CI_Controller
                           <td>'.$row->nombre_cliente.'</td>
                           <td>'.$row->nombre_prod.' </td>
                           <td>'.$row->fecha_vencimiento.' </td>
-                          <td><button type="button" data="'.$row->id_cliente.'" class="btn btn-warning btn-outline btn-circle btn-sm btn-select-cli"><i class="fa  fa-check"></i></button> </td>
+                          <td><button type="button" data="'.$row->id_cliente.'" class="btn btn-success btn-outline btn-circle btn-sm btn-select-cli"><i class="fa  fa-check"></i></button> </td>
                          </tr>';                                        
             }
         }
@@ -428,7 +455,7 @@ class Capacitacion extends CI_Controller
                           <td><input type="text" name="resp_precios[]" value=""  class="resp_precios" required data-parsley-minlength="1"> </td>
                           <td><input type="hidden" name="resp_importes[]" value=" "><p></p></td>
 
-                          <td><input type="hidden" name="reposicion" value="1" id=""><button type="button" data="'.$row->id_prod_vencimiento.'*'.$row->id_producto.'*'.$row->nombre_prod.'*'.$existencia->existencia.'*'.$row->id_cliente.'" class="btn btn-info btn-outline btn-circle btn-sm btn-add-car"><i class="fa  fa-check"></i></button> </td>
+                          <td><input type="hidden" name="reposicion" value="1" id=""><button type="button" data="'.$row->id_prod_vencimiento.'*'.$row->id_producto.'*'.$row->nombre_prod.'*'.$existencia->existencia.'*'.$row->id_cliente.'" class="btn btn-success btn-outline btn-circle btn-sm btn-add-car"><i class="fa  fa-check"></i></button> </td>
                            
                          </tr>';                                        
             }
