@@ -123,7 +123,7 @@
                             $data['year']   = date('Y');
                             $data['id_emp'] = $row->id_emp;
                             $S_ConsumoMensual  = $this->modelogeneral->sumatoriaCompraEmpMensual($data);
-                            $output .= '<tr>
+                            $output .= '<tr >
                                     <td>
                                     <strong><img src="'.base_url().'assets/plugins/images/users/'.$row->foto_emp.'" alt="user" class="img-circle" /> '.$row->nombre_emp.'</strong>
                                     </td>
@@ -137,7 +137,8 @@
 
                                      }
 
-                                     $output .= '<td> <div class="col-md-12">
+                                     $output .= '<td> <div class="col-md-12" style ="padding-right: 0;
+    padding-left: 0;">
                                                         <div class="form-group has-'.$msg.'">
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
@@ -153,7 +154,8 @@
                                     
                                      }
 
-                                     $output .= '<td> <div class="col-md-12">
+                                     $output .= '<td> <div class="col-md-12" style ="padding-right: 0;
+    padding-left: 0;">
                                                         <div class="form-group has-'.$msg.'">
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
@@ -165,7 +167,8 @@
                                         $msg ="success";
                                      }
 
-                                     $output .= '<td> <div class="col-md-12">
+                                     $output .= '<td> <div class="col-md-12" style ="padding-right: 0;
+    padding-left: 0;">
                                                         <div class="form-group has-'.$msg.'">
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
@@ -179,7 +182,8 @@
                                         $msg ="success";
                                      }
 
-                                     $output .= '<td> <div class="col-md-12">
+                                     $output .= '<td> <div class="col-md-12" style ="padding-right: 0;
+    padding-left: 0;">
                                                         <div class="form-group has-'.$msg.'">
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
@@ -191,7 +195,8 @@
                                         $msg ="success";
                                      }
 
-                                     $output .= '<td> <div class="col-md-12">
+                                     $output .= '<td> <div class="col-md-12" style ="padding-right: 0;
+    padding-left: 0;">
                                                         <div class="form-group has-'.$msg.'">
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
@@ -203,7 +208,8 @@
                                         $msg ="success";
                                      }
 
-                                     $output .= '<td> <div class="col-md-12">
+                                     $output .= '<td> <div class="col-md-12" style ="padding-right: 0;
+    padding-left: 0;">
                                                         <div class="form-group has-'.$msg.'">
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
@@ -216,7 +222,8 @@
                                         $msg ="success";
                                      }
 
-                                     $output .= '<td> <div class="col-md-12">
+                                     $output .= '<td> <div class="col-md-12" style ="padding-right: 0;
+    padding-left: 0;">
                                                         <div class="form-group has-'.$msg.'">
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
@@ -228,7 +235,8 @@
                                         $msg ="success";
                                      }
 
-                                     $output .= '<td> <div class="col-md-12">
+                                     $output .= '<td> <div class="col-md-12" style ="padding-right: 0;
+    padding-left: 0;">
                                                         <div class="form-group has-'.$msg.'">
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
@@ -240,7 +248,8 @@
                                         $msg ="success";
                                      }
 
-                                     $output .= '<td> <div class="col-md-12">
+                                     $output .= '<td> <div class="col-md-12" style ="padding-right: 0;
+    padding-left: 0;">
                                                         <div class="form-group has-'.$msg.'">
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
@@ -252,7 +261,8 @@
                                         $msg ="success";
                                      }
 
-                                     $output .= '<td> <div class="col-md-12">
+                                     $output .= '<td> <div class="col-md-12" style ="padding-right: 0;
+    padding-left: 0;">
                                                         <div class="form-group has-'.$msg.'">
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
@@ -264,7 +274,8 @@
                                         $msg ="success";
                                      }
 
-                                     $output .= '<td> <div class="col-md-12">
+                                     $output .= '<td> <div class="col-md-12"style ="padding-right: 0;
+    padding-left: 0;">
                                                         <div class="form-group has-'.$msg.'">
                                                             <input type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td>';
@@ -276,7 +287,8 @@
                                         $msg ="success";
                                      }
 
-                                     $output .= '<td> <div class="col-md-12">
+                                     $output .= '<td> <div class="col-md-12" style ="padding-right: 0;
+    padding-left: 0;">
                                                         <div class="form-group has-'.$msg.'">
                                                             <input  type="text" id="" readonly class="form-control" value=" $'.$S_ConsumoMensual->total_comp.'"></div>
                                                         </div></td></tr>';
