@@ -81,7 +81,7 @@ class Panel_admin extends CI_Controller
                                     '.$estado.'
                               </td>
                               <td>
-                              <button type="button" data="'.$row->id_emp.'" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button>
+                              <button type="button" data="'.$row->id_emp.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 delete-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button>
                               </td>
                             </tr>';
             }
@@ -115,7 +115,7 @@ class Panel_admin extends CI_Controller
         $asunto = $nombre." te invita";
         $cuerpo_mensaje = "Hola te invito a que formes parte de nuestro negocio como emprendedor";
         $url = base_url()."registro_asociado?id=".$data['id_hijo'];
-        $cuerpo_mensaje .= "<a href='".$url."' target='_blank'> Completar Registro</a>";
+        $cuerpo_mensaje .= "<a href='".$url."' target='_blank'>Completar Registro</a>";
         //$this->sendMailMandril($param['email'],$asunto, $cuerpo_mensaje);
         $this->sendMailGmail($param['email'],$asunto, $cuerpo_mensaje,$id_emp);
        

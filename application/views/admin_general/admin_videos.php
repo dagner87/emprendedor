@@ -24,6 +24,7 @@
             </div>
             <div class="modal-body">
                 <form id="add_cap" action="<?php echo base_url() ?>panel_admin/insert_cap" method="post">
+                  <input type="text" name="id_cap" id="id_cap">
             <div class="form-group">
                 <label for="exampleInputuname">Titulo</label>
                 <div class="input-group">

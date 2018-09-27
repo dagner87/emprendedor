@@ -19,10 +19,10 @@
               
             <?php  
 
-
             if (!empty($list_cap)):
                         $cont = 0;
                         $videoact = $datos_emp->id_cap;
+                        
                      foreach ($list_cap as $key): 
                         $cont ++;
                         ?> 

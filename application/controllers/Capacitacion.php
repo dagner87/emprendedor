@@ -74,6 +74,7 @@ class Capacitacion extends CI_Controller
      $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
      $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
      $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
+     $data['list_cap']   = $this->modelogeneral->listar_data_cap(); 
     
      $this->load->view("layout/header",$data);
      $this->load->view("layout/side_menu",$data);
