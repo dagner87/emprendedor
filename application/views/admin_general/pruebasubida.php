@@ -1,11 +1,11 @@
 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">ADMINISTACION DE COMBOS</h4> </div>
+                        <h4 class="page-title">ADMINISTRACION DE PROMOCIONES</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <ol class="breadcrumb">
                             <li><a href="#">Inicio</a></li>
                             <li><a href="#">Tienda</a></li>
-                            <li class="active">Adm.Combos</li>
+                            <li class="active">Adm.Promociones</li>
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -16,7 +16,7 @@
 <div class="row">
   <div class="col-xs-12">
                         <div class="panel panel-info">
-                            <div class="panel-heading">Datos del Combo</div>
+                            <div class="panel-heading">Datos de Promociones</div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
                                   <div class="alert alert-warning"><p><i class="mdi mdi-alert-outline fa-fw"></i><strong>Pulse el botón para desplegar el formulario </strong> </p></div>
@@ -25,34 +25,56 @@
                                         <div class="well">
                                           <div class="panel-wrapper collapse in" aria-expanded="true">
                 <div class="panel-body">
-                    <form  id="add_prod" action="<?php echo base_url() ?>panel_admin/insert_combo" method="post" data-toggle="validator" >
+                    <form  id="add_prod" action="<?php echo base_url() ?>panel_admin/insert_promo" method="post" data-toggle="validator">
                         <div class="form-body">
                             <div class="row">
-                              <div class="col-md-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Nombre Combo</label>
-                                         <input type="text" id="nombre_combo" name="nombre_combo" class="form-control" placeholder="Escriba nombre del combo"> <span class="help-block">  </span>
+                                        <label class="control-label">Nombre de Promoción</label>
+                                         <input type="text" id="nombre_promo" name="nombre_promo" class="form-control" placeholder="Escriba nombre "> 
+                                         <div class="help-block with-errors"></div>
                                     </div>
-
-                                    
-                                    <div class="form-group">
-                                        <label class="control-label">Precio</label>
-                                        <input type="text" id="precio_combo" class="form-control" name="precio_combo" placeholder=""> <span class="help-block"> </span>
-                                     </div>
-
-                                      <div class="form-group">
-                                        <label class="control-label">Existencia</label>
-                                        <input type="text" id="existencia" class="form-control" name="existencia" placeholder=""> <span class="help-block"> </span> </div>
-
                                 </div>
-       
-                                <div class="col-md-6 col-xs-12 btn-file">
-                                    <label for="input-file-now">Subir imagen</label>
-                                    <input type="file" id="url_imagen" name="url_imagen" class="dropify " />
-                                    <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Descuento</label>
+                                         <input type="text" id="descuento" name="descuento" class="form-control" placeholder="Escriba descuento " required> <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Fecha inicio</label>
+                                         <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control" placeholder="Escriba fecha inicio" required> 
+                                         <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Fecha fin</label>
+                                         <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" placeholder="Escriba fecha_fin" required> 
+                                         <div class="help-block with-errors"></div>
+                                    </div>
                                 </div>
                                 
+                                
                             </div>
+                            <div class="row">
+
+                              <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Existencia</label>
+                                         <input type="text" id="existencia" name="existencia" class="form-control" placeholder="Escriba Existencia" required> 
+                                         <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>  
+                              <div class="col-md-6 col-xs-12 btn-file">
+                                    <label for="input-file-now">Subir imagen</label>
+                                    <input type="file" id="url_imagen" name="url_imagen" class="dropify" />
+                                    <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
+                                </div>
+                            </div>    
 
                             <!--/row-->
                             <div class="row">
@@ -63,7 +85,6 @@
                                           <?=  $productos ?>
                                         </select>
                                     </div>
-                                   
                                 </div>
                                 
                             </div>
@@ -97,30 +118,34 @@
      </div>
    </div>
    <div class="row">
-   <div class="col-lg-12">
+                    <div class="col-md-12">
+                      <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" >Agregar Promoción</button></h3>
+                        <div class="panel">
+                            <div class="panel-heading">Lista de Promociones</div>
+                            <div class="table-responsive">
+                             <br>
+                            <table class="table table-hover manage-u-table contact-list" id="promo-table">
+                                    <thead>
+                                        <tr>
+                                           <th>Imagen</th>
+                                            <th>Nombre Promocion</th>
+                                            <th>Productos</th>
+                                            <th>Fecha inicio</th>
+                                            <th>Fecha fin</th>
+                                            <th>Descuento</th>
+                                            <th>Existencia</th>
+                                            <th>Accion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="contenido_tabla">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="white-box">
-        <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" >Agregar Producto</button></h3>
-
-        <table class="table table-hover manage-u-table contact-list" id="editable-datatable">
-            <thead>
-                <tr>
-                    <th>IMAGEN</th>
-                    <th>NOMBRE COMBO</th>
-                    <th>PRODUCTOS</th>
-                    <th>PRECIO VENTA</th>
-                    <th>EXISTENCIA</th>
-                    <th>ACCION</th>
-                </tr>
-            </thead>
-            <tbody id="contenido_video">
-               
-            </tbody>
-            
-        </table>
-    </div>
-   </div>
-</div>
 
 </div>
         </div>
@@ -129,20 +154,61 @@
 </div>
 
 
-  <!-- Editable -->
+ <!-- Editable -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/jquery-datatables-editable/jquery.dataTables.js"></script>
     <script src="<?php echo base_url();?>assets/plugins/bower_components/datatables/dataTables.bootstrap.js"></script>
     <script src="<?php echo base_url();?>assets/plugins/bower_components/tiny-editable/mindmup-editabletable.js"></script>
     <script src="<?php echo base_url();?>assets/plugins/bower_components/tiny-editable/numeric-input-example.js"></script>
     <script>
+
+
     
     $(document).ready(function() {
-
         load_data_cap();
+        // Basic
+        $('.dropify').dropify({
+            messages: {
+                default: 'No hay archivo seleccionado',
+                replace: nombre_archivo ,
+                remove: 'Remover',
+                error: 'No se pudo mostrar'
+            }
+        });
+
+      $('.btn-file').on("change", function(evt){
+        var base_url= "<?php echo base_url();?>";
+        // declaro la variable formData e instancio el objeto nativo de javascript new FormData
+        var formData = new FormData(document.getElementById("add_prod"));
+       // iniciar el ajax
+        $.ajax({
+            url: base_url + "panel_admin/subir_img",
+            // el metodo para enviar los datos es POST
+            type: "POST",
+            // colocamos la variable formData para el envio de la imagen
+            data: formData,
+            contentType: false,
+            processData: false,
+            beforeSend: function(data) 
+            {
+             $('#cargando').html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+            },
+            success: function(data)
+            {
+               let objJson = JSON.parse(data);
+               console.log(objJson.imagen);
+               $('.btn-file').addClass('btn btn-info');
+              var nombre_archivo = $('#nombre_archivo').val(objJson.imagen); //agrego el nombre del archivo subido
+               $('#cargando').fadeOut("fast",function(){
+               $('#cargando').html('<i class=""> </i>');
+                });
+               $('#cargando').fadeIn("slow");
+            } 
+        }); 
+      }); 
         
-        $('#add_prod').submit(function(e) {
+        $('#add_prod1').submit(function(e) {
             e.preventDefault();
-            var url = '<?php echo base_url() ?>panel_admin/insert_combo';
+            var url = '<?php echo base_url() ?>capacitacion/insert_cliente';
             var data = $('#add_prod').serialize();
             $.ajax({
                     type: 'ajax',
@@ -159,7 +225,7 @@
 
                     console.log(data);
                       $.toast({
-                          heading: 'Producto Agregado',
+                          heading: 'Cliente Agregado',
                           text: 'Se agregó corectamente la información.',
                           position: 'top-right',
                           loaderBg: '#ff6849',
@@ -173,8 +239,8 @@
                      //sweetalertclickerror();
                   }) 
                   .always(function(){
-                    if ($.fn.DataTable.isDataTable('#editable-datatable')) {
-                      table = $('#editable-datatable').DataTable();
+                    if ($.fn.DataTable.isDataTable('#promo-table')) {
+                      table = $('#promo-table').DataTable();
                       table.destroy();
                       console.log("estoy dentro el if");
                       load_data_cap();
@@ -207,73 +273,55 @@
         }
     });
 
-     
-
-     $('.btn-file').on("change", function(evt){
-        var base_url= "<?php echo base_url();?>";
-        // declaro la variable formData e instancio el objeto nativo de javascript new FormData
-        var formData = new FormData(document.getElementById("add_prod"));
-       // iniciar el ajax
-        $.ajax({
-            url: base_url + "panel_admin/subir_img",
-            // el metodo para enviar los datos es POST
+     $('#id_provincia').on("click", function(evt){
+          var id = $('#id_provincia').val();
+          console.log(id);
+          $.ajax({
             type: "POST",
-            // colocamos la variable formData para el envio de la imagen
-            data: formData,
-            contentType: false,
-            processData: false,
-            beforeSend: function(data) 
-            {
-             $('#cargando').html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
-            },
-            success: function(data)
-            {
-               let objJson = JSON.parse(data);
-               console.log(objJson.imagen);
-               $('.btn-file').addClass('btn btn-info');
-              var nombre_archivo = $('#nombre_archivo').val(objJson.imagen); //agrego el nombre del archivo subido
-               $('#cargando').fadeOut("fast",function(){
-               $('#cargando').html('<i class=""> </i>');
-                });
-               $('#cargando').fadeIn("slow");
-            } 
-        }); 
-      }); 
+            url: "<?php echo base_url();?>capacitacion/select_municipio",
+            data: {id: id},
+            success: function (data) {
+              $('#id_municipio').html(data);
+             }
+          });
+    }); 
 
-       // Basic
-        $('.dropify').dropify({
-            messages: {
-                default: 'No hay archivo seleccionado',
-                replace: nombre_archivo ,
-                remove: 'Remover',
-                error: 'No se pudo mostrar'
-            }
-        });
+    $(document).on("click",".btn-remove-producto", function(){
+        $(this).closest("tr").remove();
         
+    });   
+      
            
         
     });//onready
+
+    $(document).on("click",".hist-cliente", function(){
+           var id = $(this).attr('data');
+            window.location.href = "<?php echo base_url();?>historial_cliente/"+id;
+        });
+
+    
     $(document).on("click",".deletecap-row-btn", function(){
         $(this).closest("tr").remove();
         var id = $(this).attr('data');
         $.ajax({
                 type: 'ajax',
                 method: 'get',
-                url: '<?php echo base_url() ?>panel_admin/eliminar_combo',
+                url: '<?php echo base_url() ?>panel_admin/eliminar_promo',
                 data: {id: id},
                 async: false,
                 dataType: 'json',
                 success: function(data){
                   $.toast({
-                        heading: 'Video eliminado ',
-                        text: 'El video a sido eliminado.',
+                        heading: 'Promoción eliminada ',
+                        text: 'La Promoción a sido eliminada.',
                         position: 'top-right',
                         loaderBg: '#ff6849',
                         icon: 'error',
                         hideAfter: 2500
                     });
-                  if ($.fn.DataTable.isDataTable( '#editable-datatable' ) ) {
-                      table = $('#editable-datatable').DataTable();
+                  if ($.fn.DataTable.isDataTable( '#promo-table' ) ) {
+                      table = $('#promo-table').DataTable();
                       table.destroy();
                       console.log("estoy dentro el if");
                       load_data_cap();
@@ -292,12 +340,12 @@
        function load_data_cap()
     {
         $.ajax({
-            url:"<?php echo base_url(); ?>panel_admin/load_dataCombos",
+            url:"<?php echo base_url(); ?>panel_admin/load_dataPromo",
             method:"POST",
             success:function(data)
             {
-             $('#contenido_video').html(data);
-               var table = $('#editable-datatable').DataTable({
+             $('#contenido_tabla').html(data);
+                var table = $('#promo-table').DataTable({
                  responsive: true,
                  language: {
                               "lengthMenu": "Mostrar _MENU_ registros por pagina",
@@ -315,10 +363,11 @@
                                           },
                     }
                });
-           
+             
             }
         })
     }
+
     </script>
     <!--Style Switcher -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>

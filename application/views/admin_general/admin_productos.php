@@ -196,13 +196,40 @@
           </div>
      </div>
    </div>
+
+   <div class="row">
+
+                    <div class="col-md-12">
+                      <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" >Agregar Producto</button></h3>
+
+                        <div class="panel">
+                            <div class="table-responsive">
+                                <table class="table table-hover manage-u-table" id="editable-datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>IMAGEN</th>
+                                            <th>NOMBRE PRODUCTO</th>
+                                            <th>EXISTENCIA</th>
+                                            <th>PRECIO VENTA</th>
+                                            <th>PRECIO DE TIENDA</th>
+                                            <th>ACCION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="contenido_video">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
    <div class="row">
    <div class="col-lg-12">
 
     <div class="white-box">
         <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" >Agregar Producto</button></h3>
 
-        <table class="table table-striped table-bordered table-responsive  contact-list" id="editable-datatable">
+        <table class="table table-hover manage-u-table  contact-list" id="editable-datatable">
             <thead>
                 <tr>
                     <th>IMAGEN</th>
@@ -213,7 +240,7 @@
                     <th>ACCION</th>
                 </tr>
             </thead>
-            <tbody id="contenido_video">
+            <tbody id="contenido_video1">
                
             </tbody>
             
@@ -240,7 +267,7 @@
     
     $(document).ready(function() {
         load_data_cap();
-
+        
          $("#id_repuesto").on("change",function(){
          $(this).find('select :first').attr("disabled",'true');
          data = $(this).val();
@@ -408,7 +435,7 @@
         sumar();
     });
     
-    $(document).on("click",".asociar-respuesto", function(){
+    $(document).on("click",".btn-asociar-respuesto", function(){
         $(this).closest("tr").remove();
         var id = $(this).attr('data');
         $('#id_producto').val(id);
@@ -480,6 +507,7 @@
             }
         })
     }
+
     </script>
     <!--Style Switcher -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>

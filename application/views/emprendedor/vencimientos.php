@@ -66,91 +66,7 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
-<!-- .modal for add task -->
-<div class="modal fade " id="vistaPrevia" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h3><b>Detalle de Compra</b> <span class="pull-right"></span></h3>
-            </div>
-            <div class="modal-body">
-          
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="white-box printableArea">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="pull-left">
-                                        <address>
-                                            <h3> &nbsp;<b class="text-info" >Cliente:</b></h3>
-                                            <h4 class="font-bold" id="v_nombre_cliente"></h4>
-                                            <p class="text-muted m-l-30">DNI:<span id="v_dni"></span>
-                                              <br/>Teléfono:<span id="v_telefono"></span>
-                                              <br/>Celular: <span id="v_celular"></span></p>
-                                              <br/>Correo: <span id="v_email"></span>
-                                              <br/>Direccion: <span id="v_direccion"></span>
-                                            <p class="m-t-30" ><b><i class="fa fa-calendar"></i> Fecha: </b><span id="v_fecha_incio"></span>  </p>
 
-                                        </address>
-                                    </div>
-                                    <div class="">
-                                        
-
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="table-responsive m-t-40" style="clear: both;">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">#</th>
-                                                    <th>Producto</th>
-                                                    <th class="text-right">Cantidad</th>
-                                                    <th class="text-right">Precio</th>
-                                                    <th class="text-right">Importe</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-center">1</td>
-                                                    <td>Milk Powder</td>
-                                                    <td class="text-right">2 </td>
-                                                    <td class="text-right"> $24 </td>
-                                                    <td class="text-right"> $48 </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="pull-right m-t-30 text-right">
-                                        <h3><b>Total :</b> $13,986</h3> </div>
-                                    <div class="clearfix"></div>
-                                    <hr>
-                                    <div class="text-right">
-                                        <button class="btn btn-info " id="confirmar_pedido" type="submit"> Procesar Pedido </button>
-                                        <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          
-          
-            
-             
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 <div class="row">
       <div class="col-xs-12">
                         <div class="panel panel-info">
@@ -183,13 +99,7 @@
                               </table>
                             </div>   
                             </div>
-
                               <br><br>
-
-                              
-
-
-
                     <form  id="" action="<?php echo base_url() ?>capacitacion/add_reposicion" method="post" data-toggle="validator" >
 
                         <div class="row" id="" style="">
@@ -266,12 +176,14 @@
                                     
                                   
                                   </tbody>
+
                               </table>
                               <div class="form-group">
                                 <div class="col-md-3 col-md-offset-9">
                                     <div class="input-group">
                                         <span class="input-group-addon">Total:</span>
                                         <input type="text" class="form-control" placeholder="0.00" name="total" readonly="readonly">
+                                        <input type='text' name='id_cliente' id="id_cliente" value=''>
                                     </div>
                                 </div>
                             </div>
@@ -358,7 +270,7 @@
 
 
     $(document).on("click","#confirmar_pedido",function(e){
-      alert(aq);
+      //alert(aq);
             e.preventDefault();
             var url = '<?php echo base_url() ?>capacitacion/add_pedido';
             var data = $('#add_prod').serialize();
@@ -431,7 +343,7 @@
         return $(this).val();
     }).get();
 
-      /* $('div.block2').block({
+       $('div.block2').block({
             message: '<h3>Solo puede seleccionar un cliente a la vez</h3>',
             overlayCSS: {
                 backgroundColor: '#02bec9'
@@ -439,18 +351,18 @@
             css: {
                 border: '1px solid #fff'
             }
-        });*/
+        });
        $('div.mostrar-btn-clientes').show();
-       $('div.block2').css('display','none');
+      // $('div.block2').css('display','none');
        
      var cantida     = $.trim(tableData[0]); 
      var precio      = $.trim(tableData[1]);
      var importe     = $.trim(tableData[2]); 
      var reposicion  = $.trim(tableData[3]);
      
-
+     $("#id_cliente").val(id_cliente);
      var  html = "<tr>";
-          html += "<td><input type='hidden' name='id_cliente' value='"+id_cliente+"'><input type='hidden' name='rep_productos[]' value='"+id_prod_vencimiento+"'>"+nombre_prod+"</td>";
+          html += "<td><input type='hidden' name='rep_productos[]' value='"+id_prod_vencimiento+"'>"+nombre_prod+"</td>";
           html += "<td><input type='hidden' name='rep_idproductos[]' value='"+id_producto+"'>"+existencia+"</td>";
           html += "<td><input type='text' name='rep_cantidades[]' value='"+cantida+"' class='cantidades' required data-parsley-minlength='1'></td>";
           html += "<td><input type='text' name='rep_precios[]' value='"+precio+"' class='precios' required data-parsley-minlength='1'></td>";

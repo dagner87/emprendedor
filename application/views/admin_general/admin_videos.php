@@ -75,7 +75,7 @@
     <div class="white-box">
         <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#insetcapModal">Agregar Capacitación</button></h3>
 
-        <table class="table table-striped table-bordered table-responsive" id="editable-datatable">
+        <table class="table table-hover manage-u-table contact-list" id="editable-datatable">
             <thead>
                 <tr>
                     <th>TITULO VIDEO</th>

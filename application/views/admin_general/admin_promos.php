@@ -1,11 +1,11 @@
 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Consultas Cartera</h4> </div>
+                        <h4 class="page-title">ADMINISTRACION DE PROMOCIONES</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <ol class="breadcrumb">
                             <li><a href="#">Inicio</a></li>
-                            <li><a href="#">Consultas Cartera</a></li>
-                            <li class="active">Alta de Clientes</li>
+                            <li><a href="#">Tienda</a></li>
+                            <li class="active">Adm.Promociones</li>
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -53,7 +53,7 @@
                 <div class="input-group">
                     <div class="input-group-addon"><i id="cargando" class="ti-camera"> </i></div>
                     <input type="file" class="form-control btn-file1" name="url_imagen1" id="url_imagen1" placeholder="Subir Imagen" required> </div>
-                     <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
+                     <input type="text" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
             </div>
             </div>
             <div class="modal-footer">
@@ -70,7 +70,7 @@
 <div class="row">
   <div class="col-xs-12">
                         <div class="panel panel-info">
-                            <div class="panel-heading">Alta Cliente</div>
+                            <div class="panel-heading">Datos de Promociones</div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
                                   <div class="alert alert-warning"><p><i class="mdi mdi-alert-outline fa-fw"></i><strong>Pulse el botón para desplegar el formulario </strong> </p></div>
@@ -79,100 +79,44 @@
                                         <div class="well">
                                           <div class="panel-wrapper collapse in" aria-expanded="true">
                 <div class="panel-body">
-                    <form  id="add_prod" action="<?php echo base_url() ?>capacitacion/insert_cliente" method="post" data-toggle="validator" >
+                    <form  id="add_prod" action="<?php echo base_url() ?>panel_admin/insert_promo" method="post" data-toggle="validator">
                         <div class="form-body">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Nombre</label>
-                                         <input type="text" id="nombre_cliente" name="nombre_cliente" class="form-control" placeholder="Escriba nombre "> <span class="help-block">  </span>
+                                        <label class="control-label">Nombre de Promoción</label>
+                                         <input type="text" id="nombre_promo" name="nombre_promo" class="form-control" placeholder="Escriba nombre "> 
+                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Apellidos</label>
-                                         <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Escriba apellidos"> <span class="help-block">  </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">No.Identidad</label>
-                                         <input type="text" id="dni" name="dni" class="form-control" placeholder="Escriba dni"> <span class="help-block">  </span>
+                                        <label class="control-label">Descuento</label>
+                                         <input type="text" id="descuento" name="descuento" class="form-control" placeholder="Escriba descuento " required> <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Teléfono</label>
-                                         <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Escriba Telefono "> <span class="help-block">  </span>
+                                        <label class="control-label">Fecha inicio</label>
+                                         <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control" placeholder="Escriba fecha inicio" required> 
+                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Email</label>
-                                         <input type="text" id="email" name="email" class="form-control" placeholder="Escriba email"> <span class="help-block">  </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Celular</label>
-                                         <input type="text" id="celular" name="celular" class="form-control" placeholder="Escriba celular"> <span class="help-block">  </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Fecha Nacimiento</label>
-                                         <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" placeholder="Escriba fecha nacimiento "> <span class="help-block">  </span>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Provincia</label>
-                                          <select class="form-control select2"  name="id_provincia" id="id_provincia" data-placeholder="Seleccione">
-                                          <?php 
-                                          if(!empty($provincias))
-                                                  {
-                                                    foreach($provincias as $row)
-                                                      {
-                                                      echo '<option value="'.$row->id_provincia.'">'.$row->nombre.'</option>';
-                                                      }
-                                                  }
-
-                                                  ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Comuna</label>
-                                         <select class="form-control select2"  name="id_municipio" id="id_municipio" data-placeholder="Seleccione">
-                                        </select>
+                                        <label class="control-label">Fecha fin</label>
+                                         <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" placeholder="Escriba fecha_fin" required> 
+                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 
+                                
                             </div>
-                            <div class="row">
-                              <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Dirección:</label>
-                                         <textarea type="text" id="direccion" name="direccion" class="form-control" placeholder="Escriba Dirección compra "> </textarea><span class="help-block">  </span>
-                                    </div>
-                                </div>
-                            </div>    
-
+                           
                             <!--/row-->
                             <div class="row">
-                              <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Fecha compra:</label>
-                                         <input type="date" id="fecha_incio" name="fecha_incio" class="form-control" placeholder="Escriba fecha compra "> <span class="help-block">  </span>
-                                    </div>
-                                </div>
                                 <div class="col-md-12">
                                   <div class="form-group">
                                         <label class="control-label">Productos</label>
@@ -180,7 +124,6 @@
                                           <?=  $productos ?>
                                         </select>
                                     </div>
-                                   
                                 </div>
                                 
                             </div>
@@ -191,7 +134,6 @@
                                   <thead>
                                       <tr>
                                           <th>Producto</th>
-                                          <th>Cantidad</th>
                                           <th></th>
                                       </tr>
                                   </thead>
@@ -215,23 +157,23 @@
    </div>
    <div class="row">
                     <div class="col-md-12">
-                      <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" >Alta Manual</button></h3>
+                      <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" >Agregar Promoción</button></h3>
                         <div class="panel">
-                            <div class="panel-heading">Cartera de clientes</div>
+                            <div class="panel-heading">Lista de Promociones</div>
                             <div class="table-responsive">
-<br>
-                                <table class="table table-hover manage-u-table" id="editable-datatable">
+                             <br>
+                            <table class="table table-hover manage-u-table" id="promo-table">
                                     <thead>
                                         <tr>
-                                            <th>No.Identidad</th>
-                                            <th>Cliente</th>
-                                            <th>Teléfono</th>
-                                            <th>Celular</th>
-                                            <th width="250">Email</th>
-                                            <th width="300">Historial</th>
+                                            <th>Nombre Promocion</th>
+                                            <th>Productos</th>
+                                            <th>Fecha inicio</th>
+                                            <th>Fecha fin</th>
+                                            <th>Descuento</th>
+                                            <th>Accion</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="contenido_video">
+                                    <tbody id="contenido_tabla">
                                         
                                     </tbody>
                                 </table>
@@ -254,13 +196,55 @@
     <script src="<?php echo base_url();?>assets/plugins/bower_components/tiny-editable/mindmup-editabletable.js"></script>
     <script src="<?php echo base_url();?>assets/plugins/bower_components/tiny-editable/numeric-input-example.js"></script>
     <script>
+
+
     
     $(document).ready(function() {
         load_data_cap();
+        // Basic
+        $('.dropify').dropify({
+            messages: {
+                default: 'No hay archivo seleccionado',
+                replace: nombre_archivo ,
+                remove: 'Remover',
+                error: 'No se pudo mostrar'
+            }
+        });
+
+      $('.btn-file').on("change", function(evt){
+        var base_url= "<?php echo base_url();?>";
+        // declaro la variable formData e instancio el objeto nativo de javascript new FormData
+        var formData = new FormData(document.getElementById("add_prod"));
+       // iniciar el ajax
+        $.ajax({
+            url: base_url + "panel_admin/subir_img",
+            // el metodo para enviar los datos es POST
+            type: "POST",
+            // colocamos la variable formData para el envio de la imagen
+            data: formData,
+            contentType: false,
+            processData: false,
+            beforeSend: function(data) 
+            {
+             $('#cargando').html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+            },
+            success: function(data)
+            {
+               let objJson = JSON.parse(data);
+               console.log(objJson.imagen);
+               $('.btn-file').addClass('btn btn-info');
+              var nombre_archivo = $('#nombre_archivo').val(objJson.imagen); //agrego el nombre del archivo subido
+               $('#cargando').fadeOut("fast",function(){
+               $('#cargando').html('<i class=""> </i>');
+                });
+               $('#cargando').fadeIn("slow");
+            } 
+        }); 
+      }); 
         
         $('#add_prod').submit(function(e) {
             e.preventDefault();
-            var url = '<?php echo base_url() ?>capacitacion/insert_cliente';
+            var url = '<?php echo base_url() ?>panel_admin/insert_promo';
             var data = $('#add_prod').serialize();
             $.ajax({
                     type: 'ajax',
@@ -275,7 +259,7 @@
                  })
                   .done(function(data){
 
-                    console.log(data);
+                    console.log(data.comprobador);
                       $.toast({
                           heading: 'Cliente Agregado',
                           text: 'Se agregó corectamente la información.',
@@ -291,8 +275,8 @@
                      //sweetalertclickerror();
                   }) 
                   .always(function(){
-                    if ($.fn.DataTable.isDataTable('#editable-datatable')) {
-                      table = $('#editable-datatable').DataTable();
+                    if ($.fn.DataTable.isDataTable('#promo-table')) {
+                      table = $('#promo-table').DataTable();
                       table.destroy();
                       console.log("estoy dentro el if");
                       load_data_cap();
@@ -315,7 +299,6 @@
         if (data !='') {
             html = "<tr>";
             html += "<td><input type='hidden' name='productos[]' value='"+data+"'>"+nombre_prod+"</td>";
-            html += "<td><input type='text' name='cantidades[]' value='' class='cantidades' required data-parsley-minlength='2'></td>";
             html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-remove'></span></button></td>";
             html += "</tr>";
             $("#tb-combo tbody").append(html);
@@ -336,29 +319,17 @@
               $('#id_municipio').html(data);
              }
           });
-    });
-
+    }); 
 
     $(document).on("click",".btn-remove-producto", function(){
         $(this).closest("tr").remove();
-        sumar();
-    });    
-
-     
-
-   
-
-    
         
-           
+    });   
+
         
     });//onready
 
-    $(document).on("click",".hist-cliente", function(){
-           var id = $(this).attr('data');
-            window.location.href = "<?php echo base_url();?>historial_cliente/"+id;
-        });
-
+   
     
     $(document).on("click",".deletecap-row-btn", function(){
         $(this).closest("tr").remove();
@@ -366,21 +337,21 @@
         $.ajax({
                 type: 'ajax',
                 method: 'get',
-                url: '<?php echo base_url() ?>panel_admin/eliminar_combo',
+                url: '<?php echo base_url() ?>panel_admin/eliminar_promo',
                 data: {id: id},
                 async: false,
                 dataType: 'json',
                 success: function(data){
                   $.toast({
-                        heading: 'Video eliminado ',
-                        text: 'El video a sido eliminado.',
+                        heading: 'Promoción eliminada ',
+                        text: 'La Promoción a sido eliminada.',
                         position: 'top-right',
                         loaderBg: '#ff6849',
                         icon: 'error',
                         hideAfter: 2500
                     });
-                  if ($.fn.DataTable.isDataTable( '#editable-datatable' ) ) {
-                      table = $('#editable-datatable').DataTable();
+                  if ($.fn.DataTable.isDataTable( '#promo-table' ) ) {
+                      table = $('#promo-table').DataTable();
                       table.destroy();
                       console.log("estoy dentro el if");
                       load_data_cap();
@@ -399,12 +370,12 @@
        function load_data_cap()
     {
         $.ajax({
-            url:"<?php echo base_url(); ?>capacitacion/load_dataClientes",
+            url:"<?php echo base_url(); ?>panel_admin/load_dataPromo",
             method:"POST",
             success:function(data)
             {
-             $('#contenido_video').html(data);
-               var table = $('#editable-datatable').DataTable({
+             $('#contenido_tabla').html(data);
+               var table = $('#promo-table').DataTable({
                  responsive: true,
                  language: {
                               "lengthMenu": "Mostrar _MENU_ registros por pagina",
@@ -420,7 +391,7 @@
                                             "next": "Siguiente",
                                             "previous": "Anterior"
                                           },
-                    }
+                            }
                });
              
             }

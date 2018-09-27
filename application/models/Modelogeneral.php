@@ -98,6 +98,18 @@ class Modelogeneral extends CI_Model {
         }
   }
 
+  public function insert_promo($data)
+  {
+      $this->db->insert('promo',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        
+        }else{
+          return false;
+        }
+  }
+  
+
   public function listar_clientes()
   {
      $query = $this->db->get('cliente');
@@ -170,6 +182,14 @@ public function getComprobante(){
 public function save_Pedido($data){
     return $this->db->insert("pedidos",$data);
   }
+
+public function save_Promo($data){
+    return $this->db->insert("promo",$data);
+  } 
+public function save_detallePromo($data){
+    return $this->db->insert("promo_producto",$data);
+  }    
+  
 
   public function save_detallePedido($data){
     return $this->db->insert("detalle_pedido",$data);
@@ -362,25 +382,38 @@ public function save_Pedido($data){
      $this->db->where('id_respuesto_hijo',$id_producto);
      $query = $this->db->get('respuestos');
       if($query->num_rows() > 0){
-        return $query->result();
+        return $query->row();
       }else{
         return false;
       }
   }
 
-   public function verificador_vencimiento($id_cliente,$id_resp_prod)
+   public function verificador_vencimiento($id_cliente,$id_respuesto)
   {
      $this->db->where('id_cliente',$id_cliente);
-     $this->db->where('id_resp_prod',$id_resp_prod);
+     $this->db->where('id_respuesto',$id_respuesto);
      $query = $this->db->get('prod_vencimiento');
      return $query->row();
       
   }
 
+   public function buscar_prod($id_producto){
+      
+      $this->db->select('vencimiento');
+      $this->db->where('id_producto',$id_producto);
+      $query = $this->db->get('productos');
+      if($query->num_rows() > 0){
+        return $query->row();
+      }else{
+        return false;
+      }
+  }
+
   
-  public function updateverfi_vencimiento($id_prod_vencimiento,$fecha_ven_final) {
-    $param = array('fecha_vencimiento' => $fecha_ven_final );
-   $this->db->where('id_prod_vencimiento',$id_prod_vencimiento);
+  public function updateverfi_vencimiento($data) {
+    $param = array('fecha_vencimiento' => $data['fecha_vencimiento']);
+   $this->db->where('id_cliente',$data['id_cliente']);
+   $this->db->where('id_respuesto',$data['id_producto']);
    $this->db->update('prod_vencimiento',$param);
    if($this->db->affected_rows() > 0){
       return true;
@@ -388,6 +421,8 @@ public function save_Pedido($data){
          return false;
         }
    }
+
+
 
 
  public function insertverfi_vencimiento($data)
@@ -955,6 +990,14 @@ public function save_Pedido($data){
 
   }
 
+   public function productos_cat($data)
+  {
+    $this->db->where('id_categoria', $data['id_categoria']);
+    $query = $this->db->get('productos');
+    return $query->result();
+
+  }
+
  
   /*Insertar combo*/
 
@@ -985,7 +1028,19 @@ public function save_Pedido($data){
       }else{
         return false;
       }
-  } 
+  }
+
+   public function eliminar_promo($id)
+    {
+     $this->db->where('id_promo',$id);
+     $this->db->delete('promo');
+     if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+  }
+   
 
   public function prod_delcombo($id_combo){
         $this->db->select('prod.nombre_prod');
@@ -1050,6 +1105,24 @@ public function save_Pedido($data){
         return false;
       }
   }
+  /*Listar promociones*/
+     public function listar_data_promos()
+  {
+     $query = $this->db->get('promo');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+  public function prod_promo($id_promo){
+        $this->db->select('prod.nombre_prod');
+        $this->db->where('promo_p.id_promo', $id_promo);
+        $this->db->join('productos as prod', 'prod.id_producto = promo_p.id_producto');
+        $query = $this->db->get('promo_producto as promo_p');
+        return $query->result();
+       
+    }
    
    /*-----Devuelve el consecutivo de la orden -----------*/
    public function N_orden_compra($year) {

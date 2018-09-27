@@ -139,9 +139,14 @@ class Panel_admin extends CI_Controller
              $output .= '<tr>
                          <td><span class="font-medium">'.$row->titulo_video.'</span></td>
                          <td><span class="text-muted">'.$row->url_video.'</span></td>
-                        <td><span class="text-muted">'.$row->evaluacion.'</span></td>
-                        <td><span class="text-muted"> <button type="button" data="'.$row->id_cap.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span></td>
+                        <td><span class="text-muted">'.$row->evaluacion.'</span></td>';
+                        $output .= '<td>
+                        <button type="button" data="'.$row->id_cap.'" class="btn btn-info btn-outline btn-circle btn-lg m-r-5 edit-row-btn"  data-toggle="tooltip" data-original-title="Editar" title ="Editar"><i class="ti-pencil-alt"></i></button>
+                        <button type="button" data="'.$row->id_cap.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 deletecap-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button></td>
                         </tr>';
+
+                        
+                        
             }
         }
     
@@ -194,10 +199,13 @@ class Panel_admin extends CI_Controller
                          <td><span class="text-muted">'.$row->precio.'</span></td>
                          <td><span class="text-muted">'.$row->vencimiento.'</span></td>
                          <td>';
-                          if ($row->es_repuesto == 0) {
-                            $output .= ' <span class="text-muted"> <button type="button" data="'.$row->id_producto.'" class="btn btn-sm btn-icon btn-pure btn-outline asociar-respuesto"  data-toggle="modal" data-target="#asociar-respuesto" title ="Asociar Respuestos" ><i class=" icon-list" aria-hidden="true"></i></button></span>'; 
-                          } 
-                         $output .= '<span class="text-muted"> <button type="button" data="'.$row->id_producto.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span></td></tr>';
+                         $output .= '<button type="button" data="'.$row->id_producto.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 deletecap-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button>';
+                         if ($row->es_repuesto == 0) {
+                          $output .= '<button type="button"  data="'.$row->id_producto.'" class="btn btn-info btn-outline btn-circle btn-lg m-r-5 btn-asociar-respuesto" data-toggle="modal" data-target="#asociar-respuesto" title ="Asociar Respuestos">
+                           <i class="ti-server"></i></button></td></tr>';
+                          }
+
+                     
             }
         }
     
@@ -461,6 +469,81 @@ function load_dataRango()
     $this->load->view("layout/footer");  
     }
 
+    public function admin_promo()
+    {
+    if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
+            redirect(base_url() . 'login');
+        }
+    $id_emp = $this->session->userdata('id_emp');
+    $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
+    $data['categorias']  = $this->modelogeneral->selec_categorias_prod();
+    $data['productos']      = $this->modelogeneral->seleccion_productos();
+    $data['respuestos']  = $this->modelogeneral->selec_respuestos_prod();
+
+    $this->load->view("layout/header",$data);
+    $this->load->view("admin_general/side_menuAdmin");
+    $this->load->view("admin_general/admin_promos",$data);
+    $this->load->view("layout/footer");  
+    }
+
+     public function insert_promo()
+    {
+      if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
+            redirect(base_url() . 'login');
+        } 
+
+        $param['nombre_promo']     = $this->input->post('nombre_promo');
+        $param['fecha_inicio']     = $this->input->post('fecha_inicio');
+        $param['fecha_fin']        = $this->input->post('fecha_fin');
+        $param['descuento']        = $this->input->post('descuento');
+        $msg['comprobador'] = false;
+        
+        if($this->modelogeneral->save_Promo($param)){
+              $data['id_promo'] =  $this->modelogeneral->lastID();
+              $data['productos']  = $this->input->post('productos');
+              $this->save_detallePromo($data);
+           $msg['comprobador'] = TRUE;
+           } 
+       echo json_encode($param);
+    }
+   protected function save_detallePromo($data){ 
+    for ($i=0; $i < count($data['productos']); $i++) { 
+      
+          $dato_promo = array(
+              'id_producto' => $data['productos'][$i], 
+              'id_promo'    => $data['id_promo']
+          );
+       $this->modelogeneral->save_detallePromo($dato_promo);
+    
+    }
+}
+
+
+
+
+    public function all_productos_cat()
+    {
+       if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'emprendedor') {
+           redirect(base_url() . 'login');
+       }
+       
+        $data['id_categoria']  = $this->input->post('id');
+        $resultado = $this->modelogeneral->productos_cat($data);
+        $mostarprod ="";
+        if(!empty($resultado))
+        {
+            $mostarprod .='<option value="">Seleccione</option>';
+            foreach($resultado as $row):
+              $mostarprod .='<option value="'.$row->id_producto.'">'.$row->nombre_prod.'</option>';
+            endforeach ; 
+        } 
+        echo $mostarprod;
+    }
+
+
+
+
+
 
     
 
@@ -522,8 +605,37 @@ function load_dataRango()
                           endforeach ; 
                          $output .= '</td>';
                          $output .= '<td><span class="text-muted">'.$row->precio_combo.'</span></td>
-                         <td><span class="text-muted">'.$row->existencia.'</span></td>
-                         <td><span class="text-muted"> <button type="button" data="'.$row->id_combo.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span></td>
+                         <td><span class="text-muted">'.$row->existencia.'</span></td>';
+                         $output .= '<td><button type="button" data="'.$row->id_combo.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 deletecap-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button></td>
+                        </tr>';
+            }
+        }
+    
+        echo $output;
+    }
+
+    /* cargar promociones*/
+         function load_dataPromo()
+    {
+        $result = $this->modelogeneral->listar_data_promos();
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+           $productos = $this->modelogeneral->prod_promo($row->id_promo);
+            {
+             $output .= '<tr>
+                         <td><span class="font-medium">'.$row->nombre_promo.'</span></td>';
+                         $output .= '<td>';
+                         foreach($productos as $prod):
+                          $output .= '<span class="text-muted">'.$prod->nombre_prod.'</br></span>';
+                          endforeach ; 
+                         $output .= '</td>';
+                         $output .= '<td><span class="text-muted">'.$row->fecha_inicio.'</span></td>';
+                         $output .= '<td><span class="text-muted">'.$row->fecha_fin.'</span></td>';
+                         $output .= '<td><span class="text-muted">'.$row->descuento.'</span></td>';
+                         $output .= '<td><button type="button" data="'.$row->id_promo.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 deletecap-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button></td>
                         </tr>';
             }
         }
@@ -561,6 +673,18 @@ function load_dataRango()
     {
         $id = $this->input->get('id');
         $result  = $this->modelogeneral->eliminar_combo($id);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
+       public function eliminar_promo()
+    {
+        $id = $this->input->get('id');
+        $result  = $this->modelogeneral->eliminar_promo($id);
         $msg['comprobador'] = false;
         if($result)
              {
