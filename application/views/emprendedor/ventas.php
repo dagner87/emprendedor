@@ -165,24 +165,24 @@
                                 </div>
                                
                             </div>
-                    <form  id="add_pedido" action="<?php echo base_url() ?>capacitacion/add_pedido" method="post" data-toggle="validator" >
+                    <form  id="add_prod" action="" method="post" data-toggle="validator" >
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Nombre</label>
+                                        <label class="control-label">Nombre:</label>
                                          <input type="text" id="nombre_cliente" name="nombre_cliente" class="form-control" placeholder="Escriba nombre "> <span class="help-block">  </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Apellidos</label>
+                                        <label class="control-label">Apellidos:</label>
                                          <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Escriba apellidos"> <span class="help-block">  </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">No.Identidad</label>
+                                        <label class="control-label">No.Identidad:</label>
                                          <input type="text" id="dni" name="dni" class="form-control" placeholder="Escriba dni"> <span class="help-block">  </span>
                                     </div>
                                 </div>
@@ -190,19 +190,19 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Teléfono</label>
+                                        <label class="control-label">Teléfono:</label>
                                          <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Escriba Telefono "> <span class="help-block">  </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Email</label>
+                                        <label class="control-label">Email:</label>
                                          <input type="text" id="email" name="email" class="form-control" placeholder="Escriba email"> <span class="help-block">  </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Celular</label>
+                                        <label class="control-label">Celular:</label>
                                          <input type="text" id="celular" name="celular" class="form-control" placeholder="Escriba celular"> <span class="help-block">  </span>
                                     </div>
                                 </div>
@@ -211,14 +211,14 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Fecha Nacimiento</label>
+                                        <label class="control-label">Fecha Nacimiento:</label>
                                          <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" placeholder="Escriba fecha nacimiento "> <span class="help-block">  </span>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Provincia</label>
+                                        <label class="control-label">Provincia:</label>
                                           <select class="form-control select2"  name="id_provincia" id="id_provincia" data-placeholder="Seleccione">
                                           <?php 
                                           if(!empty($provincias))
@@ -235,7 +235,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Comuna</label>
+                                        <label class="control-label">Comuna:</label>
                                          <select class="form-control select2"  name="id_municipio" id="id_municipio" data-placeholder="Seleccione">
                                         </select>
                                     </div>
@@ -250,7 +250,6 @@
                                     </div>
                                 </div>
                             </div>    
-
                             <!--/row-->
                             <!--div class="row">
                               <div class="col-md-4">
@@ -338,7 +337,7 @@
 
                         <div class="form-actions">
                             <!--a  class="btn btn-success btn-outline btn-vista-previa" data-toggle="modal" data-target="#vistaPrevia"> <i class="fa fa-check"></i> Vista Previa</a-->
-                            <button type="submit" class="btn btn-success collapseble"> <i class="fa fa-check"></i> Guardar</button>
+                            <button type="submit" class="btn btn-success collapseble" id="confirmar_pedido"> <i class="fa fa-check"></i> Guardar</button>
                             <button type="button" class="btn btn-default">Limpiar</button>
                         </div>
                     </form>
@@ -406,8 +405,7 @@
     });
 
 
-    $(document).on("click","#confirmar_pedido",function(e){
-      alert(aq);
+        $('#add_prod').submit(function(e) {
             e.preventDefault();
             var url = '<?php echo base_url() ?>capacitacion/add_pedido';
             var data = $('#add_prod').serialize();
@@ -426,14 +424,15 @@
 
                     console.log(data);
                       $.toast({
-                          heading: 'Producto Agregado',
-                          text: 'Se agregó corectamente la información.',
+                          heading: 'Venta Agregada',
+                          text: 'Se agregó correctamente la información.',
                           position: 'top-right',
                           loaderBg: '#ff6849',
                           icon: 'success',
                           hideAfter: 3500,
                           stack: 6
                       });
+                      setTimeout('document.location.reload()',3502);
                      
                   })
                   .fail(function(){
@@ -451,7 +450,10 @@
                           load_data_cap();
                           }
                   });
-        });    
+        });
+
+
+      
 
        
      

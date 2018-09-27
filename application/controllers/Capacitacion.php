@@ -545,7 +545,7 @@ class Capacitacion extends CI_Controller
                } 
          
 
-        echo json_encode($data);        
+        echo json_encode($msg);        
         
     }
 
@@ -625,15 +625,15 @@ class Capacitacion extends CI_Controller
                  $data['precios']         = $this->input->post('precios');
                  $data['importe']         = $this->input->post('importes');
 
-                 
-                 $this->save_detallePedidoConfirmado($data);
+                 $test = array();
+                 $test = $this->save_detallePedidoConfirmado($data);
                  
                
                  $msg['comprobador'] = TRUE;
                }      
             
 
-        echo json_encode($data);
+        echo json_encode($msg);
     }
 
     protected function save_detallePedidoConfirmado($data){ 
@@ -645,97 +645,121 @@ class Capacitacion extends CI_Controller
               'precio_pedido' => $data['precios'][$i], 
               'cantidad'      => $data['cantidad'][$i],
               'importe'       => $data['importe'][$i] 
-          );
-        
-        $this->modelogeneral->save_detallePedido($dato_pedido);
-        //$dato['id_emp'] = $this->session->userdata('id_emp');
-        //$this->modelogeneral->resto_almacen($dato);
-        
-        //pregunto si el producto es repuesto no
-        $infoProducto =  $this->modelogeneral->datos_productos($dato_pedido['id_producto']);
+          );  
 
-        if ($infoProducto->es_repuesto == 0) {
+         // $test = array();
+         // $test['total'] =  count($data['productos']); 
              
-             // buscamos los respuestos dado el producto
-             $result =  $this->modelogeneral->datos_respuestoPadre($dato_pedido['id_producto']);
-
-             $arrayVencimientos = [];
             
-             foreach ($result as $key):
-                //inserto en la tabla producto_vencimiento el vencimiento de cada respuesto
-                     $rep_cantidades  = $dato_pedido['cantidad'];
-                     $infoRespuesto =  $this->modelogeneral->datos_productos($key->id_respuesto_hijo);                     
-                     $meses =  $infoRespuesto->vencimiento * $rep_cantidades;
-                     $fecha_actual =  date('Y-m-d');
-                     $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));                     
-                     $venc_resp = array('fecha_vencimiento' => $fecha_final,
-                                       'id_cliente' => $data['id_cliente'] ,
-                                       'id_respuesto' => $key->id_respuesto_hijo);
-                     $this->modelogeneral->insertverfi_vencimiento($venc_resp);
-                     $id_prod_vencimiento  =  $this->modelogeneral->lastID();
-                     $arrayVencimientos[] = $id_prod_vencimiento;
-              endforeach;
-
-                 $prod_cliente = array('fecha_compra' => date('Y-m-d'),
-                                       'id_producto'   => $dato_pedido['id_producto'],
-                                       'id_cliente'    =>  $data['id_cliente']);
-                 $this->modelogeneral->insert_prod_cliente($prod_cliente);
-                 $id_prod_cli  =  $this->modelogeneral->lastID();
-
-                 for ($i=0; $i < count($arrayVencimientos) ; $i++) { 
-                    $prod_cli_venc = array('id_prod_vencimiento' => $arrayVencimientos[$i],
-                                           'id_prod_cli'         => $id_prod_cli);
-                    $this->modelogeneral->insert_prod_cli_venc($prod_cli_venc);                      
-                 }
-                        
-         } else {
-
-            //caso 1
-            $verif_resp =  $this->modelogeneral->verificador_vencimiento($data['id_cliente'],$dato_pedido['id_producto']);
-            if ($verif_resp != NULL) {
-                $rep_cantidades  = $dato_pedido['cantidad']; 
-                $dato_venc = $this->modelogeneral->buscar_prod($dato_pedido['id_producto']);
-                $meses = $dato_venc->vencimiento * $rep_cantidades;
-                $fecha_actual =  $verif_resp->fecha_vencimiento;
-                $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month")); 
-
-                $datos_actvenc =  array('id_cliente' => $data['id_cliente'] ,
-                                       'id_producto' =>$dato_pedido['id_producto'],
-                                        'fecha_vencimiento' =>$fecha_final);
-                $this->modelogeneral->updateverfi_vencimiento($datos_actvenc);                
-            } else {
-                $prod_padre =  $this->modelogeneral->datos_respuestoHijo($dato_pedido['id_producto']);
-
-                $id_producto = $prod_padre->id_producto;
-
-                $prod_cliente = array('fecha_compra'   => date('Y-m-d'),
-                                       'id_producto'   => $id_producto,
-                                       'id_cliente'    =>  $data['id_cliente']);
-
-                $this->modelogeneral->insert_prod_cliente($prod_cliente);
-                $id_prod_cli  =  $this->modelogeneral->lastID();
-
-
-                $dato_venc = $this->modelogeneral->buscar_prod($dato_pedido['id_producto']);
-                $rep_cantidades  = $dato_pedido['cantidad'];
-                $meses = $dato_venc->vencimiento * $rep_cantidades;
-                $fecha_actual =  date('Y-m-d');
-                $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));
-                $venc_resp = array('fecha_vencimiento' => $fecha_final,
-                                    'id_cliente' => $data['id_cliente'] ,
-                                    'id_respuesto' => $dato_pedido['id_producto']);
-                $this->modelogeneral->insertverfi_vencimiento($venc_resp);
-                $id_prod_vencimiento  =  $this->modelogeneral->lastID();
-
-                $prod_cli_venc = array('id_prod_vencimiento' => $id_prod_vencimiento,
-                                        'id_prod_cli'         => $id_prod_cli);
-                $this->modelogeneral->insert_prod_cli_venc($prod_cli_venc);
-               
-            }
+            //$dato['id_emp'] = $this->session->userdata('id_emp');
+            //$this->modelogeneral->resto_almacen($dato);
             
-         }
-    
+            //pregunto si el producto es repuesto no
+            $infoProducto =  $this->modelogeneral->datos_productos($data['productos'][$i]);
+
+            if ($infoProducto->es_repuesto == 0) {
+                 
+                 $test[$i] =  "es producto"; 
+                 // buscamos los respuestos dado el producto
+                 $result =  $this->modelogeneral->datos_respuestoPadre($data['productos'][$i]);
+
+                 $arrayVencimientos = [];
+
+                 //inserto en la tabla producto_vencimiento el vencimiento de cada respuesto
+                 $rep_cantidades  = $data['cantidad'][$i];
+                 $infoRespuesto =  $this->modelogeneral->datos_productos($result->id_respuesto_hijo);                     
+                 $meses =  $infoRespuesto->vencimiento * $rep_cantidades;
+                 $fecha_actual =  date('Y-m-d');
+                 $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));                     
+                 $venc_resp = array('fecha_vencimiento' => $fecha_final,
+                                   'id_cliente' => $data['id_cliente'] ,
+                                   'id_respuesto' => $result->id_respuesto_hijo);
+                 $this->modelogeneral->insertverfi_vencimiento($venc_resp);
+                 $id_prod_vencimiento  =  $this->modelogeneral->lastID();
+                 
+                 //$arrayVencimientos[] = $id_prod_vencimiento;
+                
+                 /*foreach ($result as $key):
+                    //inserto en la tabla producto_vencimiento el vencimiento de cada respuesto
+                         $rep_cantidades  = $data['cantidad'][$i];
+                         $infoRespuesto =  $this->modelogeneral->datos_productos($key->id_respuesto_hijo);                     
+                         $meses =  $infoRespuesto->vencimiento * $rep_cantidades;
+                         $fecha_actual =  date('Y-m-d');
+                         $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));                     
+                         $venc_resp = array('fecha_vencimiento' => $fecha_final,
+                                           'id_cliente' => $data['id_cliente'] ,
+                                           'id_respuesto' => $key->id_respuesto_hijo);
+                         $this->modelogeneral->insertverfi_vencimiento($venc_resp);
+                         $id_prod_vencimiento  =  $this->modelogeneral->lastID();
+                         $arrayVencimientos[] = $id_prod_vencimiento;
+                  endforeach;*/
+
+                     //inserto el respuesto del producto comprado
+                     $prod_cliente = array('fecha_compra' => date('Y-m-d'),
+                                           'id_producto'   => $data['productos'][$i],
+                                           'id_cliente'    =>  $data['id_cliente']);
+                     $this->modelogeneral->insert_prod_cliente($prod_cliente);
+                     $id_prod_cli  =  $this->modelogeneral->lastID();
+                     
+                     //Guardo el registro de producto con repuesto del cliente
+                     $prod_cli_venc = array('id_prod_vencimiento' => $id_prod_vencimiento,
+                                            'id_prod_cli'         => $id_prod_cli);
+                     $this->modelogeneral->insert_prod_cli_venc($prod_cli_venc);
+
+                     /*for ($i=0; $i < count($arrayVencimientos) ; $i++) { 
+                        $prod_cli_venc = array('id_prod_vencimiento' => $arrayVencimientos[$i],
+                                               'id_prod_cli'         => $id_prod_cli);
+                        $this->modelogeneral->insert_prod_cli_venc($prod_cli_venc);                      
+                     }*/
+                            
+             } else {
+                       //caso 1
+                        $verif_resp =  $this->modelogeneral->verificador_vencimiento($data['id_cliente'],$data['productos'][$i]);
+                        if ($verif_resp != NULL) {
+                            $rep_cantidades  = $data['cantidad'][$i]; 
+                            $dato_venc = $this->modelogeneral->buscar_prod($data['productos'][$i]);
+                            $meses = $dato_venc->vencimiento * $rep_cantidades;
+                            $fecha_actual =  $verif_resp->fecha_vencimiento;
+                            $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month")); 
+
+                            $datos_actvenc =  array('id_cliente' => $data['id_cliente'] ,
+                                                   'id_producto' => $data['productos'][$i],
+                                                    'fecha_vencimiento' =>$fecha_final);
+                            $this->modelogeneral->updateverfi_vencimiento($datos_actvenc);                
+                        } else {
+                            $prod_padre =  $this->modelogeneral->datos_respuestoHijo($data['productos'][$i]);
+
+                            $id_producto = $prod_padre->id_producto;
+
+                            $prod_cliente = array('fecha_compra'   => date('Y-m-d'),
+                                                   'id_producto'   => $id_producto,
+                                                   'id_cliente'    =>  $data['id_cliente']);
+
+                            $this->modelogeneral->insert_prod_cliente($prod_cliente);
+                            $id_prod_cli  =  $this->modelogeneral->lastID();
+
+
+                            $dato_venc = $this->modelogeneral->buscar_prod($data['productos'][$i]);
+                            $rep_cantidades  = $data['cantidad'][$i];
+                            $meses = $dato_venc->vencimiento * $rep_cantidades;
+                            $fecha_actual =  date('Y-m-d');
+                            $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));
+                            $venc_resp = array('fecha_vencimiento' => $fecha_final,
+                                                'id_cliente' => $data['id_cliente'] ,
+                                                'id_respuesto' => $data['productos'][$i]);
+                            $this->modelogeneral->insertverfi_vencimiento($venc_resp);
+                            $id_prod_vencimiento  =  $this->modelogeneral->lastID();
+
+                            $prod_cli_venc = array('id_prod_vencimiento' => $id_prod_vencimiento,
+                                                    'id_prod_cli'         => $id_prod_cli);
+                            $this->modelogeneral->insert_prod_cli_venc($prod_cli_venc);
+                           
+                        }                
+                    }
+
+        $this->modelogeneral->save_detallePedido($dato_pedido);            
     }
+   // return $test;
 }
 
       function load_historialCompra()
@@ -758,6 +782,33 @@ class Capacitacion extends CI_Controller
                          <td>'.$row->total.'</td>
                          <td>'.$row->fecha_solicitud.'</td>
                          <td>'.$row->fecha_solicitud.'</td>
+                         </tr>';                                        
+            }
+        }
+    
+        echo $output;
+    }
+
+      function listado_DetallepedidosCli()
+    {
+        $id_cliente         = $this->input->post('id');
+        $result = $this->modelogeneral->listado_DetallepedidosCli($id_cliente);
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+
+             $meses =  $row->vencimiento * $row->cantidad;
+             $fecha_actual =  $row->fecha_solicitud;
+             $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));  
+                
+              $output .= '<tr>
+                          <td>'.$row->no_pedido.'</td>
+                          <td>'.$row->nombre_prod.'</td>
+                          <td>'.$row->total.'</td>
+                          <td>'.$row->fecha_solicitud.'</td>
+                          <td>'.$meses."-".$fecha_final.'</td>
                          </tr>';                                        
             }
         }
@@ -841,6 +892,107 @@ protected function save_detallePedido($data){
               'id_pedidos'    => $data['id_pedidos'],
               'cantidad'    => $data['cantidad'][$i] 
           );
+
+          $infoProducto =  $this->modelogeneral->datos_productos($data['productos'][$i]);
+
+            if ($infoProducto->es_repuesto == 0) {                 
+                 
+                 // buscamos los respuestos dado el producto
+                 $result =  $this->modelogeneral->datos_respuestoPadre($data['productos'][$i]);
+
+                 //$arrayVencimientos = [];
+
+                 //inserto en la tabla producto_vencimiento el vencimiento de cada respuesto
+                 $rep_cantidades  = $data['cantidad'][$i];
+                 $infoRespuesto =  $this->modelogeneral->datos_productos($result->id_respuesto_hijo);                     
+                 $meses =  $infoRespuesto->vencimiento * $rep_cantidades;
+                 $fecha_actual =  $data['fecha_solicitud'];
+                 $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));                     
+                 $venc_resp = array('fecha_vencimiento' => $fecha_final,
+                                   'id_cliente' => $data['id_cliente'] ,
+                                   'id_respuesto' => $result->id_respuesto_hijo);
+                 $this->modelogeneral->insertverfi_vencimiento($venc_resp);
+                 $id_prod_vencimiento  =  $this->modelogeneral->lastID();
+                 
+                 //$arrayVencimientos[] = $id_prod_vencimiento;
+                
+                 /*foreach ($result as $key):
+                    //inserto en la tabla producto_vencimiento el vencimiento de cada respuesto
+                         $rep_cantidades  = $data['cantidad'][$i];
+                         $infoRespuesto =  $this->modelogeneral->datos_productos($key->id_respuesto_hijo);                     
+                         $meses =  $infoRespuesto->vencimiento * $rep_cantidades;
+                         $fecha_actual =  date('Y-m-d');
+                         $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));                     
+                         $venc_resp = array('fecha_vencimiento' => $fecha_final,
+                                           'id_cliente' => $data['id_cliente'] ,
+                                           'id_respuesto' => $key->id_respuesto_hijo);
+                         $this->modelogeneral->insertverfi_vencimiento($venc_resp);
+                         $id_prod_vencimiento  =  $this->modelogeneral->lastID();
+                         $arrayVencimientos[] = $id_prod_vencimiento;
+                  endforeach;*/
+
+                     //inserto el respuesto del producto comprado
+                     $prod_cliente = array('fecha_compra' => date('Y-m-d'),
+                                           'id_producto'   => $data['productos'][$i],
+                                           'id_cliente'    =>  $data['id_cliente']);
+                     $this->modelogeneral->insert_prod_cliente($prod_cliente);
+                     $id_prod_cli  =  $this->modelogeneral->lastID();
+                     
+                     //Guardo el registro de producto con repuesto del cliente
+                     $prod_cli_venc = array('id_prod_vencimiento' => $id_prod_vencimiento,
+                                            'id_prod_cli'         => $id_prod_cli);
+                     $this->modelogeneral->insert_prod_cli_venc($prod_cli_venc);
+
+                     /*for ($i=0; $i < count($arrayVencimientos) ; $i++) { 
+                        $prod_cli_venc = array('id_prod_vencimiento' => $arrayVencimientos[$i],
+                                               'id_prod_cli'         => $id_prod_cli);
+                        $this->modelogeneral->insert_prod_cli_venc($prod_cli_venc);                      
+                     }*/
+                            
+             } else {
+                       //caso 1
+                        $verif_resp =  $this->modelogeneral->verificador_vencimiento($data['id_cliente'],$data['productos'][$i]);
+                        if ($verif_resp != NULL) {
+                            $rep_cantidades  = $data['cantidad'][$i]; 
+                            $dato_venc = $this->modelogeneral->buscar_prod($data['productos'][$i]);
+                            $meses = $dato_venc->vencimiento * $rep_cantidades;
+                            $fecha_actual =  $verif_resp->fecha_vencimiento;
+                            $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month")); 
+
+                            $datos_actvenc =  array('id_cliente' => $data['id_cliente'] ,
+                                                   'id_producto' => $data['productos'][$i],
+                                                    'fecha_vencimiento' =>$fecha_final);
+                            $this->modelogeneral->updateverfi_vencimiento($datos_actvenc);                
+                        } else {
+                            $prod_padre =  $this->modelogeneral->datos_respuestoHijo($data['productos'][$i]);
+
+                            $id_producto = $prod_padre->id_producto;
+
+                            $prod_cliente = array('fecha_compra'   => $data['fecha_solicitud'],
+                                                   'id_producto'   => $id_producto,
+                                                   'id_cliente'    =>  $data['id_cliente']);
+
+                            $this->modelogeneral->insert_prod_cliente($prod_cliente);
+                            $id_prod_cli  =  $this->modelogeneral->lastID();
+
+
+                            $dato_venc = $this->modelogeneral->buscar_prod($data['productos'][$i]);
+                            $rep_cantidades  = $data['cantidad'][$i];
+                            $meses = $dato_venc->vencimiento * $rep_cantidades;
+                            $fecha_actual =  $data['fecha_solicitud'];
+                            $fecha_final = date("Y-m-d", strtotime("$fecha_actual + $meses month"));
+                            $venc_resp = array('fecha_vencimiento' => $fecha_final,
+                                                'id_cliente' => $data['id_cliente'] ,
+                                                'id_respuesto' => $data['productos'][$i]);
+                            $this->modelogeneral->insertverfi_vencimiento($venc_resp);
+                            $id_prod_vencimiento  =  $this->modelogeneral->lastID();
+
+                            $prod_cli_venc = array('id_prod_vencimiento' => $id_prod_vencimiento,
+                                                    'id_prod_cli'         => $id_prod_cli);
+                            $this->modelogeneral->insert_prod_cli_venc($prod_cli_venc);
+                           
+                        }                
+                    }
         
         $this->modelogeneral->save_detallePedido($dato_combo);
     

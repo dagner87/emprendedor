@@ -100,7 +100,7 @@
                             </div>   
                             </div>
                               <br><br>
-                    <form  id="" action="<?php echo base_url() ?>capacitacion/add_reposicion" method="post" data-toggle="validator" >
+                    <form  id="add_prod" action="" method="post" data-toggle="validator" >
 
                         <div class="row" id="" style="">
 
@@ -183,7 +183,7 @@
                                     <div class="input-group">
                                         <span class="input-group-addon">Total:</span>
                                         <input type="text" class="form-control" placeholder="0.00" name="total" readonly="readonly">
-                                        <input type='text' name='id_cliente' id="id_cliente" value=''>
+                                        <input type='hidden' name='id_cliente' id="id_cliente" value=''>
                                     </div>
                                 </div>
                             </div>
@@ -193,7 +193,7 @@
                   
                         <div class="form-actions">
                             <!--a  class="btn btn-success btn-outline btn-vista-previa" data-toggle="modal" data-target="#vistaPrevia"> <i class="fa fa-check"></i> Vista Previa</a-->
-                            <button type="submit" class="btn btn-success collapseble"> <i class="fa fa-check"></i> Guardar</button>
+                            <button type="submit" class="btn btn-success collapseble" id="confirmar_pedido"> <i class="fa fa-check"></i> Guardar</button>
                             <button type="button" class="btn btn-default">Limpiar</button>
                         </div>
                     </form>
@@ -269,10 +269,10 @@
     });
 
 
-    $(document).on("click","#confirmar_pedido",function(e){
+    $('#add_prod').submit(function(e) {
       //alert(aq);
             e.preventDefault();
-            var url = '<?php echo base_url() ?>capacitacion/add_pedido';
+            var url = '<?php echo base_url() ?>capacitacion/add_reposicion';
             var data = $('#add_prod').serialize();
             $.ajax({
                     type: 'ajax',
@@ -297,6 +297,7 @@
                           hideAfter: 3500,
                           stack: 6
                       });
+                      setTimeout('document.location.reload()',3502);
                      
                   })
                   .fail(function(){

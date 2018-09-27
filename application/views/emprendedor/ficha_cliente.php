@@ -161,7 +161,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No.operación</th>
-                                                <th>Pedidos</th>
+                                                <th>Productos</th>
                                                 <th>Importe</th>
                                                 <th>Fecha compra</th>
                                                 <th>Garantía</th>
@@ -289,7 +289,7 @@
     {
         id = $('#id_cliente').val();
         $.ajax({
-            url:"<?php echo base_url(); ?>capacitacion/load_historialCompra",
+            url:"<?php echo base_url(); ?>capacitacion/listado_DetallepedidosCli",
             method:"post",
             data:{id:id},
             success:function(data)

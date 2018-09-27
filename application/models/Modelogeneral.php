@@ -141,6 +141,16 @@ class Modelogeneral extends CI_Model {
        
     }
 
+  public function listado_DetallepedidosCli($id_cliente){
+        $this->db->select('ped.no_pedido,prod.nombre_prod,de_pe.cantidad,ped.total,ped.fecha_solicitud,prod.vencimiento');
+        $this->db->where('ped.id_cliente', $id_cliente);
+        $this->db->join('productos as prod', 'prod.id_producto = de_pe.id_producto');
+        $this->db->join('pedidos as ped', 'ped.id_pedidos =de_pe.id_pedidos');
+        $query = $this->db->get('detalle_pedido as de_pe');
+        return $query->result();
+       
+    }  
+
      public function listado_pedidos($id_cliente){
         $this->db->where('id_cliente', $id_cliente);
         $query = $this->db->get('pedidos');
@@ -371,7 +381,7 @@ public function save_detallePromo($data){
      $this->db->where('id_producto',$id_producto);
      $query = $this->db->get('respuestos');
       if($query->num_rows() > 0){
-        return $query->result();
+        return $query->row();
       }else{
         return false;
       }

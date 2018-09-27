@@ -12,61 +12,7 @@
                   
                 </div>
 
-<!-- .modal for add task -->
-<div class="modal fade" id="insetcapModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="titulo_invit">Nuevo Producto </h4>
-            </div>
-            <div class="modal-body">
-            <form  action="<?php echo base_url() ?>panel_admin/insert_prod" method="post">
-            <div class="form-group">
-                <label for="exampleInputuname">Nombre producto</label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="ti-layers-alt"></i></div>
-                    <input type="text" class="form-control" name="nombre_prod" id="nombre_prod" placeholder=" Escriba Nombre producto"> </div>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Stock </label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="ti-shopping-cart-full"></i></div>
-                    <input type="text" class="form-control"  name="stock" id="stock" placeholder=" Escriba Stock" required> </div>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Precio Tienda </label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="ti-shopping-cart-full"></i></div>
-                    <input type="text" class="form-control"  name="precio_original" id="precio_original" placeholder=" Escriba Precio Tienda" required> </div>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputphone">Precio Mayorista</label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="ti-money"></i></div>
-                    <input type="text" class="form-control" name="precio_unitario" id="precio_unitario" placeholder="Escriba Precio Unitario" required > </div>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputphone">Imagen</label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i id="cargando" class="ti-camera"> </i></div>
-                    <input type="file" class="form-control btn-file1" name="url_imagen1" id="url_imagen1" placeholder="Subir Imagen" required> </div>
-                     <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
-            </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-success">Agregar</button>
-            </div>
-             </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
+
 <div class="row">
   <div class="col-xs-12">
                         <div class="panel panel-info">
