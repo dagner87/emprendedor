@@ -20,32 +20,36 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            <h4 class="modal-title" id="titulo_invit">Nuevo Producto </h4>
+                                            <h4 class="modal-title" id="btnLimpiar">Nuevo Producto </h4>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="add_prod" action="" method="post">
-                                        
-                                        
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                              <div class="form-group">
-                                                    <label class="control-label">Productos</label>
-                                                    <select class="form-control select2"  name="id_producto" id="id_producto" data-placeholder="Seleccione">
-                                                      <?=  $productos ?>
-                                                    </select>
+                                           <div class="alert alert-danger" id="mensaje" style="display: none;"></div>
+                                            <form id="add_prod" action="" method="post" data-toggle="validator">
+                                               <div class="form-group">
+                                                  <label for="inputName" class="control-label">Productos</label>
+                                                  <select class="form-control" name="id_producto" id="id_producto" data-placeholder="Seleccione" required>
+                                                  <?php  
+                                                      $mostar_prod = '<option value="">Seleccione</option>';   
+                                                      foreach($productos as $row):
+                                                        $mostar_prod .='<option value="'.$row->id_producto.'">'.$row->nombre_prod.'</option>';
+                                                      endforeach ; 
+                                                          
+                                                   echo $mostar_prod; ?>
+                                                      </select>
+                                                  <div class="help-block with-errors"></div>
                                                 </div>
-                                            </div>
-                                        </div>
                                         
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Existencia</label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i class="ti-email"></i></div>
-                                                <input type="text" class="form-control"  name="existencia" id="existencia" placeholder=" Existencia"> </div>
+                                                <div class="input-group-addon"><i class="fa fa-cubes"></i></div>
+                                                <input type="text" class="form-control"  name="existencia" id="existencia" placeholder=" Existencia" data-minlength="1" required> 
+                                             </div>
+                                                 <div class="help-block with-errors"></div>
                                         </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            <button type="button" class="btn btn-secondary"  data-dismiss="modal">Cerrar</button>
                                             <button type="submit" class="btn btn-success">Agregar</button>
                                         </div>
                                          </form>
@@ -65,12 +69,14 @@
       <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#insetprodModal"><i class="fa fa-plus"></i> Añadir Producto </button> </h3>
       <br>
            <h4 class="modal-title" id="titulo_invit">Listado de mis productos </h4>
-        <table class="table table-striped table-bordered color-table info-table table-responsive contact-list " id="editable-datatable">
+           <br>
+        <table class="table table-hover table-bordered color-table info-table table-responsive " id="editable-datatable">
             <thead>
                 <tr>
                     <th>PRODUCTO</th>
                     <th>SKU</th>
                     <th>EXISTENCIA</th>
+                    <th>ACCION</th>
                 </tr>
             </thead>
             <tbody id="contenido_compras">
@@ -86,8 +92,17 @@
     
     $(document).ready(function() {
         load_data_cap();
+
+         $("#btnLimpiar").click(function(event) {
+         $("#add_prod")[0].reset();
+       });
+
+       
         
         $('#add_prod').submit(function(e) {
+
+         var id_producto = $('#id_producto').val();//obtiene el producto seleccionado
+         if (id_producto !='') {
             e.preventDefault();
             var url = '<?php echo base_url() ?>capacitacion/insert_prodAlmacen';
             var data = $('#add_prod').serialize();
@@ -99,12 +114,16 @@
                     dataType: 'json',
                     beforeSend: function() {
                         $("#add_prod")[0].reset();
-                        console.log("enviando....");
+                       
+                        console.log("enviando...."+id_producto);
+                        $('#existencia').parent().parent().removeClass('has-error');
+                        $('#id_producto').parent().parent().removeClass('has-error');
                       }
                  })
                   .done(function(data){
-
-                    console.log(data.comprobador);
+                    if (data.comprobador){
+                      console.log(data.comprobador);
+                       $('#insetprodModal').modal('hide');
                       $.toast({
                           heading: 'Producto Agregado',
                           text: 'Se agregó corectamente la información.',
@@ -114,6 +133,13 @@
                           hideAfter: 3500,
                           stack: 6
                       });
+
+                    }else{
+                      $('#mensaje').html("El producto existe en el almacen ");
+                      $('#mensaje').show().fadeIn().delay(5000).fadeOut('slow');
+                      //$('#id_producto').parent().parent().addClass('has-error');
+                    }
+                      
                      
                   })
                   .fail(function(){
@@ -131,6 +157,11 @@
                           load_data_cap();
                           }
                   });
+              }else{
+                  $('#mensaje').html("Seleccione un producto...");
+                  $('#mensaje').show().fadeIn().delay(5000).fadeOut('slow');
+              }
+
         });
 
 
@@ -143,14 +174,15 @@
         $.ajax({
                 type: 'ajax',
                 method: 'get',
-                url: '<?php echo base_url() ?>panel_admin/eliminar_combo',
+                url: '<?php echo base_url() ?>capacitacion/eliminar_prodAlm',
                 data: {id: id},
                 async: false,
                 dataType: 'json',
                 success: function(data){
-                  $.toast({
-                        heading: 'Video eliminado ',
-                        text: 'El video a sido eliminado.',
+                   if(data.comprobador) {
+                    $.toast({
+                        heading: 'Producto eliminado ',
+                        text: 'El Producto a sido eliminado.',
                         position: 'top-right',
                         loaderBg: '#ff6849',
                         icon: 'error',
@@ -166,6 +198,11 @@
                            console.log("estoy en el else");
                           load_data_cap();
                           }
+
+
+
+                  }
+                  
                 },
                 error: function(){
                   alert('No se pudo eliminar');

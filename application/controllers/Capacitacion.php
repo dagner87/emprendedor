@@ -110,7 +110,7 @@ class Capacitacion extends CI_Controller
         } 
 
      $id_emp                 = $this->session->userdata('id_emp');
-     $data['productos']      = $this->modelogeneral->seleccion_productos();
+     $data['productos']      = $this->modelogeneral->listar_productos();
      $data['provincias']     = $this->modelogeneral->select_provincias();  
      $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
      $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp); 
@@ -143,12 +143,29 @@ class Capacitacion extends CI_Controller
                          <td>'.$row->sku.'</td>
                          <td><input type="text" name="exitencia[]" id="exitencia_'.$row->id_almacen.'" value="'.$row->existencia.'" required>
                          <i id="capa_stock'.$row->id_almacen.'"></i></td>
+                         <td>
+                              <button type="button" data="'.$row->id_almacen.'" class="btn btn-danger btn-outline btn-circle  m-r-5 deletecap-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button>
+                              </td>
+                            
                          </tr>';                                        
             }
         }
     
         echo $output;
     }
+
+       public function eliminar_prodAlm()
+    {
+        $id = $this->input->get('id');
+        $result  = $this->modelogeneral->eliminar_prodAlm($id);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
 
       public function updateTable()
     {
@@ -808,7 +825,7 @@ class Capacitacion extends CI_Controller
                           <td>'.$row->nombre_prod.'</td>
                           <td>'.$row->total.'</td>
                           <td>'.$row->fecha_solicitud.'</td>
-                          <td>'.$meses."-".$fecha_final.'</td>
+                          <td>'.$fecha_final.'</td>
                          </tr>';                                        
             }
         }
@@ -1704,7 +1721,7 @@ function load_detalleCarrito()
         }   
         $param['id_emp']          = $this->session->userdata('id_emp');
         $param['id_producto']     = $this->input->post('id_producto');
-        $param['existencia']        = $this->input->post('existencia');
+        $param['existencia']      = $this->input->post('existencia');
         
         $result = $this->modelogeneral->insert_prodAlmacen($param);
         $msg['comprobador'] = false;

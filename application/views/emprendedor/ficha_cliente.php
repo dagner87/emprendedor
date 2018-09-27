@@ -49,20 +49,20 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Nombre</label>
+                                        <label class="control-label">Nombre:</label>
                                          <input type="text" id="nombre_cliente" name="nombre_cliente" class="form-control" placeholder="Escriba nombre" value="<?= $datos_cliente->nombre_cliente ?>"> 
                                          <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Apellidos</label>
+                                        <label class="control-label">Apellidos:</label>
                                          <input type="text" id="apellidos" name="apellidos" class="form-control"   value="<?= $datos_cliente->apellidos     ?>" placeholder="Escriba apellidos"> <span class="help-block">  </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">No.Identidad</label>
+                                        <label class="control-label">No.Identidad:</label>
                                          <input type="text" id="dni" name="dni" class="form-control" value="<?= $datos_cliente->dni ?>" placeholder="Escriba dni"> <span class="help-block">  </span>
                                     </div>
                                 </div>
@@ -70,19 +70,19 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Teléfono</label>
+                                        <label class="control-label">Teléfono:</label>
                                          <input type="text" id="telefono" name="telefono" class="form-control"value="<?= $datos_cliente->telefono ?>"  placeholder="Escriba Telefono "> <span class="help-block">  </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Email</label>
+                                        <label class="control-label">Email:</label>
                                          <input type="text" id="email" name="email" class="form-control" value="<?= $datos_cliente->email ?>" placeholder="Escriba email"> <span class="help-block">  </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Celular</label>
+                                        <label class="control-label">Celular:</label>
                                          <input type="text" id="celular" name="celular" class="form-control" value="<?= $datos_cliente->celular ?>" placeholder="Escriba celular"> <span class="help-block">  </span>
                                     </div>
                                 </div>
@@ -91,14 +91,14 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Fecha Nacimiento</label>
+                                        <label class="control-label">Fecha Nacimiento:</label>
                                          <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" value="<?= $datos_cliente->fecha_nacimiento ?>" placeholder="Escriba fecha nacimiento "> <span class="help-block">  </span>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Provincia</label>
+                                        <label class="control-label">Provincia:</label>
                                           <select class="form-control select2"  name="id_provincia" id="id_provincia" data-placeholder="Seleccione">
                                           <?php 
                                           if(!empty($provincias))
@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Comuna</label>
+                                        <label class="control-label">Comuna:</label>
                                          <select class="form-control select2"  name="id_municipio" id="id_municipio" data-placeholder="Seleccione">
                                         </select>
                                     </div>

@@ -600,13 +600,13 @@ public function save_detallePromo($data){
 
    public function insert_prodAlmacen($data)
   {
-    
      $param = array('id_emp' =>$data['id_emp'] ,'id_producto' => $data['id_producto'] );
      $exitencia = $this->buscar_productoAlmacen($param);
       if ($exitencia) {
         return false;
       } else {
         $this->db->insert('almacen_emp',$data);
+        return true;
       }
     
 
@@ -986,6 +986,13 @@ public function save_detallePromo($data){
    return $mostarcategorias;
   }
 
+      public function lista_productos()
+  {
+     $result =$this->listar_categorias_prod(); 
+     $mostarcategorias = "";
+    
+  }
+
 
   public function productos_almacen($data)
   {
@@ -1040,6 +1047,19 @@ public function save_detallePromo($data){
       }
   }
 
+    public function eliminar_prodAlm($id)
+    {
+     $this->db->where('id_almacen',$id);
+     $this->db->delete('almacen_emp');
+     if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+  }
+
+  
+
    public function eliminar_promo($id)
     {
      $this->db->where('id_promo',$id);
@@ -1060,9 +1080,6 @@ public function save_detallePromo($data){
         return $query->result();
        
     }
-
-
-
 
 
 
