@@ -445,8 +445,8 @@ function load_dataRango()
    
       $this->email->from('consultas@dvigi.com.ar <consultas@dvigi.com.ar>', 'Notificaciones Dvigi');
       $this->email->to("$email_destino");
-      $this->email->subject('Información de despacho');
-      $this->email->message('<h2>Email enviado desde el Sistema DVIGI ,</h2><hr></br>'.  $cuerpo_mensaje);
+      $this->email->subject('Emprendedores Dvigi');
+      $this->email->message('<h2>Email enviado desde el Sistema Dvigi ,</h2><hr></br>'.  $cuerpo_mensaje);
       $this->email->send();
       //con esto podemos ver el resultado
       //var_dump($this->email->print_debugger());
