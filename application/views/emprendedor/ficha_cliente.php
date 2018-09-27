@@ -11,29 +11,45 @@
 </div>
 <div class="row">
     <div class="col-md-12 col-lg-6 col-sm-12">
-                        <div class="panel panel-success">
-                            <div class="panel-heading"> Ficha cliente.
-                                <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a> </div>
-                            </div>
-                            <div class="panel-wrapper collapse in" aria-expanded="true">
-                                <div class="panel-body">
-                                    <h3 class="box-title"><?= $datos_cliente->nombre_cliente." ".$datos_cliente->apellidos  ?></h3>
-                                    <dl>
-                                        <dt>DNI:</dt>
-                                        <dd><?= $datos_cliente->dni     ?></dd>
-                                        <dt>Telefono:</dt>
-                                        <dd><?= $datos_cliente->telefono     ?></dd>
-                                        <dt>Celular:</dt>
-                                        <dd><?= $datos_cliente->celular ?></dd>
-                                         <dt>Email:</dt>
-                                        <dd><?= $datos_cliente->email ?></dd>
-                                        <dt>Dirección:</dt>
-                                        <dd><?= $datos_cliente->direccion ?></dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
+      <div class="panel panel-success">
+          <div class="panel-heading"> Ficha cliente.
+              <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a> </div>
+          </div>
+          <div class="panel-wrapper collapse in" aria-expanded="true">
+              <div class="panel-body">
+                  <div class="row">
+                         <br>
+                          <div class="col-md-3 col-sm-3 text-center">
+                             <img src="<?php echo base_url() ?>assets/plugins/images/users/images.png" alt="user" class="img-circle img-responsive">
+                          </div>
+                          <div class="col-md-9 col-sm-9">
+                              <h3 class="box-title m-b-0"><?= $datos_cliente->nombre_cliente." ".$datos_cliente->apellidos  ?></h3> <small> </small>
+                              <p>
+                                  <address>
+                                    <strong>Correo: </strong> <?= $datos_cliente->email ?>
+                                      <br/>
+                                      <br/>
+                                    <strong>DNI: </strong> <?= $datos_cliente->dni  ?>
+                                      <br/>
+                                      <br/>
+                                      <strong>Teléfono: </strong> <?= $datos_cliente->telefono ?>
+                                      <br/>
+                                      <br/>
+                                      <strong>Celular: </strong> <?= $datos_cliente->celular ?>
+                                      <br/>
+                                      <br/>
+                                        <strong>Dirección: </strong><?= $datos_cliente->direccion ?>
+                                      <br/>
+                                      <br/>
+                                  </address>
+                              </p>
+                          </div>
                     </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    
   
     <div class="col-md-12 col-lg-6 col-sm-12">
                         <div class="panel panel-info">

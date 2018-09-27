@@ -22,7 +22,7 @@
             if (!empty($list_cap)):
                         $cont = 0;
                         $videoact = $datos_emp->id_cap;
-                        
+                        echo  $videoact;
                      foreach ($list_cap as $key): 
                         $cont ++;
                         ?> 

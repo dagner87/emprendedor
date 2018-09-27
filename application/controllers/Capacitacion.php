@@ -273,9 +273,7 @@ class Capacitacion extends CI_Controller
             redirect(base_url() . 'login');
         } 
 
-       
-     $data['datos_cliente']  = $this->modelogeneral->datos_cliente($id_cliente);
-     
+   
      $id_emp                 = $this->session->userdata('id_emp');
      $data['provincias']     = $this->modelogeneral->select_provincias();  
      $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
@@ -283,7 +281,7 @@ class Capacitacion extends CI_Controller
      $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
      $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");
      $data['cantidad_prod']  = $this->modelogeneral->count_cantProdCar($id_emp);
-     
+     $data['datos_cliente']  = $this->modelogeneral->datos_cliente($id_cliente);  
      
  
      $this->load->view("layout/header",$data);
