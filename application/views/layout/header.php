@@ -123,7 +123,8 @@
               color:#FFF;
               font-size:36px;
               box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-              transition:.3s;  
+              transition:.3s;
+              z-index: 1;  
             }
             .botonF1:active{
               transform:scale(1.1);

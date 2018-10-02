@@ -312,12 +312,14 @@ class Panel_admin extends CI_Controller
         {
           foreach($result as $row)
             {
-             $output .= '<tr>
+                $margen = $row->precio - $row->costo;
+             $output .= '<tr onclick = "this.style.background = "#FC0">
                          <td><span class="text-muted"><img src="'.base_url().'assets/uploads/img_productos/'.$row->url_imagen.'" alt="'.$row->nombre_prod.'" class="img-circle" /></td>
                          <td><span class="font-medium">'.$row->nombre_prod.'</span></td>
                          <td><span class="text-muted">'.$row->existencia.'</span></td>
                          <td><span class="text-muted">'.$row->precio.'</span></td>
-                         <td><span class="text-muted">'.$row->vencimiento.'</span></td>
+                         <td><span class="text-muted">'.$row->costo.'</span></td>
+                         <td><span class="text-muted">'.$margen.'</span></td>
                          <td>';
                          $output .= '<button type="button" data="'.$row->id_producto.'" class=" btn btn-info btn-outline btn-circle btn-lg m-r-5 edit-row-btn collapseble"  data-toggle="tooltip" data-original-title="Editar" title ="Editar"><i class="ti-pencil-alt"></i></button>';
                          $output .= '<button type="button" data="'.$row->id_producto.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 deletecap-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button>';
@@ -337,6 +339,7 @@ class Panel_admin extends CI_Controller
     {
         $param['nombre_prod']    = $this->input->post('nombre_prod');
         $param['url_imagen']     = $this->input->post('nombre_archivo');
+        $param['costo']          = $this->input->post('costo');
         $param['precio']         = $this->input->post('precio');
         $param['es_repuesto']    = $this->input->post('es_repuesto');
         $param['existencia']     = $this->input->post('existencia');
@@ -378,6 +381,7 @@ class Panel_admin extends CI_Controller
         $param['id_producto']    = $this->input->post('id_producto_edit');
         $param['nombre_prod']    = $this->input->post('nombre_prod');
         $param['url_imagen']     = $this->input->post('nombre_archivo');
+        $param['costo']          = $this->input->post('costo');
         $param['precio']         = $this->input->post('precio');
         $param['es_repuesto']    = $this->input->post('es_repuesto');
         $param['existencia']     = $this->input->post('existencia');
@@ -628,7 +632,7 @@ function load_datamonto()
         echo json_encode($msg);
     }   
 
-    
+
  /*-----------------------------*/  
     public function forgot_pass()
     {

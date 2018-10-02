@@ -113,9 +113,15 @@
                                                                                     </div>
                                                                                 </label>
                                                                             </div>
-                                                                           
                                                                         <div class="help-block with-errors"></div>
                                                                         </div>
+
+
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Nombre:</label>
+                                                                            <input type="text" id="nombre_prod" name="nombre_prod" class="form-control"  required data-error="Agrege Nombre Producto " > 
+                                                                            <div class="help-block with-errors"></div></div>
+                                                                    
 
                                                                     </div>
                                            
@@ -132,12 +138,14 @@
 
                                                                 <!--/row-->
                                                                 <div class="row">
-                                                                   <div class="col-md-6">
+                                                                   
+                                                                    <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label class="control-label">Nombre:</label>
-                                                                            <input type="text" id="nombre_prod" name="nombre_prod" class="form-control"  required data-error="Agrege Nombre Producto " > 
+                                                                            <label class="control-label"> Precio Costo:</label>
+                                                                            <input type="text" id="costo" name="costo" class="form-control"  required data-error="Agrege  Precio costo" > 
                                                                             <div class="help-block with-errors"></div></div>
                                                                     </div>
+
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label class="control-label">Precio:</label>
@@ -227,7 +235,8 @@
                                             <th>NOMBRE PRODUCTO</th>
                                             <th>EXISTENCIA</th>
                                             <th>PRECIO VENTA</th>
-                                            <th>PRECIO DE TIENDA</th>
+                                            <th>COSTO</th>
+                                            <th>MARGEN</th>
                                             <th>ACCION</th>
                                         </tr>
                                     </thead>
@@ -279,6 +288,8 @@
         }
     });
 
+
+      
 
          $('#add_respuesto').submit(function(e) {
             e.preventDefault();
@@ -551,6 +562,7 @@
                    
                    $('#id_producto_edit').val(data.id_producto);
                    $('#nombre_prod').val(data.nombre_prod);
+                   $('#costo').val(data.costo);
                    $('#precio').val(data.precio);
                    $('#es_repuesto').val(data.es_repuesto);
                    $('#existencia').val(data.existencia);
