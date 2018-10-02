@@ -157,7 +157,7 @@
    </div>
    <div class="row">
                     <div class="col-md-12">
-                      <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" >Agregar Promoción</button></h3>
+                      <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" ><i class="fa fa-plus"></i> Agregar Promoción</button></h3>
                         <div class="panel">
                             <div class="panel-heading">Lista de Promociones</div>
                             <div class="table-responsive">

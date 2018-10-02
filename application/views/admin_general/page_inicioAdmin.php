@@ -64,18 +64,20 @@
                  <div class="row">
                      <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title m-b-0">ADMINISTAR EMPRENDEDORES</h3>
+                            <h3 class="box-title m-b-0">ADMINISTRAR EMPRENDEDORES</h3>
                             <p class="text-muted m-b-30"></p>
                             <div class="table-responsive">
                                 <table id="example" class="table display manage-u-table">
                                     <thead>
                                         <tr>
                                             <th>NOMBRE</th>
-                                            <th>REPRESENTANTE</th>
-                                            <th>TELEFONO</th>
-                                            <th>PERFIL</th>
+                                            <th>CONTRATO ADHESION </th>
+                                            <th>ULTIMA COMPRA </th>
+                                            <th>ACUMULADO</th>
+                                            <th>PATROCINADOS ACTIVOS</th>
                                             <th>ESTADO</th>
-                                            <th>ACCION</th>
+                                            <th>CLIENTES FINALES</th>
+                                            <th>ATENCION DE CLIENTE</th>
                                         </tr>
                                     </thead>
                                     <tbody id="contenido_admin">
@@ -88,12 +90,58 @@
                   
                 </div>
 
-                
             </div>
+
+<!-- .modal for add task -->
+<div class="modal fade" id="detallepatocinados" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content detalle">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="titulo_invit">Lista de Patrocinados </h4>
+            </div>
+            <div class="modal-body" id="">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="table-responsive">
+                                <table class="table table-hover manage-u-table" id="lista-asoc">
+                                    <thead>
+                                        <tr>
+                                            <th>No.Identidad</th>
+                                            <th>Nombre</th>
+                                            <th>Teléfono</th>
+                                            <th width="250">Email</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody id="lista_patrocinados">
+
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        <!-- /.modal-content -->
+        </div>
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+
             <!-- /.container-fluid -->
 <script type="text/javascript">
         $(document).ready(function() {
             load_data_emp();
+
           
         });
  
@@ -103,6 +151,8 @@
         console.log(perfil);
 
       });
+
+   
 
         function load_data_emp()
     {
@@ -131,45 +181,85 @@
                                         }
                 
             });
-            // Order by the grouping
-            $('#example tbody').on('click', 'tr.group', function() {
-                var currentOrder = table.order()[0];
-                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                    table.order([2, 'desc']).draw();
-                } else {
-                    table.order([2, 'asc']).draw();
-                }
-            });
+           
             }
         })
     }
 
-      $(document).on("click",".delete-row-btn", function(){
-        $(this).closest("tr").remove();
-        var id = $(this).attr('data');
-        $.ajax({
-                type: 'ajax',
-                method: 'get',
-                url: '<?php echo base_url() ?>panel_admin/eliminar_emp',
-                data: {id_emp: id},
-                async: false,
-                dataType: 'json',
-                success: function(data){
-                  $.toast({
-                        heading: 'Emprendedor eliminado ',
-                        text: 'El Emprendedor a sido eliminado.',
-                        position: 'top-right',
-                        loaderBg: '#ff6849',
-                        icon: 'error',
-                        hideAfter: 3500
+     $(document).on("click",".firmo", function(){
+        var id = $(this).val();
+       
+         $.ajax({
+            url:"<?php echo base_url(); ?>panel_admin/update_firma",
+            method:"GET",
+            data:{id_emp:id},
+            success:function(data)
+            {
+             var obj = jQuery.parseJSON(data);
+             
+              console.log(obj.comprobador);
 
-                    });
-                },
-                error: function(){
-                  alert('No se pudo eliminar');
-                }
-        });
+              if ($.fn.DataTable.isDataTable('#example')) {
+                      table = $('#example').DataTable();
+                      table.destroy();
+                      console.log("limpio tabla");
+                       load_data_emp();
+                      }
+                      else {
+                           console.log("tabla cargada");
+                          load_data_emp();
+                          }
+             //$('#span'+id).text(obj.comprobador);              
+             
+             
+              
+            }
+
+        })
+    });
+
+    $(document).on("click",".mostrar-asoc", function(){
+        var id = $(this).attr('data');
+
+        if ($.fn.DataTable.isDataTable('#lista-asoc')) {
+                      table = $('#lista-asoc').DataTable();
+                      table.destroy();
+                      console.log("limpio tabla");
+                      
+                      }
+                      else {
+                           console.log("tabla cargada");
+                         
+                          }
         
+         $.ajax({
+            url:"<?php echo base_url(); ?>panel_admin/load_listaPatrocinados",
+            method:"POST",
+            data:{id_emp:id},
+            success:function(data)
+            {
+             $('#lista_patrocinados').html(data);
+               var table = $('#lista-asoc').DataTable({
+                 responsive: true,
+                 language: {
+                              "lengthMenu": "Mostrar _MENU_ registros por pagina",
+                              "zeroRecords": "No se encontraron resultados en su busqueda",
+                              "searchPlaceholder": "Buscar registros",
+                              "info": "Mostrando  _START_ al _END_ de un total de  _TOTAL_ registros",
+                              "infoEmpty": "No existen registros",
+                              "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                              "search": "Buscar:",
+                              "paginate": {
+                                            "first": "Primero",
+                                            "last": "Último",
+                                            "next": "Siguiente",
+                                            "previous": "Anterior"
+                                          },
+                    }
+               });
+              
+            }
+        })
     });
 </script>            
 

@@ -74,7 +74,7 @@
 <div class="col-lg-12">
 
     <div class="white-box">
-        <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#insetcapModal">Agregar Capacitación</button></h3>
+        <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#insetcapModal"><i class="fa fa-plus"></i> Agregar Capacitación</button></h3>
 
         <table class="table table-hover manage-u-table contact-list" id="editable-datatable">
             <thead>

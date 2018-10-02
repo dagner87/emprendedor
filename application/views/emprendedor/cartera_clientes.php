@@ -19,7 +19,7 @@
                             <div class="panel-heading">Alta Cliente</div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
-                                  <div class="alert alert-warning"><p><i class="mdi mdi-alert-outline fa-fw"></i><strong>Pulse el botón para desplegar el formulario </strong> </p></div>
+                                  <div class="alert alert-warning"><p><i class="mdi mdi-alert-outline fa-fw"></i><strong> Pulse el botón para desplegar el formulario </strong> </p></div>
                                     
                                   <div class="m-t-15 collapseblebox dn">
                                         <div class="well">

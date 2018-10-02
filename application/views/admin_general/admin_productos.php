@@ -71,7 +71,7 @@
                             <div class="panel-heading">Datos del producto</div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
-                                  <div class="alert alert-warning"><p><i class="mdi mdi-alert-outline fa-fw"></i><strong>Pulse el botón para desplegar el formulario </strong> </p></div>
+                                  <div class="alert alert-warning"><p><i class="mdi mdi-alert-outline fa-fw"></i><strong> Pulse el botón para desplegar el formulario </strong> </p></div>
                                     
                                   <div class="m-t-15 collapseblebox dn">
                                         <div class="well">
@@ -200,7 +200,7 @@
    <div class="row">
 
                     <div class="col-md-12">
-                      <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" >Agregar Producto</button></h3>
+                      <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" > <i class="fa fa-plus"></i> Agregar Producto</button></h3>
 
                         <div class="panel">
                             <div class="table-responsive">
@@ -223,31 +223,7 @@
                         </div>
                     </div>
                 </div>
-   <div class="row">
-   <div class="col-lg-12">
-
-    <div class="white-box">
-        <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" >Agregar Producto</button></h3>
-
-        <table class="table table-hover manage-u-table  contact-list" id="editable-datatable">
-            <thead>
-                <tr>
-                    <th>IMAGEN</th>
-                    <th>NOMBRE PRODUCTO</th>
-                    <th>EXISTENCIA</th>
-                    <th>PRECIO VENTA</th>
-                    <th>PRECIO DE TIENDA</th>
-                    <th>ACCION</th>
-                </tr>
-            </thead>
-            <tbody id="contenido_video1">
-               
-            </tbody>
-            
-        </table>
-    </div>
-   </div>
-</div>
+  
 
 </div>
         </div>

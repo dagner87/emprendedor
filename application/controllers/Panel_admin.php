@@ -20,10 +20,11 @@ class Panel_admin extends CI_Controller
         }
      $id_emp = $this->session->userdata('id_emp');
      $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp); 
-     $data['total_emp']  = $this->modelogeneral->Total_emp("emprendedor");       
+     $data['total_emp']  = $this->modelogeneral->Total_emp("emprendedor");
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");       
      
      $this->load->view("layout/header",$data);
-     $this->load->view("admin_general/side_menuAdmin");
+     $this->load->view("admin_general/side_menuAdmin",$data);
      $this->load->view("admin_general/page_inicioAdmin",$data);
      $this->load->view("layout/footer");  
     }
@@ -36,9 +37,10 @@ class Panel_admin extends CI_Controller
      $id_emp = $this->session->userdata('id_emp');
      $data['cant_asoc']  = $this->modelogeneral->rowCountAsoc($id_emp);
      $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
+     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");  
     
       $this->load->view("layout/header",$data);
-      $this->load->view("admin_general/side_menuAdmin");
+      $this->load->view("admin_general/side_menuAdmin",$data);
       $this->load->view("layout/perfil",$data);
       $this->load->view("layout/footer");  
     }
@@ -47,48 +49,128 @@ class Panel_admin extends CI_Controller
     {
         $id_emp = $this->session->userdata('id_emp');
         $result = $this->modelogeneral->mostrar_emp($id_emp);
+         $year = date('Y');
+         $mes  =  date('m');
+
         $count = 0;
         $output = '';
         if(!empty($result))
         {
             foreach($result as $row)
+              
             {
-                if ($row->perfil == 'administrador' ) {
-                    $selected = 'selected';
-                }else{
-                    $selected = '';
-                }
+                
+                $data = array('mes' =>$mes,'year' =>$year, 'id_emp' =>$row->id_emp);
+                $row_monto     = $this->modelogeneral->montos_mes($data); 
+                $m_acumulado   = $this->modelogeneral->compras_acumuladas($data); 
+                $cant_clientes = $this->modelogeneral->Count_Cli($row->id_emp); 
+                $cant_cli_venc = $this->modelogeneral->cant_cli_venc($row->id_emp); 
+                
+                
+                
+                if ($row_monto->monto != null) {
+                     $monto =  $row_monto->monto;
+                 } else {
+                     $monto = 0;
+                 }
 
-                if ($row->estado == 1) {
-                    $estado = '<span class="label label-success">Registro completado</span>';
-                }else{
-                    $estado = '<span class="label label-danger">Registro no completado</span>';
-                }
-                $count++;
+                if ($m_acumulado->monto != null) {
+                     $m_acumulado =  $m_acumulado->monto;
+                 } else {
+                     $m_acumulado = 0;
+                 } 
+
+                 if ($row->firmo_contrato == 1) {
+                     $firmo = "checked";
+                     $desabled = "disabled";
+
+                 } else {
+                     $firmo = " ";
+                     $desabled = "";
+                 }
+
+                
+
+                 switch ($row->estado) {
+                            case '0':
+                                $estado = '<span class="label label-warning">Invitación enviada</span>';
+                                break;
+                            case '1':
+                                 $estado = '<span class="label label-success">Aceptado</span>';
+                                break;
+                            case '2':
+                                 $estado = '<span class="label label-info">Capacitación</span>';
+                                break;
+                            case '3':
+                                 $estado = '<span class="label label-primary">Capacitado</span>';
+                                break;
+       
+                        }
+                 
+                  
                 $output .= '<tr>
-                              <td><span class="font-medium">'.$row->nombre_emp.'</span>
-                                  <br/><span class="text-muted">'.$row->email.'</span></td>
-                              <td>--</td>
-                              <td><span class="text-muted">'.$row->telefono_emp.'</span></td>
-                             
-                              <td>
-                                  <select class="form-control" id="sel_perfil">
-                                      <option value ="emprendedor" '.$selected.'>Emprendedor</option>
-                                      <option value ="administrador" '.$selected.' >Administrador</option>
-                                  </select>
-                              </td>
-                              <td>
+                               <td>
+                                 <span class="font-medium">'.$row->nombre_emp.'</span>
+                                  <br/><span class="text-muted">'.$row->email.'</span>
+                                  <br/><span class="text-muted">'.$row->telefono_emp.'</span>
+                                </td>
+                               <td>
+                                    <div class="checkbox checkbox-success">
+                                                <input id="checkbox'.$row->id_emp.'"  '.$desabled.'  type="checkbox" '.$firmo.' value="'.$row->id_emp.'" class="firmo">
+                                                <label for="checkbox'.$row->id_emp.'" ><span id="span'.$row->id_emp.'"></span></label>
+                                     </div>
+                                </td>
+                              <td>$'.$monto.'</td>
+                              <td>$'.$m_acumulado.'</td>
+
+                              <td><button type="button" data="'.$row->id_emp.'" class="btn btn-info btn-outline btn-circle btn-lg m-r-5 mostrar-asoc" data-toggle="modal" data-target="#detallepatocinados"  data-toggle="tooltip" data-original-title="Ver Patrocinados" title ="Ver Patrocinados"><i class="ti-eye"></i></button></td>
+                             <td>
                                     '.$estado.'
                               </td>
-                              <td>
-                              <button type="button" data="'.$row->id_emp.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 delete-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button>
-                              </td>
+                              
+                              <td>'.$cant_clientes.'</td>
+                             <td>'.$cant_cli_venc.'</td>
                             </tr>';
             }
         }
     
         echo $output;
     }
+
+    function load_listaPatrocinados()
+    {
+        $id_emp = $this->input->post('id_emp');
+        $result = $this->modelogeneral->mostrar_asoc($id_emp);
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+              $output .= ' <tr>
+                         <td>'.$row->dni_emp.'</td>
+                         <td>'.$row->nombre_emp.'</td>
+                         <td>'.$row->telefono_emp.'</td>
+                         <td>'.$row->email.'</td>
+                         </tr>';                                        
+            }
+        }
+    
+        echo $output;
+    }
+
+       public function update_firma()
+    {
+        $id_emp = $this->input->get('id_emp');
+        $param = array('id_emp' => $id_emp,'firmo_contrato' =>1);
+        $result  = $this->modelogeneral->update_perfil($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = "FIRMO";
+             }
+        echo json_encode($msg);
+    }
+   
      
       public function eliminar_emp()
     {
@@ -141,7 +223,8 @@ class Panel_admin extends CI_Controller
                          <td><span class="text-muted">'.$row->url_video.'</span></td>
                         <td><span class="text-muted">'.$row->evaluacion.'</span></td>';
                         $output .= '<td>
-                        <button type="button" data="'.$row->id_cap.'" class="btn btn-info btn-outline btn-circle btn-lg m-r-5 edit-row-btn"  data-toggle="tooltip" data-original-title="Editar" title ="Editar"><i class="ti-pencil-alt"></i></button>
+                        
+                        <button type="button" data="'.$row->id_cap.'" class=" btn btn-info btn-outline btn-circle btn-lg m-r-5 edit-row-btn collapseble"  data-toggle="tooltip" data-original-title="Editar" title ="Editar"><i class="ti-pencil-alt"></i></button>
                         <button type="button" data="'.$row->id_cap.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 deletecap-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button></td>
                         </tr>';
 
@@ -175,6 +258,32 @@ class Panel_admin extends CI_Controller
     {
         $id_cap = $this->input->get('id');
         $result  = $this->modelogeneral->eliminar_cap($id_cap);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+      public function getdatos_cap()
+    {
+        $id_cap = $this->input->get('id');
+        $result  = $this->modelogeneral->getdatos_cap($id_cap);
+        echo json_encode($result);
+    }
+
+    
+
+     public function update_cap()
+    {
+        $param['id_cap']         = $this->input->post('id_cap');
+        $param['titulo_video']   = $this->input->post('titulo_video');
+        $param['descripcion']    = $this->input->post('descripcion');
+        $param['imag_portada']   = $this->input->post('nombre_archivo');
+        $param['url_video']      = $this->input->post('url_video');
+        $param['evaluacion']     = $this->input->post('evaluacion');
+        
+        $result = $this->modelogeneral->update_cap($param);
         $msg['comprobador'] = false;
         if($result)
              {
@@ -461,10 +570,10 @@ function load_dataRango()
     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
     $data['categorias']  = $this->modelogeneral->listar_categorias_prod(); 
     $data['respuestos']  = $this->modelogeneral->selec_respuestos_prod(); 
-     
+    $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");   
 
     $this->load->view("layout/header",$data);
-    $this->load->view("admin_general/side_menuAdmin");
+    $this->load->view("admin_general/side_menuAdmin",$data);
     $this->load->view("admin_general/admin_productos",$data);
     $this->load->view("layout/footer");  
     }
@@ -479,9 +588,10 @@ function load_dataRango()
     $data['categorias']  = $this->modelogeneral->selec_categorias_prod();
     $data['productos']      = $this->modelogeneral->seleccion_productos();
     $data['respuestos']  = $this->modelogeneral->selec_respuestos_prod();
+    $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");  
 
     $this->load->view("layout/header",$data);
-    $this->load->view("admin_general/side_menuAdmin");
+    $this->load->view("admin_general/side_menuAdmin",$data);
     $this->load->view("admin_general/admin_promos",$data);
     $this->load->view("layout/footer");  
     }
@@ -577,11 +687,12 @@ function load_dataRango()
         }
     $id_emp = $this->session->userdata('id_emp');
     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
-    $data['productos']  = $this->modelogeneral->seleccion_productos();  
+    $data['productos']  = $this->modelogeneral->seleccion_productos();
+    $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");    
 
 
     $this->load->view("layout/header",$data);
-    $this->load->view("admin_general/side_menuAdmin");
+    $this->load->view("admin_general/side_menuAdmin",$data);
     $this->load->view("admin_general/admin_combos",$data);
     $this->load->view("layout/footer");  
     }
@@ -718,10 +829,11 @@ function load_dataRango()
             redirect(base_url() . 'login');
         }
     $id_emp = $this->session->userdata('id_emp');
-    $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+    $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp); 
+    $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");           
     $this->load->view("layout/header",$data);
-    $this->load->view("admin_general/side_menuAdmin");
-    $this->load->view("admin_general/admin_videos");
+    $this->load->view("admin_general/side_menuAdmin",$data);
+    $this->load->view("admin_general/admin_capacitacion");
     $this->load->view("layout/footer");  
     }
 
@@ -731,9 +843,10 @@ function load_dataRango()
             redirect(base_url() . 'login');
         }
     $id_emp = $this->session->userdata('id_emp');
-    $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);          
+    $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp); 
+    $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");           
     $this->load->view("layout/header",$data);
-    $this->load->view("admin_general/side_menuAdmin");
+    $this->load->view("admin_general/side_menuAdmin",$data);
     $this->load->view("admin_general/rango_comisiones");
     $this->load->view("layout/footer");  
     } 

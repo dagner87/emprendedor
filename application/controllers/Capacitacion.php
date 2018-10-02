@@ -292,7 +292,8 @@ class Capacitacion extends CI_Controller
 
     function load_dataClientes()
     {
-        $result = $this->modelogeneral->listar_clientes();
+       $id_emp                 = $this->session->userdata('id_emp');
+        $result = $this->modelogeneral->listar_clientes($id_emp);
         $count = 0;
         $output = '';
         if(!empty($result))
@@ -317,8 +318,8 @@ class Capacitacion extends CI_Controller
 
     function load_dataClientesVentas()
     {
-        $result = $this->modelogeneral->listar_clientes();
-        $count = 0;
+        $id_emp = $this->session->userdata('id_emp');
+        $result = $this->modelogeneral->listar_clientes($id_emp);
         $output = '';
         if(!empty($result))
         {

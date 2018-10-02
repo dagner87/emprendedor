@@ -24,6 +24,28 @@ class Modelogeneral extends CI_Model {
      
   }
 
+ public function montos_mes($data){
+   
+    $this->db->select("SUM(total_comp) as monto");
+    $this->db->where("MONTH(fecha_comp)",$data['mes']);
+    $this->db->where("YEAR(fecha_comp)",$data['year']);
+    $this->db->from("compra");
+    $this->db->where("id_emp",$data['id_emp']);
+    $resultados = $this->db->get();
+    return $resultados->row();
+  }
+
+ public function compras_acumuladas($data){
+   
+    $this->db->select("SUM(total_comp) as monto");
+    $this->db->where("fecha_comp >=",$data['year']."-01-01");
+    $this->db->where("fecha_comp <=",$data['year']."-12-31");
+    $this->db->from("compra");
+    $this->db->where("id_emp",$data['id_emp']);
+    $resultados = $this->db->get();
+    return $resultados->row();
+  }  
+
 
   public function check_cliente($parametro, $valor)
   {
@@ -98,6 +120,12 @@ class Modelogeneral extends CI_Model {
         }
   }
 
+   public function Count_Cli($id_emp){
+    $this->db->where('id_emp',$id_emp);
+    $resultados = $this->db->get('cliente');
+    return $resultados->num_rows();
+  }
+
   public function insert_promo($data)
   {
       $this->db->insert('promo',$data);
@@ -110,8 +138,9 @@ class Modelogeneral extends CI_Model {
   }
   
 
-  public function listar_clientes()
+  public function listar_clientes($id_emp)
   {
+     $this->db->where('id_emp',$id_emp);
      $query = $this->db->get('cliente');
       if($query->num_rows() > 0){
         return $query->result();
@@ -119,6 +148,8 @@ class Modelogeneral extends CI_Model {
         return false;
       }
   }
+
+  
 
    public function update_datosCliente($param)
   {
@@ -246,6 +277,26 @@ public function save_detallePromo($data){
         }
      
   }
+
+   public function getdatos_cap($id_cap)
+  {
+     $this->db->where('id_cap',$id_cap);
+     $query = $this->db->get('capacitacion');
+     return $query->row();
+     
+  }
+
+   public function update_cap($param) 
+  {
+    $this->db->where('id_cap',$param['id_cap']);
+    $this->db->update('capacitacion',$param);
+     if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+  }
+ 
 
   
 
@@ -519,6 +570,23 @@ public function save_detallePromo($data){
       }
   }
 
+   public function cant_cli_venc($id_emp){
+      
+      $this->db->select('prov.id_prod_vencimiento,prov.id_cliente,cli.nombre_cliente,prod.nombre_prod,prov.fecha_vencimiento');
+      $this->db->where('prov.fecha_vencimiento <', date('Y-m-d'));
+      $this->db->where('cli.id_emp', $id_emp);
+      $this->db->join('cliente as cli', 'cli.id_cliente = prov.id_cliente');
+      $this->db->join('productos as prod','prod.id_producto = prov.id_respuesto');
+      $query = $this->db->get('prod_vencimiento as prov');
+
+      if($query->num_rows() > 0){
+        return $query->num_rows();
+
+      }else{
+        return false;
+      }
+  }
+
   // lista de repuestos vencidos para el  historial de cliente
   public function repustosVencidos_cliente($data){
       
@@ -709,6 +777,23 @@ public function save_detallePromo($data){
         return false;
       }
   }
+
+  /*MOSTRAR ASOCIADOS ACTIVOS*/
+
+ public function mostrar_asocAct($id_emp)
+  {
+      $this->db->where('emp.estado','1');
+      $this->db->where('e_a.id_padre', $id_emp);
+      $this->db->join('emprendedor as emp ', 'e_a.id_hijo = emp.id_emp');
+      $query = $this->db->get('emp_asoc as e_a');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+  /*-------------------------*/
   public function mostrar_carrito($id_emp)
   {
       $this->db->select('id_car,car.id_producto,no_orden,url_imagen,nombre_prod,precio_car,cantidad,importe');
@@ -1237,6 +1322,10 @@ public function save_detallePromo($data){
          return false;
         }
   }
+
+
+
+
  
 
 
