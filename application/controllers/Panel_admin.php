@@ -279,6 +279,8 @@ class Panel_admin extends CI_Controller
         echo json_encode($result);
     }
 
+
+
     
 
     
@@ -482,8 +484,9 @@ function load_dataRango()
                          <td><span class="font-medium">'.$row->rango_inicial.'</span></td>
                          <td><span class="font-medium">'.$row->rango_final.'</span></td>
                         <td><span class="font-medium">'.$row->valor_comision.'</span></td>
+                        <td><span class="font-medium">'.$row->categoria.'</span></td>
                         <td>
-                        <button type="button" data="'.$row->id_tbl_comisiones.'" class=" btn btn-info btn-outline btn-circle btn-lg m-r-5 edit-row-btn collapseble"  data-toggle="tooltip" data-original-title="Editar" title ="Editar"><i class="ti-pencil-alt"></i></button>
+                        <button type="button" data="'.$row->id_tbl_comisiones.'" class=" btn btn-info btn-outline btn-circle btn-lg m-r-5 edit-row-btn" data-toggle="modal" data-target="#insetcapModal"  data-toggle="tooltip" data-original-title="Editar" title ="Editar"><i class="ti-pencil-alt"></i></button>
                         <button type="button" data="'.$row->id_tbl_comisiones.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 deletecap-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button></td>
                         </tr>';
             }
@@ -499,7 +502,34 @@ function load_dataRango()
         $param['rango_inicial']  = $this->input->post('rango_inicial');
         $param['rango_final']    = $this->input->post('rango_final');
         $param['valor_comision'] = $this->input->post('valor_comision');
+        $param['categoria']      = $this->input->post('categoria');
         $result                  = $this->modelogeneral->insert_comisiones($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
+    /*listar*/
+
+       public function getdatos_rango()
+    {
+        $id      = $this->input->get('id');
+        $result  = $this->modelogeneral->getdatos_rango($id);
+        echo json_encode($result);
+    }
+
+    public function update_rango()
+    {
+        $param['id_tbl_comisiones'] = $this->input->post('id_tbl_comisiones');
+        $param['rango_inicial']     = $this->input->post('rango_inicial');
+        $param['rango_final']       = $this->input->post('rango_final');
+        $param['valor_comision']    = $this->input->post('valor_comision');
+        $param['categoria']         = $this->input->post('categoria');
+        
+        $result = $this->modelogeneral->update_rango($param);
         $msg['comprobador'] = false;
         if($result)
              {
@@ -520,6 +550,85 @@ function load_dataRango()
              }
         echo json_encode($msg);
     }  
+
+ /*-----------------------------*/
+ /*-------------TABLA DE MONTO MINIMO-------------*/
+
+
+function load_datamonto()
+    {
+        $result = $this->modelogeneral->listar_monto();
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+             $output .= '<tr>
+                         <td><span class="font-medium">'.$row->monto_minimo.'</span></td>
+                        <td>
+                        <button type="button" data="'.$row->id_monto.'" class=" btn btn-info btn-outline btn-circle btn-lg m-r-5 edit-row-btn" data-toggle="modal" data-target="#insetcapModal"  data-toggle="tooltip" data-original-title="Editar" title ="Editar"><i class="ti-pencil-alt"></i></button>
+                        <button type="button" data="'.$row->id_monto.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 deletecap-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button></td>
+                        </tr>';
+            }
+        }
+    
+        echo $output;
+    }
+
+  /* Insertar*/
+    public function insert_monto()
+    {
+       
+        $param['monto_minimo']  = $this->input->post('monto_minimo');
+        $param['fecha']         = date('Y-m-d');
+        $result                 = $this->modelogeneral->insert_monto($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
+    /*listar*/
+
+       public function getdatos_monto()
+    {
+        $id      = $this->input->get('id');
+        $result  = $this->modelogeneral->getdatos_monto($id);
+        echo json_encode($result);
+    }
+
+    public function update_monto()
+    {
+        $param['id_monto']      = $this->input->post('id_monto');
+        $param['monto_minimo']  = $this->input->post('monto_minimo');
+        $param['fecha']         = date('Y-m-d');
+        
+        $result = $this->modelogeneral->update_monto($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
+      /* eliminar monto */
+  public function eliminar_monto()
+    {
+        $id = $this->input->get('id');
+        $result  = $this->modelogeneral->eliminar_monto($id);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }   
+
+    
  /*-----------------------------*/  
     public function forgot_pass()
     {
@@ -891,6 +1000,20 @@ function load_dataRango()
     $this->load->view("layout/header",$data);
     $this->load->view("admin_general/side_menuAdmin",$data);
     $this->load->view("admin_general/rango_comisiones");
+    $this->load->view("layout/footer");  
+    } 
+
+     public function monto_comisiones()
+    {
+    if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
+            redirect(base_url() . 'login');
+        }
+    $id_emp = $this->session->userdata('id_emp');
+    $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp); 
+    $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");           
+    $this->load->view("layout/header",$data);
+    $this->load->view("admin_general/side_menuAdmin",$data);
+    $this->load->view("admin_general/monto_comisiones");
     $this->load->view("layout/footer");  
     } 
 

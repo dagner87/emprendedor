@@ -20,40 +20,20 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="titulo_invit">Nuevo Rango </h4>
+                <h4 class="modal-title" id="titulo_invit">Nuevo Monto </h4>
             </div>
             <div class="modal-body">
-                <form id="add_cap" action="<?php echo base_url() ?>panel_admin/insert_comision" method="post">
-                   <input type="hidden" name="id_tbl_comisiones" id="id_tbl_comisiones" value="">
-                   <input type="hidden" name="camino" id="camino" value="">
+                <form id="add_cap" action="" method="post">
+                   <input type="text" name="id_monto" id="id_monto" value="">
+                   <input type="text" name="camino" id="camino" value="">
 
             <div class="form-group">
-                <label for="exampleInputuname">RANGO INICIAL</label>
+                <label for="monto_minimo">MONTO MINIMO</label>
                 <div class="input-group">
-                    <div class="input-group-addon"><i class="ti-flag"></i></div>
-                    <input type="text" class="form-control" name="rango_inicial" id="rango_inicial" placeholder=" Escriba rango Inicial" required> </div>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputphone">RANGO FINAL</label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i id="cargando" class="ti-flag-alt"> </i></div>
-                    <input type="text" class="form-control" name="rango_final" id="rango_final" placeholder="Escriba rango Final" required> </div>
+                    <div class="input-group-addon"><i class="fa fa-money"></i></div>
+                    <input type="text" class="form-control" name="monto_minimo" id="monto_minimo" placeholder=" Escriba monto minimo" required> </div>
             </div>
            
-            
-            <div class="form-group">
-                <label for="exampleInputphone">% COMISION</label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-percent"></i></div>
-                    <input type="tel" class="form-control" name="valor_comision" id="valor_comision" placeholder="Escriba valor comisión" required> </div>
-            </div>
-
-            <div class="form-group">
-                <label for="categoria">CATEGORIA</label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="ti-star"></i></div>
-                    <input type="text" class="form-control" name="categoria" id="categoria" placeholder="Escriba la categoría" required> </div>
-            </div>
          </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -70,7 +50,7 @@
 <div class="row">
         <div class="col-md-12">
 
-          <h3 class="box-title"><button type="button"  id="btn-agregar" class="btn btn-info btn-rounded collapseble" data-toggle="modal" data-target="#insetcapModal" ><i class="fa fa-plus"></i> Agregar Rango</button></h3>
+          <h3 class="box-title"><button type="button"  id="btn-agregar" class="btn btn-info btn-rounded collapseble" data-toggle="modal" data-target="#insetcapModal" ><i class="fa fa-plus"></i> Agregar Monto minimo</button></h3>
             <div class="panel">
                 <div class="panel-heading">Lista de Rango de  comisiones</div>
                 <div class="table-responsive">
@@ -78,10 +58,7 @@
                 <table class="table table-hover manage-u-table" id="editable-datatable">
                         <thead>
                             <tr>
-                              <th>RANGO INICIAL</th>
-                              <th>RANGO FINAL</th>
-                              <th> % COMISION</th>
-                              <th>CATEGORIA</th>
+                              <th>MONTO MINIMO</th>
                               <th>ACCION</th>
                           </tr>
                         </thead>
@@ -111,8 +88,8 @@
 
         $('#add_cap').submit(function(e) {
             e.preventDefault();
-            var url    = '<?php echo base_url() ?>panel_admin/insert_comision';
-            var url_up = '<?php echo base_url() ?>panel_admin/update_rango';
+            var url    = '<?php echo base_url() ?>panel_admin/insert_monto';
+            var url_up = '<?php echo base_url() ?>panel_admin/update_monto';
             var data   = $('#add_cap').serialize();
             var camino = $('#camino').val();
 
@@ -222,19 +199,17 @@
      $(document).on("click",".edit-row-btn", function(){
         var id = $(this).attr('data');
         $('#camino').val("editar");
-        $('#id_tbl_comisiones').val(id);
+        $('#id_monto').val(id);
         $.ajax({
                 type: 'ajax',
                 method: 'get',
-                url: '<?php echo base_url() ?>panel_admin/getdatos_rango',
+                url: '<?php echo base_url() ?>panel_admin/getdatos_monto',
                 data: {id: id},
                 async: false,
                 dataType: 'json',
                 success: function(data){
-                   $('#rango_inicial').val(data.rango_inicial);
-                   $('#rango_final').val(data.rango_final);
-                   $('#valor_comision').val(data.valor_comision);
-                   $('#categoria').val(data.categoria);
+                   $('#monto_minimo').val(data.monto_minimo);
+                   
                  },
                 error: function(){
                   alert('No se pudo mostrar');
@@ -250,7 +225,7 @@
         $.ajax({
                 type: 'ajax',
                 method: 'get',
-                url: '<?php echo base_url() ?>panel_admin/eliminar_rango',
+                url: '<?php echo base_url() ?>panel_admin/eliminar_monto',
                 data: {id: id},
                 async: false,
                 dataType: 'json',
@@ -284,7 +259,7 @@
        function load_data_cap()
     {
         $.ajax({
-            url:"<?php echo base_url(); ?>panel_admin/load_dataRango",
+            url:"<?php echo base_url(); ?>panel_admin/load_datamonto",
             method:"POST",
             success:function(data)
             {

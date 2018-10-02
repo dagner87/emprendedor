@@ -71,152 +71,150 @@
                             <div class="panel-heading">Datos del producto</div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
-                                  <div class="alert alert-warning"><p><i class="mdi mdi-alert-outline fa-fw"></i><strong> Pulse el botón para desplegar el formulario </strong> </p></div>
-                                    
-                                  <div class="m-t-15 collapseblebox dn">
-                                        <div class="well">
-                                          <div class="panel-wrapper collapse in" aria-expanded="true">
-                <div class="panel-body">
-                    <form  id="add_prod" action="<?php echo base_url() ?>panel_admin/insert_prod" method="post" data-toggle="validator" >
-                        <input type="hidden" name="id_producto_edit" id="id_producto_edit" value="">
-                        <input type="hidden" name="camino" id="camino" value="">
+                                      <div class="alert alert-warning"><p><i class="mdi mdi-alert-outline fa-fw"></i><strong> Pulse el botón para desplegar el formulario </strong> </p></div>
+                                      <div class="m-t-15 collapseblebox dn">
+                                            <div class="well">
+                                                <div class="panel-wrapper collapse in" aria-expanded="true">
+                                                     <div class="panel-body">
+                                                        <form  id="add_prod" action="<?php echo base_url() ?>panel_admin/insert_prod" method="post" data-toggle="validator" >
+                                                            <input type="hidden" name="id_producto_edit" id="id_producto_edit" value="">
+                                                            <input type="hidden" name="camino" id="camino" value="">
 
-                        <div class="form-body">
-                            <div class="row">
-                              <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Categorías:</label>
-                                        <select class="form-control" data-placeholder="Seleccione una Categoria" tabindex="1" name="id_categoria" id="id_categoria" required>
-                                          <?php if(!empty($categorias))
-                                            {
-                                              foreach($categorias as $row)
-                                                {
-                                                 echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
-                                                }
-                                            } ?>
-                                        </select>
-                                      
-                                    <div class="help-block with-errors"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Detalle:</label>
-                                        <div class="radio-list">
-                                            <label class="radio-inline p-0">
-                                                <div class="radio radio-info">
-                                                    <input type="radio" name="es_repuesto" value="1"  checked required>
-                                                    <label for="es_repuesto">Producto</label>
+                                                            <div class="form-body">
+                                                                <div class="row">
+                                                                  <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Categorías:</label>
+                                                                            <select class="form-control" data-placeholder="Seleccione una Categoria" tabindex="1" name="id_categoria" id="id_categoria" required>
+                                                                              <?php if(!empty($categorias))
+                                                                                {
+                                                                                  foreach($categorias as $row)
+                                                                                    {
+                                                                                     echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
+                                                                                    }
+                                                                                } ?>
+                                                                            </select>
+                                                                          
+                                                                        <div class="help-block with-errors"></div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Detalle:</label>
+                                                                            <div class="radio-list">
+                                                                                <label class="radio-inline p-0">
+                                                                                    <div class="radio radio-info">
+                                                                                        <input type="radio" name="es_repuesto" value="1"  checked required>
+                                                                                        <label for="es_repuesto">Producto</label>
+                                                                                    </div>
+                                                                                </label>
+                                                                                <label class="radio-inline">
+                                                                                    <div class="radio radio-info">
+                                                                                        <input type="radio" name="es_repuesto" value="2" required>
+                                                                                        <label for="es_repuesto">Repuesto </label>
+                                                                                    </div>
+                                                                                </label>
+                                                                            </div>
+                                                                           
+                                                                        <div class="help-block with-errors"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                           
+                                                                    <div class="col-md-6 col-xs-12 btn-file">
+                                                                        <label for="input-file-now">Subir imagen:</label>
+                                                                        <input type="file" id="url_imagen" name="url_imagen" class="dropify " data-default-file="" 
+                                                                        data-error="Agrege una imagen"/>
+                                                                        <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
+                                                                        <div class="help-block with-errors"></div>
+
+                                                                    </div>
+                                                                    
+                                                                </div>
+
+                                                                <!--/row-->
+                                                                <div class="row">
+                                                                   <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Nombre:</label>
+                                                                            <input type="text" id="nombre_prod" name="nombre_prod" class="form-control"  required data-error="Agrege Nombre Producto " > 
+                                                                            <div class="help-block with-errors"></div></div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Precio:</label>
+                                                                            <input type="text" id="precio" class="form-control" name="precio" required data-error="Agrege Precio ">
+                                                                             <div class="help-block with-errors"></div> </div>
+                                                                    </div>
+                                                                    <!--/span-->
+                                                                   
+                                                                    <!--/span-->
+                                                                </div>
+                                                                <!--/row-->
+                                                                <div class="row">
+                                                                      <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">Existencia:</label>
+                                                                                <input type="text" id="existencia" name="existencia" class="form-control"
+                                                                                 required data-error="Agrege Existencia"> 
+                                                                                <div class="help-block with-errors"></div> 
+                                                                            </div>
+                                                                        </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Vencimiento:</label>
+                                                                            <input type="num" id="vencimiento" name="vencimiento" class="form-control" required data-error="Agrege Vencimiento"> 
+                                                                            <div class="help-block with-errors"></div> </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                      <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">Alto:</label>
+                                                                                <input type="text" id="alto" name="alto" class="form-control" required data-error="Agrege Alto"> <div class="help-block with-errors"></div> </div>
+                                                                        </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Ancho:</label>
+                                                                            <input type="text" id="ancho" name="ancho" class="form-control" required data-error="Agrege Ancho"> <div class="help-block with-errors"></div> </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                      <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">Largo:</label>
+                                                                                <input type="text" id="largo" name="largo" class="form-control" required data-error="Agrege Largo "> <div class="help-block with-errors"></div> </div>
+                                                                        </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Peso:</label>
+                                                                            <input type="text" id="peso" name="peso" class="form-control" required data-error="Agrege Peso"> <div class="help-block with-errors"></div> </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                      <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">SKU:</label>
+                                                                                <input type="text" id="sku"  name="sku" class="form-control" required data-error="Agrege SKU"> 
+                                                                                <div class="help-block with-errors"></div> </div>
+                                                                        </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Valor Declarado:</label>
+                                                                            <input type="text" id="valor_declarado" name="valor_declarado" class="form-control" required data-error="Agrege Valor Declarado"> <div class="help-block with-errors"></div> </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            <div class="form-actions">
+                                                                <button type="submit" class="btn btn-success collapseble"> <i class="fa fa-check"></i> Guardar</button>
+                                                                <button type="button" class="btn btn-default">Limpiar</button>
+                                                            </div>
+                                                        </form>
+                                                     </div>
                                                 </div>
-                                            </label>
-                                            <label class="radio-inline">
-                                                <div class="radio radio-info">
-                                                    <input type="radio" name="es_repuesto" value="2" required>
-                                                    <label for="es_repuesto">Repuesto </label>
-                                                </div>
-                                            </label>
-                                        </div>
-                                       
-                                    <div class="help-block with-errors"></div>
-                                    </div>
+                                            </div>
+                                     </div>
+                               </div>
 
-                                </div>
-       
-                                <div class="col-md-6 col-xs-12 btn-file">
-                                    <label for="input-file-now">Subir imagen:</label>
-                                    <input type="file" id="url_imagen" name="url_imagen" class="dropify " data-default-file="" 
-                                    data-error="Agrege una imagen"/>
-                                    <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
-                                    <div class="help-block with-errors"></div>
-
-                                </div>
-                                
-                            </div>
-
-                            <!--/row-->
-                            <div class="row">
-                               <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Nombre:</label>
-                                        <input type="text" id="nombre_prod" name="nombre_prod" class="form-control"  required data-error="Agrege Nombre Producto " > 
-                                        <div class="help-block with-errors"></div></div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Precio:</label>
-                                        <input type="text" id="precio" class="form-control" name="precio" required data-error="Agrege Precio ">
-                                         <div class="help-block with-errors"></div> </div>
-                                </div>
-                                <!--/span-->
-                               
-                                <!--/span-->
-                            </div>
-                            <!--/row-->
-                            <div class="row">
-                                  <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Existencia:</label>
-                                            <input type="text" id="existencia" name="existencia" class="form-control"
-                                             required data-error="Agrege Existencia"> 
-                                            <div class="help-block with-errors"></div> 
-                                        </div>
-                                    </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Vencimiento:</label>
-                                        <input type="num" id="vencimiento" name="vencimiento" class="form-control" required data-error="Agrege Vencimiento"> 
-                                        <div class="help-block with-errors"></div> </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                  <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Alto:</label>
-                                            <input type="text" id="alto" name="alto" class="form-control" required data-error="Agrege Alto"> <div class="help-block with-errors"></div> </div>
-                                    </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Ancho:</label>
-                                        <input type="text" id="ancho" name="ancho" class="form-control" required data-error="Agrege Ancho"> <div class="help-block with-errors"></div> </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                  <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Largo:</label>
-                                            <input type="text" id="largo" name="largo" class="form-control" required data-error="Agrege Largo "> <div class="help-block with-errors"></div> </div>
-                                    </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Peso:</label>
-                                        <input type="text" id="peso" name="peso" class="form-control" required data-error="Agrege Peso"> <div class="help-block with-errors"></div> </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                  <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">SKU:</label>
-                                            <input type="text" id="sku"  name="sku" class="form-control" required data-error="Agrege SKU"> 
-                                            <div class="help-block with-errors"></div> </div>
-                                    </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Valor Declarado:</label>
-                                        <input type="text" id="valor_declarado" name="valor_declarado" class="form-control" required data-error="Agrege Valor Declarado"> <div class="help-block with-errors"></div> </div>
-                                </div>
-                            </div>
-
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-success collapseble"> <i class="fa fa-check"></i> Guardar</button>
-                            <button type="button" class="btn btn-default">Limpiar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-          </div>
-     </div>
-   </div>
-
-   <div class="row">
-
+         <div class="row">
                     <div class="col-md-12">
                       <h3 class="box-title"><button type="button" id="btn-agregar" class="btn btn-info btn-rounded collapseble" > <i class="fa fa-plus"></i> Agregar Producto</button></h3>
 

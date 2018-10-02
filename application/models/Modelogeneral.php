@@ -361,6 +361,25 @@ public function save_detallePromo($data){
      
   }
 
+  public function getdatos_rango($id)
+  {
+     $this->db->where('id_tbl_comisiones',$id);
+     $query = $this->db->get('tbl_comisiones');
+     return $query->row();
+     
+  }
+
+   public function update_rango($param) 
+  {
+    $this->db->where('id_tbl_comisiones',$param['id_tbl_comisiones']);
+    $this->db->update('tbl_comisiones',$param);
+     if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+  }
+
   public function eliminar_rango($id)
     {
      $this->db->where('id_tbl_comisiones',$id);
@@ -372,6 +391,62 @@ public function save_detallePromo($data){
       }
   } 
   /*------------------------------------*/
+   /*----------tabla de comsiones--------*/
+
+  /*listar*/
+   public function listar_monto()
+  {
+     $query = $this->db->get('monto_comisiones');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+    /* insertar videos */
+   public function insert_monto($data)
+  {
+      $this->db->insert('monto_comisiones',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        }else{
+          return false;
+        }
+     
+  }
+
+  public function getdatos_monto($id)
+  {
+     $this->db->where('id_monto',$id);
+     $query = $this->db->get('monto_comisiones');
+     return $query->row();
+     
+  }
+
+   public function update_monto($param) 
+  {
+    $this->db->where('id_monto',$param['id_monto']);
+    $this->db->update('monto_comisiones',$param);
+     if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+  }
+
+  public function eliminar_monto($id)
+    {
+     $this->db->where('id_monto',$id);
+     $this->db->delete('monto_comisiones');
+     if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+  } 
+
+
+  /*------------------------------*/
 
    public function listar_categorias_prod()
   {
