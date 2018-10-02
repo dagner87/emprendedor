@@ -19,35 +19,37 @@
                             <div class="panel-heading">Datos del Combo</div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
-                                  <div class="alert alert-warning"><p><i class="mdi mdi-alert-outline fa-fw"></i><strong>Pulse el botón para desplegar el formulario </strong> </p></div>
+                                  <div class="alert alert-warning"><p><i class="mdi mdi-alert-outline fa-fw"></i><strong> Pulse el botón para desplegar el formulario </strong> </p></div>
                                     
                                   <div class="m-t-15 collapseblebox dn">
                                         <div class="well">
                                           <div class="panel-wrapper collapse in" aria-expanded="true">
                 <div class="panel-body">
                     <form  id="add_prod" action="<?php echo base_url() ?>panel_admin/insert_combo" method="post" data-toggle="validator" >
+                         <input type="hidden" name="id_combo" id="id_combo" value="">
+                        <input type="hidden" name="camino" id="camino" value="">
                         <div class="form-body">
                             <div class="row">
                               <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Nombre Combo</label>
+                                        <label class="control-label">Nombre Combo:</label>
                                          <input type="text" id="nombre_combo" name="nombre_combo" class="form-control" placeholder="Escriba nombre del combo"> <span class="help-block">  </span>
                                     </div>
 
                                     
                                     <div class="form-group">
-                                        <label class="control-label">Precio</label>
+                                        <label class="control-label">Precio:</label>
                                         <input type="text" id="precio_combo" class="form-control" name="precio_combo" placeholder=""> <span class="help-block"> </span>
                                      </div>
 
                                       <div class="form-group">
-                                        <label class="control-label">Existencia</label>
+                                        <label class="control-label">Existencia:</label>
                                         <input type="text" id="existencia" class="form-control" name="existencia" placeholder=""> <span class="help-block"> </span> </div>
 
                                 </div>
        
                                 <div class="col-md-6 col-xs-12 btn-file">
-                                    <label for="input-file-now">Subir imagen</label>
+                                    <label for="input-file-now">Subir imagen:</label>
                                     <input type="file" id="url_imagen" name="url_imagen" class="dropify " />
                                     <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
                                 </div>
@@ -58,7 +60,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                   <div class="form-group">
-                                        <label class="control-label">Productos</label>
+                                        <label class="control-label">Productos:</label>
                                         <select class="form-control select2"  name="id_producto" id="id_producto" data-placeholder="Seleccione">
                                           <?=  $productos ?>
                                         </select>
@@ -97,30 +99,33 @@
      </div>
    </div>
    <div class="row">
-   <div class="col-lg-12">
 
-    <div class="white-box">
-        <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" >Agregar Producto</button></h3>
+                    <div class="col-md-12">
+                      <h3 class="box-title"><button type="button" id="btn-agregar" class="btn btn-info btn-rounded collapseble" > <i class="fa fa-plus"></i> Agregar Combo</button></h3>
 
-        <table class="table table-hover manage-u-table contact-list" id="editable-datatable">
-            <thead>
-                <tr>
-                    <th>IMAGEN</th>
-                    <th>NOMBRE COMBO</th>
-                    <th>PRODUCTOS</th>
-                    <th>PRECIO VENTA</th>
-                    <th>EXISTENCIA</th>
-                    <th>ACCION</th>
-                </tr>
-            </thead>
-            <tbody id="contenido_video">
-               
-            </tbody>
-            
-        </table>
-    </div>
-   </div>
-</div>
+                        <div class="panel">
+                            <div class="table-responsive">
+                                <table class="table table-hover manage-u-table contact-list" id="editable-datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>IMAGEN</th>
+                                            <th>NOMBRE COMBO</th>
+                                            <th>PRODUCTOS</th>
+                                            <th>PRECIO VENTA</th>
+                                            <th>EXISTENCIA</th>
+                                            <th>ACCION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="contenido_video">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
 </div>
         </div>
@@ -137,6 +142,11 @@
     <script>
     
     $(document).ready(function() {
+
+      $('.cantidades').keypress(function(tecla) {
+        if(tecla.charCode < 48 || tecla.charCode > 57) return false;
+    });
+
 
         load_data_cap();
         
@@ -197,7 +207,16 @@
         if (data !='') {
             html = "<tr>";
             html += "<td><input type='hidden' name='productos[]' value='"+data+"'>"+nombre_prod+"</td>";
-            html += "<td><input type='text' name='cantidades[]' value='' class='cantidades' required data-parsley-minlength='2'></td>";
+
+
+        /*     html += "<td><input type='text' name='cantidades[]' value='' class='cantidades' required data-parsley-minlength='1'data-error='Solo numeros mayores a cero'><div class='help-block with-errors'></div></td>";*/
+
+             html += "<td><div class=form-group><input type='num' class='form-control cantidades col-xs-2' data-minlength='1' name='cantidades[]' placeholder='cantidades' data-error='escriba una cantidad mayor a cero' required><div class='help-block with-errors'></div></div></td>";
+
+
+
+
+
             html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-remove'></span></button></td>";
             html += "</tr>";
             $("#tb-combo tbody").append(html);
@@ -253,6 +272,55 @@
            
         
     });//onready
+
+     $(document).on("click","#btn-agregar", function(){
+        $("#add_prod")[0].reset();
+        $('#camino').val("insertar");
+    });
+
+    $(document).on("click",".edit-row-btn", function(){
+        var id = $(this).attr('data');
+        $('#camino').val("editar");
+        $(".collapseblebox").css({'display': "block" });
+       
+        $.ajax({
+                type: 'ajax',
+                method: 'get',
+                url: '<?php echo base_url() ?>panel_admin/getdatos_prod',
+                data: {id: id},
+                async: false,
+                dataType: 'json',
+                success: function(data){
+                   
+                   $('#id_combo').val(data.id_combo);
+                   $('#nombre_combo').val(data.nombre_combo);
+                   $('#url_imagen_combo').val(data.url_imagen_combo);
+                   $('#precio_combo').val(data.precio_combo);
+                   $('#existencia').val(data.existencia);
+                   
+
+                   $('select[name=id_categoria]').val(data.id_categoria).attr('selected','selected');
+                   $('#valor_declarado').val(data.valor_declarado);
+                   
+                   $('#nombre_archivo').val(data.url_imagen);
+                   var ruta = '<?php echo base_url();?>assets/uploads/img_productos/';
+                    $('#url_imagen').attr("data-default-file",ruta+data.url_imagen); 
+
+                    if (data.es_repuesto == 1){
+                                $("input[name=es_repuesto][value='1']").prop("checked",true);
+                                } else {
+                                    $("input[name=es_repuesto][value='2']").prop("checked",true);
+                                }
+                
+                },
+                error: function(){
+                  alert('No se pudo eliminar');
+                }
+        });
+        
+    });  
+
+
     $(document).on("click",".deletecap-row-btn", function(){
         $(this).closest("tr").remove();
         var id = $(this).attr('data');

@@ -286,6 +286,14 @@ public function save_detallePromo($data){
      
   }
 
+  public function getdatos_prod($id_producto)
+  {
+     $this->db->where('id_producto',$id_producto);
+     $query = $this->db->get('productos');
+     return $query->row();
+     
+  }
+
    public function update_cap($param) 
   {
     $this->db->where('id_cap',$param['id_cap']);
@@ -1192,7 +1200,18 @@ public function save_detallePromo($data){
         }
      
   }
-  /*Editar*/
+ /*actualizar */
+   public function update_prod($param) 
+  {
+    $this->db->where('id_producto',$param['id_producto']);
+    $this->db->update('productos',$param);
+     if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+  }
+ 
   
   /*Eliminar*/
      public function eliminar_prod($id)

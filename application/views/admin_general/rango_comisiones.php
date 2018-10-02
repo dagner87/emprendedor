@@ -60,10 +60,35 @@
 <!-- /.modal -->
 
 <div class="row">
+        <div class="col-md-12">
+          <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" data-toggle="modal" data-target="#insetcapModal" ><i class="fa fa-plus"></i> Agregar Promoción</button></h3>
+            <div class="panel">
+                <div class="panel-heading">Lista de Promociones</div>
+                <div class="table-responsive">
+                 <br>
+                <table class="table table-hover manage-u-table" id="editable-datatable">
+                        <thead>
+                            <tr>
+                              <th>RANGO INICIAL</th>
+                              <th>RANGO FINAL</th>
+                              <th> % COMISION</th>
+                              <th>ACCION</th>
+                          </tr>
+                        </thead>
+                        <tbody id="contenido_video">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!--div class="row">
 <div class="col-lg-12">
 
     <div class="white-box">
-        <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#insetcapModal">Agregar Nuevo Rango</button></h3>
+        <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#insetcapModal"><i class="fa fa-plus"></i> Agregar Nuevo Rango</button></h3>
 
         <table class="table table-striped table-bordered table-responsive" id="editable-datatable">
             <thead>
@@ -81,7 +106,7 @@
         </table>
     </div>
 </div>
-</div>
+</div-->
 
   <!-- Editable -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/jquery-datatables-editable/jquery.dataTables.js"></script>

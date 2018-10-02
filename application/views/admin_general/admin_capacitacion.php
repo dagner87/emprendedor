@@ -30,36 +30,37 @@
                                           <div class="panel-wrapper collapse in" aria-expanded="true">
                 <div class="panel-body">
                     <form  id="add_cap" action="" method="post" data-toggle="validator" >
-                        <input type="text" name="id_cap" id="id_cap" value="">
-                        <input type="text" name="camino" id="camino" value="">
+                        <input type="hidden" name="id_cap" id="id_cap" value="">
+                        <input type="hidden" name="camino" id="camino" value="">
                         <div class="form-body">
                             
                                 <div class="form-group">
-                                    <label for="titulo_video" class="control-label">Titulo</label>
+                                    <label for="titulo_video" class="control-label">Titulo:</label>
                                     <input type="text" class="form-control" name="titulo_video" id="titulo_video" placeholder="Escriba Titulo Video"  data-error="Escriba un titulo" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="btn-file">
-                                        <label for="url_imagen">Subir imagen</label>
-                                        <input type="file" id="url_imagen" name="url_imagen" class="dropify" required data-error="Agrege una imagen"/>
+                                <div class="form-group" >
+                                    <div class="btn-file"id="foto" >
+                                        <label for="url_imagen">Subir imagen:</label>
+                                        <input type="file" id="url_imagen" name="url_imagen" class="dropify" required data-error="Agrege una imagen"
+                                        data-default-file=""/>
                                         <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control" >
                                     </div>
                                      <div class="help-block with-errors"></div>
                                 </div>    
                                 <div class="form-group">
-                                    <label for="url_video"  class="control-label">URL</label>
+                                    <label for="url_video"  class="control-label">URL:</label>
                                     <input type="url" class="form-control" id="url_video" name="url_video"  placeholder="Escriba URL" 
                                     data-error="Escriba una url correcta" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="descripcion" class="control-label">Descripción</label>
+                                    <label for="descripcion" class="control-label">Descripción:</label>
                                     <textarea id="descripcion"  name="descripcion" class="form-control" required></textarea> 
                                     <span class="help-block with-errors"></span> 
                                 </div>
                                 <div class="form-group">
-                                    <label for="evaluacion"  class="control-label">Evaluación</label>
+                                    <label for="evaluacion"  class="control-label">Evaluación:</label>
                                     <input type="num" class="form-control" id="evaluacion" name="evaluacion"  placeholder="Escriba Evaluación" 
                                     data-error="Escriba Evaluación correcta" required>
                                     <div class="help-block with-errors"></div>
@@ -85,7 +86,7 @@
 
                         <div class="panel">
                             <div class="table-responsive">
-                                <table class="table table-hover manage-u-table" id="editable-datatable">
+                                <table class="table table-hover manage-u-table contact-list" id="editable-datatable">
                                     <thead>
                                          <tr>
                                             <th>TITULO VIDEO</th>
@@ -180,7 +181,6 @@
                                   load_data_cap();
                                   }
                           });
-
 
 
                }else{
@@ -310,6 +310,7 @@
         var id = $(this).attr('data');
         $('#camino').val("editar");
         $(".collapseblebox").css({'display': "block" });
+       
         $.ajax({
                 type: 'ajax',
                 method: 'get',
@@ -319,18 +320,17 @@
                 dataType: 'json',
                 success: function(data){
 
-                   
-                   console.log(data);
                     $('#id_cap').val(data.id_cap); 
                     $('#titulo_video').val(data.titulo_video);
                     $('#descripcion').val(data.descripcion);
-                    $('#imag_portada').val(data.imag_portada);
                     $('#nombre_archivo').val(data.imag_portada);
                     $('#url_video').val(data.url_video);
-                    $('#evaluacion').val(data.evaluacion);                  
-                    
-                 
-                
+                    $('#evaluacion').val(data.evaluacion); 
+                   var ruta = '<?php echo base_url();?>assets/videos/';
+                   
+                    $('#url_imagen').attr("data-default-file",ruta+data.imag_portada); 
+                    // $("#foto").load(" #foto");
+
                 },
                 error: function(){
                   alert('No se pudo eliminar');

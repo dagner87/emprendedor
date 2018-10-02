@@ -45,7 +45,7 @@
                                                       <th></th>
                                                   </tr>
                                               </thead>
-                                              <tbody>
+                                              <tbody id="bodyrepuesto">
                                               
                                               </tbody>
                                           </table>
@@ -78,12 +78,15 @@
                                           <div class="panel-wrapper collapse in" aria-expanded="true">
                 <div class="panel-body">
                     <form  id="add_prod" action="<?php echo base_url() ?>panel_admin/insert_prod" method="post" data-toggle="validator" >
+                        <input type="hidden" name="id_producto_edit" id="id_producto_edit" value="">
+                        <input type="hidden" name="camino" id="camino" value="">
+
                         <div class="form-body">
                             <div class="row">
                               <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Categorías</label>
-                                        <select class="form-control" data-placeholder="Seleccione una Categoria" tabindex="1" name="id_categoria" id="id_categoria">
+                                        <label class="control-label">Categorías:</label>
+                                        <select class="form-control" data-placeholder="Seleccione una Categoria" tabindex="1" name="id_categoria" id="id_categoria" required>
                                           <?php if(!empty($categorias))
                                             {
                                               foreach($categorias as $row)
@@ -92,30 +95,38 @@
                                                 }
                                             } ?>
                                         </select>
+                                      
+                                    <div class="help-block with-errors"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label">Detalle</label>
+                                        <label class="control-label">Detalle:</label>
                                         <div class="radio-list">
                                             <label class="radio-inline p-0">
                                                 <div class="radio radio-info">
-                                                    <input type="radio" name="es_repuesto" value="1" checked="true">
-                                                    <label for="radio1">Producto</label>
+                                                    <input type="radio" name="es_repuesto" value="1"  checked required>
+                                                    <label for="es_repuesto">Producto</label>
                                                 </div>
                                             </label>
                                             <label class="radio-inline">
                                                 <div class="radio radio-info">
-                                                    <input type="radio" name="es_repuesto" value="2">
-                                                    <label for="radio2">Repuesto </label>
+                                                    <input type="radio" name="es_repuesto" value="2" required>
+                                                    <label for="es_repuesto">Repuesto </label>
                                                 </div>
                                             </label>
                                         </div>
+                                       
+                                    <div class="help-block with-errors"></div>
                                     </div>
+
                                 </div>
        
                                 <div class="col-md-6 col-xs-12 btn-file">
-                                    <label for="input-file-now">Subir imagen</label>
-                                    <input type="file" id="url_imagen" name="url_imagen" class="dropify " />
+                                    <label for="input-file-now">Subir imagen:</label>
+                                    <input type="file" id="url_imagen" name="url_imagen" class="dropify " data-default-file="" 
+                                    data-error="Agrege una imagen"/>
                                     <input type="hidden" id="nombre_archivo" name="nombre_archivo"  value="" class="form-control">
+                                    <div class="help-block with-errors"></div>
+
                                 </div>
                                 
                             </div>
@@ -124,13 +135,15 @@
                             <div class="row">
                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Nombre</label>
-                                        <input type="text" id="nombre_prod" name="nombre_prod" class="form-control" placeholder="Escriba nombre del producto"> <span class="help-block">  </span> </div>
+                                        <label class="control-label">Nombre:</label>
+                                        <input type="text" id="nombre_prod" name="nombre_prod" class="form-control"  required data-error="Agrege Nombre Producto " > 
+                                        <div class="help-block with-errors"></div></div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Precio</label>
-                                        <input type="text" id="precio" class="form-control" name="precio" placeholder=""> <span class="help-block"> </span> </div>
+                                        <label class="control-label">Precio:</label>
+                                        <input type="text" id="precio" class="form-control" name="precio" required data-error="Agrege Precio ">
+                                         <div class="help-block with-errors"></div> </div>
                                 </div>
                                 <!--/span-->
                                
@@ -140,49 +153,54 @@
                             <div class="row">
                                   <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label">Existencia</label>
-                                            <input type="text" id="existencia" name="existencia" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
+                                            <label class="control-label">Existencia:</label>
+                                            <input type="text" id="existencia" name="existencia" class="form-control"
+                                             required data-error="Agrege Existencia"> 
+                                            <div class="help-block with-errors"></div> 
+                                        </div>
                                     </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Vencimiento</label>
-                                        <input type="num" id="vencimiento" name="vencimiento" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
+                                        <label class="control-label">Vencimiento:</label>
+                                        <input type="num" id="vencimiento" name="vencimiento" class="form-control" required data-error="Agrege Vencimiento"> 
+                                        <div class="help-block with-errors"></div> </div>
                                 </div>
                             </div>
                             <div class="row">
                                   <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label">Alto</label>
-                                            <input type="text" id="alto" name="alto" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
+                                            <label class="control-label">Alto:</label>
+                                            <input type="text" id="alto" name="alto" class="form-control" required data-error="Agrege Alto"> <div class="help-block with-errors"></div> </div>
                                     </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Ancho</label>
-                                        <input type="text" id="ancho" name="ancho" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
+                                        <label class="control-label">Ancho:</label>
+                                        <input type="text" id="ancho" name="ancho" class="form-control" required data-error="Agrege Ancho"> <div class="help-block with-errors"></div> </div>
                                 </div>
                             </div>
                             <div class="row">
                                   <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label">Largo</label>
-                                            <input type="text" id="largo" name="largo" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
+                                            <label class="control-label">Largo:</label>
+                                            <input type="text" id="largo" name="largo" class="form-control" required data-error="Agrege Largo "> <div class="help-block with-errors"></div> </div>
                                     </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Peso</label>
-                                        <input type="text" id="peso" name="peso" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
+                                        <label class="control-label">Peso:</label>
+                                        <input type="text" id="peso" name="peso" class="form-control" required data-error="Agrege Peso"> <div class="help-block with-errors"></div> </div>
                                 </div>
                             </div>
                             <div class="row">
                                   <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label">SKU</label>
-                                            <input type="text" id="sku"  name="sku" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
+                                            <label class="control-label">SKU:</label>
+                                            <input type="text" id="sku"  name="sku" class="form-control" required data-error="Agrege SKU"> 
+                                            <div class="help-block with-errors"></div> </div>
                                     </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Valor Declarado</label>
-                                        <input type="text" id="valor_declarado" name="valor_declarado" class="form-control" placeholder=""> <span class="help-block"> </span> </div>
+                                        <label class="control-label">Valor Declarado:</label>
+                                        <input type="text" id="valor_declarado" name="valor_declarado" class="form-control" required data-error="Agrege Valor Declarado"> <div class="help-block with-errors"></div> </div>
                                 </div>
                             </div>
 
@@ -200,11 +218,11 @@
    <div class="row">
 
                     <div class="col-md-12">
-                      <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" > <i class="fa fa-plus"></i> Agregar Producto</button></h3>
+                      <h3 class="box-title"><button type="button" id="btn-agregar" class="btn btn-info btn-rounded collapseble" > <i class="fa fa-plus"></i> Agregar Producto</button></h3>
 
                         <div class="panel">
                             <div class="table-responsive">
-                                <table class="table table-hover manage-u-table" id="editable-datatable">
+                                <table class="table table-hover manage-u-table contact-list" id="editable-datatable">
                                     <thead>
                                         <tr>
                                             <th>IMAGEN</th>
@@ -315,46 +333,105 @@
         $('#add_prod').submit(function(e) {
             e.preventDefault();
             var url = '<?php echo base_url() ?>panel_admin/insert_prod';
+            var url_up = '<?php echo base_url() ?>panel_admin/update_prod';
             var data = $('#add_prod').serialize();
-            $.ajax({
-                    type: 'ajax',
-                    method: 'post',
-                    url: url,
-                    data: data,
-                    dataType: 'json',
-                    beforeSend: function() {
-                        //sweetalert_proceso();
-                        console.log("enviando....");
-                      }
-                 })
-                  .done(function(){
-                    console.log(data);
-                      $.toast({
-                          heading: 'Producto Agregado',
-                          text: 'Se agregó corectamente la información.',
-                          position: 'top-right',
-                          loaderBg: '#ff6849',
-                          icon: 'success',
-                          hideAfter: 3500,
-                          stack: 6
-                      });
-                     
-                  })
-                  .fail(function(){
-                     //sweetalertclickerror();
-                  }) 
-                  .always(function(){
-                    if ($.fn.DataTable.isDataTable('#editable-datatable')) {
-                      table = $('#editable-datatable').DataTable();
-                      table.destroy();
-                      console.log("estoy dentro el if");
-                      load_data_cap();
-                      }
-                      else {
-                           console.log("estoy en el else");
-                          load_data_cap();
+
+            var camino = $('#camino').val();
+
+            if (camino == 'insertar')
+               {
+
+                    $.ajax({
+                            type: 'ajax',
+                            method: 'post',
+                            url: url,
+                            data: data,
+                            dataType: 'json',
+                            beforeSend: function() {
+                                //sweetalert_proceso();
+                                console.log("enviando....");
+                              }
+                         })
+                          .done(function(){
+                            console.log(data);
+                              $.toast({
+                                  heading: 'Producto Agregado',
+                                  text: 'Se agregó correctamente la información.',
+                                  position: 'top-right',
+                                  loaderBg: '#ff6849',
+                                  icon: 'success',
+                                  hideAfter: 3500,
+                                  stack: 6
+                              });
+                             
+                          })
+                          .fail(function(){
+                             //sweetalertclickerror();
+                          }) 
+                          .always(function(){
+                            if ($.fn.DataTable.isDataTable('#editable-datatable')) {
+                              table = $('#editable-datatable').DataTable();
+                              table.destroy();
+                              console.log("estoy dentro el if");
+                              load_data_cap();
+                              }
+                              else {
+                                   console.log("estoy en el else");
+                                  load_data_cap();
+                                  }
+                          });
+                 }else{
+
+                console.log("editar");
+
+                        $.ajax({
+                            type: 'ajax',
+                            method: 'post',
+                            url: url_up,
+                            data: data,
+                            dataType: 'json',
+                            beforeSend: function() {
+                                //sweetalert_proceso();
+                                console.log("editando....");
+                              }
+                         })
+                          .done(function(data){
+                            
+                          if (data.comprobador) {
+
+                            $.toast({
+                                  heading: 'Producto Editado',
+                                  text: 'Se ha editado correctamente la información.',
+                                  position: 'top-right',
+                                  loaderBg: '#ff6849',
+                                  icon: 'info',
+                                  hideAfter: 3500,
+                                  stack: 6
+                              });
+
+
                           }
-                  });
+                              
+                             
+                          })
+                          .fail(function(){
+                             //sweetalertclickerror();
+                          }) 
+                          .always(function(){
+                            if ($.fn.DataTable.isDataTable( '#editable-datatable' ) ) {
+                              table = $('#editable-datatable').DataTable();
+                              table.destroy();
+                              console.log("estoy dentro el if");
+                              load_data_cap();
+                              }
+                              else {
+                                   console.log("estoy en el else");
+                                  load_data_cap();
+                                  }
+                          });
+                
+
+                    }          
         });
 
      
@@ -415,6 +492,7 @@
         $(this).closest("tr").remove();
         var id = $(this).attr('data');
         $('#id_producto').val(id);
+         $("#tb-combo").load(" #bodyrepuesto");
     });
 
     $(document).on("click",".deletecap-row-btn", function(){
@@ -429,8 +507,8 @@
                 dataType: 'json',
                 success: function(data){
                   $.toast({
-                        heading: 'Video eliminado ',
-                        text: 'El video a sido eliminado.',
+                        heading: 'Producto eliminado ',
+                        text: 'El producto a sido eliminado.',
                         position: 'top-right',
                         loaderBg: '#ff6849',
                         icon: 'error',
@@ -453,6 +531,63 @@
         });
         
     });
+
+     $(document).on("click","#btn-agregar", function(){
+        $("#add_prod")[0].reset();
+        $('#camino').val("insertar");
+    });
+
+    $(document).on("click",".edit-row-btn", function(){
+        var id = $(this).attr('data');
+        $('#camino').val("editar");
+        $(".collapseblebox").css({'display': "block" });
+       
+        $.ajax({
+                type: 'ajax',
+                method: 'get',
+                url: '<?php echo base_url() ?>panel_admin/getdatos_prod',
+                data: {id: id},
+                async: false,
+                dataType: 'json',
+                success: function(data){
+                   
+                   $('#id_producto_edit').val(data.id_producto);
+                   $('#nombre_prod').val(data.nombre_prod);
+                   $('#precio').val(data.precio);
+                   $('#es_repuesto').val(data.es_repuesto);
+                   $('#existencia').val(data.existencia);
+                   $('#vencimiento').val(data.vencimiento);
+                   $('#reg_cancelado').val(data.reg_cancelado);
+                   $('#alto').val(data.alto);
+                   $('#ancho').val(data.ancho);
+                   $('#largo').val(data.largo);
+                   $('#peso').val(data.peso);
+                   $('#sku').val(data.sku);
+                  
+                   $('select[name=id_categoria]').val(data.id_categoria).attr('selected','selected');
+                   $('#valor_declarado').val(data.valor_declarado);
+                   
+                   $('#nombre_archivo').val(data.url_imagen);
+                   var ruta = '<?php echo base_url();?>assets/uploads/img_productos/';
+                    $('#url_imagen').attr("data-default-file",ruta+data.url_imagen); 
+
+                    if (data.es_repuesto == 1){
+                                $("input[name=es_repuesto][value='1']").prop("checked",true);
+                                } else {
+                                    $("input[name=es_repuesto][value='2']").prop("checked",true);
+                                }
+
+
+                    
+                 
+                
+                },
+                error: function(){
+                  alert('No se pudo eliminar');
+                }
+        });
+        
+    }); 
        function load_data_cap()
     {
         $.ajax({
