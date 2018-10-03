@@ -16,7 +16,7 @@
                  <!--MENU -->
                 <ul class="nav" id="side-menu">
                   <li> <a href="<?php echo base_url();?>" class="waves-effect"><i class="mdi mdi-home-variant fa-fw"></i> <span class="hide-menu">MENU</span></a></li>
-                  <li><a href="javascript:void(0)"  data-toggle="modal" data-target="#enviarInvitacion"><i class="ti-plus fa-fw"></i> <span class="hide-menu">Enviar invitación</span></a></li>
+                  <li><a href="javascript:void(0)"  data-toggle="modal" data-target="#enviarInvitacion"><i class="ti-email fa-fw"></i> <span class="hide-menu">Enviar invitación</span></a></li>
 
                     <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-rename-box fa-fw"></i> <span class="hide-menu">Capacitación<span class="fa arrow"></span> <span class="label label-rouded label-info pull-right"><?= $cantidadVideos  ?></span> </span></a>
                         <ul class="nav nav-second-level">

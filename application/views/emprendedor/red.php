@@ -14,7 +14,7 @@
  <div class="row">
   <div class="col-sm-12">
       <div class="white-box">
-          <h3 class="box-title">MI red</h3>
+          <h3 class="box-title">Mis Patrocinados</h3>
           <div class="table-responsive management-hierarchy contact-list">
          <br>
         <div class="hv-container">

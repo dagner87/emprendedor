@@ -6,12 +6,12 @@
 
 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">MI CARTERA</h4> </div>
+                        <h4 class="page-title">Mi billetera virtual</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <ol class="breadcrumb">
                             <li><a href="<?php echo base_url();?>">Inicio</a></li>
                             <li><a href="<?php echo base_url();?>">Mi Cuenta Corriente</a></li>
-                            <li class="active">Mi Cartera</li>
+                            <li class="active">Mi billetera virtual</li>
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -23,7 +23,7 @@
 <div class="row">
   <div class="col-sm-12">
       <div class="white-box">
-          <h1 class="text-left text-info m-t-10">Mi Cartera: $ <?= $datos_emp->comision_acumulada  ?> </h1>
+          <h1 class="text-left text-info m-t-10">Mi Billetera: $ <?= $datos_emp->comision_acumulada  ?> </h1>
           <div class="table-responsive">
               <table class="table color-table info-table" id="editable-datatable">
                   <thead>

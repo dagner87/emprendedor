@@ -46,7 +46,7 @@
                     
                     <li> <a href="javascript:void(0)" class="waves-effect"><i class="fa fa-users fa-fw"></i> <span class="hide-menu">Asociados<span class="fa arrow"></span><span class="label label-rouded label-warning pull-right"><?= $cant_asoc;?></span></span></a>
                         <ul class="nav nav-second-level">
-                          <li><a href="javascript:void(0)"  data-toggle="modal" data-target="#enviarInvitacion"><i class="ti-plus fa-fw"></i> <span class="hide-menu">Enviar invitación</span></a></li>
+                          <li><a href="javascript:void(0)"  data-toggle="modal" data-target="#enviarInvitacion"><i class="ti-email fa-fw"></i> <span class="hide-menu">Enviar invitación</span></a></li>
                           <li><a href="<?php echo base_url();?>capacitacion/mi_red"><i class="ti-layers-alt fa-fw"></i> <span class="hide-menu">Mi Red</span></a></li>
                         </ul>
                     </li>
@@ -55,7 +55,7 @@
                      <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-wallet fa-fw"></i> <span class="hide-menu">Mi cuenta Corriente<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="<?php echo base_url();?>capacitacion/mis_compras"><i class="fa fa-tasks fa-fw"></i><span class="hide-menu">Ver Mis Compras</span></a></li>
-                            <li><a href="<?php echo base_url();?>capacitacion/mi_cartera"><i class="mdi mdi-cash-multiple fa-fw"></i><span class="hide-menu">Mi Cartera</span></a></li>
+                            <li><a href="<?php echo base_url();?>capacitacion/mi_cartera"><i class="mdi mdi-cash-multiple fa-fw"></i><span class="hide-menu">Mi billetera virtual </span></a></li>
                         </ul>
                     </li>
 
