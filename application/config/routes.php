@@ -39,3 +39,16 @@ $route['vencimientos/(:num)'] = "capacitacion/vencimientos/$1";
 
 /*-------------------------------------------------*/
 
+
+//-------carrito--------------------------
+$route['carrito'] = "capacitacion/carrito";
+$route['carrito/(:num)'] = "capacitacion/carrito/$1";
+
+/*-------------------------------------------------*/
+
+//-------tienda--------------------------
+$route['tienda'] = "capacitacion/tienda";
+$route['tienda/(:num)'] = "capacitacion/tienda/$1";
+
+/*-------------------------------------------------*/
+

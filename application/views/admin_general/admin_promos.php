@@ -28,7 +28,10 @@
                 <label for="exampleInputuname">Nombre producto</label>
                 <div class="input-group">
                     <div class="input-group-addon"><i class="ti-layers-alt"></i></div>
-                    <input type="text" class="form-control" name="nombre_prod" id="nombre_prod" placeholder=" Escriba Nombre producto"> </div>
+                    <input type="text" class="form-control" name="nombre_prod" id="nombre_prod" placeholder=" Escriba Nombre producto" 
+                    required data-error="Nombre producto"> 
+                    <div class="help-block with-errors"></div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Stock </label>
@@ -85,14 +88,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Nombre de Promoción</label>
-                                         <input type="text" id="nombre_promo" name="nombre_promo" class="form-control" placeholder="Escriba nombre "> 
+                                         <input type="text" id="nombre_promo" name="nombre_promo" class="form-control" placeholder="Escriba nombre " required data-error="Agrege Nombre de Promoción"> 
                                          <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Descuento</label>
-                                         <input type="text" id="descuento" name="descuento" class="form-control" placeholder="Escriba descuento " required> <div class="help-block with-errors"></div>
+                                         <input type="text" id="descuento" name="descuento" class="form-control" placeholder="Escriba descuento " required data-error="Agrege Descuento"> <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                             </div>
@@ -100,14 +103,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Fecha inicio</label>
-                                         <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control" placeholder="Escriba fecha inicio" required> 
+                                         <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control" placeholder="Escriba fecha inicio" required data-error="Agrege Fecha inicio"> 
                                          <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Fecha fin</label>
-                                         <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" placeholder="Escriba fecha_fin" required> 
+                                         <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" placeholder="Escriba fecha_fin" required data-error="Agrege Fecha fin"> 
                                          <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -120,9 +123,10 @@
                                 <div class="col-md-12">
                                   <div class="form-group">
                                         <label class="control-label">Productos</label>
-                                        <select class="form-control select2"  name="id_producto" id="id_producto" data-placeholder="Seleccione">
+                                        <select class="form-control select2"  name="id_producto" id="id_producto" data-placeholder="Seleccione" required data-error="Agrege Productos">
                                           <?=  $productos ?>
                                         </select>
+                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 
@@ -156,31 +160,31 @@
      </div>
    </div>
    <div class="row">
-                    <div class="col-md-12">
-                      <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" ><i class="fa fa-plus"></i> Agregar Promoción</button></h3>
-                        <div class="panel">
-                            <div class="panel-heading">Lista de Promociones</div>
-                            <div class="table-responsive">
-                             <br>
-                            <table class="table table-hover manage-u-table" id="promo-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre Promocion</th>
-                                            <th>Productos</th>
-                                            <th>Fecha inicio</th>
-                                            <th>Fecha fin</th>
-                                            <th>Descuento</th>
-                                            <th>Accion</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="contenido_tabla">
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+        <div class="col-md-12">
+          <h3 class="box-title"><button type="button" class="btn btn-info btn-rounded collapseble" ><i class="fa fa-plus"></i> Agregar Promoción</button></h3>
+            <div class="panel">
+                <div class="panel-heading">Lista de Promociones</div>
+                <div class="table-responsive">
+                 <br>
+                <table class="table table-hover manage-u-table" id="promo-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre Promocion</th>
+                                <th>Productos</th>
+                                <th>Fecha inicio</th>
+                                <th>Fecha fin</th>
+                                <th>Descuento</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contenido_tabla">
+                            
+                        </tbody>
+                    </table>
                 </div>
+            </div>
+        </div>
+</div>
 
 
 </div>

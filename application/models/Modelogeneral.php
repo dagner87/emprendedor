@@ -286,6 +286,14 @@ public function save_detallePromo($data){
      
   }
 
+  public function getdatos_prod($id_producto)
+  {
+     $this->db->where('id_producto',$id_producto);
+     $query = $this->db->get('productos');
+     return $query->row();
+     
+  }
+
    public function update_cap($param) 
   {
     $this->db->where('id_cap',$param['id_cap']);
@@ -353,6 +361,25 @@ public function save_detallePromo($data){
      
   }
 
+  public function getdatos_rango($id)
+  {
+     $this->db->where('id_tbl_comisiones',$id);
+     $query = $this->db->get('tbl_comisiones');
+     return $query->row();
+     
+  }
+
+   public function update_rango($param) 
+  {
+    $this->db->where('id_tbl_comisiones',$param['id_tbl_comisiones']);
+    $this->db->update('tbl_comisiones',$param);
+     if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+  }
+
   public function eliminar_rango($id)
     {
      $this->db->where('id_tbl_comisiones',$id);
@@ -364,6 +391,87 @@ public function save_detallePromo($data){
       }
   } 
   /*------------------------------------*/
+   /*----------tabla de comsiones--------*/
+
+  /*listar*/
+   public function getValorMont_min()
+  {
+    $this->db->where('parametro','monto_min');
+    $query = $this->db->get('configuracion');
+    return $query->row();
+ }
+
+  public function configuracion()
+  {
+     $query = $this->db->get('configuracion');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
+
+  
+
+  public function updateParametros($param) 
+  {
+    $this->db->where('id_conf',$param['id_conf']);
+    $this->db->update('configuracion',$param);
+     if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+  }
+
+
+
+    /* insertar videos */
+   public function insert_monto($data)
+  {
+      $this->db->insert('monto_comisiones',$data);
+     if($this->db->affected_rows() > 0){
+          return true;
+        }else{
+          return false;
+        }
+     
+  }
+
+  public function getdatos_monto($id)
+  {
+     $this->db->where('id_monto',$id);
+     $query = $this->db->get('monto_comisiones');
+     return $query->row();
+     
+  }
+
+
+
+   public function update_monto($param) 
+  {
+    $this->db->where('id_monto',$param['id_monto']);
+    $this->db->update('monto_comisiones',$param);
+     if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+  }
+
+  public function eliminar_monto($id)
+    {
+     $this->db->where('id_monto',$id);
+     $this->db->delete('monto_comisiones');
+     if($this->db->affected_rows() > 0){
+        return true;
+      }else{
+        return false;
+      }
+  } 
+
+
+  /*------------------------------*/
 
    public function listar_categorias_prod()
   {
@@ -728,6 +836,7 @@ public function save_detallePromo($data){
               return false;
              }
   }
+
   public function update_prodCar($param) {
    $this->db->where('id_car',$param['id_car']);
    $this->db->update('carrito',$param);
@@ -798,7 +907,7 @@ public function save_detallePromo($data){
   {
       $this->db->select('id_car,car.id_producto,no_orden,url_imagen,nombre_prod,precio_car,cantidad,importe');
       $this->db->where('car.id_emp',$id_emp);
-      $this->db->join('producto as prod','prod.id_producto = car.id_producto');
+      $this->db->join('productos as prod','prod.id_producto = car.id_producto');
       $query = $this->db->get('carrito as car');
       if($query->num_rows() > 0){
         return $query->result();
@@ -809,9 +918,9 @@ public function save_detallePromo($data){
 
   public function mostrar_detallecarrito($id_emp)
   {
-      $this->db->select('url_imagen,nombre_prod,precio_car,cantidad');
+      $this->db->select('url_imagen,nombre_prod,car.precio_car,car.cantidad');
       $this->db->where('car.id_emp',$id_emp);
-      $this->db->join('producto as prod','prod.id_producto = car.id_producto');
+      $this->db->join('productos as prod','prod.id_producto = car.id_producto');
       $query = $this->db->get('carrito as car');
       if($query->num_rows() > 0){
         return $query->result();
@@ -844,7 +953,7 @@ public function save_detallePromo($data){
     $this->db->select("prod.nombre_prod,cantidad_comp,precio_comp,importe");
     $this->db->from("detalle_compra d_c");
     $this->db->where("d_c.id_compra",$id_compra);
-    $this->db->join("producto as prod","prod.id_producto = d_c.id_producto");
+    $this->db->join("productos as prod","prod.id_producto = d_c.id_producto");
     $resultados = $this->db->get();
     if ($resultados->num_rows() > 0) {
       return $resultados->result();
@@ -989,7 +1098,7 @@ public function save_detallePromo($data){
 
    public function mostrar_producto()
   {
-     $query = $this->db->get('producto');
+     $query = $this->db->get('productos');
       if($query->num_rows() > 0){
         return $query->result();
       }else{
@@ -1192,7 +1301,18 @@ public function save_detallePromo($data){
         }
      
   }
-  /*Editar*/
+ /*actualizar */
+   public function update_prod($param) 
+  {
+    $this->db->where('id_producto',$param['id_producto']);
+    $this->db->update('productos',$param);
+     if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+  }
+ 
   
   /*Eliminar*/
      public function eliminar_prod($id)
@@ -1275,7 +1395,7 @@ public function save_detallePromo($data){
    public function datos_prod($id_producto) {
     
    $this->db->where('id_producto',$id_producto);
-   $query = $this->db->get('producto');
+   $query = $this->db->get('productos');
    return $query-> row();
   
    }

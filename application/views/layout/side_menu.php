@@ -39,7 +39,7 @@
                     
                     <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-store fa-fw"></i> <span class="hide-menu">Tienda<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="<?php echo base_url();?>capacitacion/tienda"><i class="fa fa-shopping-cart fa-fw"></i><span class="hide-menu">Ver Tienda</span></a></li>
+                            <li><a href="<?php echo base_url();?>tienda"><i class="fa fa-shopping-cart fa-fw"></i><span class="hide-menu">Ver Tienda</span></a></li>
                          
                         </ul>
                     </li>
@@ -54,7 +54,7 @@
 
                      <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-wallet fa-fw"></i> <span class="hide-menu">Mi cuenta Corriente<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="<?php echo base_url();?>capacitacion/mis_compras"><i class="fa fa-tasks fa-fw"></i><span class="hide-menu">Ver Historial</span></a></li>
+                            <li><a href="<?php echo base_url();?>capacitacion/mis_compras"><i class="fa fa-tasks fa-fw"></i><span class="hide-menu">Ver Mis Compras</span></a></li>
                             <li><a href="<?php echo base_url();?>capacitacion/mi_cartera"><i class="mdi mdi-cash-multiple fa-fw"></i><span class="hide-menu">Mi Cartera</span></a></li>
                         </ul>
                     </li>

@@ -223,7 +223,7 @@ class Panel_admin extends CI_Controller
                          <td><span class="text-muted">'.$row->url_video.'</span></td>
                         <td><span class="text-muted">'.$row->evaluacion.'</span></td>';
                         $output .= '<td>
-                        
+
                         <button type="button" data="'.$row->id_cap.'" class=" btn btn-info btn-outline btn-circle btn-lg m-r-5 edit-row-btn collapseble"  data-toggle="tooltip" data-original-title="Editar" title ="Editar"><i class="ti-pencil-alt"></i></button>
                         <button type="button" data="'.$row->id_cap.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 deletecap-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button></td>
                         </tr>';
@@ -272,6 +272,17 @@ class Panel_admin extends CI_Controller
         echo json_encode($result);
     }
 
+      public function getdatos_prod()
+    {
+        $id_producto = $this->input->get('id');
+        $result  = $this->modelogeneral->getdatos_prod($id_producto);
+        echo json_encode($result);
+    }
+
+
+
+    
+
     
 
      public function update_cap()
@@ -301,13 +312,16 @@ class Panel_admin extends CI_Controller
         {
           foreach($result as $row)
             {
-             $output .= '<tr>
+                $margen = $row->precio - $row->costo;
+             $output .= '<tr onclick = "this.style.background = "#FC0">
                          <td><span class="text-muted"><img src="'.base_url().'assets/uploads/img_productos/'.$row->url_imagen.'" alt="'.$row->nombre_prod.'" class="img-circle" /></td>
                          <td><span class="font-medium">'.$row->nombre_prod.'</span></td>
                          <td><span class="text-muted">'.$row->existencia.'</span></td>
                          <td><span class="text-muted">'.$row->precio.'</span></td>
-                         <td><span class="text-muted">'.$row->vencimiento.'</span></td>
+                         <td><span class="text-muted">'.$row->costo.'</span></td>
+                         <td><span class="text-muted">'.$margen.'</span></td>
                          <td>';
+                         $output .= '<button type="button" data="'.$row->id_producto.'" class=" btn btn-info btn-outline btn-circle btn-lg m-r-5 edit-row-btn collapseble"  data-toggle="tooltip" data-original-title="Editar" title ="Editar"><i class="ti-pencil-alt"></i></button>';
                          $output .= '<button type="button" data="'.$row->id_producto.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 deletecap-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button>';
                          if ($row->es_repuesto == 0) {
                           $output .= '<button type="button"  data="'.$row->id_producto.'" class="btn btn-info btn-outline btn-circle btn-lg m-r-5 btn-asociar-respuesto" data-toggle="modal" data-target="#asociar-respuesto" title ="Asociar Respuestos">
@@ -325,6 +339,7 @@ class Panel_admin extends CI_Controller
     {
         $param['nombre_prod']    = $this->input->post('nombre_prod');
         $param['url_imagen']     = $this->input->post('nombre_archivo');
+        $param['costo']          = $this->input->post('costo');
         $param['precio']         = $this->input->post('precio');
         $param['es_repuesto']    = $this->input->post('es_repuesto');
         $param['existencia']     = $this->input->post('existencia');
@@ -357,6 +372,38 @@ class Panel_admin extends CI_Controller
              }
         echo json_encode($msg);
     }
+
+
+  /* update producto*/
+
+   public function update_prod()
+    {
+        $param['id_producto']    = $this->input->post('id_producto_edit');
+        $param['nombre_prod']    = $this->input->post('nombre_prod');
+        $param['url_imagen']     = $this->input->post('nombre_archivo');
+        $param['costo']          = $this->input->post('costo');
+        $param['precio']         = $this->input->post('precio');
+        $param['es_repuesto']    = $this->input->post('es_repuesto');
+        $param['existencia']     = $this->input->post('existencia');
+        $param['vencimiento']    = $this->input->post('vencimiento');
+        $param['alto']           = $this->input->post('alto');
+        $param['ancho']          = $this->input->post('ancho');
+        $param['largo']          = $this->input->post('largo');
+        $param['peso']           = $this->input->post('peso');
+        $param['sku']            = $this->input->post('sku');
+        $param['id_categoria']   = $this->input->post('id_categoria');
+        $param['valor_declarado']= $this->input->post('valor_declarado');       
+        
+        $result = $this->modelogeneral->update_prod($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($param);
+    }
+
+
  /*-----------./ CRUD PRODUCTO-----------------------*/ 
  /* subir imagen*/
  public function subir_img()
@@ -441,7 +488,10 @@ function load_dataRango()
                          <td><span class="font-medium">'.$row->rango_inicial.'</span></td>
                          <td><span class="font-medium">'.$row->rango_final.'</span></td>
                         <td><span class="font-medium">'.$row->valor_comision.'</span></td>
-                        <td><span class="font-medium"> <button type="button" data="'.$row->id_tbl_comisiones.'" class="btn btn-sm btn-icon btn-pure btn-outline deletecap-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></span></td>
+                        <td><span class="font-medium">'.$row->categoria.'</span></td>
+                        <td>
+                        <button type="button" data="'.$row->id_tbl_comisiones.'" class=" btn btn-info btn-outline btn-circle btn-lg m-r-5 edit-row-btn" data-toggle="modal" data-target="#insetcapModal"  data-toggle="tooltip" data-original-title="Editar" title ="Editar"><i class="ti-pencil-alt"></i></button>
+                        <button type="button" data="'.$row->id_tbl_comisiones.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 deletecap-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button></td>
                         </tr>';
             }
         }
@@ -456,7 +506,34 @@ function load_dataRango()
         $param['rango_inicial']  = $this->input->post('rango_inicial');
         $param['rango_final']    = $this->input->post('rango_final');
         $param['valor_comision'] = $this->input->post('valor_comision');
+        $param['categoria']      = $this->input->post('categoria');
         $result                  = $this->modelogeneral->insert_comisiones($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
+    /*listar*/
+
+       public function getdatos_rango()
+    {
+        $id      = $this->input->get('id');
+        $result  = $this->modelogeneral->getdatos_rango($id);
+        echo json_encode($result);
+    }
+
+    public function update_rango()
+    {
+        $param['id_tbl_comisiones'] = $this->input->post('id_tbl_comisiones');
+        $param['rango_inicial']     = $this->input->post('rango_inicial');
+        $param['rango_final']       = $this->input->post('rango_final');
+        $param['valor_comision']    = $this->input->post('valor_comision');
+        $param['categoria']         = $this->input->post('categoria');
+        
+        $result = $this->modelogeneral->update_rango($param);
         $msg['comprobador'] = false;
         if($result)
              {
@@ -477,6 +554,87 @@ function load_dataRango()
              }
         echo json_encode($msg);
     }  
+
+ /*-----------------------------*/
+ /*-------------TABLA DE MONTO MINIMO-------------*/
+
+
+function load_datamonto()
+    {
+        $result = $this->modelogeneral->configuracion();
+        $count = 0;
+        $output = '';
+        if(!empty($result))
+        {
+          foreach($result as $row)
+            {
+             $output .= '<tr>
+                         <td><span class="font-medium">'.$row->parametro.'</span></td>
+                         <td>
+                             <input type="text" name="valor[]" class="" id="valor_'.$row->id_conf.'" value="'.$row->valor.'"  required>
+                             <i id="capa_'.$row->id_conf.'"></i>
+                             
+                        </td>            
+                         <td><span class="font-medium">'.$row->descripcion.'</span></td>
+                        </tr>';
+            }
+        }
+    
+        echo $output;
+    }
+
+  /* Insertar*/
+    public function insert_monto()
+    {
+       
+        $param['monto_minimo']  = $this->input->post('monto_minimo');
+        $param['fecha']         = date('Y-m-d');
+        $result                 = $this->modelogeneral->insert_monto($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
+    /*listar*/
+
+       public function getdatos_monto()
+    {
+        $id      = $this->input->get('id');
+        $result  = $this->modelogeneral->getdatos_monto($id);
+        echo json_encode($result);
+    }
+
+    public function updateParametros()
+    {
+        $param['id_conf']  = $this->input->get('id_conf');
+        $param['valor']    = $this->input->get('valor');
+        
+        $result = $this->modelogeneral->updateParametros($param);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }
+
+      /* eliminar monto */
+  public function eliminar_monto()
+    {
+        $id = $this->input->get('id');
+        $result  = $this->modelogeneral->eliminar_monto($id);
+        $msg['comprobador'] = false;
+        if($result)
+             {
+               $msg['comprobador'] = TRUE;
+             }
+        echo json_encode($msg);
+    }   
+
+
  /*-----------------------------*/  
     public function forgot_pass()
     {
@@ -848,6 +1006,20 @@ function load_dataRango()
     $this->load->view("layout/header",$data);
     $this->load->view("admin_general/side_menuAdmin",$data);
     $this->load->view("admin_general/rango_comisiones");
+    $this->load->view("layout/footer");  
+    } 
+
+     public function configuracion_parametros()
+    {
+    if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
+            redirect(base_url() . 'login');
+        }
+    $id_emp = $this->session->userdata('id_emp');
+    $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp); 
+    $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");           
+    $this->load->view("layout/header",$data);
+    $this->load->view("admin_general/side_menuAdmin",$data);
+    $this->load->view("admin_general/configuraciones");
     $this->load->view("layout/footer");  
     } 
 

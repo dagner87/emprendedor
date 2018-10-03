@@ -1423,28 +1423,26 @@ public function update_datosCliente()
                         $this->modelogeneral->update_orden_compra($year);
                     }
 
-                 /*$data['detalle']   = $this->modelogeneral->getDetalleCompra($id_compra);
-                 $data['compra']    = $this->modelogeneral->getdatosCompra($id_compra);     
-                 $this->load->view("layout/header",$data);
-                 $this->load->view("layout/side_menu",$data);
-                 $this->load->view("emprendedor/compra_completada",$data);
-                 $this->load->view("layout/footer"); */
-                 $this->comprar($id_compra); 
+                  redirect(base_url() ."capacitacion/comprar/".$id_compra);
+                 
 
             }else{
                     $this->carrito();
+                   // redirect(base_url() . "carrito");
                  
                  }
+
         }                   
   
   } 
 
 
    function verficar_monto() {
-    if ($_POST['sub_total'] >= 1000){
+    $min = $this->modelogeneral->getValorMont_min();
+    if ($_POST['sub_total'] >= $min->valor){
         return true;
        }else{
-        $this->form_validation->set_message('verficar_monto', 'Por Favor debe comprar un monto mayor a 10000');
+        $this->form_validation->set_message('verficar_monto', 'Por Favor debe comprar un monto mayor a '.$min->valor);
         return false;
         }
     }
@@ -1548,7 +1546,7 @@ function load_detalleCarrito()
             }
 
             $output .= '<li>
-                          <a class="text-center" href="'.base_url().'capacitacion/carrito"> <strong>Ver Cesta </strong> <i class="fa fa-angle-right"></i> </a>
+                          <a class="text-center" href="'.base_url().'capacitacion/carrito"> <strong>Ver Carrito </strong> <i class="fa fa-angle-right"></i> </a>
                             </li>';
         }
     
@@ -1694,15 +1692,14 @@ function load_detalleCarrito()
             redirect(base_url() . 'login');
         }   
         $param['id_emp']          = $this->session->userdata('id_emp');
-        $param['id_producto']     = $this->input->post('id_producto');
+        $param['id_producto']     = $this->input->post('id_prod');
         $param['cantidad']        = $this->input->post('cantidad');
         $year                     = date('Y');
         $no_orden                 =  $this->modelogeneral->datos_prod($year);
         $param['no_orden']        = $no_orden + 1;
         $param['fecha_car']       = date('Y-m-d');
-        //$this->modelogeneral->update_orden_compra($year);
         $row['datos']             = $this->modelogeneral->datos_prod($param['id_producto']);
-        $param['precio_car']      = $row['datos']->precio_unitario;
+        $param['precio_car']      = $row['datos']->precio;
         $param['importe']         = $param['precio_car'] * $param['cantidad'];
         $result = $this->modelogeneral->insert_toCar($param);
         $msg['comprobador'] = false;
@@ -1711,6 +1708,7 @@ function load_detalleCarrito()
                $msg['comprobador'] = TRUE;
              }
         echo json_encode($msg);
+       // redirect(base_url() . "ventas/add_salida_prodcliente");
     }
 
 

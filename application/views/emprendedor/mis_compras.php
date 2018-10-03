@@ -5,43 +5,43 @@
 </style>
 
 <div class="row bg-title">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">MIS COMPRAS</h4> </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <ol class="breadcrumb">
-                            <li><a href="<?php echo base_url();?>">Inicio</a></li>
-                            <li><a href="<?php echo base_url();?>">MI Cuenta</a></li>
-                            <li class="active">Ver Historial</li>
-                        </ol>
-                    </div>
-                    <!-- /.col-lg-12 -->
-                  
-                </div>
+      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+          <h4 class="page-title">MIS COMPRAS</h4> </div>
+      <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+          <ol class="breadcrumb">
+              <li><a href="<?php echo base_url();?>">Inicio</a></li>
+              <li><a href="<?php echo base_url();?>">MI Cuenta</a></li>
+              <li class="active">Ver Historial</li>
+          </ol>
+      </div>
+      <!-- /.col-lg-12 -->
+  </div>
 
 
 
 <div class="row">
-<div class="col-lg-12">
+  <div class="col-sm-12">
+      <div class="white-box">
+          <h3 class="box-title">LISTA DE MIS COMPRAS</h3>
+          <div class="table-responsive">
+              <table class="table color-table info-table" id="editable-datatable">
+                  <thead>
+                     <tr>
+                        <th>FECHA</th>
+                        <th>NO COMPRA</th>
+                        <th>TOTAL</th>
+                        <th>VER DETALLE</th>
+                    </tr>
+                  </thead>
+                  <tbody id="contenido_compras">
+                     
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
 
-    <div class="white-box">
-       
-        <table class="table table-striped table-bordered color-table info-table table-responsive contact-list " id="editable-datatable">
-            <thead>
-                <tr>
-                    <th>FECHA</th>
-                    <th>NO COMPRA</th>
-                    <th>TOTAL</th>
-                    <th>VER DETALLE</th>
-                </tr>
-            </thead>
-            <tbody id="contenido_compras">
-               
-            </tbody>
-            
-        </table>
-    </div>
-</div>
-</div>
 
 <!-- .modal for add task -->
 <div class="modal fade" id="detalleModal" tabindex="-1" role="dialog" aria-hidden="true">

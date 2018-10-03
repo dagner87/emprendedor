@@ -21,31 +21,26 @@
 
 
 <div class="row">
-<div class="col-lg-12">
-
-    <div class="white-box">
-      <div class="row sales-report">
-                <div class="col-md-6 col-sm-6 col-xs-6 ">
-                    <h1 class="text-left text-info m-t-20">Mi Cartera: $ <?= $datos_emp->comision_acumulada  ?> </h1> </div>
-            </div>
-       
-        <table class="table table-striped table-bordered color-table info-table table-responsive contact-list " id="editable-datatable">
-            <thead>
-                <tr>
-                    <th>FECHA</th>
-                    <th>NO COMPRA</th>
-                    <th>DESCUENTO</th>
-                    <th>SALDO</th>
-                    
-                </tr>
-            </thead>
-            <tbody id="contenido_compras">
-               
-            </tbody>
-            
-        </table>
-    </div>
-</div>
+  <div class="col-sm-12">
+      <div class="white-box">
+          <h1 class="text-left text-info m-t-10">Mi Cartera: $ <?= $datos_emp->comision_acumulada  ?> </h1>
+          <div class="table-responsive">
+              <table class="table color-table info-table" id="editable-datatable">
+                  <thead>
+                    <tr>
+                      <th>FECHA</th>
+                      <th>NO COMPRA</th>
+                      <th>DESCUENTO</th>
+                      <th>SALDO</th>
+                    </tr>
+                  </thead>
+                  <tbody id="contenido_compras">
+                     
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
 </div>
 
 <!-- .modal for add task -->
