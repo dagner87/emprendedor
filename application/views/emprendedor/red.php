@@ -44,7 +44,7 @@
                                 <div class="person">
                                     <img src="<?php echo base_url();?>assets/plugins/images/users/<?= $key->foto_emp ?>" alt="">
                                     <p class="name ">
-                                        <?= $key->nombre_emp ;?> <b><span class=" fa fa-circle text-success m-r-10"></span></b>
+                                        <?= $key->nombre_emp ;?> <b> <span class=" fa fa-circle text-success m-r-10"></span></b>
 
                                         
 

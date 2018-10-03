@@ -16,7 +16,7 @@
         height: 25px;
         bottom: 0;
         left: 50%;
-        background-color: #2ea3f2; /*color del nodo padre*/
+        background-color: #2ea3f2; /* color del nodo padre*/
         transform: translateY(100%); }
     .hv-wrapper .hv-item .hv-item-children {
       display: flex;
