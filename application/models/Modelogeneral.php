@@ -953,7 +953,7 @@ public function save_detallePromo($data){
     $this->db->select("prod.nombre_prod,cantidad_comp,precio_comp,importe");
     $this->db->from("detalle_compra d_c");
     $this->db->where("d_c.id_compra",$id_compra);
-    $this->db->join("producto as prod","prod.id_producto = d_c.id_producto");
+    $this->db->join("productos as prod","prod.id_producto = d_c.id_producto");
     $resultados = $this->db->get();
     if ($resultados->num_rows() > 0) {
       return $resultados->result();
