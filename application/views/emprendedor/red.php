@@ -10,10 +10,13 @@
                     <!-- /.col-lg-12 -->
                 </div>
 
- <section class="management-hierarchy contact-list">
-        
-        <br>
-       
+
+ <div class="row">
+  <div class="col-sm-12">
+      <div class="white-box">
+          <h3 class="box-title">MI red</h3>
+          <div class="table-responsive management-hierarchy contact-list">
+         <br>
         <div class="hv-container">
             <div class="hv-wrapper">
                <!-- Emprendedor -->
@@ -40,8 +43,11 @@
                             <div class="hv-item">
                                 <div class="person">
                                     <img src="<?php echo base_url();?>assets/plugins/images/users/<?= $key->foto_emp ?>" alt="">
-                                    <p class="name">
-                                        <?= $key->nombre_emp ;?> <b>/ <?= $key->email; ?></b>
+                                    <p class="name ">
+                                        <?= $key->nombre_emp ;?> <b><span class=" fa fa-circle text-success m-r-10"></span></b>
+
+                                        
+
                                     </p>
                                 </div>
                            </div>
@@ -58,4 +64,11 @@
         </div>
         <br>
         <br>
-    </section>
+
+              
+          </div>
+      </div>
+  </div>
+</div>               
+
+ 

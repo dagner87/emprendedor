@@ -394,15 +394,38 @@ public function save_detallePromo($data){
    /*----------tabla de comsiones--------*/
 
   /*listar*/
-   public function listar_monto()
+   public function getValorMont_min()
   {
-     $query = $this->db->get('monto_comisiones');
+    $this->db->where('parametro','monto_min');
+    $query = $this->db->get('configuracion');
+    return $query->row();
+ }
+
+  public function configuracion()
+  {
+     $query = $this->db->get('configuracion');
       if($query->num_rows() > 0){
         return $query->result();
       }else{
         return false;
       }
   }
+
+  
+
+  public function updateParametros($param) 
+  {
+    $this->db->where('id_conf',$param['id_conf']);
+    $this->db->update('configuracion',$param);
+     if($this->db->affected_rows() > 0){
+      return true;
+       }else{
+         return false;
+        }
+  }
+
+
+
     /* insertar videos */
    public function insert_monto($data)
   {
@@ -422,6 +445,8 @@ public function save_detallePromo($data){
      return $query->row();
      
   }
+
+
 
    public function update_monto($param) 
   {
@@ -811,6 +836,7 @@ public function save_detallePromo($data){
               return false;
              }
   }
+
   public function update_prodCar($param) {
    $this->db->where('id_car',$param['id_car']);
    $this->db->update('carrito',$param);
@@ -881,7 +907,7 @@ public function save_detallePromo($data){
   {
       $this->db->select('id_car,car.id_producto,no_orden,url_imagen,nombre_prod,precio_car,cantidad,importe');
       $this->db->where('car.id_emp',$id_emp);
-      $this->db->join('producto as prod','prod.id_producto = car.id_producto');
+      $this->db->join('productos as prod','prod.id_producto = car.id_producto');
       $query = $this->db->get('carrito as car');
       if($query->num_rows() > 0){
         return $query->result();
@@ -892,9 +918,9 @@ public function save_detallePromo($data){
 
   public function mostrar_detallecarrito($id_emp)
   {
-      $this->db->select('url_imagen,nombre_prod,precio_car,cantidad');
+      $this->db->select('url_imagen,nombre_prod,car.precio_car,car.cantidad');
       $this->db->where('car.id_emp',$id_emp);
-      $this->db->join('producto as prod','prod.id_producto = car.id_producto');
+      $this->db->join('productos as prod','prod.id_producto = car.id_producto');
       $query = $this->db->get('carrito as car');
       if($query->num_rows() > 0){
         return $query->result();
@@ -1072,7 +1098,7 @@ public function save_detallePromo($data){
 
    public function mostrar_producto()
   {
-     $query = $this->db->get('producto');
+     $query = $this->db->get('productos');
       if($query->num_rows() > 0){
         return $query->result();
       }else{
@@ -1369,7 +1395,7 @@ public function save_detallePromo($data){
    public function datos_prod($id_producto) {
     
    $this->db->where('id_producto',$id_producto);
-   $query = $this->db->get('producto');
+   $query = $this->db->get('productos');
    return $query-> row();
   
    }

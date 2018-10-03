@@ -76,34 +76,33 @@
   font-weight: bold;
   color: #DE5454; }
     .management-hierarchy {
-     background-color: #303840; }
+     background-color: #fff; }/*color de fondo*/
     .management-hierarchy > h1 {
-    color: #FFF; }
+    color: #2ea3f2; }
     .management-hierarchy .person {
     text-align: center; }
     .management-hierarchy .person > img {
       height: 90px;
-      border: 5px solid #FFF;
+      border: 5px solid #2ea3f2; /*color de circulo padre*/
       border-radius: 50%;
       overflow: hidden;
-      background-color: #fff; }
+      background-color: #2ea3f2; } /* color guia  del padre*/
     .management-hierarchy .person > p.name {
-      background-color: #fff;
+      background-color: #2ea3f2; /*color del cuadro del nombre*/
       padding: 5px 10px;
       border-radius: 5px;
       font-size: 12px;
       font-weight: normal;
-      color: #3BAA9D;
+      color: #fff;  /*color de la letra */
       margin: 0;
       position: relative; }
-      .management-hierarchy .person > p.name b {
-        color: rgba(59, 170, 157, 0.5); }
+      
       .management-hierarchy .person > p.name:before {
         content: '';
         position: absolute;
         width: 2px;
-        height: 8px;
-        background-color: #fff;
+        height: 5px; /*largo del palito corto*/
+        background-color: #2ea3f2;   /*color de linea pequeña hijos*/
         left: 50%;
         top: 0;
 

@@ -561,7 +561,7 @@ function load_dataRango()
 
 function load_datamonto()
     {
-        $result = $this->modelogeneral->listar_monto();
+        $result = $this->modelogeneral->configuracion();
         $count = 0;
         $output = '';
         if(!empty($result))
@@ -569,10 +569,13 @@ function load_datamonto()
           foreach($result as $row)
             {
              $output .= '<tr>
-                         <td><span class="font-medium">'.$row->monto_minimo.'</span></td>
-                        <td>
-                        <button type="button" data="'.$row->id_monto.'" class=" btn btn-info btn-outline btn-circle btn-lg m-r-5 edit-row-btn" data-toggle="modal" data-target="#insetcapModal"  data-toggle="tooltip" data-original-title="Editar" title ="Editar"><i class="ti-pencil-alt"></i></button>
-                        <button type="button" data="'.$row->id_monto.'" class="btn btn-danger btn-outline btn-circle btn-lg m-r-5 deletecap-row-btn"  data-toggle="tooltip" data-original-title="Eliminar" title ="Eliminar"><i class="icon-trash"></i></button></td>
+                         <td><span class="font-medium">'.$row->parametro.'</span></td>
+                         <td>
+                             <input type="text" name="valor[]" class="" id="valor_'.$row->id_conf.'" value="'.$row->valor.'"  required>
+                             <i id="capa_'.$row->id_conf.'"></i>
+                             
+                        </td>            
+                         <td><span class="font-medium">'.$row->descripcion.'</span></td>
                         </tr>';
             }
         }
@@ -604,13 +607,12 @@ function load_datamonto()
         echo json_encode($result);
     }
 
-    public function update_monto()
+    public function updateParametros()
     {
-        $param['id_monto']      = $this->input->post('id_monto');
-        $param['monto_minimo']  = $this->input->post('monto_minimo');
-        $param['fecha']         = date('Y-m-d');
+        $param['id_conf']  = $this->input->get('id_conf');
+        $param['valor']    = $this->input->get('valor');
         
-        $result = $this->modelogeneral->update_monto($param);
+        $result = $this->modelogeneral->updateParametros($param);
         $msg['comprobador'] = false;
         if($result)
              {
@@ -1007,7 +1009,7 @@ function load_datamonto()
     $this->load->view("layout/footer");  
     } 
 
-     public function monto_comisiones()
+     public function configuracion_parametros()
     {
     if ($this->session->userdata('perfil') == false || $this->session->userdata('perfil') != 'administrador') {
             redirect(base_url() . 'login');
@@ -1017,7 +1019,7 @@ function load_datamonto()
     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");           
     $this->load->view("layout/header",$data);
     $this->load->view("admin_general/side_menuAdmin",$data);
-    $this->load->view("admin_general/monto_comisiones");
+    $this->load->view("admin_general/configuraciones");
     $this->load->view("layout/footer");  
     } 
 

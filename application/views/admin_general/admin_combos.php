@@ -170,7 +170,7 @@
                     console.log(data);
                       $.toast({
                           heading: 'Producto Agregado',
-                          text: 'Se agregó corectamente la información.',
+                          text: 'Se agregó correctamente la información.',
                           position: 'top-right',
                           loaderBg: '#ff6849',
                           icon: 'success',

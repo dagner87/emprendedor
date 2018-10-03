@@ -83,8 +83,8 @@
                 <div class="clearfix"></div>
                 <hr>
                 <div class="text-right">
-                    <a href="<?php echo base_url();?>capacitacion/tienda" class="btn btn-default btn-outline" type="button"> <span><i class="ti-shopping-cart-full"></i> Seguir Comprando</span> </a>
-                    <button class="btn btn-outline btn-info" type="submit"> Finalizar Compra </button>
+                    <a href="<?php echo base_url();?>tienda" class="btn btn-default btn-outline" type="button"> <span><i class="ti-shopping-cart-full"></i> Seguir Comprando</span> </a>
+                    <button class="btn btn-outline btn-info" id="fin_compra" type="submit"> Finalizar Compra </button>
                 </div>
             </div>
            </form>
@@ -97,13 +97,11 @@
             //carrito();
             sumar_pro();
             var comision = $(this).attr('data');
-          /*  $("input[name='micartera']").TouchSpin({
-                min: 0,
-                max: comision,
-                stepinterval: 50,
-                maxboostedstep: comision,
-               
-            });*/
+            var total = $("input[name='total']").val();
+            if (total == 0){
+              $("#fin_compra").attr('disabled',true);
+            }
+         
             
         });
 
@@ -167,6 +165,7 @@
                 }
         });
         sumar_pro();
+
     });  
 
     $(document).on("click",".btn-remove-producto", function(){
@@ -228,6 +227,15 @@
                  $("#total_pagar").text(" "+total_pagar.toFixed(2));
                  $("#total").val(total_pagar.toFixed(2));
                var sub_total =  $("#sub_total").val(total.toFixed(2));
+
+           var total = $("input[name='total']").val();
+            if (total == 0){
+              $("#fin_compra").attr('disabled',true);
+            }else{
+               $("#fin_compra").attr('disabled',false);
+            }
+
+
     
         
    } 

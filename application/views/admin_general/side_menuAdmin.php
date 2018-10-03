@@ -40,7 +40,7 @@
                     <li><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-settings fa-fw"></i> <span class="hide-menu">Configuración<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="<?php echo base_url();?>panel_admin/rango_comisiones"><i class="fa fa-sliders fa-fw"></i><span class="hide-menu">Adm. Rango Comisiones</span></a></li>
-                            <li><a href="<?php echo base_url();?>panel_admin/monto_comisiones"><i class="fa fa-sliders fa-fw"></i><span class="hide-menu">Adm. Monto Comisiones</span></a></li>
+                            <li><a href="<?php echo base_url();?>panel_admin/configuracion_parametros"><i class="fa fa-sliders fa-fw"></i><span class="hide-menu">Adm. Parámetros</span></a></li>
                          
                         </ul>
                     </li>
