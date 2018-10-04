@@ -229,7 +229,22 @@ public function save_Promo($data){
   } 
 public function save_detallePromo($data){
     return $this->db->insert("promo_producto",$data);
-  }    
+  } 
+
+   public function buscar_promo($id_producto){
+   $hoy = date('Y-m-d');
+   $this->db->join('productos as prod', 'prod.id_producto = pro_p.id_producto');
+   $this->db->join('promo as pro', 'pro_p.id_promo = pro.id_promo');
+   $this->db->where('pro.fecha_fin >=',$hoy);
+   $this->db->where('pro_p.id_producto',$id_producto);
+   $query = $this->db->get('promo_producto as pro_p');
+   if($query->num_rows() > 0){
+        return $query->row();
+      }else{
+        return false;
+      }
+  
+   }    
   
 
   public function save_detallePedido($data){
@@ -1167,10 +1182,10 @@ public function save_detallePromo($data){
      $mostarcategorias = "";
      foreach($result as  $value):
       $mostarcategorias .='<optgroup label="'.$value->nombre.'">';
-      $result_prod =$this->listar_productos(); 
+      $result_prod =$this->listar_productosxcateg($value->id); 
        if(!empty($result_prod))
         {
-          $mostarcategorias .='<option value=" " seleted >Seleccione</option>';
+          
             foreach($result_prod as $row):
               $mostarcategorias .='<option value="'.$row->id_producto.'">'.$row->nombre_prod.'</option>';
             endforeach ; 
@@ -1274,6 +1289,19 @@ public function save_detallePromo($data){
         return $query->result();
        
     }
+
+
+       public function listar_productosxcateg($id)
+  {
+    $this->db->where('id_categoria', $id);
+    $this->db->select("id_categoria,id_producto,nombre_prod");
+     $query = $this->db->get('productos');
+      if($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return false;
+      }
+  }
 
 
 

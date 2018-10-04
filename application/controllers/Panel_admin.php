@@ -745,7 +745,7 @@ function load_datamonto()
     $data['datos_emp']  = $this->modelogeneral->datos_emp($id_emp);
     $data['categorias']  = $this->modelogeneral->selec_categorias_prod();
     $data['productos']      = $this->modelogeneral->seleccion_productos();
-    $data['respuestos']  = $this->modelogeneral->selec_respuestos_prod();
+    //$data['respuestos']  = $this->modelogeneral->selec_respuestos_prod();
     $data['cantidadVideos'] = $this->modelogeneral->rowCount("capacitacion");  
 
     $this->load->view("layout/header",$data);

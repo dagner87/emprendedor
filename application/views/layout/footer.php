@@ -87,7 +87,7 @@
         
     <!--Wave Effects -->
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/waves.js"></script>
-    
+
     <!-- jQuery for carousel -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/owl.carousel/owl.carousel.min.js"></script>
     <script src="<?php echo base_url();?>assets/plugins/bower_components/owl.carousel/owl.custom.js"></script>  
@@ -110,7 +110,7 @@
       $('#view_car').click(function(e) {
             window.location.href = "<?php echo base_url();?>capacitacion/carrito";
         });
-      $('#modal_bienvenido').modal("show");
+      //$('#modal_bienvenido').modal("show");
       
       
 

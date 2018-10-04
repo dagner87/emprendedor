@@ -281,7 +281,7 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                             <h4 class="modal-title" id="titulo_invit">BIENVENIDOS </h4>
+                                             <h4 class="modal-title" id="titulo_invit">BIENVENIDO  AL SISTEMA DE EMPRENDEDORES </h4>
                                         </div>
                                         <div class="modal-body">
                                          
