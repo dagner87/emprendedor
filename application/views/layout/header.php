@@ -27,6 +27,11 @@
     <link href="<?php echo base_url();?>assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/bower_components/dropify/dist/css/dropify.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/plugins/bower_components/gallery/css/animated-masonry-gallery.css" />
+
+    <!--My admin Custom CSS -->
+    <link href="<?php echo base_url();?>assets/plugins/bower_components/owl.carousel/owl.carousel.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url();?>assets/plugins/bower_components/owl.carousel/owl.theme.default.css" rel="stylesheet" type="text/css" />
+
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/plugins/bower_components/fancybox/ekko-lightbox.min.css" />
     <link href="<?php echo base_url();?>assets/plugins/bower_components/calendar/dist/fullcalendar.css" rel="stylesheet" />
      <!-- Date picker plugins css -->
@@ -108,9 +113,9 @@
 
         transform: translateY(-100%); } 
         .botonF1{
-              width:80px;
-              height:80px;
-              border-radius:90%;
+              width:70px;
+              height:70px;
+              border-radius:80%;
               background:#2ea3f2;
               right:0;
               bottom:0;
@@ -241,7 +246,7 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            <h4 class="modal-title" id="titulo_invit">Nuevo Miembro </h4>
+                                            <h4 class="modal-title" id="titulo_invit">Nuevo patrocinado </h4>
                                         </div>
                                         <div class="modal-body">
                                             <form id="add_emp" action="<?php echo base_url() ?>panel_admin/insert_emp" method="post">
@@ -266,7 +271,49 @@
                             </div>
                             <!-- /.modal -->
                 <!--/.row -->
+
+<!-- sample modal content -->
+
+ <div class="modal fade" id="modal_bienvenido" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                             <h4 class="modal-title" id="titulo_invit">BIENVENIDO  AL SISTEMA DE EMPRENDEDORES </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                         
+                                          <!-- START carousel-->
+                                          <div id="carousel-example-captions-1" data-ride="carousel" class="carousel slide">
+                                              <ol class="carousel-indicators">
+                                                  <li data-target="#carousel-example-captions-1" data-slide-to="0" class="active"></li>
+                                                  <li data-target="#carousel-example-captions-1" data-slide-to="1"></li>
+                                                  <li data-target="#carousel-example-captions-1" data-slide-to="2"></li>
+                                              </ol>
+                                              <div role="listbox" class="carousel-inner">
+                                                  <div class="item active"> <img src="<?php echo base_url();?>assets/plugins/images/big/img4.jpg" alt="First slide image"> </div>
+                                                  <div class="item"> <img src="<?php echo base_url();?>assets/plugins/images/big/img5.jpg" alt="Second slide image"> </div>
+                                                  <div class="item"> <img src="<?php echo base_url();?>assets/plugins/images/big/img6.jpg" alt="Third slide image"> </div>
+                                              </div>
+                                          </div>
+                                          <!-- END carousel-->
+                                                  
+                                          
+                                        </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+   </div>  
+
+
+        
+        <!-- /.modal -->              
   <script type="text/javascript">
+
+
 
     $(document).on("click",".detalle_carrito", function(){
        $.ajax({

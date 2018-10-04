@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-sm-6 col-xs-12">
                         <div class="white-box analytics-info">
-                            <h3 class="box-title">GANACIAS TOTALES</h3>
+                            <h3 class="box-title">GANANCIAS TOTALES</h3>
                             <ul class="list-inline two-part">
                                 <li>
                                     <div id="sparklinedash"></div>
@@ -65,6 +65,7 @@
                 </div>
                 <!--/.row -->
                 <!--row -->
+                
                 <!-- /.row  col-md-12 col-lg-8 col-sm-12 col-xs-12-->
                   <div class="row">
                     <div class="col-sm-12">

@@ -87,6 +87,10 @@
         
     <!--Wave Effects -->
     <script src="<?php echo base_url();?>assets/ampleadmin-minimal/js/waves.js"></script>
+
+    <!-- jQuery for carousel -->
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/owl.carousel/owl.carousel.min.js"></script>
+    <script src="<?php echo base_url();?>assets/plugins/bower_components/owl.carousel/owl.custom.js"></script>  
     <!-- Form Wizard JavaScript -->
     <script src="<?php echo base_url();?>assets/plugins/bower_components/jquery-wizard-master/dist/jquery-wizard.min.js"></script>
     <!-- FormValidation -->
@@ -106,6 +110,10 @@
       $('#view_car').click(function(e) {
             window.location.href = "<?php echo base_url();?>capacitacion/carrito";
         });
+      //$('#modal_bienvenido').modal("show");
+      
+      
+
       });
 
      
@@ -124,28 +132,6 @@
                 $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
             }
 
-     /* $("input[name='cantidades[]']").TouchSpin({
-                
-
-            });*/ 
-
-
-        // delegate calls to data-toggle="lightbox"
-        $(document).delegate('*[data-toggle="lightbox"]:not([data-gallery="navigateTo"])', 'click', function(event) {
-            event.preventDefault();
-            return $(this).ekkoLightbox({
-                onShown: function() {
-                    if (window.console) {
-                        return console.log('Checking our the events huh?');
-                    }
-                },
-                onNavigate: function(direction, itemIndex) {
-                    if (window.console) {
-                        return console.log('Navigating ' + direction + '. Current item: ' + itemIndex);
-                    }
-                }
-            });
-        });
         //Programatically call
         $('#open-image').click(function(e) {
             e.preventDefault();
@@ -218,7 +204,7 @@
                   .done(function(){
                     console.log(data);
                     
-                     swal("Buen Trabajo!!", "Nuevo Emprendedor Agregado.", "success");
+                     swal("Buen Trabajo!!", "Invitación enviada.", "success");
                      
                   })
                   .fail(function(){

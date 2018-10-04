@@ -26,8 +26,16 @@
             <div class="modal-body">
               <div class="alert alert-danger" id="mensaje" style="display: none;"></div>
                 <form id="add_cap" action="<?php echo base_url() ?>capacitacion/add_toCar" method="post">
+<<<<<<< HEAD
                    <input class="" type="hidden" name="id_prod" value="" id="id_prod">
                   <input class="" type="hidden" name="existencia" value="" id="existencia">
+=======
+                  <input class="" type="text" name="id_prod" value="" id="id_prod">
+                  <input class="" type="text" name="existencia" value="" id="existencia">
+                  <input class="" type="text" name="precio" value="" id="precio">
+                  
+
+>>>>>>> 9f2d7f1513c0855d5515d7b035f9d882e9e78949
                   <div class="form-group">
                       <label for="cantidad" class="control-label">Cantidad</label>
                       <input type="text" class="form-control"  name="cantidad" id="cantidad" placeholder="Cantidad" 
@@ -53,6 +61,7 @@
                 <div class="row">
              <?php  if (!empty($productos)):?> 
                           <?php foreach ($productos as $key): ?> 
+<<<<<<< HEAD
                             <div class="col-md-6 col-lg-3 col-xs-12 col-sm-6"> <img class="img-responsive" alt="user" src="<?php echo base_url();?>assets/uploads/img_productos/<?= $key->url_imagen;?>">
                                 <div class="white-box">
                                     <h3 class="m-t-20 m-b-20"><strong><span style=""><?=  $key->nombre_prod;?></span></strong></h3>
@@ -65,6 +74,56 @@
                                     </p>
                                     <div class="text-center">
                                       <button data-toggle="modal" data-target="#insetcapModal"  value="<?=  $key->id_producto."*".$key->existencia;?>" class="btn btn-outline btn-info btn-sm btn-car"><i class="ti-shopping-cart"></i> Añadir al Carrito</button>
+=======
+                            <div class="col-md-6 col-lg-3 col-xs-12 col-sm-6"> 
+                              <img class="img-responsive" alt="user" src="<?php echo base_url();?>assets/uploads/img_productos/<?= $key->url_imagen;?>">
+                                <div class="white-box">
+                                    <h3 class="m-t-20 m-b-20"><strong><span style=""><?=  $key->nombre_prod;?></span></strong></h3>
+                                     <div class="text-muted">
+                                      <a style="color:#3ec457" class="text-muted m-l-10" href="#"> <?=  $key->existencia;?> disponibles</a></div>
+                                    <p>
+                                      <?php $promo = $this->modelogeneral->buscar_promo($key->id_producto);
+
+                                       if (!empty($promo)){
+                                          $prociento = ($key->costo * $promo->descuento)/100 ;
+                                          $promo  = $key->costo - $prociento;
+                                          ?>
+                                          <!--precio oficial de la tienda-->  
+                                            <span style="color:#2ea3f2"> Precio + IVA 21 %:<?= " $".$key->precio;?></span>
+                                            <br>
+                                          <!--costo para emprendedores -->
+                                            <strong><span style="color:#2ea3f2" >Costo + IVA 21 %:<?= " $ <s>".$key->costo ?></s> <?= " $ ".$promo ?> </span></strong>
+                                            <br>
+                                            <?php $costo_final =  $promo ;?>
+                                          <!--margen-->
+                                          <?php  $margen =  $key->precio - $promo ?>
+
+                                          <span style="color:#2ea3f2">Margen:<?= " $".$margen;?></span>
+
+                                          <?php 
+                                        
+                                       }else{  ?>
+                                              <!--precio oficial de la tienda-->  
+                                            <span style="color:#2ea3f2"> Precio + IVA 21 %:<?= " $".$key->precio;?></span>
+                                            <br>
+                                          <!--costo para emprendedores -->
+                                            <strong><span style="color:#2ea3f2" >Costo + IVA 21 %: <?= " $ ".$key->costo ?></span></strong>
+                                            <br>
+                                            <?php $costo_final =  $key->costo ;?>
+                                          <!--margen-->
+                                          <?php  $margen =  $key->precio - $key->costo ?>
+
+                                          <span style="color:#2ea3f2">Margen: <?= " $".$margen;?></span>
+
+                                         <?php 
+                                            }
+
+                                          ?>
+
+                                    </p>
+                                    <div class="text-center">
+                                      <button data-toggle="modal" data-target="#insetcapModal"  value="<?=  $key->id_producto."*".$key->existencia."*".$costo_final;?>" class="btn btn-outline btn-info btn-sm btn-car"><i class="ti-shopping-cart"></i> Añadir al Carrito</button>
+>>>>>>> 9f2d7f1513c0855d5515d7b035f9d882e9e78949
                                       &nbsp;
                                      </div>
                                 </div>
@@ -73,6 +132,44 @@
                     <?php endif ?> 
 
                 </div>
+<<<<<<< HEAD
+=======
+
+                   <!--combos-->
+
+                   <!--div class="row">
+             <?php  if (!empty($combos)):?> 
+                          <?php foreach ($combos as $key): ?> 
+                            <div class="col-md-6 col-lg-3 col-xs-12 col-sm-6"> <img class="img-responsive" alt="user" src="<?php echo base_url();?>assets/uploads/img_productos/<?= $key->url_imagen_combo;?>">
+                                <div class="white-box">
+                                    <h3 class="m-t-20 m-b-20"><strong><span style=""><?=  $key->nombre_combo;?></span></strong></h3>
+                                     <div class="text-muted"><a style="color:#3ec457" class="text-muted m-l-10" href="#">
+                                      <i class=""></i> <?=  $key->existencia;?> disponibles</a></div>
+                                    <p>
+
+                                    <!precio de pormosion>  
+                                      <span style="color:#2ea3f2"> Promo:<?= " $ <s>".$key->precio_combo;?></s></span> 
+                                      <br>
+
+                                    <--precio oficial de la tienda->  
+                                      <span style="color:#2ea3f2"> P + IVA 21 %:<?= " $".$key->precio_combo;?></span>
+                                    <--costo para emprendedores ->
+                                      <strong><span style="color:#2ea3f2" >C + IVA 21 %:<?= " $".$key->costo;?></span></strong>
+                                    <!-margen->
+                                      <span style="color:#2ea3f2">M:<?= " $".$key->costo;?></span>
+
+                                    </p>
+                                    <div class="text-center">
+                                      <button data-toggle="modal" data-target="#insetcapModal"  value="<?=  $key->id_combo."*".$key->existencia;?>" class="btn btn-outline btn-info btn-sm btn-car"><i class="ti-shopping-cart"></i> Añadir al Carrito</button>
+                                      &nbsp;
+                                     </div>
+                                </div>
+                            </div>
+                    <?php endforeach; ?> 
+                    <?php endif ?> 
+
+                </div-->
+>>>>>>> 9f2d7f1513c0855d5515d7b035f9d882e9e78949
                 <!-- ============================================================== -->
                 <!-- chats, message & profile widgets -->
                 <!-- ============================================================== -->
@@ -141,6 +238,11 @@ $(document).on("click",".btn-car",function(){
         var infoproducto = datos.split("*");
         $('#id_prod').val(infoproducto[0]); // id del producto
         $('#existencia').val(infoproducto[1]); // existencia
+<<<<<<< HEAD
+=======
+        $('#precio').val(infoproducto[2]); // existencia
+        
+>>>>>>> 9f2d7f1513c0855d5515d7b035f9d882e9e78949
         var stock = $('#existencia').val();
         if (stock == 0){
            $("input[name='cantidad']").attr('disabled',true);

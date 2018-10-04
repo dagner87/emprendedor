@@ -1671,7 +1671,10 @@ function load_detalleCarrito()
 
      $id_emp = $this->session->userdata('id_emp');
      $result = $this->modelogeneral->mostrar_producto();
-     $data   = array('productos' => $result);
+     $combos = $this->modelogeneral->listar_data_combos();
+     
+     $data   = array('productos' => $result,'combos' => $combos );
+     
      $data['cant_asoc']      = $this->modelogeneral->rowCountAsoc($id_emp);
      $data['datos_emp']      = $this->modelogeneral->datos_emp($id_emp);
      $data['ultimo_reg']     = $this->modelogeneral->las_insetCap(); 
@@ -1694,12 +1697,17 @@ function load_detalleCarrito()
         $param['id_emp']          = $this->session->userdata('id_emp');
         $param['id_producto']     = $this->input->post('id_prod');
         $param['cantidad']        = $this->input->post('cantidad');
+
         $year                     = date('Y');
         $no_orden                 =  $this->modelogeneral->datos_prod($year);
         $param['no_orden']        = $no_orden + 1;
         $param['fecha_car']       = date('Y-m-d');
         $row['datos']             = $this->modelogeneral->datos_prod($param['id_producto']);
+<<<<<<< HEAD
         $param['precio_car']      = $row['datos']->precio;
+=======
+        $param['precio_car']      = $this->input->post('precio');
+>>>>>>> 9f2d7f1513c0855d5515d7b035f9d882e9e78949
         $param['importe']         = $param['precio_car'] * $param['cantidad'];
         $result = $this->modelogeneral->insert_toCar($param);
         $msg['comprobador'] = false;
